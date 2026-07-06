@@ -1,0 +1,2 @@
+# MFM Enterprise
+Maritim Forenings Manager Enterprise (MFM) er et integreret administrations- og dokumentationssystem udviklet til maritime kulturhistoriske foreninger. Systemet skal understøtte hele foreningens arbejde – fra kontaktregister og medlemsadministration til økonomi, fartøjsbevaring, restaureringsprojekter, fondsadministration og dokumentarkiv. MFM udvikles første gang til fiskeskibet Álvur SA 98, men designes fra starten, så det kan anvendes af andre maritime kulturhistoriske foreninger i Danmark, Færøerne, Grønland og resten af Norden.
