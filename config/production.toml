@@ -1,0 +1,19 @@
+[application]
+name = "MFM Enterprise"
+version = "0.3.0"
+
+[database]
+engine = "postgresql"
+host = "localhost"
+port = 5432
+database = "mfm"
+username = "mfm"
+password = ""
+
+[logging]
+level = "INFO"
+file = "logs/mfm.log"
+
+[gui]
+theme = "default"
+language = "da"

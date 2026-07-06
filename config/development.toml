@@ -1,0 +1,17 @@
+[application]
+name = "MFM Enterprise"
+version = "0.3.0-alpha1"
+environment = "development"
+
+[database]
+engine = "sqlite"
+path = "data/mfm.db"
+echo = true
+
+[logging]
+level = "DEBUG"
+file = "logs/mfm.log"
+
+[gui]
+theme = "default"
+language = "da"
