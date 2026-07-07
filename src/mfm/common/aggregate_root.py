@@ -1,54 +1,27 @@
 """
-Base class for aggregate roots.
+Base Aggregate Root.
 """
 
 from __future__ import annotations
 
-from datetime import UTC, datetime
+from typing import List
 
-from sqlalchemy import Boolean
-from sqlalchemy import DateTime
-from sqlalchemy import String
-from sqlalchemy.orm import Mapped
-from sqlalchemy.orm import mapped_column
-
-from mfm.database.base import Base
+from mfm.common.domain_event import DomainEvent
 
 
-class AggregateRoot(Base):
+class AggregateRoot:
+    """
+    Base Aggregate Root supporting Domain Events.
+    """
 
-    __abstract__ = True
+    def __init__(self) -> None:
+        self._events: List[DomainEvent] = []
+        self.version: int = 1
 
-    created_at: Mapped[datetime] = mapped_column(
-        "CreatedAt",
-        DateTime(timezone=True),
-        default=lambda: datetime.now(UTC),
-        nullable=False,
-    )
+    def add_event(self, event: DomainEvent) -> None:
+        self._events.append(event)
 
-    updated_at: Mapped[datetime] = mapped_column(
-        "UpdatedAt",
-        DateTime(timezone=True),
-        default=lambda: datetime.now(UTC),
-        onupdate=lambda: datetime.now(UTC),
-        nullable=False,
-    )
-
-    created_by: Mapped[str | None] = mapped_column(
-        "CreatedBy",
-        String(100),
-        nullable=True,
-    )
-
-    updated_by: Mapped[str | None] = mapped_column(
-        "UpdatedBy",
-        String(100),
-        nullable=True,
-    )
-
-    is_active: Mapped[bool] = mapped_column(
-        "IsActive",
-        Boolean,
-        default=True,
-        nullable=False,
-    )
+    def pull_events(self) -> list[DomainEvent]:
+        events = self._events.copy()
+        self._events.clear()
+        return events
