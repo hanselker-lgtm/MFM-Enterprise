@@ -29,7 +29,11 @@ class GuiConfig:
 
 @dataclass(slots=True)
 class Config:
+
     application: ApplicationConfig
+
     database: DatabaseConfig
+
     logging: LoggingConfig
+
     gui: GuiConfig
