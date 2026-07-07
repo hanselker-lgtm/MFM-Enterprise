@@ -1,34 +1,26 @@
-"""
-Configuration loader.
-"""
-
 from pathlib import Path
 import tomllib
 
+from mfm.config.models import *
 
-class Configuration:
 
-    def __init__(self, filename: str):
+CONFIG_FILE = (
+    Path(__file__)
+    .resolve()
+    .parents[3]
+    / "config"
+    / "default.toml"
+)
 
-        self.filename = Path(filename)
 
-        with open(self.filename, "rb") as f:
-            self.data = tomllib.load(f)
+def load_configuration() -> Config:
 
-    def get(self, *keys, default=None):
+    with CONFIG_FILE.open("rb") as fp:
+        data = tomllib.load(fp)
 
-        value = self.data
-
-        for key in keys:
-
-            if not isinstance(value, dict):
-
-                return default
-
-            value = value.get(key)
-
-            if value is None:
-
-                return default
-
-        return value
+    return Config(
+        application=ApplicationConfig(**data["application"]),
+        database=DatabaseConfig(**data["database"]),
+        logging=LoggingConfig(**data["logging"]),
+        gui=GuiConfig(**data["gui"]),
+    )

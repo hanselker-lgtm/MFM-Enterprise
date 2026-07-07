@@ -1,0 +1,17 @@
+[application]
+name = "MFM Enterprise"
+version = "0.3.0-alpha"
+language = "da"
+theme = "system"
+
+[database]
+provider = "sqlite"
+path = "data/database/mfm.db"
+
+[logging]
+level = "INFO"
+directory = "logs"
+filename = "mfm.log"
+
+[gui]
+style = "Fusion"

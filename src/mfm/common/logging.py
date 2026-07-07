@@ -1,18 +1,49 @@
 """
-Application logging.
+Logging configuration.
 """
 
-from pathlib import Path
+from __future__ import annotations
+
 import logging
 
+from logging.handlers import RotatingFileHandler
 
-def configure_logging(log_file: str, level: str = "INFO") -> None:
-    """Configure application logging."""
+from mfm.common.paths import LOG_DIR
 
-    Path(log_file).parent.mkdir(parents=True, exist_ok=True)
 
-    logging.basicConfig(
-        filename=log_file,
-        level=getattr(logging, level.upper()),
-        format="%(asctime)s %(levelname)s %(name)s : %(message)s",
+def configure_logging() -> logging.Logger:
+    """
+    Configure application logging.
+    """
+
+    LOG_DIR.mkdir(
+        parents=True,
+        exist_ok=True,
     )
+
+    logger = logging.getLogger("mfm")
+
+    logger.setLevel(logging.INFO)
+
+    formatter = logging.Formatter(
+        "%(asctime)s | %(levelname)-8s | %(name)s | %(message)s"
+    )
+
+    file_handler = RotatingFileHandler(
+        LOG_DIR / "mfm.log",
+        maxBytes=5 * 1024 * 1024,
+        backupCount=5,
+        encoding="utf-8",
+    )
+
+    file_handler.setFormatter(formatter)
+
+    console_handler = logging.StreamHandler()
+
+    console_handler.setFormatter(formatter)
+
+    logger.addHandler(file_handler)
+
+    logger.addHandler(console_handler)
+
+    return logger
