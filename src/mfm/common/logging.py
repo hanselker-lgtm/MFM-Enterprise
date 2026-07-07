@@ -1,49 +1,63 @@
 """
-Logging configuration.
+Logging management for MFM Enterprise.
 """
 
 from __future__ import annotations
 
 import logging
-
 from logging.handlers import RotatingFileHandler
+from pathlib import Path
 
-from mfm.common.paths import LOG_DIR
+from mfm.config.models import Config
 
 
-def configure_logging() -> logging.Logger:
-    """
-    Configure application logging.
-    """
+class LoggingManager:
+    """Central logging manager for the application."""
 
-    LOG_DIR.mkdir(
-        parents=True,
-        exist_ok=True,
-    )
+    _initialized = False
 
-    logger = logging.getLogger("mfm")
+    @classmethod
+    def initialize(cls, config: Config) -> logging.Logger:
 
-    logger.setLevel(logging.INFO)
+        if cls._initialized:
+            return logging.getLogger("mfm")
 
-    formatter = logging.Formatter(
-        "%(asctime)s | %(levelname)-8s | %(name)s | %(message)s"
-    )
+        log_directory = Path(config.logging.directory)
+        log_directory.mkdir(parents=True, exist_ok=True)
 
-    file_handler = RotatingFileHandler(
-        LOG_DIR / "mfm.log",
-        maxBytes=5 * 1024 * 1024,
-        backupCount=5,
-        encoding="utf-8",
-    )
+        logger = logging.getLogger("mfm")
+        logger.setLevel(getattr(logging, config.logging.level.upper()))
 
-    file_handler.setFormatter(formatter)
+        formatter = logging.Formatter(
+            "%(asctime)s | %(levelname)-8s | %(name)s | %(message)s"
+        )
 
-    console_handler = logging.StreamHandler()
+        file_handler = RotatingFileHandler(
+            log_directory / config.logging.filename,
+            maxBytes=5 * 1024 * 1024,
+            backupCount=5,
+            encoding="utf-8",
+        )
 
-    console_handler.setFormatter(formatter)
+        file_handler.setFormatter(formatter)
 
-    logger.addHandler(file_handler)
+        console_handler = logging.StreamHandler()
+        console_handler.setFormatter(formatter)
 
-    logger.addHandler(console_handler)
+        logger.handlers.clear()
+        logger.addHandler(file_handler)
+        logger.addHandler(console_handler)
 
-    return logger
+        cls._initialized = True
+
+        logger.info("Logging initialized")
+
+        return logger
+
+    @staticmethod
+    def get_logger(name: str | None = None) -> logging.Logger:
+
+        if name:
+            return logging.getLogger(name)
+
+        return logging.getLogger("mfm")
