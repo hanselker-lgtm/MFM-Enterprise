@@ -1,30 +1,46 @@
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass
 
+from mfm.common.value_object import ValueObject
 from mfm.common.enums import EmailType
 
 
-@dataclass(slots=True, frozen=True)
-class Email:
+_EMAIL_PATTERN = re.compile(
+    r"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$"
+)
+
+
+@dataclass(frozen=True, slots=True)
+class Email(ValueObject):
     """
-    Email Value Object.
+    Immutable Email Value Object.
+
+    Equality is based on the normalized e-mail address.
     """
 
     address: str
-    type: EmailType = EmailType.PRIVATE
+    email_type: EmailType = EmailType.PRIVATE
     primary: bool = False
     verified: bool = False
 
     def __post_init__(self) -> None:
 
-        if "@" not in self.address:
-            raise ValueError(
-                f"Invalid email address: {self.address}"
-            )
+        normalized = self.address.strip().lower()
 
-        object.__setattr__(
-            self,
-            "address",
-            self.address.lower().strip(),
-        )
+        if not _EMAIL_PATTERN.fullmatch(normalized):
+            raise ValueError(f"Invalid e-mail address: {self.address}")
+
+        object.__setattr__(self, "address", normalized)
+
+    @property
+    def domain(self) -> str:
+        return self.address.split("@", 1)[1]
+
+    @property
+    def local_part(self) -> str:
+        return self.address.split("@", 1)[0]
+
+    def __str__(self) -> str:
+        return self.address
