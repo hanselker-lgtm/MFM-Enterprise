@@ -1,97 +1,81 @@
-"""
-Address entity.
-"""
-
 from __future__ import annotations
 
-import uuid
-from datetime import date
+from dataclasses import dataclass
 
-from sqlalchemy import Boolean
-from sqlalchemy import Date
-from sqlalchemy import Enum
-from sqlalchemy import ForeignKey
-from sqlalchemy import String
-from sqlalchemy.orm import Mapped
-from sqlalchemy.orm import mapped_column
-from sqlalchemy.orm import relationship
-
-from mfm.domain.common.entity import Entity
-from mfm.domain.common.enums import AddressType
+from mfm.common.enums import AddressType
+from mfm.common.value_object import ValueObject
 
 
-class Address(Entity):
+@dataclass(frozen=True, slots=True)
+class Address(ValueObject):
     """
-    Postal address belonging to a Contact.
+    Immutable postal address.
     """
 
-    __tablename__ = "ADDRESS"
+    line1: str
 
-    address_id: Mapped[str] = mapped_column(
-        "AddressID",
-        String(36),
-        primary_key=True,
-        default=lambda: str(uuid.uuid4()),
-    )
+    postal_code: str
 
-    contact_id: Mapped[str] = mapped_column(
-        "ContactID",
-        ForeignKey("CONTACT.ContactID"),
-        nullable=False,
-        index=True,
-    )
+    city: str
 
-    address_type: Mapped[AddressType] = mapped_column(
-        "AddressType",
-        Enum(AddressType),
-        nullable=False,
-    )
+    country: str
 
-    street: Mapped[str] = mapped_column(
-        "Street",
-        String(200),
-        nullable=False,
-    )
+    address_type: AddressType = AddressType.HOME
 
-    postal_code: Mapped[str] = mapped_column(
-        "PostalCode",
-        String(20),
-        nullable=False,
-    )
+    primary: bool = False
 
-    city: Mapped[str] = mapped_column(
-        "City",
-        String(100),
-        nullable=False,
-    )
+    line2: str = ""
 
-    country: Mapped[str] = mapped_column(
-        "Country",
-        String(100),
-        nullable=False,
-        default="Danmark",
-    )
+    state: str = ""
 
-    valid_from: Mapped[date] = mapped_column(
-        "ValidFrom",
-        Date,
-        nullable=False,
-    )
+    def __post_init__(self):
 
-    valid_to: Mapped[date | None] = mapped_column(
-        "ValidTo",
-        Date,
-        nullable=True,
-    )
+        object.__setattr__(
+            self,
+            "line1",
+            self.line1.strip(),
+        )
 
-    is_current: Mapped[bool] = mapped_column(
-        "IsCurrent",
-        Boolean,
-        default=True,
-        nullable=False,
-    )
+        object.__setattr__(
+            self,
+            "line2",
+            self.line2.strip(),
+        )
 
-    contact = relationship(
-        "Contact",
-        back_populates="addresses",
-    )
+        object.__setattr__(
+            self,
+            "postal_code",
+            self.postal_code.strip(),
+        )
+
+        object.__setattr__(
+            self,
+            "city",
+            self.city.strip(),
+        )
+
+        object.__setattr__(
+            self,
+            "state",
+            self.state.strip(),
+        )
+
+        object.__setattr__(
+            self,
+            "country",
+            self.country.strip(),
+        )
+
+    @property
+    def single_line(self) -> str:
+
+        return (
+            f"{self.line1}, "
+            f"{self.postal_code} "
+            f"{self.city}, "
+            f"{self.country}"
+        )
+
+    def __str__(self):
+
+        return self.single_line
