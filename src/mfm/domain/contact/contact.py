@@ -1,86 +1,113 @@
 """
-Contact aggregate root.
+Contact Aggregate Root.
 """
 
 from __future__ import annotations
 
-import uuid
+from dataclasses import dataclass, field
+from datetime import UTC, datetime
+from uuid import UUID, uuid4
 
-from sqlalchemy import Enum
-from sqlalchemy import String
-from sqlalchemy.orm import Mapped
-from sqlalchemy.orm import mapped_column
-from sqlalchemy.orm import relationship
+from mfm.common.aggregate_root import AggregateRoot
+from mfm.common.enums import ContactStatus
 
-from .base_model import AggregateRoot
-from .enums import ContactType
+from mfm.domain.contact.contact_party import ContactParty
+from mfm.domain.contact.email import Email
+from mfm.domain.contact.phone import Phone
+from mfm.domain.contact.address import Address
 
 
+@dataclass(slots=True)
 class Contact(AggregateRoot):
+    """
+    Aggregate Root representing a Contact.
+    """
 
-    __tablename__ = "CONTACT"
+    party: ContactParty
 
-    contact_id: Mapped[str] = mapped_column(
-        "ContactID",
-        String(36),
-        primary_key=True,
-        default=lambda: str(uuid.uuid4()),
+    contact_number: str
+
+    status: ContactStatus = ContactStatus.ACTIVE
+
+    id: UUID = field(default_factory=uuid4)
+
+    created: datetime = field(
+        default_factory=lambda: datetime.now(UTC)
     )
 
-    contact_type: Mapped[ContactType] = mapped_column(
-        "ContactType",
-        Enum(ContactType),
-        nullable=False,
+    modified: datetime = field(
+        default_factory=lambda: datetime.now(UTC)
     )
 
-    person = relationship(
-        "Person",
-        back_populates="contact",
-        uselist=False,
-        cascade="all, delete-orphan",
-    )
+    emails: list[Email] = field(default_factory=list)
 
-    organisation = relationship(
-        "Organisation",
-        back_populates="contact",
-        uselist=False,
-        cascade="all, delete-orphan",
-    )
+    phones: list[Phone] = field(default_factory=list)
 
-    addresses = relationship(
-        "Address",
-        back_populates="contact",
-        cascade="all, delete-orphan",
-    )
+    addresses: list[Address] = field(default_factory=list)
 
-    emails = relationship(
-        "Email",
-        back_populates="contact",
-        cascade="all, delete-orphan",
-    )
+    def __post_init__(self):
 
-    phones = relationship(
-        "Phone",
-        back_populates="contact",
-        cascade="all, delete-orphan",
-    )
+        AggregateRoot.__init__(self)
 
-    outgoing_relations = relationship(
-        "ContactRelation",
-        foreign_keys="ContactRelation.from_contact_id",
-        back_populates="from_contact",
-    )
+    @property
+    def display_name(self) -> str:
 
-    incoming_relations = relationship(
-        "ContactRelation",
-        foreign_keys="ContactRelation.to_contact_id",
-        back_populates="to_contact",
-    )
+        return self.party.display_name
 
-    def archive(self) -> None:
-        """Archive the contact."""
-        self.is_active = False
+    def add_email(self, email: Email):
 
-    def activate(self) -> None:
-        """Reactivate the contact."""
-        self.is_active = True
+        if email.primary:
+
+            self.emails = [
+                Email(
+                    address=e.address,
+                    email_type=e.email_type,
+                    primary=False,
+                    verified=e.verified,
+                )
+                for e in self.emails
+            ]
+
+        self.emails.append(email)
+
+        self.modified = datetime.now(UTC)
+
+    def add_phone(self, phone: Phone):
+
+        if phone.primary:
+
+            self.phones = [
+                Phone(
+                    number=p.number,
+                    phone_type=p.phone_type,
+                    primary=False,
+                    verified=p.verified,
+                )
+                for p in self.phones
+            ]
+
+        self.phones.append(phone)
+
+        self.modified = datetime.now(UTC)
+
+    def add_address(self, address: Address):
+
+        if address.primary:
+
+            self.addresses = [
+                Address(
+                    line1=a.line1,
+                    postal_code=a.postal_code,
+                    city=a.city,
+                    country=a.country,
+                    address_type=a.address_type,
+                    primary=False,
+                    line2=a.line2,
+                    state=a.state,
+                )
+                for a in self.addresses
+            ]
+
+        self.addresses.append(address)
+
+        self.modified = datetime.now(UTC)

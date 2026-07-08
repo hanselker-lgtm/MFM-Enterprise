@@ -1,48 +1,45 @@
 """
-Organisation domain model.
-"
-rom .base_model import Entity
+Organisation Entity.
+"""
 
-from sqlalchemy import ForeignKey
-from sqlalchemy import String
+from __future__ import annotations
 
-from sqlalchemy.orm import Mapped
-from sqlalchemy.orm import mapped_column
-from sqlalchemy.orm import relationship
-
-from mfm.domain.base import Base
+from dataclasses import dataclass
 
 
-class Organisation(Entity):
+@dataclass(slots=True)
+class Organisation:
+    """
+    Represents an organisation.
+    """
 
-    __tablename__ = "ORGANISATION"
+    name: str
 
-    contact_id: Mapped[str] = mapped_column(
-        "ContactID",
-        ForeignKey("CONTACT.id"),
-        primary_key=True,
-    )
+    cvr: str = ""
 
-    name: Mapped[str] = mapped_column(
-        "Name",
-        String(200),
-        nullable=False,
-    )
+    vat: str = ""
 
-    cvr: Mapped[str | None] = mapped_column(
-        "CVR",
-        String(20),
-        nullable=True,
-    )
+    ean: str = ""
 
-    country: Mapped[str] = mapped_column(
-        "Country",
-        String(100),
-        default="Danmark",
-        nullable=False,
-    )
+    industry: str = ""
 
-    contact = relationship(
-        "Contact",
-        back_populates="organisation",
-    )
+    def __post_init__(self):
+
+        self.name = self.name.strip()
+
+        self.cvr = self.cvr.strip()
+
+        self.vat = self.vat.strip()
+
+        self.ean = self.ean.strip()
+
+        self.industry = self.industry.strip()
+
+    @property
+    def display_name(self) -> str:
+
+        return self.name
+
+    def __str__(self):
+
+        return self.name

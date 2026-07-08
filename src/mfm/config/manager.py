@@ -1,12 +1,31 @@
+from __future__ import annotations
+
 from pathlib import Path
-import shutil
+from typing import Any
+
 import tomllib
 
 from mfm.config.exceptions import ConfigurationError
-from mfm.config.models import *
+from mfm.config.models import (
+    ApplicationConfig,
+    Config,
+    DatabaseConfig,
+    GuiConfig,
+    LoggingConfig,
+)
 
 
 class ConfigManager:
+    """
+    Loads the application configuration.
+
+    Configuration is loaded in two steps:
+
+    1. config/default.toml (required)
+    2. config/user.toml (optional)
+
+    Values from user.toml override the defaults.
+    """
 
     CONFIG_DIR = (
         Path(__file__).resolve().parents[3]
@@ -18,24 +37,80 @@ class ConfigManager:
     USER_FILE = CONFIG_DIR / "user.toml"
 
     @classmethod
-    def load(cls) -> Config:
+    def _load_toml(cls, path: Path) -> dict[str, Any]:
+        """
+        Load a TOML file.
 
-        if not cls.USER_FILE.exists():
+        Returns an empty dict if the file does not exist.
+        """
 
-            shutil.copy(
-                cls.DEFAULT_FILE,
-                cls.USER_FILE,
-            )
+        if not path.exists():
+            return {}
 
         try:
-
-            with cls.USER_FILE.open("rb") as fp:
-
+            with path.open("rb") as fp:
                 data = tomllib.load(fp)
 
         except Exception as exc:
+            raise ConfigurationError(
+                f"Unable to read configuration file '{path.name}': {exc}"
+            ) from exc
 
-            raise ConfigurationError(str(exc))
+        if not isinstance(data, dict):
+            return {}
+
+        return data
+
+    @staticmethod
+    def _merge(
+        default: dict[str, Any],
+        user: dict[str, Any],
+    ) -> dict[str, Any]:
+        """
+        Merge user configuration into default configuration.
+        """
+
+        result: dict[str, Any] = default.copy()
+
+        for key, value in user.items():
+
+            if (
+                key in result
+                and isinstance(result[key], dict)
+                and isinstance(value, dict)
+            ):
+                merged = result[key].copy()
+                merged.update(value)
+                result[key] = merged
+
+            else:
+                result[key] = value
+
+        return result
+
+    @classmethod
+    def load(cls) -> Config:
+        """
+        Load the effective application configuration.
+        """
+
+        default_data = cls._load_toml(
+            cls.DEFAULT_FILE
+        )
+
+        if not default_data:
+            raise ConfigurationError(
+                "default.toml is missing or empty."
+            )
+
+        user_data = cls._load_toml(
+            cls.USER_FILE
+        )
+
+        data = cls._merge(
+            default_data,
+            user_data,
+        )
 
         return Config(
             application=ApplicationConfig(

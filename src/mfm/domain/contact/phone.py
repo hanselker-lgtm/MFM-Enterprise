@@ -42,6 +42,10 @@ class Phone(ValueObject):
             normalized,
         )
 
+        @property
+        def display_name(self) -> str:
+            return self.full_name
+
     def __str__(self):
 
         return self.number

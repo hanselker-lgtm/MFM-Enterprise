@@ -11,6 +11,16 @@ class ContactType(str, Enum):
 
     ORGANISATION = "ORGANISATION"
 
+class ContactStatus(str, Enum):
+
+    ACTIVE = "ACTIVE"
+
+    INACTIVE = "INACTIVE"
+
+    ARCHIVED = "ARCHIVED"
+
+    DELETED = "DELETED"
+
 
 class AddressType(str, Enum):
 
