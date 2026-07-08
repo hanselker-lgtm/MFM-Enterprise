@@ -15,28 +15,19 @@ class Person:
     """
 
     first_name: str
-
     last_name: str
-
     middle_name: str = ""
-
     title: str = ""
-
     birth_date: date | None = None
 
     def __post_init__(self) -> None:
-
         self.first_name = self.first_name.strip()
-
         self.middle_name = self.middle_name.strip()
-
         self.last_name = self.last_name.strip()
-
         self.title = self.title.strip()
 
     @property
     def full_name(self) -> str:
-
         parts = [
             self.first_name,
             self.middle_name,
@@ -48,8 +39,17 @@ class Person:
         )
 
     @property
-    def initials(self) -> str:
+    def display_name(self) -> str:
+        """
+        Public name used throughout the application.
 
+        Contact, GUI and reports should use this property instead
+        of accessing full_name directly.
+        """
+        return self.full_name
+
+    @property
+    def initials(self) -> str:
         result = ""
 
         if self.first_name:
@@ -64,5 +64,4 @@ class Person:
         return result.upper()
 
     def __str__(self) -> str:
-
-        return self.full_name
+        return self.display_name
