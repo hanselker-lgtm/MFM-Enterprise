@@ -1,74 +1,93 @@
 """
-Repository for Contact aggregate.
+Contact Repository interface.
+
+This module defines the repository contract used by the
+application layer.
+
+Infrastructure implementations (SQLite, PostgreSQL, etc.)
+must implement this interface.
 """
 
 from __future__ import annotations
 
-from typing import Sequence
-
-from sqlalchemy import select
-from sqlalchemy.orm import Session
-from sqlalchemy.orm import joinedload
+from abc import ABC
+from abc import abstractmethod
+from uuid import UUID
 
 from mfm.domain.contact.contact import Contact
 
 
-class ContactRepository:
+class ContactRepository(ABC):
     """
-    Repository for Contact aggregate.
+    Repository contract for Contact aggregates.
+
+    Implementations are responsible only for persistence.
+    No business logic belongs here.
     """
 
-    def __init__(self, session: Session):
-        self._session = session
-
+    @abstractmethod
     def add(self, contact: Contact) -> None:
-        """Add a new contact."""
-        self._session.add(contact)
-
-    def get_by_id(self, contact_id: str) -> Contact | None:
-        """Return one Contact aggregate."""
-
-        stmt = (
-            select(Contact)
-            .options(
-                joinedload(Contact.person),
-                joinedload(Contact.organisation),
-                joinedload(Contact.addresses),
-                joinedload(Contact.emails),
-                joinedload(Contact.phones),
-                joinedload(Contact.outgoing_relations),
-                joinedload(Contact.incoming_relations),
-            )
-            .where(Contact.contact_id == contact_id)
-        )
-
-        return self._session.scalar(stmt)
-
-    def list_active(self) -> Sequence[Contact]:
-        """Return all active contacts."""
-
-        stmt = (
-            select(Contact)
-            .where(Contact.is_active.is_(True))
-            .order_by(Contact.created_at)
-        )
-
-        return self._session.scalars(stmt).all()
-
-    def list_all(self) -> Sequence[Contact]:
-        """Return all contacts."""
-
-        stmt = (
-            select(Contact)
-            .order_by(Contact.created_at)
-        )
-
-        return self._session.scalars(stmt).all()
-
-    def remove(self, contact: Contact) -> None:
         """
-        Physical delete.
-
-        Must ONLY be used by maintenance tools.
+        Persist a new Contact.
         """
-        self._session.delete(contact)
+        raise NotImplementedError
+
+    @abstractmethod
+    def get(self, contact_id: UUID) -> Contact | None:
+        """
+        Return a Contact by UUID.
+
+        Returns None if not found.
+        """
+        raise NotImplementedError
+
+    @abstractmethod
+    def get_by_number(
+        self,
+        contact_number: str,
+    ) -> Contact | None:
+        """
+        Return a Contact by contact number.
+
+        Returns None if not found.
+        """
+        raise NotImplementedError
+
+    @abstractmethod
+    def list(self) -> list[Contact]:
+        """
+        Return all contacts.
+        """
+        raise NotImplementedError
+
+    @abstractmethod
+    def search(
+        self,
+        text: str,
+    ) -> list[Contact]:
+        """
+        Search contacts.
+
+        Implementation decides how searching is performed.
+        """
+        raise NotImplementedError
+
+    @abstractmethod
+    def exists(
+        self,
+        contact_id: UUID,
+    ) -> bool:
+        """
+        Check whether a Contact exists.
+        """
+        raise NotImplementedError
+
+    @abstractmethod
+    def delete(
+        self,
+        contact_id: UUID,
+    ) -> None:
+        """
+        Delete a Contact.
+        """
+        raise NotImplementedError
