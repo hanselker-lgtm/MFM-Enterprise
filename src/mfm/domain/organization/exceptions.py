@@ -51,3 +51,35 @@ class InvalidRoleIdentityMutationError(RoleError):
 
 class RoleSerializationError(RoleError):
     """Raised when serialized role payload is invalid."""
+
+
+class BoardError(Exception):
+    """Base exception for board domain errors."""
+
+
+class InvalidBoardNameError(BoardError):
+    """Raised when board name is missing or invalid."""
+
+
+class InvalidBoardTermError(BoardError):
+    """Raised when board term boundaries are invalid."""
+
+
+class DuplicateBoardRoleError(BoardError):
+    """Raised when the same role overlaps in the same term period."""
+
+
+class BoardChairRequirementError(BoardError):
+    """Raised when board has no chair."""
+
+
+class BoardMemberNotFoundError(BoardError):
+    """Raised when target board member assignment does not exist."""
+
+
+class InvalidBoardStatusTransitionError(BoardError):
+    """Raised when board transition is not allowed."""
+
+
+class InvalidBoardMemberOperationError(BoardError):
+    """Raised when board member operation is invalid."""
