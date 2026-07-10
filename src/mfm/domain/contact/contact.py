@@ -11,10 +11,10 @@ from uuid import UUID, uuid4
 from mfm.common.aggregate_root import AggregateRoot
 from mfm.common.enums import ContactStatus
 
+from mfm.domain.contact.address import Address
 from mfm.domain.contact.contact_party import ContactParty
 from mfm.domain.contact.email import Email
 from mfm.domain.contact.phone import Phone
-from mfm.domain.contact.address import Address
 
 
 @dataclass(slots=True)
@@ -31,11 +31,11 @@ class Contact(AggregateRoot):
 
     id: UUID = field(default_factory=uuid4)
 
-    created: datetime = field(
+    created_at: datetime = field(
         default_factory=lambda: datetime.now(UTC)
     )
 
-    modified: datetime = field(
+    updated_at: datetime = field(
         default_factory=lambda: datetime.now(UTC)
     )
 
@@ -45,19 +45,15 @@ class Contact(AggregateRoot):
 
     addresses: list[Address] = field(default_factory=list)
 
-    def __post_init__(self):
-
+    def __post_init__(self) -> None:
         AggregateRoot.__init__(self)
 
     @property
     def display_name(self) -> str:
-
         return self.party.display_name
 
-    def add_email(self, email: Email):
-
+    def add_email(self, email: Email) -> None:
         if email.primary:
-
             self.emails = [
                 Email(
                     address=e.address,
@@ -70,12 +66,10 @@ class Contact(AggregateRoot):
 
         self.emails.append(email)
 
-        self.modified = datetime.now(UTC)
+        self.updated_at = datetime.now(UTC)
 
-    def add_phone(self, phone: Phone):
-
+    def add_phone(self, phone: Phone) -> None:
         if phone.primary:
-
             self.phones = [
                 Phone(
                     number=p.number,
@@ -88,12 +82,10 @@ class Contact(AggregateRoot):
 
         self.phones.append(phone)
 
-        self.modified = datetime.now(UTC)
+        self.updated_at = datetime.now(UTC)
 
-    def add_address(self, address: Address):
-
+    def add_address(self, address: Address) -> None:
         if address.primary:
-
             self.addresses = [
                 Address(
                     line1=a.line1,
@@ -110,4 +102,4 @@ class Contact(AggregateRoot):
 
         self.addresses.append(address)
 
-        self.modified = datetime.now(UTC)
+        self.updated_at = datetime.now(UTC)
