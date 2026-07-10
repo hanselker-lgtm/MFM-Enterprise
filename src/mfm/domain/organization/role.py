@@ -5,7 +5,6 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field
 from datetime import UTC
-from datetime import date
 from datetime import datetime
 from typing import Any
 from typing import ClassVar
@@ -15,11 +14,11 @@ from mfm.domain.organization.exceptions import DuplicateRoleCodeError
 from mfm.domain.organization.exceptions import InvalidRoleIdentityMutationError
 from mfm.domain.organization.exceptions import InvalidRoleNameError
 from mfm.domain.organization.exceptions import InvalidRoleStatusTransitionError
-from mfm.domain.organization.exceptions import InvalidRoleValidityPeriodError
 from mfm.domain.organization.exceptions import RoleSerializationError
-from mfm.domain.organization.role_id import RoleCode
+from mfm.domain.organization.role_code import RoleCode
 from mfm.domain.organization.role_id import RoleId
 from mfm.domain.organization.role_status import RoleStatus
+from mfm.domain.organization.role_type import RoleType
 
 
 @dataclass(slots=True)
@@ -32,9 +31,10 @@ class Role:
     role_code: RoleCode = field(default_factory=lambda: RoleCode("ROLE-UNSET"))
     name: str = ""
     description: str | None = None
+    role_type: RoleType = RoleType.OPERATIONAL
     status: RoleStatus = RoleStatus.ACTIVE
-    valid_from: date = field(default_factory=lambda: datetime.now(UTC).date())
-    valid_to: date | None = None
+    created_at: datetime = field(default_factory=lambda: datetime.now(UTC))
+    updated_at: datetime = field(default_factory=lambda: datetime.now(UTC))
     _identity_locked: bool = field(default=False, init=False, repr=False, compare=False)
 
     def __setattr__(self, name: str, value: Any) -> None:
@@ -62,20 +62,31 @@ class Role:
         if self.description is not None:
             self.description = self._normalize_description(self.description)
 
+        if not isinstance(self.role_type, RoleType):
+            self.role_type = RoleType(str(self.role_type).upper())
+
         if not isinstance(self.status, RoleStatus):
             self.status = RoleStatus(str(self.status).upper())
 
-        if not isinstance(self.valid_from, date):
-            raise TypeError("valid_from must be date")
+        if not isinstance(self.created_at, datetime):
+            raise TypeError("created_at must be datetime")
 
-        if self.valid_to is not None and not isinstance(self.valid_to, date):
-            raise TypeError("valid_to must be date or None")
+        if not isinstance(self.updated_at, datetime):
+            raise TypeError("updated_at must be datetime")
 
-        if self.valid_to is not None and self.valid_from > self.valid_to:
-            raise InvalidRoleValidityPeriodError("valid_from must be <= valid_to")
+        self.created_at = self._as_utc(self.created_at)
+        self.updated_at = self._as_utc(self.updated_at)
+        if self.updated_at < self.created_at:
+            self.updated_at = self.created_at
 
         self._register_role_code()
         self._identity_locked = True
+
+    @staticmethod
+    def _as_utc(value: datetime) -> datetime:
+        if value.tzinfo is None:
+            return value.replace(tzinfo=UTC)
+        return value.astimezone(UTC)
 
     @staticmethod
     def _normalize_name(value: str) -> str:
@@ -103,43 +114,60 @@ class Role:
 
         self._code_registry[self.role_code.value] = self.id
 
+    def _touch(self) -> None:
+        self.updated_at = datetime.now(UTC)
+
     def rename(self, new_name: str) -> None:
         normalized = self._normalize_name(new_name)
         if normalized == self.name:
             return
 
         self.name = normalized
+        self._touch()
 
     def activate(self) -> None:
         if self.status is RoleStatus.ARCHIVED:
             raise InvalidRoleStatusTransitionError("Archived role cannot be activated")
-
-        if self.status is RoleStatus.ACTIVE:
-            return
+        if self.status is not RoleStatus.INACTIVE:
+            raise InvalidRoleStatusTransitionError(
+                f"Cannot activate role from status {self.status.value}"
+            )
 
         self.status = RoleStatus.ACTIVE
+        self._touch()
 
     def deactivate(self) -> None:
         if self.status is RoleStatus.ARCHIVED:
             raise InvalidRoleStatusTransitionError("Archived role cannot be deactivated")
-
-        if self.status is RoleStatus.INACTIVE:
-            return
+        if self.status is not RoleStatus.ACTIVE:
+            raise InvalidRoleStatusTransitionError(
+                f"Cannot deactivate role from status {self.status.value}"
+            )
 
         self.status = RoleStatus.INACTIVE
+        self._touch()
 
     def archive(self) -> None:
         if self.status is RoleStatus.ARCHIVED:
             return
 
         self.status = RoleStatus.ARCHIVED
+        self._touch()
 
     def change_description(self, description: str | None) -> None:
         if description is None:
+            if self.description is None:
+                return
             self.description = None
+            self._touch()
             return
 
-        self.description = self._normalize_description(description)
+        normalized = self._normalize_description(description)
+        if normalized == self.description:
+            return
+
+        self.description = normalized
+        self._touch()
 
     def to_dict(self) -> dict[str, str | None]:
         return {
@@ -147,9 +175,10 @@ class Role:
             "role_code": str(self.role_code),
             "name": self.name,
             "description": self.description,
+            "role_type": self.role_type.value,
             "status": self.status.value,
-            "valid_from": self.valid_from.isoformat(),
-            "valid_to": self.valid_to.isoformat() if self.valid_to is not None else None,
+            "created_at": self.created_at.isoformat(),
+            "updated_at": self.updated_at.isoformat(),
         }
 
     @classmethod
@@ -162,9 +191,10 @@ class Role:
             "role_code",
             "name",
             "description",
+            "role_type",
             "status",
-            "valid_from",
-            "valid_to",
+            "created_at",
+            "updated_at",
         }
         if not required.issubset(data.keys()):
             missing = sorted(required - set(data.keys()))
@@ -173,20 +203,16 @@ class Role:
             )
 
         try:
-            valid_to_value = data["valid_to"]
             description_value = data["description"]
             return cls(
                 id=RoleId(data["id"]),
                 role_code=RoleCode(str(data["role_code"])),
                 name=str(data["name"]),
                 description=(None if description_value is None else str(description_value)),
+                role_type=RoleType(str(data["role_type"]).upper()),
                 status=RoleStatus(str(data["status"]).upper()),
-                valid_from=date.fromisoformat(str(data["valid_from"])),
-                valid_to=(
-                    date.fromisoformat(str(valid_to_value))
-                    if valid_to_value is not None
-                    else None
-                ),
+                created_at=datetime.fromisoformat(str(data["created_at"])),
+                updated_at=datetime.fromisoformat(str(data["updated_at"])),
             )
         except Exception as exc:
             raise RoleSerializationError("Invalid serialized role") from exc

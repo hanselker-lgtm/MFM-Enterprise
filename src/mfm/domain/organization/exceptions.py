@@ -45,10 +45,6 @@ class InvalidRoleStatusTransitionError(RoleError):
     """Raised when role status transition is not allowed."""
 
 
-class InvalidRoleValidityPeriodError(RoleError):
-    """Raised when role validity period is inconsistent."""
-
-
 class InvalidRoleIdentityMutationError(RoleError):
     """Raised when role identity fields are mutated after creation."""
 
