@@ -83,3 +83,31 @@ class InvalidBoardStatusTransitionError(BoardError):
 
 class InvalidBoardMemberOperationError(BoardError):
     """Raised when board member operation is invalid."""
+
+
+class CommitteeError(Exception):
+    """Base exception for committee domain errors."""
+
+
+class InvalidCommitteeNameError(CommitteeError):
+    """Raised when committee name is missing or invalid."""
+
+
+class DuplicateCommitteeMemberError(CommitteeError):
+    """Raised when committee member appears as duplicate active assignment."""
+
+
+class CommitteeMemberNotFoundError(CommitteeError):
+    """Raised when committee member assignment does not exist."""
+
+
+class InvalidCommitteeStatusTransitionError(CommitteeError):
+    """Raised when committee transition is not allowed."""
+
+
+class InvalidCommitteeMemberOperationError(CommitteeError):
+    """Raised when committee member operation is invalid."""
+
+
+class CommitteeSerializationError(CommitteeError):
+    """Raised when serialized committee payload is invalid."""
