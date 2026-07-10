@@ -6,7 +6,15 @@ Responsible for transaction handling.
 
 from __future__ import annotations
 
-from sqlalchemy.orm import Session
+from typing import Protocol
+
+
+class SessionLike(Protocol):
+    def commit(self) -> None: ...
+
+    def rollback(self) -> None: ...
+
+    def close(self) -> None: ...
 
 
 class UnitOfWork:
@@ -14,11 +22,11 @@ class UnitOfWork:
     Coordinates database transactions.
     """
 
-    def __init__(self, session: Session):
+    def __init__(self, session: SessionLike):
         self._session = session
 
     @property
-    def session(self) -> Session:
+    def session(self) -> SessionLike:
         return self._session
 
     def commit(self) -> None:
