@@ -44,13 +44,16 @@ from mfm.domain.organization.exceptions import InvalidBoardMemberOperationError
 from mfm.domain.organization.exceptions import InvalidBoardNameError
 from mfm.domain.organization.exceptions import InvalidBoardStatusTransitionError
 from mfm.domain.organization.exceptions import InvalidBoardTermError
+from mfm.domain.organization.exceptions import ArchivedRoleAssignmentError
 from mfm.domain.organization.exceptions import InvalidRoleCodeError
-from mfm.domain.organization.exceptions import InvalidRoleIdentityMutationError
+from mfm.domain.organization.exceptions import InvalidRoleAssignmentPeriodError
 from mfm.domain.organization.exceptions import InvalidRoleNameError
 from mfm.domain.organization.exceptions import InvalidRoleStatusTransitionError
 from mfm.domain.organization.exceptions import OrganizationError
 from mfm.domain.organization.exceptions import OrganizationSerializationError
 from mfm.domain.organization.exceptions import RoleError
+from mfm.domain.organization.exceptions import RoleAssignmentNotFoundError
+from mfm.domain.organization.exceptions import RoleAssignmentOverlapError
 from mfm.domain.organization.exceptions import RoleSerializationError
 from mfm.domain.organization.organization import Organization
 from mfm.domain.organization.organization_id import OrganizationId
@@ -58,6 +61,7 @@ from mfm.domain.organization.organization_id import OrganizationNumber
 from mfm.domain.organization.organization_status import OrganizationStatus
 from mfm.domain.organization.organization_type import OrganizationType
 from mfm.domain.organization.role import Role
+from mfm.domain.organization.role_assignment import RoleAssignment
 from mfm.domain.organization.role_code import RoleCode
 from mfm.domain.organization.role_id import RoleId
 from mfm.domain.organization.role_status import RoleStatus
@@ -65,6 +69,7 @@ from mfm.domain.organization.role_type import RoleType
 
 __all__ = [
     "Board",
+    "ArchivedRoleAssignmentError",
     "BoardChairRequirementError",
     "BoardError",
     "BoardMember",
@@ -98,8 +103,8 @@ __all__ = [
     "InvalidOrganizationNameError",
     "InvalidOrganizationNumberError",
     "InvalidOrganizationStatusTransitionError",
+    "InvalidRoleAssignmentPeriodError",
     "InvalidRoleCodeError",
-    "InvalidRoleIdentityMutationError",
     "InvalidRoleNameError",
     "InvalidRoleStatusTransitionError",
     "Organization",
@@ -110,6 +115,9 @@ __all__ = [
     "OrganizationStatus",
     "OrganizationType",
     "Role",
+    "RoleAssignment",
+    "RoleAssignmentNotFoundError",
+    "RoleAssignmentOverlapError",
     "RoleCode",
     "RoleError",
     "RoleId",

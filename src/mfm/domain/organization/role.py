@@ -1,20 +1,23 @@
-"""Role aggregate."""
+"""Generic Role aggregate."""
 
 from __future__ import annotations
 
 from dataclasses import dataclass
 from dataclasses import field
-from datetime import UTC
-from datetime import datetime
+from datetime import date
 from typing import Any
 from typing import ClassVar
 from typing import Mapping
+from uuid import UUID
 
+from mfm.domain.organization.exceptions import ArchivedRoleAssignmentError
 from mfm.domain.organization.exceptions import DuplicateRoleCodeError
-from mfm.domain.organization.exceptions import InvalidRoleIdentityMutationError
+from mfm.domain.organization.exceptions import InvalidRoleAssignmentPeriodError
 from mfm.domain.organization.exceptions import InvalidRoleNameError
-from mfm.domain.organization.exceptions import InvalidRoleStatusTransitionError
+from mfm.domain.organization.exceptions import RoleAssignmentNotFoundError
+from mfm.domain.organization.exceptions import RoleAssignmentOverlapError
 from mfm.domain.organization.exceptions import RoleSerializationError
+from mfm.domain.organization.role_assignment import RoleAssignment
 from mfm.domain.organization.role_code import RoleCode
 from mfm.domain.organization.role_id import RoleId
 from mfm.domain.organization.role_status import RoleStatus
@@ -23,32 +26,17 @@ from mfm.domain.organization.role_type import RoleType
 
 @dataclass(slots=True)
 class Role:
-    """Aggregate root for role identity and lifecycle."""
+    """Aggregate root for generic role definition and assignments."""
 
     _code_registry: ClassVar[dict[str, RoleId]] = {}
 
+    role_code: RoleCode
+    name: str
+    category: RoleType
     id: RoleId = field(default_factory=RoleId.new)
-    role_code: RoleCode = field(default_factory=lambda: RoleCode("ROLE-UNSET"))
-    name: str = ""
     description: str | None = None
-    role_type: RoleType = RoleType.OPERATIONAL
     status: RoleStatus = RoleStatus.ACTIVE
-    created_at: datetime = field(default_factory=lambda: datetime.now(UTC))
-    updated_at: datetime = field(default_factory=lambda: datetime.now(UTC))
-    _identity_locked: bool = field(default=False, init=False, repr=False, compare=False)
-
-    def __setattr__(self, name: str, value: Any) -> None:
-        if (
-            name in {"id", "role_code"}
-            and getattr(self, "_identity_locked", False)
-            and hasattr(self, name)
-        ):
-            current = getattr(self, name)
-            if value != current:
-                raise InvalidRoleIdentityMutationError(
-                    f"{name} is immutable for Role identity"
-                )
-        super().__setattr__(name, value)
+    assignments: list[RoleAssignment] = field(default_factory=list)
 
     def __post_init__(self) -> None:
         if not isinstance(self.id, RoleId):
@@ -62,48 +50,34 @@ class Role:
         if self.description is not None:
             self.description = self._normalize_description(self.description)
 
-        if not isinstance(self.role_type, RoleType):
-            self.role_type = RoleType(str(self.role_type).upper())
+        if not isinstance(self.category, RoleType):
+            self.category = RoleType(str(self.category).upper())
 
         if not isinstance(self.status, RoleStatus):
             self.status = RoleStatus(str(self.status).upper())
 
-        if not isinstance(self.created_at, datetime):
-            raise TypeError("created_at must be datetime")
-
-        if not isinstance(self.updated_at, datetime):
-            raise TypeError("updated_at must be datetime")
-
-        self.created_at = self._as_utc(self.created_at)
-        self.updated_at = self._as_utc(self.updated_at)
-        if self.updated_at < self.created_at:
-            self.updated_at = self.created_at
-
+        self.assignments = list(self.assignments)
+        for assignment in self.assignments:
+            if assignment.role_id != self.id:
+                raise InvalidRoleAssignmentPeriodError(
+                    "assignment.role_id must match role.id"
+                )
+        self._assert_no_assignment_overlap()
         self._register_role_code()
-        self._identity_locked = True
-
-    @staticmethod
-    def _as_utc(value: datetime) -> datetime:
-        if value.tzinfo is None:
-            return value.replace(tzinfo=UTC)
-        return value.astimezone(UTC)
 
     @staticmethod
     def _normalize_name(value: str) -> str:
         if not isinstance(value, str):
             raise InvalidRoleNameError("name must be a string")
-
         normalized = value.strip()
         if not normalized:
             raise InvalidRoleNameError("name cannot be empty")
-
         return normalized
 
     @staticmethod
     def _normalize_description(value: str) -> str | None:
         if not isinstance(value, str):
             raise TypeError("description must be a string")
-
         normalized = value.strip()
         return normalized or None
 
@@ -111,74 +85,87 @@ class Role:
         existing = self._code_registry.get(self.role_code.value)
         if existing is not None and existing != self.id:
             raise DuplicateRoleCodeError(f"role_code {self.role_code.value} already exists")
-
         self._code_registry[self.role_code.value] = self.id
 
-    def _touch(self) -> None:
-        self.updated_at = datetime.now(UTC)
+    def _assert_no_assignment_overlap(self) -> None:
+        grouped: dict[UUID, list[RoleAssignment]] = {}
+        for assignment in self.assignments:
+            grouped.setdefault(assignment.assignee_id, []).append(assignment)
+
+        for values in grouped.values():
+            ordered = sorted(values, key=lambda item: item.valid_from)
+            for index, left in enumerate(ordered):
+                for right in ordered[index + 1 :]:
+                    if left.overlaps(right.valid_from, right.valid_to):
+                        raise RoleAssignmentOverlapError(
+                            "assignment periods may not overlap"
+                        )
+
+    def assign(
+        self,
+        *,
+        assignee_id: UUID,
+        organization_id: UUID,
+        valid_from: date,
+        valid_to: date | None = None,
+    ) -> RoleAssignment:
+        if self.status is RoleStatus.ARCHIVED:
+            raise ArchivedRoleAssignmentError("archived roles cannot be assigned")
+
+        assignment = RoleAssignment(
+            role_id=self.id,
+            assignee_id=assignee_id,
+            organization_id=organization_id,
+            valid_from=valid_from,
+            valid_to=valid_to,
+        )
+
+        for existing in self.assignments:
+            if existing.assignee_id != assignment.assignee_id:
+                continue
+            if existing.overlaps(assignment.valid_from, assignment.valid_to):
+                raise RoleAssignmentOverlapError("assignment periods may not overlap")
+
+        self.assignments.append(assignment)
+        return assignment
+
+    def revoke(self, assignee_id: UUID, revoked_on: date) -> None:
+        target = next(
+            (
+                assignment
+                for assignment in self.assignments
+                if assignment.assignee_id == assignee_id and assignment.valid_to is None
+            ),
+            None,
+        )
+        if target is None:
+            raise RoleAssignmentNotFoundError("active assignment not found")
+
+        if revoked_on < target.valid_from:
+            raise InvalidRoleAssignmentPeriodError(
+                "revoked_on cannot be before valid_from"
+            )
+
+        target.valid_to = revoked_on
 
     def rename(self, new_name: str) -> None:
         normalized = self._normalize_name(new_name)
         if normalized == self.name:
             return
-
         self.name = normalized
-        self._touch()
-
-    def activate(self) -> None:
-        if self.status is RoleStatus.ARCHIVED:
-            raise InvalidRoleStatusTransitionError("Archived role cannot be activated")
-        if self.status is not RoleStatus.INACTIVE:
-            raise InvalidRoleStatusTransitionError(
-                f"Cannot activate role from status {self.status.value}"
-            )
-
-        self.status = RoleStatus.ACTIVE
-        self._touch()
-
-    def deactivate(self) -> None:
-        if self.status is RoleStatus.ARCHIVED:
-            raise InvalidRoleStatusTransitionError("Archived role cannot be deactivated")
-        if self.status is not RoleStatus.ACTIVE:
-            raise InvalidRoleStatusTransitionError(
-                f"Cannot deactivate role from status {self.status.value}"
-            )
-
-        self.status = RoleStatus.INACTIVE
-        self._touch()
 
     def archive(self) -> None:
-        if self.status is RoleStatus.ARCHIVED:
-            return
-
         self.status = RoleStatus.ARCHIVED
-        self._touch()
 
-    def change_description(self, description: str | None) -> None:
-        if description is None:
-            if self.description is None:
-                return
-            self.description = None
-            self._touch()
-            return
-
-        normalized = self._normalize_description(description)
-        if normalized == self.description:
-            return
-
-        self.description = normalized
-        self._touch()
-
-    def to_dict(self) -> dict[str, str | None]:
+    def to_dict(self) -> dict[str, Any]:
         return {
             "id": str(self.id),
             "role_code": str(self.role_code),
             "name": self.name,
             "description": self.description,
-            "role_type": self.role_type.value,
+            "category": self.category.value,
             "status": self.status.value,
-            "created_at": self.created_at.isoformat(),
-            "updated_at": self.updated_at.isoformat(),
+            "assignments": [assignment.to_dict() for assignment in self.assignments],
         }
 
     @classmethod
@@ -191,10 +178,9 @@ class Role:
             "role_code",
             "name",
             "description",
-            "role_type",
+            "category",
             "status",
-            "created_at",
-            "updated_at",
+            "assignments",
         }
         if not required.issubset(data.keys()):
             missing = sorted(required - set(data.keys()))
@@ -203,17 +189,24 @@ class Role:
             )
 
         try:
+            assignments_payload = data["assignments"]
+            if not isinstance(assignments_payload, list):
+                raise RoleSerializationError("assignments must be a list")
+
             description_value = data["description"]
             return cls(
                 id=RoleId(data["id"]),
                 role_code=RoleCode(str(data["role_code"])),
                 name=str(data["name"]),
                 description=(None if description_value is None else str(description_value)),
-                role_type=RoleType(str(data["role_type"]).upper()),
+                category=RoleType(str(data["category"]).upper()),
                 status=RoleStatus(str(data["status"]).upper()),
-                created_at=datetime.fromisoformat(str(data["created_at"])),
-                updated_at=datetime.fromisoformat(str(data["updated_at"])),
+                assignments=[
+                    RoleAssignment.from_dict(item) for item in assignments_payload
+                ],
             )
+        except RoleSerializationError:
+            raise
         except Exception as exc:
             raise RoleSerializationError("Invalid serialized role") from exc
 

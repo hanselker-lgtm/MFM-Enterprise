@@ -53,6 +53,22 @@ class RoleSerializationError(RoleError):
     """Raised when serialized role payload is invalid."""
 
 
+class InvalidRoleAssignmentPeriodError(RoleError):
+    """Raised when assignment period boundaries are invalid."""
+
+
+class RoleAssignmentOverlapError(RoleError):
+    """Raised when assignment periods overlap for same assignee."""
+
+
+class ArchivedRoleAssignmentError(RoleError):
+    """Raised when assignment is attempted for archived role."""
+
+
+class RoleAssignmentNotFoundError(RoleError):
+    """Raised when target role assignment does not exist."""
+
+
 class BoardError(Exception):
     """Base exception for board domain errors."""
 
