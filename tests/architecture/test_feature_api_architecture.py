@@ -5,6 +5,7 @@ from dataclasses import is_dataclass
 import importlib
 import inspect
 import pkgutil
+from pathlib import Path
 import sys
 from typing import Any
 from typing import get_args
@@ -16,11 +17,33 @@ import mfm.application.features as features_pkg
 
 def _iter_feature_classes() -> list[type]:
     classes: list[type] = []
+    package_root = Path(features_pkg.__path__[0])
+    candidate_modules: set[str] = set()
+
+    for module_path in package_root.rglob("*.py"):
+        if not module_path.is_file():
+            continue
+
+        relative = module_path.relative_to(package_root)
+        if relative.name == "__init__.py":
+            relative = relative.parent
+        else:
+            relative = relative.with_suffix("")
+
+        if str(relative) in {"", "."}:
+            continue
+
+        parts = [part for part in relative.parts if part]
+        candidate_modules.add(".".join((features_pkg.__name__, *parts)))
+
     for module_info in pkgutil.iter_modules(
         features_pkg.__path__,
         f"{features_pkg.__name__}.",
     ):
-        module = importlib.import_module(module_info.name)
+        candidate_modules.add(module_info.name)
+
+    for module_name in sorted(candidate_modules):
+        module = importlib.import_module(module_name)
         for name, obj in vars(module).items():
             if (
                 inspect.isclass(obj)
