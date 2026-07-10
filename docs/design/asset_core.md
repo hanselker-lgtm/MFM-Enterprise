@@ -195,3 +195,16 @@ Dette design omfatter ikke:
 
 Eksplicit afgrænsning:
 Asset Core skal være generisk og må ikke kende Vessel, Engine, Equipment eller Maintenance. Disse capability områder designes senere som separate moduler oven på Asset Core.
+
+## Capability Status (ASSET-007)
+
+Status: READY FOR LOCK
+
+Verificeret i capability review:
+- Domain invariants og lifecycle-regler
+- Persistence mappings og mapper roundtrip
+- Repository contract og UnitOfWork-anvendelse
+- Application DTO/validation/events
+- Feature layer Public API standard og exception mapping
+- End-to-end workflows med database roundtrip
+- Architecture dependency guard og feature API compliance
