@@ -22,6 +22,8 @@ from mfm.database.models.committee_member_model import CommitteeMemberModel
 from mfm.database.models.volunteer_model import VolunteerModel
 from mfm.database.models.role_model import RoleModel
 from mfm.database.models.role_assignment_model import RoleAssignmentModel
+from mfm.database.models.asset_model import AssetModel
+from mfm.database.models.asset_location_model import AssetLocationModel
 from mfm.domain.contact.contact import Contact
 from mfm.domain.contact.person import Person
 from mfm.domain.contact.organisation import Organisation
@@ -35,6 +37,7 @@ from mfm.domain.organization.board import Board
 from mfm.domain.organization.committee import Committee
 from mfm.domain.organization.volunteer import Volunteer
 from mfm.domain.organization.role import Role
+from mfm.domain.asset.asset import Asset
 
 
 __all__ = [
@@ -61,6 +64,9 @@ __all__ = [
     "VolunteerModel",
     "RoleModel",
     "RoleAssignmentModel",
+    "AssetModel",
+    "AssetLocationModel",
+    "Asset",
     "Organization",
     "Board",
     "Committee",

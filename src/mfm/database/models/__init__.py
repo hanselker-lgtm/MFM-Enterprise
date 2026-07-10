@@ -16,6 +16,8 @@ from mfm.database.models.committee_member_model import CommitteeMemberModel
 from mfm.database.models.volunteer_model import VolunteerModel
 from mfm.database.models.role_model import RoleModel
 from mfm.database.models.role_assignment_model import RoleAssignmentModel
+from mfm.database.models.asset_model import AssetModel
+from mfm.database.models.asset_location_model import AssetLocationModel
 
 __all__ = [
     "BaseModel",
@@ -36,4 +38,6 @@ __all__ = [
     "VolunteerModel",
     "RoleModel",
     "RoleAssignmentModel",
+    "AssetModel",
+    "AssetLocationModel",
 ]
