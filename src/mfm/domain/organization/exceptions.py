@@ -111,3 +111,43 @@ class InvalidCommitteeMemberOperationError(CommitteeError):
 
 class CommitteeSerializationError(CommitteeError):
     """Raised when serialized committee payload is invalid."""
+
+
+class VolunteerError(Exception):
+    """Base exception for volunteer domain errors."""
+
+
+class InvalidVolunteerReferenceError(VolunteerError):
+    """Raised when volunteer contact/member references are invalid."""
+
+
+class InvalidVolunteerStatusTransitionError(VolunteerError):
+    """Raised when volunteer status transition is not allowed."""
+
+
+class InvalidVolunteerSkillError(VolunteerError):
+    """Raised when volunteer skill input is invalid."""
+
+
+class DuplicateVolunteerSkillError(VolunteerError):
+    """Raised when duplicate volunteer skill is added."""
+
+
+class VolunteerSkillNotFoundError(VolunteerError):
+    """Raised when volunteer skill is not found."""
+
+
+class InvalidVolunteerAvailabilityError(VolunteerError):
+    """Raised when volunteer availability input is invalid."""
+
+
+class DuplicateVolunteerCertificateError(VolunteerError):
+    """Raised when duplicate certificate is added."""
+
+
+class VolunteerCertificateNotFoundError(VolunteerError):
+    """Raised when volunteer certificate is not found."""
+
+
+class VolunteerSerializationError(VolunteerError):
+    """Raised when serialized volunteer payload is invalid."""

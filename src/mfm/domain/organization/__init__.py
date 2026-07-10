@@ -8,15 +8,27 @@ from mfm.domain.organization.committee import Committee
 from mfm.domain.organization.committee_id import CommitteeId
 from mfm.domain.organization.committee_member import CommitteeMember
 from mfm.domain.organization.committee_status import CommitteeStatus
+from mfm.domain.organization.volunteer import Volunteer
+from mfm.domain.organization.volunteer import VolunteerCertificate
+from mfm.domain.organization.volunteer_availability import VolunteerAvailability
+from mfm.domain.organization.volunteer_id import VolunteerId
+from mfm.domain.organization.volunteer_skill import VolunteerSkill
+from mfm.domain.organization.volunteer_status import VolunteerStatus
 from mfm.domain.organization.exceptions import BoardChairRequirementError
 from mfm.domain.organization.exceptions import BoardError
 from mfm.domain.organization.exceptions import BoardMemberNotFoundError
 from mfm.domain.organization.exceptions import CommitteeError
 from mfm.domain.organization.exceptions import CommitteeMemberNotFoundError
 from mfm.domain.organization.exceptions import CommitteeSerializationError
+from mfm.domain.organization.exceptions import VolunteerCertificateNotFoundError
+from mfm.domain.organization.exceptions import VolunteerError
+from mfm.domain.organization.exceptions import VolunteerSerializationError
+from mfm.domain.organization.exceptions import VolunteerSkillNotFoundError
 from mfm.domain.organization.exceptions import DuplicateOrganizationNumberError
 from mfm.domain.organization.exceptions import DuplicateCommitteeMemberError
 from mfm.domain.organization.exceptions import DuplicateBoardRoleError
+from mfm.domain.organization.exceptions import DuplicateVolunteerCertificateError
+from mfm.domain.organization.exceptions import DuplicateVolunteerSkillError
 from mfm.domain.organization.exceptions import InvalidOrganizationNameError
 from mfm.domain.organization.exceptions import InvalidOrganizationNumberError
 from mfm.domain.organization.exceptions import InvalidOrganizationStatusTransitionError
@@ -24,6 +36,10 @@ from mfm.domain.organization.exceptions import DuplicateRoleCodeError
 from mfm.domain.organization.exceptions import InvalidCommitteeMemberOperationError
 from mfm.domain.organization.exceptions import InvalidCommitteeNameError
 from mfm.domain.organization.exceptions import InvalidCommitteeStatusTransitionError
+from mfm.domain.organization.exceptions import InvalidVolunteerAvailabilityError
+from mfm.domain.organization.exceptions import InvalidVolunteerReferenceError
+from mfm.domain.organization.exceptions import InvalidVolunteerSkillError
+from mfm.domain.organization.exceptions import InvalidVolunteerStatusTransitionError
 from mfm.domain.organization.exceptions import InvalidBoardMemberOperationError
 from mfm.domain.organization.exceptions import InvalidBoardNameError
 from mfm.domain.organization.exceptions import InvalidBoardStatusTransitionError
@@ -64,6 +80,8 @@ __all__ = [
     "CommitteeSerializationError",
     "CommitteeStatus",
     "DuplicateCommitteeMemberError",
+    "DuplicateVolunteerCertificateError",
+    "DuplicateVolunteerSkillError",
     "DuplicateOrganizationNumberError",
     "DuplicateRoleCodeError",
     "InvalidBoardMemberOperationError",
@@ -73,6 +91,10 @@ __all__ = [
     "InvalidCommitteeMemberOperationError",
     "InvalidCommitteeNameError",
     "InvalidCommitteeStatusTransitionError",
+    "InvalidVolunteerAvailabilityError",
+    "InvalidVolunteerReferenceError",
+    "InvalidVolunteerSkillError",
+    "InvalidVolunteerStatusTransitionError",
     "InvalidOrganizationNameError",
     "InvalidOrganizationNumberError",
     "InvalidOrganizationStatusTransitionError",
@@ -94,4 +116,14 @@ __all__ = [
     "RoleSerializationError",
     "RoleStatus",
     "RoleType",
+    "Volunteer",
+    "VolunteerAvailability",
+    "VolunteerCertificate",
+    "VolunteerCertificateNotFoundError",
+    "VolunteerError",
+    "VolunteerId",
+    "VolunteerSerializationError",
+    "VolunteerSkill",
+    "VolunteerSkillNotFoundError",
+    "VolunteerStatus",
 ]
