@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import cast
 from uuid import UUID
 
 from sqlalchemy import or_
@@ -13,13 +14,15 @@ from mfm.database.models.board_member_model import BoardMemberModel
 from mfm.database.models.board_model import BoardModel
 from mfm.domain.organization.board import Board
 from mfm.repositories.board_repository import BoardRepository
+from mfm.repositories.unit_of_work import UnitOfWork
 
 
 class SQLiteBoardRepository(BoardRepository):
     """SQLAlchemy-backed repository for Board aggregates."""
 
-    def __init__(self, session: Session):
-        self._session = session
+    def __init__(self, unit_of_work: UnitOfWork):
+        self._uow = unit_of_work
+        self._session = cast(Session, unit_of_work.session)
 
     def add(self, board: Board) -> None:
         self._session.add(OrganizationMapper.to_orm_board(board))

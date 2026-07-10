@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import cast
 from uuid import UUID
 
 from sqlalchemy import or_
@@ -13,13 +14,15 @@ from mfm.database.models.committee_member_model import CommitteeMemberModel
 from mfm.database.models.committee_model import CommitteeModel
 from mfm.domain.organization.committee import Committee
 from mfm.repositories.committee_repository import CommitteeRepository
+from mfm.repositories.unit_of_work import UnitOfWork
 
 
 class SQLiteCommitteeRepository(CommitteeRepository):
     """SQLAlchemy-backed repository for Committee aggregates."""
 
-    def __init__(self, session: Session):
-        self._session = session
+    def __init__(self, unit_of_work: UnitOfWork):
+        self._uow = unit_of_work
+        self._session = cast(Session, unit_of_work.session)
 
     def add(self, committee: Committee) -> None:
         self._session.add(OrganizationMapper.to_orm_committee(committee))

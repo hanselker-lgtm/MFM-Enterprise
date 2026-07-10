@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import cast
 from uuid import UUID
 
 from sqlalchemy import or_
@@ -12,13 +13,15 @@ from mfm.database.mappers.organization_mapper import OrganizationMapper
 from mfm.database.models.organization_model import OrganizationModel
 from mfm.domain.organization.organization import Organization
 from mfm.repositories.organization_repository import OrganizationRepository
+from mfm.repositories.unit_of_work import UnitOfWork
 
 
 class SQLiteOrganizationRepository(OrganizationRepository):
     """SQLAlchemy-backed repository for Organization aggregates."""
 
-    def __init__(self, session: Session):
-        self._session = session
+    def __init__(self, unit_of_work: UnitOfWork):
+        self._uow = unit_of_work
+        self._session = cast(Session, unit_of_work.session)
 
     def add(self, organization: Organization) -> None:
         if self._session.scalar(

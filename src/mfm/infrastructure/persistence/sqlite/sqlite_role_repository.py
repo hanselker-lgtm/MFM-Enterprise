@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import cast
 from uuid import UUID
 
 from sqlalchemy import or_
@@ -13,13 +14,15 @@ from mfm.database.models.role_assignment_model import RoleAssignmentModel
 from mfm.database.models.role_model import RoleModel
 from mfm.domain.organization.role import Role
 from mfm.repositories.role_repository import RoleRepository
+from mfm.repositories.unit_of_work import UnitOfWork
 
 
 class SQLiteRoleRepository(RoleRepository):
     """SQLAlchemy-backed repository for Role aggregates."""
 
-    def __init__(self, session: Session):
-        self._session = session
+    def __init__(self, unit_of_work: UnitOfWork):
+        self._uow = unit_of_work
+        self._session = cast(Session, unit_of_work.session)
 
     def add(self, role: Role) -> None:
         if self._session.scalar(

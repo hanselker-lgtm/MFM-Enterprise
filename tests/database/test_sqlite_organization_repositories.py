@@ -47,12 +47,17 @@ from mfm.infrastructure.persistence.sqlite.sqlite_role_repository import (
 from mfm.infrastructure.persistence.sqlite.sqlite_volunteer_repository import (
     SQLiteVolunteerRepository,
 )
+from mfm.repositories.unit_of_work import UnitOfWork
 
 
 def _create_session() -> tuple[object, Session]:
     engine = create_engine("sqlite:///:memory:")
     BaseModel.metadata.create_all(engine)
     return engine, Session(engine)
+
+
+def _create_uow(session: Session) -> UnitOfWork:
+    return UnitOfWork(session)
 
 
 def _create_contact_and_member(session: Session) -> tuple[UUID, UUID]:
@@ -89,10 +94,11 @@ def _create_organization(repo: SQLiteOrganizationRepository) -> Organization:
 
 def test_organization_repository_crud_list_search_and_mapper_roundtrip() -> None:
     _, session = _create_session()
-    repo = SQLiteOrganizationRepository(session)
+    uow = _create_uow(session)
+    repo = SQLiteOrganizationRepository(uow)
 
     organization = _create_organization(repo)
-    session.commit()
+    uow.commit()
 
     loaded = repo.get_by_id(organization.id.value)
     assert loaded is not None
@@ -101,7 +107,7 @@ def test_organization_repository_crud_list_search_and_mapper_roundtrip() -> None
 
     organization.rename("Maritime Federation Updated")
     repo.update(organization)
-    session.commit()
+    uow.commit()
 
     updated = repo.get_by_id(organization.id.value)
     assert updated is not None
@@ -114,7 +120,7 @@ def test_organization_repository_crud_list_search_and_mapper_roundtrip() -> None
     assert any(item.id == organization.id for item in search_hits)
 
     repo.delete(organization.id.value)
-    session.commit()
+    uow.commit()
 
     assert repo.get_by_id(organization.id.value) is None
     assert repo.exists(organization.id.value) is False
@@ -122,8 +128,9 @@ def test_organization_repository_crud_list_search_and_mapper_roundtrip() -> None
 
 def test_board_repository_crud_list_search_mapper_and_cascade_relations() -> None:
     _, session = _create_session()
-    org_repo = SQLiteOrganizationRepository(session)
-    board_repo = SQLiteBoardRepository(session)
+    uow = _create_uow(session)
+    org_repo = SQLiteOrganizationRepository(uow)
+    board_repo = SQLiteBoardRepository(uow)
 
     organization = _create_organization(org_repo)
 
@@ -143,7 +150,7 @@ def test_board_repository_crud_list_search_mapper_and_cascade_relations() -> Non
     )
 
     board_repo.add(board)
-    session.commit()
+    uow.commit()
 
     loaded = board_repo.get_by_id(board.id)
     assert loaded is not None
@@ -153,7 +160,7 @@ def test_board_repository_crud_list_search_mapper_and_cascade_relations() -> Non
 
     board.name = "Updated Board"
     board_repo.update(board)
-    session.commit()
+    uow.commit()
 
     updated = board_repo.get_by_id(board.id)
     assert updated is not None
@@ -164,7 +171,7 @@ def test_board_repository_crud_list_search_mapper_and_cascade_relations() -> Non
     assert any(item.id == board.id for item in board_repo.search("Updated"))
 
     board_repo.delete(board.id)
-    session.commit()
+    uow.commit()
 
     assert board_repo.get_by_id(board.id) is None
     assert board_repo.exists(board.id) is False
@@ -173,8 +180,9 @@ def test_board_repository_crud_list_search_mapper_and_cascade_relations() -> Non
 
 def test_committee_repository_crud_list_search_mapper_and_cascade_relations() -> None:
     _, session = _create_session()
-    org_repo = SQLiteOrganizationRepository(session)
-    committee_repo = SQLiteCommitteeRepository(session)
+    uow = _create_uow(session)
+    org_repo = SQLiteOrganizationRepository(uow)
+    committee_repo = SQLiteCommitteeRepository(uow)
 
     organization = _create_organization(org_repo)
 
@@ -192,7 +200,7 @@ def test_committee_repository_crud_list_search_mapper_and_cascade_relations() ->
     )
 
     committee_repo.add(committee)
-    session.commit()
+    uow.commit()
 
     loaded = committee_repo.get_by_id(committee.id.value)
     assert loaded is not None
@@ -202,7 +210,7 @@ def test_committee_repository_crud_list_search_mapper_and_cascade_relations() ->
 
     committee.rename("Safety and Training Committee")
     committee_repo.update(committee)
-    session.commit()
+    uow.commit()
 
     updated = committee_repo.get_by_id(committee.id.value)
     assert updated is not None
@@ -213,7 +221,7 @@ def test_committee_repository_crud_list_search_mapper_and_cascade_relations() ->
     assert any(item.id == committee.id for item in committee_repo.search("Training"))
 
     committee_repo.delete(committee.id.value)
-    session.commit()
+    uow.commit()
 
     assert committee_repo.get_by_id(committee.id.value) is None
     assert committee_repo.exists(committee.id.value) is False
@@ -222,7 +230,8 @@ def test_committee_repository_crud_list_search_mapper_and_cascade_relations() ->
 
 def test_volunteer_repository_crud_list_search_and_mapper_roundtrip() -> None:
     _, session = _create_session()
-    volunteer_repo = SQLiteVolunteerRepository(session)
+    uow = _create_uow(session)
+    volunteer_repo = SQLiteVolunteerRepository(uow)
 
     contact_id, member_id = _create_contact_and_member(session)
 
@@ -240,7 +249,7 @@ def test_volunteer_repository_crud_list_search_and_mapper_roundtrip() -> None:
     )
 
     volunteer_repo.add(volunteer)
-    session.commit()
+    uow.commit()
 
     loaded = volunteer_repo.get_by_id(volunteer.id.value)
     assert loaded is not None
@@ -250,7 +259,7 @@ def test_volunteer_repository_crud_list_search_and_mapper_roundtrip() -> None:
 
     volunteer.deactivate(on_date=date(2026, 2, 1))
     volunteer_repo.update(volunteer)
-    session.commit()
+    uow.commit()
 
     updated = volunteer_repo.get_by_id(volunteer.id.value)
     assert updated is not None
@@ -261,7 +270,7 @@ def test_volunteer_repository_crud_list_search_and_mapper_roundtrip() -> None:
     assert any(item.id == volunteer.id for item in volunteer_repo.search("FIRST AID"))
 
     volunteer_repo.delete(volunteer.id.value)
-    session.commit()
+    uow.commit()
 
     assert volunteer_repo.get_by_id(volunteer.id.value) is None
     assert volunteer_repo.exists(volunteer.id.value) is False
@@ -269,8 +278,9 @@ def test_volunteer_repository_crud_list_search_and_mapper_roundtrip() -> None:
 
 def test_role_repository_crud_list_search_mapper_and_cascade_relations() -> None:
     _, session = _create_session()
-    org_repo = SQLiteOrganizationRepository(session)
-    role_repo = SQLiteRoleRepository(session)
+    uow = _create_uow(session)
+    org_repo = SQLiteOrganizationRepository(uow)
+    role_repo = SQLiteRoleRepository(uow)
 
     organization = _create_organization(org_repo)
 
@@ -287,7 +297,7 @@ def test_role_repository_crud_list_search_mapper_and_cascade_relations() -> None
     )
 
     role_repo.add(role)
-    session.commit()
+    uow.commit()
 
     loaded = role_repo.get_by_id(role.id.value)
     assert loaded is not None
@@ -297,7 +307,7 @@ def test_role_repository_crud_list_search_mapper_and_cascade_relations() -> None
 
     role.rename("Operations Director")
     role_repo.update(role)
-    session.commit()
+    uow.commit()
 
     updated = role_repo.get_by_id(role.id.value)
     assert updated is not None
@@ -308,7 +318,7 @@ def test_role_repository_crud_list_search_mapper_and_cascade_relations() -> None
     assert any(item.id == role.id for item in role_repo.search("Director"))
 
     role_repo.delete(role.id.value)
-    session.commit()
+    uow.commit()
 
     assert role_repo.get_by_id(role.id.value) is None
     assert role_repo.exists(role.id.value) is False

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import cast
 from uuid import UUID
 
 from sqlalchemy import or_
@@ -12,13 +13,15 @@ from mfm.database.mappers.organization_mapper import OrganizationMapper
 from mfm.database.models.volunteer_model import VolunteerModel
 from mfm.domain.organization.volunteer import Volunteer
 from mfm.repositories.volunteer_repository import VolunteerRepository
+from mfm.repositories.unit_of_work import UnitOfWork
 
 
 class SQLiteVolunteerRepository(VolunteerRepository):
     """SQLAlchemy-backed repository for Volunteer aggregates."""
 
-    def __init__(self, session: Session):
-        self._session = session
+    def __init__(self, unit_of_work: UnitOfWork):
+        self._uow = unit_of_work
+        self._session = cast(Session, unit_of_work.session)
 
     def add(self, volunteer: Volunteer) -> None:
         self._session.add(OrganizationMapper.to_orm_volunteer(volunteer))
