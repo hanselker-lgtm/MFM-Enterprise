@@ -19,6 +19,7 @@ from mfm.domain.asset.asset_status import AssetStatus
 
 if TYPE_CHECKING:
     from mfm.database.models.asset_location_model import AssetLocationModel
+    from mfm.database.models.vessel_model import VesselModel
 
 
 class AssetModel(BaseModel):
@@ -73,6 +74,14 @@ class AssetModel(BaseModel):
 
     location: Mapped["AssetLocationModel"] = relationship(
         "AssetLocationModel",
+        back_populates="asset",
+        cascade="all, delete-orphan",
+        single_parent=True,
+        uselist=False,
+    )
+
+    vessel: Mapped["VesselModel | None"] = relationship(
+        "VesselModel",
         back_populates="asset",
         cascade="all, delete-orphan",
         single_parent=True,
