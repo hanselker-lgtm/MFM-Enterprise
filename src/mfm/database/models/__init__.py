@@ -8,6 +8,9 @@ from mfm.database.models.contact_address_model import ContactAddressModel
 from mfm.database.models.contingent_plan_model import ContingentPlanModel
 from mfm.database.models.member_model import MemberModel
 from mfm.database.models.membership_type_model import MembershipTypeModel
+from mfm.database.models.maintenance_plan_model import MaintenancePlanModel
+from mfm.database.models.maintenance_record_model import MaintenanceRecordModel
+from mfm.database.models.maintenance_requirement_model import MaintenanceRequirementModel
 from mfm.database.models.technical_component_link_model import TechnicalComponentLinkModel
 from mfm.database.models.technical_component_model import TechnicalComponentModel
 from mfm.database.models.technical_component_replacement_model import (
@@ -16,6 +19,7 @@ from mfm.database.models.technical_component_replacement_model import (
 from mfm.database.models.technical_configuration_model import TechnicalConfigurationModel
 from mfm.database.models.vessel_dimensions_model import VesselDimensionsModel
 from mfm.database.models.vessel_model import VesselModel
+from mfm.database.models.work_order_model import WorkOrderModel
 
 __all__ = [
     "BaseModel",
@@ -28,6 +32,10 @@ __all__ = [
     "ContingentPlanModel",
     "MemberModel",
     "MembershipTypeModel",
+    "MaintenancePlanModel",
+    "MaintenanceRequirementModel",
+    "MaintenanceRecordModel",
+    "WorkOrderModel",
     "TechnicalConfigurationModel",
     "TechnicalComponentModel",
     "TechnicalComponentLinkModel",
