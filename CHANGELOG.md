@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.9.0-alpha - 2026-07-11
+
+Certificates and Compliance capability lock release.
+
+### Changed
+- Certificates and Compliance capability status formalized as `CAP-10 Certificates and Compliance: LOCKED` in design documentation.
+- CAP-10 lock constraints documented for capability boundaries (Maintenance workflow ownership, Fleet/Organization identity-only references, no Technical Configuration target expansion without a new capability plan).
+
+### Quality
+- Certificates and Compliance lock verification completed against focused CERT tests, permanent architecture compliance tests, and full regression suite.
+- Test suite status at lock: 820 passed, 0 failures, 0 warnings.
+
 ## v0.8.0-alpha - 2026-07-11
 
 Maintenance capability lock release.

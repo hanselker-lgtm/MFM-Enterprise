@@ -379,3 +379,30 @@ CERT-000 omfatter ikke:
 
 ## Design Recommendation
 READY FOR DOMAIN IMPLEMENTATION
+
+## Capability Status (CAP-10 Certificates and Compliance)
+
+Status: LOCKED
+
+Status pr. 2026-07-11:
+- CERT-000: design dokumenteret.
+- CERT-001: domain implementeret og testet.
+- CERT-002: SQLAlchemy persistence + mapper implementeret og testet.
+- CERT-003: repository contract + SQLite repository implementeret og testet.
+- CERT-004: application services implementeret og testet.
+- CERT-005: feature layer implementeret og testet.
+- CERT-006: end-to-end integration workflows implementeret og testet.
+- CERT-007: capability review dokumenteret i certificate_capability_review.md med konklusion READY FOR LOCK.
+
+Lock-regler:
+- Eksisterende public Certificates and Compliance API betragtes som stabil.
+- Kun fejlrettelser maa aendre laast adfaerd uden ny plan.
+- Maintenance workflow ownership forbliver i Maintenance capability.
+- Fleet og Organization anvendes kun via identity/reference boundaries.
+- Technical Configuration target types maa ikke udvides uden ny capability plan.
+- Ingen document storage subsystem maa introduceres i CERT capability.
+
+Kvalitetsgate:
+- Fuldt regressionssaet skal vaere groent (0 failures, 0 warnings).
+- Permanente architecture compliance tests skal vaere groenne.
+- Historical certificate truth og issuer snapshot history maa ikke brydes.
