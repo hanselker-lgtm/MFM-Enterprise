@@ -3,9 +3,9 @@
 ## Executive Summary
 MAINT-006 pre-review gates are verified green and correctly scoped. CAP-09 Maintenance implementation is broadly aligned with MAINT-000 design across Domain, Persistence, Repositories, Application, Feature API, and E2E workflows. 
 
-Review conclusion: **NOT READY FOR LOCK**.
+Review conclusion: **READY FOR LOCK**.
 
-Reason: one blocker remains in historical permanence guarantees. The persistence model allows hard deletion of completed WorkOrders and their MaintenanceRecords through cascade delete behavior, which can remove historical truth that MAINT design describes as permanent.
+MAINT-007A resolved the lock-blocking findings with minimal CAP-09-internal corrections and regression tests. Historical permanence is now protected at repository level, and overdue behavior is now directly covered by domain tests.
 
 ## Scope Reviewed
 - Design source:
@@ -59,7 +59,7 @@ Status: PASS.
 - Target queries are by target_type + target_id, no cross-capability object joins.
 
 ## Due Calculation Assessment
-Status: PARTIAL PASS (test coverage gap).
+Status: PASS.
 
 Verified:
 - Domain-owned deterministic due logic.
@@ -68,8 +68,8 @@ Verified:
 - Calendar and running-hours due paths validated in domain/application/E2E tests.
 - No telemetry introduced.
 
-Gap:
-- is_overdue behavior exists in domain but lacks direct test coverage.
+Additional verification:
+- Direct overdue behavior coverage added for calendar and running-hours paths.
 
 ## Work Order Lifecycle Assessment
 Status: PASS.
@@ -83,7 +83,7 @@ Verified:
 - Application/feature layers orchestrate; they do not mutate status fields directly.
 
 ## Maintenance History Assessment
-Status: PASS under normal workflow execution; BLOCKER under delete path.
+Status: PASS.
 
 Verified by MAINT-006 and lower-layer tests:
 - Historical records are created and preserved across plan updates.
@@ -93,18 +93,17 @@ Verified by MAINT-006 and lower-layer tests:
 
 Explicit review answer:
 - Does Maintenance preserve historical truth independently of current plan state?
-  - **Yes for normal create/update/complete/history workflows.**
-  - **No under delete path due to cascade-based physical deletion (blocker below).**
+  - **Yes.** Historical truth is preserved independently of current planning state, including under delete attempts for completed/history-bearing work orders.
 
 ## Historical Snapshot Integrity Assessment
-Status: PASS in tested workflows; BLOCKER in deletion semantics.
+Status: PASS.
 
 Evidence:
 - MAINT-006 workflow 5 explicitly verifies A/B context separation across reloads.
 - Mapper/repository tests verify record fields persist independently from updated plan instructions/interval.
 
 ## Persistence and Mapper Assessment
-Status: PARTIAL PASS (blocker in delete semantics).
+Status: PASS.
 
 Verified:
 - SQLAlchemy 2.x typed mappings are used (Mapped/mapped_column/relationship).
@@ -116,11 +115,11 @@ Verified:
 - No Fleet persistence internals required for maintenance persistence.
 - No TECH persistence internals required for maintenance persistence.
 
-Concern:
-- Cascade on WorkOrderModel.records plus repository delete can remove historical records.
+Correction:
+- Repository delete now rejects deletion for completed/history-bearing work orders, preserving immutable maintenance records.
 
 ## Repository Assessment
-Status: PARTIAL PASS (blocker in permanence guarantee).
+Status: PASS.
 
 Verified:
 - Aggregate-root repositories only: MaintenancePlanRepository and WorkOrderRepository.
@@ -132,10 +131,9 @@ Verified:
 - No domain due/lifecycle logic embedded in repositories.
 - Target querying uses identity/reference only.
 
-Blocker detail:
-- WorkOrderRepository.delete allows deleting a completed WorkOrder.
-- WorkOrderModel relationship uses cascade that deletes child MaintenanceRecord.
-- This violates permanent historical truth intent.
+Correction detail:
+- WorkOrderRepository.delete now blocks destructive deletion for completed/history-bearing work orders.
+- Historical records remain preserved under attempted delete.
 
 ## Application Assessment
 Status: PASS.
@@ -276,6 +274,10 @@ No documentation corrections applied in this review.
 - Minimal required correction:
   - Prevent deletion of completed WorkOrders (and/or WorkOrders with maintenance_record), or enforce archival-only behavior while preserving records.
   - Add regression test proving history persistence under attempted delete.
+- Resolution status:
+  - CORRECTED in src/mfm/infrastructure/persistence/sqlite/sqlite_work_order_repository.py
+  - Regression test: tests/database/test_sqlite_maintenance_repositories.py::test_work_order_repository_crud_get_by_requirement_and_lifecycle_roundtrip
+  - Verification result: PASS
 
 ### MAJOR
 1. Overdue behavior is implemented but not directly tested.
@@ -288,6 +290,12 @@ No documentation corrections applied in this review.
   - Potential silent regressions in overdue semantics.
 - Minimal required correction:
   - Add focused overdue tests for calendar and running-hours where supported.
+- Resolution status:
+  - CORRECTED in tests/domain/maintenance/test_maintenance_domain.py
+  - Regression tests:
+    - tests/domain/maintenance/test_maintenance_domain.py::test_maintenance_calendar_overdue_behaviour
+    - tests/domain/maintenance/test_maintenance_domain.py::test_maintenance_running_hours_overdue_behaviour
+  - Verification result: PASS
 
 ### MINOR
 1. Changelog coverage for maintenance milestones is incomplete.
@@ -304,18 +312,18 @@ No documentation corrections applied in this review.
 1. MAINT-006 E2E coverage is strong and exercises real stack end-to-end with public API verification and boundary checks.
 
 ## Risks
-- Historical snapshot corruption: elevated if delete path remains unrestricted (blocker).
+- Historical snapshot corruption: low after delete-protection correction and regression validation.
 - Plan/history coupling: low in normal flow (A/B snapshot tests validate decoupling).
 - Hidden clock dependency: low (explicit date/hour input model).
 - WorkOrder lifecycle inconsistency: low (domain guards + tests).
 - Cross-capability target leakage: low (identity/reference model).
 - TECH ownership leakage: low (no replacement lifecycle execution by MAINT).
-- Repository history deletion: high until blocker is corrected.
+- Repository history deletion: low after repository deletion guard correction.
 - Public API domain leakage: low (feature architecture and response typing enforce API-safe DTOs).
 - Transaction rollback integrity: low (application tests and E2E rollback scenario validate).
 
 ## Lock Recommendation
-**NOT READY FOR LOCK**
+**READY FOR LOCK**
 
-Condition to move to READY FOR LOCK:
-- Resolve blocker preventing historical record deletion via repository/model delete cascade path.
+Condition satisfied:
+- Lock-blocking blocker and major findings are corrected with passing regression tests.

@@ -320,6 +320,24 @@ def test_maintenance_running_hours_requires_supplied_state() -> None:
         plan.calculate_due(as_of_date=date(2027, 1, 1))
 
 
+def test_maintenance_calendar_overdue_behaviour() -> None:
+    requirement = _calendar_requirement(target=_target_component(), title="Overdue")
+    requirement.record_completion(completed_on=date(2026, 1, 1))
+
+    assert requirement.next_due == date(2027, 1, 1)
+    assert requirement.is_overdue(as_of_date=date(2027, 1, 1)) is False
+    assert requirement.is_overdue(as_of_date=date(2027, 1, 2)) is True
+
+
+def test_maintenance_running_hours_overdue_behaviour() -> None:
+    requirement = _running_hours_requirement(target=_target_component(), title="Hours overdue")
+    requirement.record_completion(completed_running_hours=500)
+
+    assert requirement.next_due == 600
+    assert requirement.is_overdue(current_running_hours=600) is False
+    assert requirement.is_overdue(current_running_hours=601) is True
+
+
 def test_work_order_create_work_order() -> None:
     order = WorkOrder(
         maintenance_target=_target_vessel(),

@@ -7,6 +7,7 @@ from pathlib import Path
 from uuid import UUID
 from uuid import uuid4
 
+import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 
@@ -325,6 +326,15 @@ def test_work_order_repository_crud_get_by_requirement_and_lifecycle_roundtrip(
         session.commit()
         assert work_order_repository.get_by_id(in_progress.id.value) is None
         assert work_order_repository.get_by_id(uuid4()) is None
+
+        with pytest.raises(ValueError):
+            work_order_repository.delete(completed.id.value)
+
+        session.rollback()
+        preserved_completed = work_order_repository.get_by_id(completed.id.value)
+        assert preserved_completed is not None
+        assert preserved_completed.maintenance_record is not None
+        assert preserved_completed.maintenance_record.finding == "Observe next overhaul window"
     finally:
         session.close()
 

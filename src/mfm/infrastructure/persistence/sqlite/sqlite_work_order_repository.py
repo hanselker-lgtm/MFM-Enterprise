@@ -53,6 +53,12 @@ class SQLiteWorkOrderRepository(WorkOrderRepository):
         orm = self._session.get(WorkOrderModel, work_order_id)
         if orm is None:
             return
+
+        if orm.status.value == "COMPLETED" or orm.records:
+            raise ValueError(
+                "Completed work orders or work orders with maintenance records cannot be deleted"
+            )
+
         self._session.delete(orm)
         self._session.flush()
 
