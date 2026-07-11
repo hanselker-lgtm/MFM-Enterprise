@@ -1,19 +1,16 @@
 # Changelog
 
-## v0.6.0-alpha - 2026-07-10
+## v0.6.0-alpha - 2026-07-11
 
-Asset capability freeze release.
+Fleet capability lock release.
 
-### Added
-- Asset core domain model with immutable value objects and lifecycle operations.
-- Asset persistence models, mapper, and SQLite repository implementation.
-- Asset application use cases and feature layer facades.
-- End-to-end integration workflows for create, transfer ownership, relocate, retire, and dispose.
-- Asset capability review report: READY FOR LOCK.
+### Changed
+- Fleet capability status formalized as `CAP-07 Fleet: LOCKED` in design documentation.
+- Fleet lock constraints documented for capability scope boundaries (Engine, Maintenance, Certificates, Voyages excluded from Fleet Core).
 
 ### Quality
-- Architecture gates green (dependency guard and feature API compliance).
-- Test suite status at review: 513 passed, 0 failures, 0 warnings.
+- Fleet lock verification completed against full regression suite and permanent architecture compliance tests.
+- Test suite status at lock: 570 passed, 0 failures, 0 warnings.
 
 ## v0.5.0-alpha - 2026-07-10
 

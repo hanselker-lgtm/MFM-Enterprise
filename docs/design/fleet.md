@@ -179,3 +179,31 @@ Dette design omfatter ikke:
 
 Eksplicit afgrænsning:
 Fleet capability modellerer flådestruktur og asset-medlemskab, men ikke motor-, vedligeholds-, rejse- eller certifikatdomæner.
+
+## Capability Status (CAP-07 Fleet)
+
+Status: LOCKED
+
+Status pr. 2026-07-11:
+- FLEET-000: design dokumenteret.
+- FLEET-001: vessel domain implementeret og testet.
+- FLEET-002: SQLAlchemy persistence + mapper implementeret og testet.
+- FLEET-003: repository contract + SQLite repository implementeret og testet.
+- FLEET-004: application services implementeret og testet.
+- FLEET-005: feature layer implementeret og testet.
+- FLEET-006: end-to-end integration workflows implementeret og testet.
+- FLEET-007: capability review dokumenteret i fleet_capability_review.md med konklusion READY FOR LOCK.
+
+Lock-regler:
+- Eksisterende public Fleet API betragtes som stabil.
+- Kun fejlrettelser må ændre låst adfærd uden ny plan.
+- Nye maritime områder implementeres som nye capabilities.
+- Engine må ikke tilføjes til Fleet Core.
+- Maintenance må ikke tilføjes til Fleet Core.
+- Certificates må ikke tilføjes til Fleet Core.
+- Voyages må ikke tilføjes til Fleet Core.
+
+Kvalitetsgate:
+- Fuldt regressionssæt skal være grønt (0 failures, 0 warnings).
+- Permanente architecture compliance tests skal være grønne.
+- Asset ↔ Fleet dependency direction og public API boundary må ikke brydes.
