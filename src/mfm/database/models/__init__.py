@@ -8,6 +8,12 @@ from mfm.database.models.contact_address_model import ContactAddressModel
 from mfm.database.models.contingent_plan_model import ContingentPlanModel
 from mfm.database.models.member_model import MemberModel
 from mfm.database.models.membership_type_model import MembershipTypeModel
+from mfm.database.models.technical_component_link_model import TechnicalComponentLinkModel
+from mfm.database.models.technical_component_model import TechnicalComponentModel
+from mfm.database.models.technical_component_replacement_model import (
+    TechnicalComponentReplacementModel,
+)
+from mfm.database.models.technical_configuration_model import TechnicalConfigurationModel
 from mfm.database.models.vessel_dimensions_model import VesselDimensionsModel
 from mfm.database.models.vessel_model import VesselModel
 
@@ -22,6 +28,10 @@ __all__ = [
     "ContingentPlanModel",
     "MemberModel",
     "MembershipTypeModel",
+    "TechnicalConfigurationModel",
+    "TechnicalComponentModel",
+    "TechnicalComponentLinkModel",
+    "TechnicalComponentReplacementModel",
     "VesselDimensionsModel",
     "VesselModel",
 ]
