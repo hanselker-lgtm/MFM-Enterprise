@@ -403,3 +403,31 @@ MAINT-000 omfatter ikke:
 
 ## Design Recommendation
 READY FOR DOMAIN IMPLEMENTATION
+
+## Capability Status (CAP-09 Maintenance)
+
+Status: LOCKED
+
+Status pr. 2026-07-11:
+- MAINT-000: design dokumenteret.
+- MAINT-001: domain implementeret og testet.
+- MAINT-002: SQLAlchemy persistence + mapper implementeret og testet.
+- MAINT-003: repository contract + SQLite repository implementeret og testet.
+- MAINT-004: application services implementeret og testet.
+- MAINT-005: feature layer implementeret og testet.
+- MAINT-006: end-to-end integration workflows implementeret og testet.
+- MAINT-007: capability review dokumenteret i maintenance_capability_review.md med konklusion READY FOR LOCK.
+- MAINT-007A: lock-blocking findings korrigeret med passerende regression tests.
+
+Lock-regler:
+- Eksisterende public Maintenance API betragtes som stabil.
+- Kun fejlrettelser maa aendre laast adfaerd uden ny plan.
+- Component lifecycle, replacement og technical ownership forbliver i Technical Configuration.
+- Certificates implementeres som separat capability.
+- Voyages implementeres som separat capability.
+- Asset Core og Fleet maa ikke udvides via Maintenance lock-aendringer.
+
+Kvalitetsgate:
+- Fuldt regressionssaet skal vaere groent (0 failures, 0 warnings).
+- Permanente architecture compliance tests skal vaere groenne.
+- Historical truth, aggregate boundaries og public API boundary maa ikke brydes.

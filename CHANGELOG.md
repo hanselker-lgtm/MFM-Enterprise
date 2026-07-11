@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.8.0-alpha - 2026-07-11
+
+Maintenance capability lock release.
+
+### Changed
+- Maintenance capability status formalized as `CAP-09 Maintenance: LOCKED` in design documentation.
+- Maintenance lock constraints documented for capability scope boundaries (Technical Configuration ownership, Certificates, Voyages outside CAP-09).
+
+### Quality
+- Maintenance lock verification completed against full regression suite and permanent architecture compliance tests.
+- Test suite status at lock: 733 passed, 0 failures, 0 warnings.
+
 ## v0.7.0-alpha - 2026-07-11
 
 Technical Configuration capability lock release.
