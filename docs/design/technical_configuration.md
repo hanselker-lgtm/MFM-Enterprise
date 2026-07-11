@@ -398,3 +398,30 @@ Begrundelse:
 - Designet etablerer klar aggregate-graense omkring TechnicalConfiguration.
 - Capability boundary mod Asset/Fleet er tydelig og kan holdes via vessel_id-reference.
 - Ingen blocker i Asset Core eller Fleet er nødvendig for opstart af domain-implementering.
+
+## Capability Status (CAP-08 Technical Configuration)
+
+Status: LOCKED
+
+Status pr. 2026-07-11:
+- TECH-000: design dokumenteret.
+- TECH-001: domain implementeret og testet.
+- TECH-002: SQLAlchemy persistence + mapper implementeret og testet.
+- TECH-003: repository contract + SQLite repository implementeret og testet.
+- TECH-004: application services implementeret og testet.
+- TECH-005: feature layer implementeret og testet.
+- TECH-006: end-to-end integration workflows implementeret og testet.
+- TECH-007: capability review dokumenteret i technical_configuration_capability_review.md med konklusion READY FOR LOCK.
+
+Lock-regler:
+- Eksisterende public Technical Configuration API betragtes som stabil.
+- Kun fejlrettelser ma ændre låst adfærd uden ny plan.
+- Maintenance implementeres som separat capability.
+- Certificates implementeres som separat capability.
+- Voyages implementeres som separat capability.
+- Fleet udvides ikke med technical component ownership.
+
+Kvalitetsgate:
+- Fuldt regressionssæt skal være grønt (0 failures, 0 warnings).
+- Permanente architecture compliance tests skal være grønne.
+- Asset ↔ Fleet ↔ Technical dependency direction og public API boundary ma ikke brydes.

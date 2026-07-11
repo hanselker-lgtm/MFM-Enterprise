@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.7.0-alpha - 2026-07-11
+
+Technical Configuration capability lock release.
+
+### Changed
+- Technical Configuration capability status formalized as `CAP-08 Technical Configuration: LOCKED` in design documentation.
+- Technical Configuration lock constraints documented for capability scope boundaries (Maintenance, Certificates, Voyages excluded from CAP-08).
+
+### Quality
+- Technical Configuration lock verification completed against full regression suite and permanent architecture compliance tests.
+- Test suite status at lock: 651 passed, 0 failures, 0 warnings.
+
 ## v0.6.0-alpha - 2026-07-11
 
 Fleet capability lock release.
