@@ -23,6 +23,7 @@ from mfm.database.models.technical_component_replacement_model import (
 from mfm.database.models.technical_configuration_model import TechnicalConfigurationModel
 from mfm.database.models.vessel_dimensions_model import VesselDimensionsModel
 from mfm.database.models.vessel_model import VesselModel
+from mfm.database.models.voyage_model import VoyageModel
 from mfm.database.models.work_order_model import WorkOrderModel
 
 __all__ = [
@@ -48,4 +49,5 @@ __all__ = [
     "TechnicalComponentReplacementModel",
     "VesselDimensionsModel",
     "VesselModel",
+    "VoyageModel",
 ]
