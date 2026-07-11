@@ -6,6 +6,10 @@ from mfm.database.models.contact_email_model import ContactEmailModel
 from mfm.database.models.contact_phone_model import ContactPhoneModel
 from mfm.database.models.contact_address_model import ContactAddressModel
 from mfm.database.models.contingent_plan_model import ContingentPlanModel
+from mfm.database.models.certificate_model import CertificateModel
+from mfm.database.models.certificate_compliance_observation_model import (
+    CertificateComplianceObservationModel,
+)
 from mfm.database.models.member_model import MemberModel
 from mfm.database.models.membership_type_model import MembershipTypeModel
 from mfm.database.models.maintenance_plan_model import MaintenancePlanModel
@@ -30,6 +34,8 @@ __all__ = [
     "ContactPhoneModel",
     "ContactAddressModel",
     "ContingentPlanModel",
+    "CertificateModel",
+    "CertificateComplianceObservationModel",
     "MemberModel",
     "MembershipTypeModel",
     "MaintenancePlanModel",
