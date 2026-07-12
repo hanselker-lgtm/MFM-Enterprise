@@ -4,6 +4,7 @@ from datetime import date
 from datetime import datetime
 from datetime import timezone
 from pathlib import Path
+import weakref
 from uuid import UUID
 from uuid import uuid4
 
@@ -44,7 +45,9 @@ def _sqlite_session(tmp_path: Path, name: str) -> Session:
     db_path = tmp_path / f"{name}.sqlite"
     engine = create_engine(f"sqlite:///{db_path}")
     BaseModel.metadata.create_all(engine)
-    return Session(engine)
+    session = Session(engine)
+    weakref.finalize(session, engine.dispose)
+    return session
 
 
 def _build_plan(target: MaintenanceTarget) -> MaintenancePlan:

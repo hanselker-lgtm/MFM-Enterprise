@@ -522,61 +522,63 @@ def test_historical_replacement_feature_scenario() -> None:
         service=ReplaceTechnicalComponentUseCase(unit_of_work=uow)
     )
 
-    created = create_feature.execute(CreateTechnicalConfigurationRequest(vessel_id=uuid4()))
-    configuration_id = created.configuration.id
+    try:
+        created = create_feature.execute(CreateTechnicalConfigurationRequest(vessel_id=uuid4()))
+        configuration_id = created.configuration.id
 
-    add_a = add_feature.execute(
-        AddTechnicalComponentRequest(
-            configuration_id=configuration_id,
-            component_type="GEARBOX",
-            name="Component A",
+        add_a = add_feature.execute(
+            AddTechnicalComponentRequest(
+                configuration_id=configuration_id,
+                component_type="GEARBOX",
+                name="Component A",
+            )
         )
-    )
 
-    component_a_id = next(
-        component.id
-        for component in add_a.configuration.components
-        if component.name == "Component A"
-    )
-
-    install_feature.execute(
-        InstallTechnicalComponentRequest(
-            configuration_id=configuration_id,
-            component_id=component_a_id,
-            installed_on=date(2025, 1, 1),
+        component_a_id = next(
+            component.id
+            for component in add_a.configuration.components
+            if component.name == "Component A"
         )
-    )
 
-    replaced = replace_feature.execute(
-        ReplaceTechnicalComponentRequest(
-            configuration_id=configuration_id,
-            component_id=component_a_id,
-            replaced_on=date(2025, 4, 1),
-            reason="Wear",
-            replacement_component_type="GEARBOX",
-            replacement_name="Component B",
+        install_feature.execute(
+            InstallTechnicalComponentRequest(
+                configuration_id=configuration_id,
+                component_id=component_a_id,
+                installed_on=date(2025, 1, 1),
+            )
         )
-    )
 
-    assert any(component.name == "Component A" for component in replaced.configuration.components)
-    assert any(component.name == "Component B" for component in replaced.configuration.components)
+        replaced = replace_feature.execute(
+            ReplaceTechnicalComponentRequest(
+                configuration_id=configuration_id,
+                component_id=component_a_id,
+                replaced_on=date(2025, 4, 1),
+                reason="Wear",
+                replacement_component_type="GEARBOX",
+                replacement_name="Component B",
+            )
+        )
 
-    component_a = next(
-        component
-        for component in replaced.configuration.components
-        if component.name == "Component A"
-    )
-    component_b = next(
-        component
-        for component in replaced.configuration.components
-        if component.name == "Component B"
-    )
+        assert any(component.name == "Component A" for component in replaced.configuration.components)
+        assert any(component.name == "Component B" for component in replaced.configuration.components)
 
-    assert component_a.status == "REMOVED"
-    assert component_b.status == "INSTALLED"
-    assert len(replaced.configuration.replacement_history) == 1
+        component_a = next(
+            component
+            for component in replaced.configuration.components
+            if component.name == "Component A"
+        )
+        component_b = next(
+            component
+            for component in replaced.configuration.components
+            if component.name == "Component B"
+        )
 
-    write_session.close()
+        assert component_a.status == "REMOVED"
+        assert component_b.status == "INSTALLED"
+        assert len(replaced.configuration.replacement_history) == 1
+    finally:
+        write_session.close()
+        engine.dispose()
 
 
 def test_propulsion_chain_feature_scenario() -> None:
@@ -591,49 +593,51 @@ def test_propulsion_chain_feature_scenario() -> None:
         service=InstallTechnicalComponentUseCase(unit_of_work=uow)
     )
 
-    created = create_feature.execute(CreateTechnicalConfigurationRequest(vessel_id=uuid4()))
-    configuration_id = created.configuration.id
+    try:
+        created = create_feature.execute(CreateTechnicalConfigurationRequest(vessel_id=uuid4()))
+        configuration_id = created.configuration.id
 
-    flow = [
-        ("Propulsion Engine", "PROPULSION_ENGINE"),
-        ("Gear Arrangement", "GEARBOX"),
-        ("Shaft", "SHAFT"),
-        ("Controllable Pitch Propeller", "PROPELLER"),
-    ]
+        flow = [
+            ("Propulsion Engine", "PROPULSION_ENGINE"),
+            ("Gear Arrangement", "GEARBOX"),
+            ("Shaft", "SHAFT"),
+            ("Controllable Pitch Propeller", "PROPELLER"),
+        ]
 
-    for name, component_type in flow:
-        add_response = add_feature.execute(
-            AddTechnicalComponentRequest(
-                configuration_id=configuration_id,
-                component_type=component_type,
-                name=name,
+        for name, component_type in flow:
+            add_response = add_feature.execute(
+                AddTechnicalComponentRequest(
+                    configuration_id=configuration_id,
+                    component_type=component_type,
+                    name=name,
+                )
             )
-        )
 
-        component_id = next(
-            component.id
-            for component in add_response.configuration.components
-            if component.name == name
-        )
-
-        install_response = install_feature.execute(
-            InstallTechnicalComponentRequest(
-                configuration_id=configuration_id,
-                component_id=component_id,
-                installed_on=date(2025, 1, 1),
+            component_id = next(
+                component.id
+                for component in add_response.configuration.components
+                if component.name == name
             )
-        )
 
-    names = [component.name for component in install_response.configuration.components]
-    statuses = {component.name: component.status for component in install_response.configuration.components}
+            install_response = install_feature.execute(
+                InstallTechnicalComponentRequest(
+                    configuration_id=configuration_id,
+                    component_id=component_id,
+                    installed_on=date(2025, 1, 1),
+                )
+            )
 
-    assert "Propulsion Engine" in names
-    assert "Gear Arrangement" in names
-    assert "Shaft" in names
-    assert "Controllable Pitch Propeller" in names
-    assert statuses["Propulsion Engine"] == "INSTALLED"
-    assert statuses["Gear Arrangement"] == "INSTALLED"
-    assert statuses["Shaft"] == "INSTALLED"
-    assert statuses["Controllable Pitch Propeller"] == "INSTALLED"
+        names = [component.name for component in install_response.configuration.components]
+        statuses = {component.name: component.status for component in install_response.configuration.components}
 
-    write_session.close()
+        assert "Propulsion Engine" in names
+        assert "Gear Arrangement" in names
+        assert "Shaft" in names
+        assert "Controllable Pitch Propeller" in names
+        assert statuses["Propulsion Engine"] == "INSTALLED"
+        assert statuses["Gear Arrangement"] == "INSTALLED"
+        assert statuses["Shaft"] == "INSTALLED"
+        assert statuses["Controllable Pitch Propeller"] == "INSTALLED"
+    finally:
+        write_session.close()
+        engine.dispose()

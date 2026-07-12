@@ -34,6 +34,12 @@ def _sqlite_session(tmp_path: Path, name: str) -> Session:
     return Session(engine)
 
 
+def _close_session(session: Session) -> None:
+    bind = session.get_bind()
+    session.close()
+    bind.dispose()
+
+
 def _certificate_type() -> CertificateTypeReference:
     return CertificateTypeReference(
         certificate_type_id=CertificateTypeId(UUID("00000000-0000-0000-0000-00000000D101")),
@@ -142,7 +148,7 @@ def test_certificate_repository_add_get_exists_list_and_not_found(tmp_path: Path
         assert len(listed) == 1
         assert listed[0].id == certificate.id
     finally:
-        session.close()
+        _close_session(session)
 
 
 def test_certificate_repository_get_by_target_for_all_approved_types(tmp_path: Path) -> None:
@@ -191,7 +197,7 @@ def test_certificate_repository_get_by_target_for_all_approved_types(tmp_path: P
             is CertificateTargetType.ORGANIZATION
         )
     finally:
-        session.close()
+        _close_session(session)
 
 
 def test_certificate_repository_update_lifecycle_roundtrip_without_transition_logic(
@@ -237,7 +243,7 @@ def test_certificate_repository_update_lifecycle_roundtrip_without_transition_lo
         assert loaded_revoked is not None
         assert loaded_revoked.status is CertificateStatus.REVOKED
     finally:
-        session.close()
+        _close_session(session)
 
 
 def test_certificate_repository_validity_queries_with_explicit_reference_dates(
@@ -356,7 +362,7 @@ def test_certificate_repository_validity_queries_with_explicit_reference_dates(
         assert loaded_expiring is not None
         assert loaded_expiring.status is CertificateStatus.ACTIVE
     finally:
-        session.close()
+        _close_session(session)
 
 
 def test_certificate_repository_renewal_history_and_historical_truth_and_chain(
@@ -445,7 +451,7 @@ def test_certificate_repository_renewal_history_and_historical_truth_and_chain(
         assert reloaded_a.notes == "Context A"
         assert reloaded_b.notes == "Context B updated"
     finally:
-        session.close()
+        _close_session(session)
 
 
 def test_certificate_repository_compliance_observation_boundary_and_event_restoration(
@@ -486,7 +492,7 @@ def test_certificate_repository_compliance_observation_boundary_and_event_restor
         # Restored aggregate should not emit false historical events from reload.
         assert loaded.pull_events() == []
     finally:
-        session.close()
+        _close_session(session)
 
 
 def test_certificate_repository_uses_uow_transaction_without_implicit_commit(
@@ -551,3 +557,4 @@ def test_certificate_repository_uses_uow_transaction_without_implicit_commit(
     finally:
         session_one.close()
         session_two.close()
+        engine.dispose()

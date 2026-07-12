@@ -3,6 +3,7 @@ from __future__ import annotations
 from datetime import UTC
 from datetime import datetime
 from pathlib import Path
+import weakref
 from uuid import UUID
 
 import mfm.database.models  # noqa: F401
@@ -34,7 +35,9 @@ def _sqlite_session(tmp_path: Path, name: str) -> Session:
     db_path = tmp_path / f"{name}.sqlite"
     engine = create_engine(f"sqlite:///{db_path}")
     BaseModel.metadata.create_all(engine)
-    return Session(engine)
+    session = Session(engine)
+    weakref.finalize(session, engine.dispose)
+    return session
 def _aware(year: int, month: int, day: int, hour: int, minute: int = 0) -> datetime:
     return datetime(year, month, day, hour, minute, tzinfo=UTC)
 

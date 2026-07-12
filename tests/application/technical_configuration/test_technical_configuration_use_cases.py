@@ -677,134 +677,144 @@ def test_response_mapping_no_domain_object_leakage() -> None:
 
 def test_historical_configuration_application_scenario_reload() -> None:
     engine, write_session = _create_sqlite_session()
-    write_uow = SQLiteTechnicalConfigurationApplicationUnitOfWork(write_session)
+    read_session: Session | None = None
+    try:
+        write_uow = SQLiteTechnicalConfigurationApplicationUnitOfWork(write_session)
 
-    create_response = CreateTechnicalConfigurationUseCase(unit_of_work=write_uow).execute(
-        CreateTechnicalConfigurationRequest(vessel_id=uuid4())
-    )
-    configuration_id = create_response.configuration.id
-
-    add_use_case = AddTechnicalComponentUseCase(unit_of_work=write_uow)
-    add_a = add_use_case.execute(
-        AddTechnicalComponentRequest(
-            configuration_id=configuration_id,
-            component_type=TechnicalComponentType.GEARBOX,
-            name="Component A",
+        create_response = CreateTechnicalConfigurationUseCase(unit_of_work=write_uow).execute(
+            CreateTechnicalConfigurationRequest(vessel_id=uuid4())
         )
-    )
-    component_a_id = next(
-        component.id for component in add_a.configuration.components if component.name == "Component A"
-    )
+        configuration_id = create_response.configuration.id
 
-    InstallTechnicalComponentUseCase(unit_of_work=write_uow).execute(
-        InstallTechnicalComponentRequest(
-            configuration_id=configuration_id,
-            component_id=component_a_id,
-            installed_on=date(2025, 1, 1),
-        )
-    )
-
-    ReplaceTechnicalComponentUseCase(unit_of_work=write_uow).execute(
-        ReplaceTechnicalComponentRequest(
-            configuration_id=configuration_id,
-            component_id=component_a_id,
-            replaced_on=date(2025, 4, 1),
-            reason="Wear",
-            replacement_component_type=TechnicalComponentType.GEARBOX,
-            replacement_name="Component B",
-        )
-    )
-    write_session.close()
-
-    read_session = Session(engine)
-    read_uow = SQLiteTechnicalConfigurationApplicationUnitOfWork(read_session)
-
-    loaded = GetTechnicalConfigurationUseCase(unit_of_work=read_uow).execute(
-        GetTechnicalConfigurationRequest(configuration_id=configuration_id)
-    )
-
-    assert any(component.name == "Component A" for component in loaded.configuration.components)
-    assert any(component.name == "Component B" for component in loaded.configuration.components)
-
-    component_a = next(
-        component
-        for component in loaded.configuration.components
-        if component.name == "Component A"
-    )
-    component_b = next(
-        component
-        for component in loaded.configuration.components
-        if component.name == "Component B"
-    )
-
-    assert component_a.status == "REMOVED"
-    assert component_a.removed_date == date(2025, 4, 1)
-    assert component_b.status == "INSTALLED"
-    assert len(loaded.configuration.replacement_history) == 1
-
-    read_session.close()
-
-
-def test_propulsion_chain_application_scenario_reload() -> None:
-    engine, write_session = _create_sqlite_session()
-    write_uow = SQLiteTechnicalConfigurationApplicationUnitOfWork(write_session)
-
-    create_response = CreateTechnicalConfigurationUseCase(unit_of_work=write_uow).execute(
-        CreateTechnicalConfigurationRequest(vessel_id=uuid4())
-    )
-    configuration_id = create_response.configuration.id
-
-    add_use_case = AddTechnicalComponentUseCase(unit_of_work=write_uow)
-    install_use_case = InstallTechnicalComponentUseCase(unit_of_work=write_uow)
-
-    components = [
-        ("Propulsion Engine", TechnicalComponentType.PROPULSION_ENGINE),
-        ("Gear Arrangement", TechnicalComponentType.GEARBOX),
-        ("Shaft", TechnicalComponentType.SHAFT),
-        ("Controllable Pitch Propeller", TechnicalComponentType.PROPELLER),
-    ]
-
-    for name, component_type in components:
-        add_response = add_use_case.execute(
+        add_use_case = AddTechnicalComponentUseCase(unit_of_work=write_uow)
+        add_a = add_use_case.execute(
             AddTechnicalComponentRequest(
                 configuration_id=configuration_id,
-                component_type=component_type,
-                name=name,
+                component_type=TechnicalComponentType.GEARBOX,
+                name="Component A",
             )
         )
-        component_id = next(
-            component.id
-            for component in add_response.configuration.components
-            if component.name == name
+        component_a_id = next(
+            component.id for component in add_a.configuration.components if component.name == "Component A"
         )
 
-        install_use_case.execute(
+        InstallTechnicalComponentUseCase(unit_of_work=write_uow).execute(
             InstallTechnicalComponentRequest(
                 configuration_id=configuration_id,
-                component_id=component_id,
+                component_id=component_a_id,
                 installed_on=date(2025, 1, 1),
             )
         )
 
-    write_session.close()
+        ReplaceTechnicalComponentUseCase(unit_of_work=write_uow).execute(
+            ReplaceTechnicalComponentRequest(
+                configuration_id=configuration_id,
+                component_id=component_a_id,
+                replaced_on=date(2025, 4, 1),
+                reason="Wear",
+                replacement_component_type=TechnicalComponentType.GEARBOX,
+                replacement_name="Component B",
+            )
+        )
+        write_session.close()
 
-    read_session = Session(engine)
-    read_uow = SQLiteTechnicalConfigurationApplicationUnitOfWork(read_session)
+        read_session = Session(engine)
+        read_uow = SQLiteTechnicalConfigurationApplicationUnitOfWork(read_session)
 
-    loaded = GetTechnicalConfigurationUseCase(unit_of_work=read_uow).execute(
-        GetTechnicalConfigurationRequest(configuration_id=configuration_id)
-    )
+        loaded = GetTechnicalConfigurationUseCase(unit_of_work=read_uow).execute(
+            GetTechnicalConfigurationRequest(configuration_id=configuration_id)
+        )
 
-    names = [component.name for component in loaded.configuration.components]
-    statuses = {component.name: component.status for component in loaded.configuration.components}
+        assert any(component.name == "Component A" for component in loaded.configuration.components)
+        assert any(component.name == "Component B" for component in loaded.configuration.components)
 
-    assert "Propulsion Engine" in names
-    assert "Gear Arrangement" in names
-    assert "Shaft" in names
-    assert "Controllable Pitch Propeller" in names
-    assert statuses["Propulsion Engine"] == "INSTALLED"
-    assert statuses["Gear Arrangement"] == "INSTALLED"
-    assert statuses["Shaft"] == "INSTALLED"
-    assert statuses["Controllable Pitch Propeller"] == "INSTALLED"
+        component_a = next(
+            component
+            for component in loaded.configuration.components
+            if component.name == "Component A"
+        )
+        component_b = next(
+            component
+            for component in loaded.configuration.components
+            if component.name == "Component B"
+        )
 
-    read_session.close()
+        assert component_a.status == "REMOVED"
+        assert component_a.removed_date == date(2025, 4, 1)
+        assert component_b.status == "INSTALLED"
+        assert len(loaded.configuration.replacement_history) == 1
+    finally:
+        write_session.close()
+        if read_session is not None:
+            read_session.close()
+        engine.dispose()
+
+
+def test_propulsion_chain_application_scenario_reload() -> None:
+    engine, write_session = _create_sqlite_session()
+    read_session: Session | None = None
+    try:
+        write_uow = SQLiteTechnicalConfigurationApplicationUnitOfWork(write_session)
+
+        create_response = CreateTechnicalConfigurationUseCase(unit_of_work=write_uow).execute(
+            CreateTechnicalConfigurationRequest(vessel_id=uuid4())
+        )
+        configuration_id = create_response.configuration.id
+
+        add_use_case = AddTechnicalComponentUseCase(unit_of_work=write_uow)
+        install_use_case = InstallTechnicalComponentUseCase(unit_of_work=write_uow)
+
+        components = [
+            ("Propulsion Engine", TechnicalComponentType.PROPULSION_ENGINE),
+            ("Gear Arrangement", TechnicalComponentType.GEARBOX),
+            ("Shaft", TechnicalComponentType.SHAFT),
+            ("Controllable Pitch Propeller", TechnicalComponentType.PROPELLER),
+        ]
+
+        for name, component_type in components:
+            add_response = add_use_case.execute(
+                AddTechnicalComponentRequest(
+                    configuration_id=configuration_id,
+                    component_type=component_type,
+                    name=name,
+                )
+            )
+            component_id = next(
+                component.id
+                for component in add_response.configuration.components
+                if component.name == name
+            )
+
+            install_use_case.execute(
+                InstallTechnicalComponentRequest(
+                    configuration_id=configuration_id,
+                    component_id=component_id,
+                    installed_on=date(2025, 1, 1),
+                )
+            )
+
+        write_session.close()
+
+        read_session = Session(engine)
+        read_uow = SQLiteTechnicalConfigurationApplicationUnitOfWork(read_session)
+
+        loaded = GetTechnicalConfigurationUseCase(unit_of_work=read_uow).execute(
+            GetTechnicalConfigurationRequest(configuration_id=configuration_id)
+        )
+
+        names = [component.name for component in loaded.configuration.components]
+        statuses = {component.name: component.status for component in loaded.configuration.components}
+
+        assert "Propulsion Engine" in names
+        assert "Gear Arrangement" in names
+        assert "Shaft" in names
+        assert "Controllable Pitch Propeller" in names
+        assert statuses["Propulsion Engine"] == "INSTALLED"
+        assert statuses["Gear Arrangement"] == "INSTALLED"
+        assert statuses["Shaft"] == "INSTALLED"
+        assert statuses["Controllable Pitch Propeller"] == "INSTALLED"
+    finally:
+        write_session.close()
+        if read_session is not None:
+            read_session.close()
+        engine.dispose()

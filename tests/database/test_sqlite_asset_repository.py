@@ -40,147 +40,179 @@ def _create_asset(number: str = "ASSET-R-001") -> Asset:
 
 
 def test_asset_repository_add_and_get_by_id() -> None:
-    _, session = _create_session()
-    uow = _create_uow(session)
-    repo = SQLiteAssetRepository(uow)
+    engine, session = _create_session()
+    try:
+        uow = _create_uow(session)
+        repo = SQLiteAssetRepository(uow)
 
-    asset = _create_asset("ASSET-R-ADD")
-    repo.add(asset)
-    uow.commit()
+        asset = _create_asset("ASSET-R-ADD")
+        repo.add(asset)
+        uow.commit()
 
-    loaded = repo.get_by_id(asset.id.value)
-    assert loaded is not None
-    assert isinstance(loaded, Asset)
-    assert loaded == asset
+        loaded = repo.get_by_id(asset.id.value)
+        assert loaded is not None
+        assert isinstance(loaded, Asset)
+        assert loaded == asset
+    finally:
+        session.close()
+        engine.dispose()
 
 
 def test_asset_repository_get_by_asset_number() -> None:
-    _, session = _create_session()
-    uow = _create_uow(session)
-    repo = SQLiteAssetRepository(uow)
+    engine, session = _create_session()
+    try:
+        uow = _create_uow(session)
+        repo = SQLiteAssetRepository(uow)
 
-    asset = _create_asset("asset-r-number")
-    repo.add(asset)
-    uow.commit()
+        asset = _create_asset("asset-r-number")
+        repo.add(asset)
+        uow.commit()
 
-    loaded = repo.get_by_asset_number("ASSET-R-NUMBER")
-    assert loaded is not None
-    assert loaded.id == asset.id
+        loaded = repo.get_by_asset_number("ASSET-R-NUMBER")
+        assert loaded is not None
+        assert loaded.id == asset.id
+    finally:
+        session.close()
+        engine.dispose()
 
 
 def test_asset_repository_update() -> None:
-    _, session = _create_session()
-    uow = _create_uow(session)
-    repo = SQLiteAssetRepository(uow)
+    engine, session = _create_session()
+    try:
+        uow = _create_uow(session)
+        repo = SQLiteAssetRepository(uow)
 
-    asset = _create_asset("ASSET-R-UPDATE")
-    repo.add(asset)
-    uow.commit()
+        asset = _create_asset("ASSET-R-UPDATE")
+        repo.add(asset)
+        uow.commit()
 
-    asset.rename("Updated Asset")
-    asset.change_location("Warehouse Beta")
-    asset.change_owner(None)
-    asset.deactivate()
+        asset.rename("Updated Asset")
+        asset.change_location("Warehouse Beta")
+        asset.change_owner(None)
+        asset.deactivate()
 
-    repo.update(asset)
-    uow.commit()
+        repo.update(asset)
+        uow.commit()
 
-    updated = repo.get_by_id(asset.id.value)
-    assert updated is not None
-    assert updated.name == "Updated Asset"
-    assert updated.location == AssetLocation("Warehouse Beta")
-    assert updated.owner_id is None
-    assert updated.status is AssetStatus.INACTIVE
+        updated = repo.get_by_id(asset.id.value)
+        assert updated is not None
+        assert updated.name == "Updated Asset"
+        assert updated.location == AssetLocation("Warehouse Beta")
+        assert updated.owner_id is None
+        assert updated.status is AssetStatus.INACTIVE
+    finally:
+        session.close()
+        engine.dispose()
 
 
 def test_asset_repository_delete() -> None:
-    _, session = _create_session()
-    uow = _create_uow(session)
-    repo = SQLiteAssetRepository(uow)
+    engine, session = _create_session()
+    try:
+        uow = _create_uow(session)
+        repo = SQLiteAssetRepository(uow)
 
-    asset = _create_asset("ASSET-R-DELETE")
-    repo.add(asset)
-    uow.commit()
+        asset = _create_asset("ASSET-R-DELETE")
+        repo.add(asset)
+        uow.commit()
 
-    repo.delete(asset.id.value)
-    uow.commit()
+        repo.delete(asset.id.value)
+        uow.commit()
 
-    assert repo.get_by_id(asset.id.value) is None
+        assert repo.get_by_id(asset.id.value) is None
+    finally:
+        session.close()
+        engine.dispose()
 
 
 def test_asset_repository_exists() -> None:
-    _, session = _create_session()
-    uow = _create_uow(session)
-    repo = SQLiteAssetRepository(uow)
+    engine, session = _create_session()
+    try:
+        uow = _create_uow(session)
+        repo = SQLiteAssetRepository(uow)
 
-    asset = _create_asset("ASSET-R-EXISTS")
-    repo.add(asset)
-    uow.commit()
+        asset = _create_asset("ASSET-R-EXISTS")
+        repo.add(asset)
+        uow.commit()
 
-    assert repo.exists(asset.id.value) is True
+        assert repo.exists(asset.id.value) is True
 
-    repo.delete(asset.id.value)
-    uow.commit()
+        repo.delete(asset.id.value)
+        uow.commit()
 
-    assert repo.exists(asset.id.value) is False
+        assert repo.exists(asset.id.value) is False
+    finally:
+        session.close()
+        engine.dispose()
 
 
 def test_asset_repository_list() -> None:
-    _, session = _create_session()
-    uow = _create_uow(session)
-    repo = SQLiteAssetRepository(uow)
+    engine, session = _create_session()
+    try:
+        uow = _create_uow(session)
+        repo = SQLiteAssetRepository(uow)
 
-    first = _create_asset("ASSET-R-LIST-1")
-    second = _create_asset("ASSET-R-LIST-2")
-    second.change_location("Harbor East")
+        first = _create_asset("ASSET-R-LIST-1")
+        second = _create_asset("ASSET-R-LIST-2")
+        second.change_location("Harbor East")
 
-    repo.add(first)
-    repo.add(second)
-    uow.commit()
+        repo.add(first)
+        repo.add(second)
+        uow.commit()
 
-    items = repo.list()
+        items = repo.list()
 
-    assert all(isinstance(item, Asset) for item in items)
-    assert any(item.id == first.id for item in items)
-    assert any(item.id == second.id for item in items)
+        assert all(isinstance(item, Asset) for item in items)
+        assert any(item.id == first.id for item in items)
+        assert any(item.id == second.id for item in items)
+    finally:
+        session.close()
+        engine.dispose()
 
 
 def test_asset_repository_search() -> None:
-    _, session = _create_session()
-    uow = _create_uow(session)
-    repo = SQLiteAssetRepository(uow)
+    engine, session = _create_session()
+    try:
+        uow = _create_uow(session)
+        repo = SQLiteAssetRepository(uow)
 
-    first = _create_asset("ASSET-R-SEARCH-1")
-    first.rename("Harbor Crane")
-    first.change_location("Pier A")
+        first = _create_asset("ASSET-R-SEARCH-1")
+        first.rename("Harbor Crane")
+        first.change_location("Pier A")
 
-    second = _create_asset("ASSET-R-SEARCH-2")
-    second.rename("Office Desk")
-    second.change_location("Head Office")
+        second = _create_asset("ASSET-R-SEARCH-2")
+        second.rename("Office Desk")
+        second.change_location("Head Office")
 
-    repo.add(first)
-    repo.add(second)
-    uow.commit()
+        repo.add(first)
+        repo.add(second)
+        uow.commit()
 
-    hits = repo.search("Pier")
+        hits = repo.search("Pier")
 
-    assert all(isinstance(item, Asset) for item in hits)
-    assert any(item.id == first.id for item in hits)
-    assert all(item.id != second.id for item in hits)
+        assert all(isinstance(item, Asset) for item in hits)
+        assert any(item.id == first.id for item in hits)
+        assert all(item.id != second.id for item in hits)
+    finally:
+        session.close()
+        engine.dispose()
 
 
 def test_asset_repository_mapper_roundtrip() -> None:
-    _, session = _create_session()
-    uow = _create_uow(session)
-    repo = SQLiteAssetRepository(uow)
+    engine, session = _create_session()
+    try:
+        uow = _create_uow(session)
+        repo = SQLiteAssetRepository(uow)
 
-    asset = _create_asset("ASSET-R-ROUNDTRIP")
-    asset.dispose(date(2026, 1, 1))
-    repo.add(asset)
-    uow.commit()
+        asset = _create_asset("ASSET-R-ROUNDTRIP")
+        asset.dispose(date(2026, 1, 1))
+        repo.add(asset)
+        uow.commit()
 
-    reloaded = repo.get_by_id(asset.id.value)
-    assert reloaded is not None
-    assert reloaded == asset
-    assert reloaded.status is AssetStatus.DISPOSED
-    assert reloaded.retired_date == date(2026, 1, 1)
+        reloaded = repo.get_by_id(asset.id.value)
+        assert reloaded is not None
+        assert reloaded == asset
+        assert reloaded.status is AssetStatus.DISPOSED
+        assert reloaded.retired_date == date(2026, 1, 1)
+    finally:
+        session.close()
+        engine.dispose()

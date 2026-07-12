@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from datetime import date
+import weakref
 from uuid import uuid4
 
 from sqlalchemy import create_engine
@@ -50,7 +51,9 @@ from mfm.domain.technical_configuration.value_objects import SerialNumber
 def _create_session() -> tuple[object, Session]:
     engine = create_engine("sqlite:///:memory:")
     BaseModel.metadata.create_all(engine)
-    return engine, Session(engine)
+    session = Session(engine)
+    weakref.finalize(session, engine.dispose)
+    return engine, session
 
 
 def _build_configuration_with_history() -> TechnicalConfiguration:

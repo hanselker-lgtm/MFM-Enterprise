@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import weakref
 from uuid import uuid4
 
 import pytest
@@ -31,7 +32,9 @@ def clear_registry() -> None:
 def _create_session() -> tuple[object, Session]:
     engine = create_engine("sqlite:///:memory:")
     BaseModel.metadata.create_all(engine)
-    return engine, Session(engine)
+    session = Session(engine)
+    weakref.finalize(session, engine.dispose)
+    return engine, session
 
 
 def _create_asset(session: Session, asset_number: str = "ASSET-V-001") -> AssetModel:

@@ -5,6 +5,7 @@ from datetime import datetime
 from datetime import timedelta
 from datetime import timezone
 from pathlib import Path
+import weakref
 from uuid import UUID
 
 import mfm.database.models  # noqa: F401
@@ -28,7 +29,9 @@ from mfm.repositories.unit_of_work import UnitOfWork
 def _new_session(db_path: Path) -> Session:
     engine = create_engine(f"sqlite:///{db_path}")
     BaseModel.metadata.create_all(engine)
-    return Session(engine)
+    session = Session(engine)
+    weakref.finalize(session, engine.dispose)
+    return session
 
 
 def _aware_utc(year: int, month: int, day: int, hour: int, minute: int = 0) -> datetime:

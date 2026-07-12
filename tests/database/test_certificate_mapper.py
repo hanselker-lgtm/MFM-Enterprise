@@ -33,6 +33,12 @@ def _sqlite_session(tmp_path: Path, name: str) -> Session:
     return Session(engine)
 
 
+def _close_session(session: Session) -> None:
+    bind = session.get_bind()
+    session.close()
+    bind.dispose()
+
+
 def _certificate_type() -> CertificateTypeReference:
     return CertificateTypeReference(
         certificate_type_id=CertificateTypeId(UUID("00000000-0000-0000-0000-00000000A101")),
@@ -143,7 +149,7 @@ def test_certificate_roundtrip_persists_core_state(tmp_path: Path) -> None:
         assert restored.document_reference == "DOC-A"
         assert restored.external_document_id == "EXT-A"
     finally:
-        session.close()
+        _close_session(session)
 
 
 def test_certificate_target_roundtrip_for_approved_types(tmp_path: Path) -> None:
@@ -182,7 +188,7 @@ def test_certificate_target_roundtrip_for_approved_types(tmp_path: Path) -> None
         assert restored_vessel.target.target_id == vessel.target.target_id
         assert restored_org.target.target_id == organization.target.target_id
     finally:
-        session.close()
+        _close_session(session)
 
 
 def test_certificate_type_roundtrip_controlled_reference(tmp_path: Path) -> None:
@@ -207,7 +213,7 @@ def test_certificate_type_roundtrip_controlled_reference(tmp_path: Path) -> None
         assert restored.certificate_type.code == "STATUTORY_CERT"
         assert restored.certificate_type.display_name_snapshot == "Statutory Certificate"
     finally:
-        session.close()
+        _close_session(session)
 
 
 def test_issuer_snapshot_roundtrip_preserves_a_and_b(tmp_path: Path) -> None:
@@ -255,7 +261,7 @@ def test_issuer_snapshot_roundtrip_preserves_a_and_b(tmp_path: Path) -> None:
         assert restored_b.issuer.issuer_name_snapshot == "Maritime Authority B"
         assert restored_b.renewed_from_certificate_id == restored_a.id
     finally:
-        session.close()
+        _close_session(session)
 
 
 def test_validity_and_status_roundtrip_fixed_and_non_expiring(tmp_path: Path) -> None:
@@ -302,7 +308,7 @@ def test_validity_and_status_roundtrip_fixed_and_non_expiring(tmp_path: Path) ->
         assert restored_non_expiring.expires_at is None
         assert restored_non_expiring.status is CertificateStatus.ACTIVE
     finally:
-        session.close()
+        _close_session(session)
 
 
 def test_lifecycle_status_roundtrip_for_persisted_states(tmp_path: Path) -> None:
@@ -375,7 +381,7 @@ def test_lifecycle_status_roundtrip_for_persisted_states(tmp_path: Path) -> None
         assert restored_suspended.status is CertificateStatus.SUSPENDED
         assert restored_revoked.status is CertificateStatus.REVOKED
     finally:
-        session.close()
+        _close_session(session)
 
 
 def test_renewal_relation_and_historical_truth_roundtrip(tmp_path: Path) -> None:
@@ -437,7 +443,7 @@ def test_renewal_relation_and_historical_truth_roundtrip(tmp_path: Path) -> None
         assert restored_b.document_reference == "DOC-B"
         assert restored_b.renewed_from_certificate_id == restored_a.id
     finally:
-        session.close()
+        _close_session(session)
 
 
 def test_compliance_observation_roundtrip_and_maintenance_boundary(tmp_path: Path) -> None:
@@ -472,7 +478,7 @@ def test_compliance_observation_roundtrip_and_maintenance_boundary(tmp_path: Pat
         assert observation.requires_maintenance_work is True
         assert not hasattr(restored, "create_work_order")
     finally:
-        session.close()
+        _close_session(session)
 
 
 def test_event_restoration_does_not_emit_false_history_events(tmp_path: Path) -> None:
@@ -517,4 +523,4 @@ def test_event_restoration_does_not_emit_false_history_events(tmp_path: Path) ->
         assert restored_a.pull_events() == []
         assert restored_b.pull_events() == []
     finally:
-        session.close()
+        _close_session(session)

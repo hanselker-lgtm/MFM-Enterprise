@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from datetime import date
+import weakref
 from uuid import UUID
 from uuid import uuid4
 
@@ -45,7 +46,9 @@ from mfm.repositories.unit_of_work import UnitOfWork
 def _create_session() -> tuple[object, Session]:
     engine = create_engine("sqlite:///:memory:")
     BaseModel.metadata.create_all(engine)
-    return engine, Session(engine)
+    session = Session(engine)
+    weakref.finalize(session, engine.dispose)
+    return engine, session
 
 
 def _create_uow(session: Session) -> UnitOfWork:
