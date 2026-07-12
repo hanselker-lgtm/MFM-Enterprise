@@ -10,6 +10,9 @@ from mfm.database.models.certificate_model import CertificateModel
 from mfm.database.models.certificate_compliance_observation_model import (
     CertificateComplianceObservationModel,
 )
+from mfm.database.models.inventory_item_model import InventoryItemModel
+from mfm.database.models.inventory_stock_movement_model import InventoryStockMovementModel
+from mfm.database.models.inventory_stock_position_model import InventoryStockPositionModel
 from mfm.database.models.member_model import MemberModel
 from mfm.database.models.membership_type_model import MembershipTypeModel
 from mfm.database.models.maintenance_plan_model import MaintenancePlanModel
@@ -37,6 +40,9 @@ __all__ = [
     "ContingentPlanModel",
     "CertificateModel",
     "CertificateComplianceObservationModel",
+    "InventoryItemModel",
+    "InventoryStockPositionModel",
+    "InventoryStockMovementModel",
     "MemberModel",
     "MembershipTypeModel",
     "MaintenancePlanModel",
