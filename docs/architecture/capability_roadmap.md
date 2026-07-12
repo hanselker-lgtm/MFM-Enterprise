@@ -210,7 +210,7 @@ Voyages must not own:
 These entries are provisional and subject to explicit roadmap decisions.
 
 - CAP-11 Voyages (VOY) - LOCKED
-- CAP-12 Inventory (INV) - PROVISIONAL
+- CAP-12 Inventory (INV) - PLANNED
 - CAP-13 Procurement (PROC) - PROVISIONAL
 - CAP-14 Projects (PROJ) - PROVISIONAL
 - CAP-15 Document Management (DOC) - PROVISIONAL
