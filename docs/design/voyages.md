@@ -431,3 +431,39 @@ CAP-11 first scope non-goals:
 
 ## Design Recommendation
 READY FOR DOMAIN IMPLEMENTATION
+
+## Capability Status (CAP-11 Voyages)
+
+Status: LOCKED
+
+Status pr. 2026-07-12:
+- VOY-000: design dokumenteret.
+- VOY-001: domain implementeret og testet.
+- VOY-002: SQLAlchemy persistence + mapper implementeret og testet.
+- VOY-003: repository contract + SQLite repository implementeret og testet.
+- VOY-004: application services implementeret og testet.
+- VOY-005: feature layer implementeret og testet.
+- VOY-006: end-to-end integration workflows implementeret og testet.
+- VOY-007: capability review dokumenteret i voyage_capability_review.md med konklusion READY FOR LOCK.
+- VOY-008: capability locked.
+
+Lock-regler:
+- Eksisterende public Voyages API betragtes som stabil.
+- Kun fejlrettelser maa aendre laast adfaerd uden ny plan.
+- Voyage lifecycle ownership forbliver i Voyage domain aggregate.
+- Vessel association er identity/reference only via vessel_id (UUID); Fleet aggregate maa ikke ejes af Voyages.
+- Planned voyage context og actual voyage context forbliver uafhaengige og maa ikke sammenlaegges.
+- Historical voyage truth maa ikke brydes: planlagt destination forbliver planlagt destination; faktisk ankomst forbliver faktisk ankomst.
+- Alle lifecycle timestamps (departed_at, arrived_at, cancelled_at) skal vaere eksplicit supplied; ingen hidden clock i Voyage production code.
+- Repository ejer ikke transaktionsgrænsen; UnitOfWork ejer commit/rollback.
+- Mapper restoration maa ikke afspille Voyage domain operationer eller emittere falske lifecycle events.
+- Public Feature API foelger execute(request) med immutable request/response DTOs; response felter er primitive og API-safe.
+- Voyages ejer ikke Fleet, Certificates, Maintenance eller Technical Configuration adfaerd.
+- Passage planning, ECDIS, AIS, GPS track storage og telemetri forbliver uden for laast CAP-11 scope.
+- Fleet og Organization anvendes kun via identity/reference boundaries.
+- Ingen document storage subsystem maa introduceres i Voyage capability.
+
+Kvalitetsgate:
+- Fuldt regressionssaet skal vaere groent (0 failures, 0 warnings).
+- Permanente architecture compliance tests skal vaere groenne.
+- Historical voyage truth og aggregate boundaries maa ikke brydes.

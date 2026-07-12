@@ -30,6 +30,7 @@ but it does not override sequence decisions recorded here.
 | 4 | CAP-08 / TECH-000..TECH-008 | Technical Configuration | LOCKED | `docs/design/technical_configuration.md`, `CHANGELOG.md` |
 | 5 | CAP-09 / MAINT-000..MAINT-008 | Maintenance | LOCKED | `docs/design/maintenance.md`, `CHANGELOG.md` |
 | 6 | CAP-10 / CERT-000..CERT-008 | Certificates and Compliance | LOCKED | `docs/design/certificates_compliance.md`, `CHANGELOG.md` |
+| 7 | CAP-11 / VOY-000..VOY-008 | Voyages | LOCKED | `docs/design/voyages.md`, `CHANGELOG.md` |
 
 Status interpretation rules in this roadmap:
 - LOCKED: explicitly marked LOCKED in design capability status and lock release notes.
@@ -44,6 +45,7 @@ Current locked foundation that must be preserved:
 - CAP-08 Technical Configuration (LOCKED)
 - CAP-09 Maintenance (LOCKED)
 - CAP-10 Certificates and Compliance (LOCKED)
+- CAP-11 Voyages (LOCKED)
 
 Completed but not lock-marked in design status:
 - Asset Core (ASSET-007 READY FOR LOCK)
@@ -168,7 +170,7 @@ boundaries and stable public API contracts.
 - Exact capability name: Voyages
 - Approved prefix: VOY
 - Next waypoint identifier: VOY-000
-- Status: PLANNED
+- Status: LOCKED
 
 ### Capability purpose
 Define voyage planning and operational voyage lifecycle as a separate bounded
@@ -207,7 +209,7 @@ Voyages must not own:
 ## Provisional Future Sequence
 These entries are provisional and subject to explicit roadmap decisions.
 
-- CAP-11 Voyages (VOY) - PLANNED
+- CAP-11 Voyages (VOY) - LOCKED
 - CAP-12 Inventory (INV) - PROVISIONAL
 - CAP-13 Procurement (PROC) - PROVISIONAL
 - CAP-14 Projects (PROJ) - PROVISIONAL

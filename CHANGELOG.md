@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.10.0-alpha - 2026-07-12
+
+Voyages capability lock release.
+
+### Changed
+- Voyages capability status formalized as `CAP-11 Voyages: LOCKED` in design documentation.
+- CAP-11 lock constraints documented for capability boundaries (vessel identity/reference only, planned and actual context independence, historical voyage truth, no Fleet/Maintenance/Certificate/Technical Configuration ownership).
+
+### Quality
+- Voyages lock verification completed against focused VOY tests, permanent architecture compliance tests, and full regression suite.
+- Test suite status at lock: 907 passed, 0 failures, 0 warnings.
+
 ## v0.9.0-alpha - 2026-07-11
 
 Certificates and Compliance capability lock release.
