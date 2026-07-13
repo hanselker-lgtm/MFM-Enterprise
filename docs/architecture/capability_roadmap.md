@@ -211,6 +211,9 @@ These entries are provisional and subject to explicit roadmap decisions.
 
 - CAP-11 Voyages (VOY) - LOCKED
 - CAP-12 Inventory (INV) - PLANNED
+	- INV-002 (Inventory Persistence and Mapper) is verified complete at baseline commit 0a114fe.
+	- Provenance and completeness were audited; no duplicate INV-002 implementation commit is required.
+	- Accepted baseline for proceeding to INV-003: 0a114fe.
 - CAP-13 Procurement (PROC) - PROVISIONAL
 - CAP-14 Projects (PROJ) - PROVISIONAL
 - CAP-15 Document Management (DOC) - PROVISIONAL
