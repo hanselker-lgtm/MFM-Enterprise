@@ -3,10 +3,11 @@ from __future__ import annotations
 from datetime import UTC
 from datetime import date
 from datetime import datetime
-import weakref
+from collections.abc import Iterator
 from uuid import UUID
 from uuid import uuid4
 
+import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 
@@ -51,11 +52,35 @@ from mfm.infrastructure.persistence.sqlite.sqlite_volunteer_repository import (
 from mfm.repositories.unit_of_work import UnitOfWork
 
 
+_SQLITE_RESOURCES: list[tuple[object, Session]] = []
+
+
+@pytest.fixture(autouse=True)
+def _deterministic_sqlite_teardown() -> Iterator[None]:
+    try:
+        yield
+    finally:
+        close_errors: list[BaseException] = []
+        while _SQLITE_RESOURCES:
+            engine, session = _SQLITE_RESOURCES.pop()
+            try:
+                session.close()
+            except BaseException as exc:  # pragma: no cover - defensive cleanup
+                close_errors.append(exc)
+            try:
+                engine.dispose()
+            except BaseException as exc:  # pragma: no cover - defensive cleanup
+                close_errors.append(exc)
+
+        if close_errors:
+            raise close_errors[0]
+
+
 def _create_session() -> tuple[object, Session]:
     engine = create_engine("sqlite:///:memory:")
     BaseModel.metadata.create_all(engine)
     session = Session(engine)
-    weakref.finalize(session, engine.dispose)
+    _SQLITE_RESOURCES.append((engine, session))
     return engine, session
 
 

@@ -11,6 +11,7 @@ from uuid import uuid4
 import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
+from sqlalchemy.pool import NullPool
 
 import mfm.database.models  # noqa: F401
 from mfm.database.models.asset_location_model import AssetLocationModel  # noqa: F401
@@ -43,7 +44,7 @@ def _utc(year: int, month: int, day: int, hour: int) -> datetime:
 
 def _sqlite_session(tmp_path: Path, name: str) -> Session:
     db_path = tmp_path / f"{name}.sqlite"
-    engine = create_engine(f"sqlite:///{db_path}")
+    engine = create_engine(f"sqlite:///{db_path}", poolclass=NullPool)
     BaseModel.metadata.create_all(engine)
     session = Session(engine)
     weakref.finalize(session, engine.dispose)
