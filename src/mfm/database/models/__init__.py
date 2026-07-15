@@ -28,6 +28,10 @@ from mfm.database.models.vessel_dimensions_model import VesselDimensionsModel
 from mfm.database.models.vessel_model import VesselModel
 from mfm.database.models.voyage_model import VoyageModel
 from mfm.database.models.work_order_model import WorkOrderModel
+from mfm.database.models.purchase_order_model import PurchaseOrderModel
+from mfm.database.models.purchase_order_line_model import PurchaseOrderLineModel
+from mfm.database.models.purchase_receipt_model import PurchaseReceiptModel
+from mfm.database.models.purchase_receipt_line_model import PurchaseReceiptLineModel
 
 __all__ = [
     "BaseModel",
@@ -56,4 +60,8 @@ __all__ = [
     "VesselDimensionsModel",
     "VesselModel",
     "VoyageModel",
+    "PurchaseOrderModel",
+    "PurchaseOrderLineModel",
+    "PurchaseReceiptModel",
+    "PurchaseReceiptLineModel",
 ]
