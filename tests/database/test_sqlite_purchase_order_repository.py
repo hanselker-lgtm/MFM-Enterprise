@@ -229,6 +229,63 @@ def test_purchase_order_repository_update_persists_history_and_status_across_ses
         second_session.close()
 
 
+def test_purchase_order_repository_update_preserves_multiple_receipts_for_same_line(
+    tmp_path: Path,
+) -> None:
+    db_path = tmp_path / "sqlite-purchase-order-repository-receipt-history.sqlite"
+    session = _new_session(db_path)
+    try:
+        repository = SQLitePurchaseOrderRepository(UnitOfWork(session))
+        order = _order(
+            order_id=UUID("00000000-0000-0000-0000-00000000E312"),
+            order_number="PO-REPO-RECEIPT-HISTORY",
+        )
+        repository.add(order)
+        session.commit()
+
+        first = repository.get_by_id(order.id.value)
+        assert first is not None
+        _progress_to_ordered(first)
+        first.record_receipt(
+            receipt_reference="RCPT-1",
+            received_at=_aware(2028, 5, 1, 8, 0, offset_hours=1),
+            lines=[
+                PurchaseReceiptLine(
+                    purchase_order_line_id=first.lines[0].id,
+                    quantity=Decimal("2.000"),
+                )
+            ],
+        )
+        repository.update(first)
+        session.commit()
+
+        second = repository.get_by_id(order.id.value)
+        assert second is not None
+        second.record_receipt(
+            receipt_reference="RCPT-2",
+            received_at=_aware(2028, 5, 2, 8, 0, offset_hours=1),
+            lines=[
+                PurchaseReceiptLine(
+                    purchase_order_line_id=second.lines[0].id,
+                    quantity=Decimal("3.000"),
+                )
+            ],
+        )
+        repository.update(second)
+        session.commit()
+
+        restored = repository.get_by_id(order.id.value)
+        assert restored is not None
+        assert [receipt.receipt_reference for receipt in restored.receipts] == [
+            "RCPT-1",
+            "RCPT-2",
+        ]
+        assert restored.lines[0].received_quantity == Decimal("5.000")
+        assert restored.status is PurchaseOrderStatus.PARTIALLY_RECEIVED
+    finally:
+        session.close()
+
+
 def test_purchase_order_repository_list_and_filter_methods(tmp_path: Path) -> None:
     db_path = tmp_path / "sqlite-purchase-order-repository-list.sqlite"
     session = _new_session(db_path)

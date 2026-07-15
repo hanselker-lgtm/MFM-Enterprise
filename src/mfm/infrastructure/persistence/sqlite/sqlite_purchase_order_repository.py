@@ -74,6 +74,13 @@ class SQLitePurchaseOrderRepository(PurchaseOrderRepository):
                 f"Purchase order number {order.purchase_order_number.value} already exists"
             )
 
+        # Replace child collections before merge to avoid stale child rows colliding
+        # with unique constraints when the aggregate history grows across updates.
+        existing.receipts.clear()
+        self._session.flush()
+        existing.lines.clear()
+        self._session.flush()
+
         self._session.merge(PurchaseOrderMapper.to_orm_purchase_order(order))
         self._session.flush()
 
