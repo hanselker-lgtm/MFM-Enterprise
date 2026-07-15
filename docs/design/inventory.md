@@ -637,3 +637,36 @@ CAP-12 first scope non-goals:
 
 ## Design Recommendation
 READY FOR DOMAIN IMPLEMENTATION
+
+## Capability Status (CAP-12 Inventory)
+
+Status: LOCKED
+
+Status pr. 2026-07-15:
+- INV-000: design dokumenteret.
+- INV-001: domain implementeret og testet.
+- INV-002: SQLAlchemy persistence + mapper implementeret og testet.
+- INV-003: repository contract + SQLite repository implementeret og testet.
+- INV-004: application services implementeret og testet.
+- INV-005: feature layer implementeret og testet.
+- INV-006: end-to-end integration workflows implementeret og testet.
+- INV-007: capability review dokumenteret i inventory_capability_review.md med konklusion READY FOR LOCK.
+- INV-008: capability locked.
+
+Lock-regler:
+- Eksisterende public Inventory API betragtes som stabil.
+- Kun fejlrettelser maa aendre laast adfaerd uden ny plan.
+- Inventory capability behavior is frozen.
+- Domain invariants are protected.
+- Persistence and mapper semantics are protected.
+- Repository contract semantics are protected.
+- Application-service behavior is protected.
+- Public Feature API behavior is protected.
+- Historical stock truth is protected.
+- Active/inactive lifecycle semantics are protected.
+- Low-stock semantics are protected.
+- Procurement boundary is protected.
+- Dependency direction is protected.
+- Asset Core, Fleet, Technical Configuration, Maintenance, Certificates and Compliance, and Voyages remain protected locked capabilities.
+- Inventory must not introduce reverse dependencies into locked capabilities.
+- Future changes to locked Inventory require explicit governance action under the repository lock rules.

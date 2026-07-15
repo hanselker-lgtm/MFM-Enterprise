@@ -210,7 +210,7 @@ Voyages must not own:
 These entries are provisional and subject to explicit roadmap decisions.
 
 - CAP-11 Voyages (VOY) - LOCKED
-- CAP-12 Inventory (INV) - PLANNED
+- CAP-12 Inventory (INV) - LOCKED
 	- INV-002 (Inventory Persistence and Mapper) is verified complete at baseline commit 0a114fe.
 	- Provenance and completeness were audited; no duplicate INV-002 implementation commit is required.
 	- Accepted baseline for proceeding to INV-003: 0a114fe.
