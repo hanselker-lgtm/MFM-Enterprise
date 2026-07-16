@@ -217,7 +217,7 @@ These entries are provisional and subject to explicit roadmap decisions.
 - CAP-13 Procurement (PROC) - LOCKED
 	- PROC-000 - Design
 - CAP-14 Projects (PROJ) - PROVISIONAL
-- CAP-15 Document Management (DOC) - PROVISIONAL
+- CAP-15 Document Management (DOC) - LOCKED
 
 Note:
 - Finance/fund capabilities remain provisional and require explicit boundary
