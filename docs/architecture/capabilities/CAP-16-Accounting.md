@@ -1,6 +1,6 @@
 # CAP-16 Accounting
 
-Status: REVIEWED
+Status: LOCKED
 Capability ID: CAP-16
 Prefix: ACC
 
@@ -332,9 +332,9 @@ stateDiagram-v2
 - ACC-008 Lock
   - Lock checklist, roadmap update, and release governance evidence.
 
-## 12. Review Outcome
+## 12. Final Lock Status
 
-ACC-007 review status:
+ACC-008 lock status:
 - Domain architecture: verified
 - Persistence architecture: verified
 - Repository implementation: verified
@@ -352,7 +352,6 @@ ACC-007 review status:
 - Test coverage: verified
 - Dead code: no CAP-16 findings detected
 - Unused imports: none detected in changed CAP-16 scope
-- TODO/FIXME markers: none detected in CAP-16 scope
 - Ruff: passed on changed review file
 - Full regression suite: passed
 

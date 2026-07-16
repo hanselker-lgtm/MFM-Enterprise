@@ -31,6 +31,7 @@ but it does not override sequence decisions recorded here.
 | 5 | CAP-09 / MAINT-000..MAINT-008 | Maintenance | LOCKED | `docs/design/maintenance.md`, `CHANGELOG.md` |
 | 6 | CAP-10 / CERT-000..CERT-008 | Certificates and Compliance | LOCKED | `docs/design/certificates_compliance.md`, `CHANGELOG.md` |
 | 7 | CAP-11 / VOY-000..VOY-008 | Voyages | LOCKED | `docs/design/voyages.md`, `CHANGELOG.md` |
+| 8 | CAP-16 / ACC-000..ACC-008 | Accounting | LOCKED | `docs/architecture/capabilities/CAP-16-Accounting.md`, `CHANGELOG.md`, ACC commit history |
 
 Status interpretation rules in this roadmap:
 - LOCKED: explicitly marked LOCKED in design capability status and lock release notes.
@@ -46,6 +47,7 @@ Current locked foundation that must be preserved:
 - CAP-09 Maintenance (LOCKED)
 - CAP-10 Certificates and Compliance (LOCKED)
 - CAP-11 Voyages (LOCKED)
+- CAP-16 Accounting (LOCKED)
 
 Completed but not lock-marked in design status:
 - Asset Core (ASSET-007 READY FOR LOCK)
@@ -218,6 +220,7 @@ These entries are provisional and subject to explicit roadmap decisions.
 	- PROC-000 - Design
 - CAP-14 Projects (PROJ) - LOCKED
 - CAP-15 Document Management (DOC) - LOCKED
+- CAP-16 Accounting (ACC) - LOCKED
 
 Note:
 - Finance/fund capabilities remain provisional and require explicit boundary
