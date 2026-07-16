@@ -17,3 +17,23 @@ from mfm.domain.procurement.purchase_order_line import PurchaseOrderLine
 from mfm.domain.procurement.purchase_order_status import PurchaseOrderStatus
 from mfm.domain.procurement.purchase_receipt import PurchaseReceipt
 from mfm.domain.procurement.purchase_receipt import PurchaseReceiptLine
+
+__all__ = [
+	"PurchaseOrderAmended",
+	"PurchaseOrderApproved",
+	"PurchaseOrderCancelled",
+	"PurchaseOrderCreated",
+	"PurchaseOrderOrdered",
+	"PurchaseOrderSubmitted",
+	"PurchaseReceiptRecorded",
+	"PurchaseOrderId",
+	"PurchaseOrderLineId",
+	"PurchaseOrderNumber",
+	"PurchaseReceiptId",
+	"SupplierReference",
+	"PurchaseOrder",
+	"PurchaseOrderLine",
+	"PurchaseOrderStatus",
+	"PurchaseReceipt",
+	"PurchaseReceiptLine",
+]

@@ -38,9 +38,6 @@ from mfm.application.features.procurement.approve_purchase_order_feature import 
 from mfm.application.features.procurement.cancel_purchase_order_feature import (
     CancelPurchaseOrderFeature,
 )
-from mfm.application.features.procurement.cancel_purchase_order_feature import (
-    CancelPurchaseOrderRequest,
-)
 from mfm.application.features.procurement.create_purchase_order_feature import (
     BusinessRuleViolation,
 )
@@ -474,7 +471,7 @@ def test_e2e_workflow_5_query_truth_supplier_boundary_and_ordering(sqlite_sessio
     try:
         stack = _build_feature_stack(session)
 
-        id_a = _create_order(
+        _create_order(
             stack,
             order_number="PO-E2E-Q-A",
             supplier_reference="ORG:SUP-A",

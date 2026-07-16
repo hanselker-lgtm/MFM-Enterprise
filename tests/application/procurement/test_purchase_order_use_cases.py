@@ -6,7 +6,6 @@ from datetime import UTC
 from datetime import datetime
 from decimal import Decimal
 from uuid import UUID
-from uuid import uuid4
 
 import pytest
 
@@ -360,7 +359,7 @@ def test_get_purchase_order_existing_missing_and_query_no_commit() -> None:
 
 def test_list_and_filter_queries_delegate_and_preserve_repository_order() -> None:
     uow = FakeProcurementUnitOfWork()
-    order_a = _create_order(uow, order_number="PO-APP-A", supplier_reference="SUP-A")
+    _create_order(uow, order_number="PO-APP-A", supplier_reference="SUP-A")
     order_b = _create_order(uow, order_number="PO-APP-B", supplier_reference="SUP-A")
     order_c = _create_order(uow, order_number="PO-APP-C", supplier_reference="SUP-B")
 

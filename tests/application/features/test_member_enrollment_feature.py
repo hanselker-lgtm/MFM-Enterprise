@@ -216,7 +216,7 @@ def _build_feature(
     plans: list[ContingentPlan],
     member_number: str,
     fail_invoice_add: bool = False,
-) -> tuple[MemberEnrollmentFeature, FakeUnitOfWork, EventCollector]:
+) -> tuple[CreateMemberFeature, FakeUnitOfWork, EventCollector]:
     uow = FakeUnitOfWork(plans=plans, fail_invoice_add=fail_invoice_add)
     dispatcher = DomainEventDispatcher()
     collector = EventCollector()
