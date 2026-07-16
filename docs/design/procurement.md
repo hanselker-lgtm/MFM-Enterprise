@@ -337,7 +337,33 @@ READY FOR DOMAIN IMPLEMENTATION
 
 ## Capability Status (CAP-13 Procurement)
 
-Status: PLANNED
+Status: LOCKED
 
 Status pr. 2026-07-15:
 - PROC-000: design documented.
+- PROC-001: domain implemented and tested.
+- PROC-002: SQLAlchemy persistence + mapper implemented and tested.
+- PROC-003: repository contract + SQLite repository implemented and tested.
+- PROC-004: application services implemented and tested.
+- PROC-005: feature layer implemented and tested.
+- PROC-006: end-to-end integration workflows implemented and tested.
+- PROC-007: capability review documented in procurement_capability_review.md with conclusion READY FOR LOCK WAYPOINT.
+- PROC-008: capability locked.
+
+Lock rules:
+- Existing public Procurement API is considered stable.
+- Only governed corrective work may change locked Procurement behavior.
+- PurchaseOrder lifecycle ownership remains in Procurement domain aggregate.
+- Supplier reference remains identity/reference only; Procurement does not own supplier master data.
+- Inventory boundary remains protected: Procurement does not own stock quantity, stock movement, low-stock semantics, or inventory lifecycle.
+- Money and Decimal semantics remain domain-owned and authoritative through persistence roundtrip.
+- Historical procurement truth remains protected, including append-only receipt history.
+- Repository does not own transaction commit/rollback; UnitOfWork owns commit/rollback.
+- Mapper restoration must not replay domain operations or emit false lifecycle events.
+- Public Feature API remains execute(request) with immutable request/response DTOs and API-safe response fields.
+- Procurement must not introduce reverse dependencies into locked capabilities.
+- CAP-12 Inventory remains a locked protected capability.
+
+Quality gate:
+- Full regression suite must be green (0 failures, 0 warning errors).
+- Permanent architecture compliance tests must be green.
