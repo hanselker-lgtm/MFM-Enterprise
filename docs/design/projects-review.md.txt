@@ -1,6 +1,6 @@
 # PROJ-007 - Projects Capability Final Review
 
-Status: Final
+Status: LOCKED
 
 Purpose
 
@@ -189,7 +189,7 @@ Result: PASS
 
 Capability Status
 
-READY FOR LOCK: YES
+LOCKED: YES
 
 Reason
 
