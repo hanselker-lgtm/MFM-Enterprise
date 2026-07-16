@@ -37,6 +37,10 @@ from mfm.database.models.purchase_order_model import PurchaseOrderModel
 from mfm.database.models.purchase_order_line_model import PurchaseOrderLineModel
 from mfm.database.models.purchase_receipt_model import PurchaseReceiptModel
 from mfm.database.models.purchase_receipt_line_model import PurchaseReceiptLineModel
+from mfm.infrastructure.persistence.documents.document_model import DocumentModel
+from mfm.infrastructure.persistence.documents.document_reference_model import (
+    DocumentReferenceModel,
+)
 
 __all__ = [
     "BaseModel",
@@ -74,4 +78,6 @@ __all__ = [
     "PurchaseOrderLineModel",
     "PurchaseReceiptModel",
     "PurchaseReceiptLineModel",
+    "DocumentModel",
+    "DocumentReferenceModel",
 ]
