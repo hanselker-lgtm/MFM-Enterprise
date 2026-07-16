@@ -15,14 +15,19 @@ from sqlalchemy.orm import Session
 from sqlalchemy.orm import sessionmaker
 
 from mfm.application.documents.archive_document import ArchiveDocumentUseCase
+from mfm.application.documents.attach_reference import AttachReferenceUseCase
 from mfm.application.documents.create_document import CreateDocumentUseCase
 from mfm.application.documents.delete_document import DeleteDocumentUseCase
 from mfm.application.documents.get_document import GetDocumentUseCase
 from mfm.application.documents.list_documents import ListDocumentsUseCase
+from mfm.application.documents.register_document_version import RegisterDocumentVersionUseCase
+from mfm.application.documents.remove_reference import RemoveReferenceUseCase
 from mfm.application.documents.search_documents import SearchDocumentsUseCase
 from mfm.application.documents.update_document_metadata import UpdateDocumentMetadataUseCase
 from mfm.application.features.documents.archive_document_feature import ArchiveDocumentFeature
 from mfm.application.features.documents.archive_document_feature import ArchiveDocumentRequest
+from mfm.application.features.documents.attach_reference_feature import AttachReferenceFeature
+from mfm.application.features.documents.attach_reference_feature import AttachReferenceRequest
 from mfm.application.features.documents.create_document_feature import (
     BusinessRuleViolation,
 )
@@ -36,6 +41,18 @@ from mfm.application.features.documents.get_document_feature import GetDocumentF
 from mfm.application.features.documents.get_document_feature import GetDocumentRequest
 from mfm.application.features.documents.list_documents_feature import ListDocumentsFeature
 from mfm.application.features.documents.list_documents_feature import ListDocumentsRequest
+from mfm.application.features.documents.register_document_version_feature import (
+    RegisterDocumentVersionFeature,
+)
+from mfm.application.features.documents.register_document_version_feature import (
+    RegisterDocumentVersionRequest,
+)
+from mfm.application.features.documents.remove_reference_feature import (
+    RemoveReferenceFeature,
+)
+from mfm.application.features.documents.remove_reference_feature import (
+    RemoveReferenceRequest,
+)
 from mfm.application.features.documents.search_documents_feature import (
     SearchDocumentsFeature,
 )
@@ -93,9 +110,12 @@ class DocumentsFeatureStack:
     create: CreateDocumentFeature
     get: GetDocumentFeature
     update: UpdateDocumentMetadataFeature
+    register_version: RegisterDocumentVersionFeature
+    attach_reference: AttachReferenceFeature
     archive: ArchiveDocumentFeature
     list_documents: ListDocumentsFeature
     search_documents: SearchDocumentsFeature
+    remove_reference: RemoveReferenceFeature
     delete: DeleteDocumentFeature
 
 
@@ -121,10 +141,19 @@ def _build_feature_stack(session: Session) -> DocumentsFeatureStack:
         update=UpdateDocumentMetadataFeature(
             service=UpdateDocumentMetadataUseCase(unit_of_work=uow)
         ),
+        register_version=RegisterDocumentVersionFeature(
+            service=RegisterDocumentVersionUseCase(unit_of_work=uow)
+        ),
+        attach_reference=AttachReferenceFeature(
+            service=AttachReferenceUseCase(unit_of_work=uow)
+        ),
         archive=ArchiveDocumentFeature(service=ArchiveDocumentUseCase(unit_of_work=uow)),
         list_documents=ListDocumentsFeature(service=ListDocumentsUseCase(unit_of_work=uow)),
         search_documents=SearchDocumentsFeature(
             service=SearchDocumentsUseCase(unit_of_work=uow)
+        ),
+        remove_reference=RemoveReferenceFeature(
+            service=RemoveReferenceUseCase(unit_of_work=uow)
         ),
         delete=DeleteDocumentFeature(service=DeleteDocumentUseCase(unit_of_work=uow)),
     )
@@ -196,6 +225,24 @@ def test_e2e_workflow_full_document_lifecycle_with_reopen_persistence(sqlite_ses
         )
         assert updated.document.document_title.endswith("rev A")
 
+        versioned = stack.register_version.execute(
+            RegisterDocumentVersionRequest(
+                document_id=document_id,
+                version=_version(2, day=2),
+                registered_at=_aware_utc(2033, 1, 2, 9),
+            )
+        )
+        assert len(versioned.document.versions) == 2
+
+        attached = stack.attach_reference.execute(
+            AttachReferenceRequest(
+                document_id=document_id,
+                reference=_reference(2, day=3),
+                attached_at=_aware_utc(2033, 1, 3, 8),
+            )
+        )
+        assert len(attached.document.references) == 2
+
         archived = stack.archive.execute(
             ArchiveDocumentRequest(document_id=document_id, archived_at=_aware_utc(2033, 1, 4, 8))
         )
@@ -208,6 +255,15 @@ def test_e2e_workflow_full_document_lifecycle_with_reopen_persistence(sqlite_ses
             SearchDocumentsRequest(text="compliance", target_capability="PROJECTS")
         )
         assert [item.document_number for item in searched.documents] == ["DOC-E2E-001"]
+
+        removed = stack.remove_reference.execute(
+            RemoveReferenceRequest(
+                document_id=document_id,
+                reference_id=attached.document.references[0].reference_id,
+                removed_at=_aware_utc(2033, 1, 5, 8),
+            )
+        )
+        assert len(removed.document.references) == 1
 
         deleted = stack.delete.execute(DeleteDocumentRequest(document_id=document_id))
         assert deleted.document_id == document_id

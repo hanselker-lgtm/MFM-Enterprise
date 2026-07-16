@@ -34,6 +34,11 @@ class DocumentReferenceModel(BaseModel):
         ),
         UniqueConstraint(
             "document_id",
+            "version_order",
+            name="uq_document_reference_version_order",
+        ),
+        UniqueConstraint(
+            "document_id",
             "version_number",
             name="uq_document_reference_version_number",
         ),
@@ -47,17 +52,34 @@ class DocumentReferenceModel(BaseModel):
 
     reference_order: Mapped[int] = mapped_column(
         Integer,
-        nullable=False,
+        nullable=True,
     )
 
-    version_number: Mapped[int] = mapped_column(
+    version_order: Mapped[int | None] = mapped_column(
         Integer,
-        nullable=False,
+        nullable=True,
     )
 
-    storage_key: Mapped[str] = mapped_column(
-        String(1024),
+    has_version: Mapped[bool] = mapped_column(
+        Boolean,
         nullable=False,
+        default=False,
+    )
+
+    has_reference: Mapped[bool] = mapped_column(
+        Boolean,
+        nullable=False,
+        default=False,
+    )
+
+    version_number: Mapped[int | None] = mapped_column(
+        Integer,
+        nullable=True,
+    )
+
+    storage_key: Mapped[str | None] = mapped_column(
+        String(1024),
+        nullable=True,
     )
 
     file_name: Mapped[str | None] = mapped_column(
@@ -80,51 +102,51 @@ class DocumentReferenceModel(BaseModel):
         nullable=True,
     )
 
-    version_created_at: Mapped[datetime] = mapped_column(
+    version_created_at: Mapped[datetime | None] = mapped_column(
         DateTime(timezone=True),
-        nullable=False,
+        nullable=True,
     )
 
-    target_capability: Mapped[str] = mapped_column(
+    target_capability: Mapped[str | None] = mapped_column(
         String(80),
-        nullable=False,
+        nullable=True,
         index=True,
     )
 
-    target_aggregate_type: Mapped[str] = mapped_column(
+    target_aggregate_type: Mapped[str | None] = mapped_column(
         String(120),
-        nullable=False,
+        nullable=True,
     )
 
-    target_aggregate_id: Mapped[str] = mapped_column(
+    target_aggregate_id: Mapped[str | None] = mapped_column(
         String(120),
-        nullable=False,
+        nullable=True,
         index=True,
     )
 
-    exists: Mapped[bool] = mapped_column(
+    exists: Mapped[bool | None] = mapped_column(
         Boolean,
-        nullable=False,
+        nullable=True,
     )
 
-    authorized: Mapped[bool] = mapped_column(
+    authorized: Mapped[bool | None] = mapped_column(
         Boolean,
-        nullable=False,
+        nullable=True,
     )
 
-    is_soft_deleted: Mapped[bool] = mapped_column(
+    is_soft_deleted: Mapped[bool | None] = mapped_column(
         Boolean,
-        nullable=False,
+        nullable=True,
     )
 
-    is_archived: Mapped[bool] = mapped_column(
+    is_archived: Mapped[bool | None] = mapped_column(
         Boolean,
-        nullable=False,
+        nullable=True,
     )
 
-    checked_at: Mapped[datetime] = mapped_column(
+    checked_at: Mapped[datetime | None] = mapped_column(
         DateTime(timezone=True),
-        nullable=False,
+        nullable=True,
     )
 
     description: Mapped[str | None] = mapped_column(

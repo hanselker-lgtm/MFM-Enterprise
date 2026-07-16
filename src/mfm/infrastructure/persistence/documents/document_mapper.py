@@ -37,13 +37,14 @@ class DocumentMapper:
             version=document.version,
         )
 
-        pairs = zip(document.versions, document.references, strict=True)
-        for reference_order, (version, reference) in enumerate(pairs):
+        for version_order, version in enumerate(document.versions):
             orm.references.append(
                 DocumentReferenceModel(
-                    id=reference.id,
                     document_id=document.id.value,
-                    reference_order=reference_order,
+                    reference_order=None,
+                    version_order=version_order,
+                    has_version=True,
+                    has_reference=False,
                     version_number=version.version_number,
                     storage_key=version.storage_key,
                     file_name=version.file_name,
@@ -51,6 +52,34 @@ class DocumentMapper:
                     checksum=version.checksum,
                     size_bytes=version.size_bytes,
                     version_created_at=version.created_at,
+                    target_capability=None,
+                    target_aggregate_type=None,
+                    target_aggregate_id=None,
+                    exists=None,
+                    authorized=None,
+                    is_soft_deleted=None,
+                    is_archived=None,
+                    checked_at=None,
+                    description=None,
+                )
+            )
+
+        for reference_order, reference in enumerate(document.references):
+            orm.references.append(
+                DocumentReferenceModel(
+                    id=reference.id,
+                    document_id=document.id.value,
+                    reference_order=reference_order,
+                    version_order=None,
+                    has_version=False,
+                    has_reference=True,
+                    version_number=None,
+                    storage_key=None,
+                    file_name=None,
+                    mime_type=None,
+                    checksum=None,
+                    size_bytes=None,
+                    version_created_at=None,
                     target_capability=reference.target_capability,
                     target_aggregate_type=reference.target_aggregate_type,
                     target_aggregate_id=reference.target_aggregate_id,
@@ -67,35 +96,42 @@ class DocumentMapper:
 
     @staticmethod
     def to_domain_document(orm: DocumentModel) -> Document:
-        ordered_refs = sorted(orm.references, key=lambda item: item.reference_order)
+        version_rows = sorted(
+            [item for item in orm.references if item.has_version],
+            key=lambda item: (item.version_order is None, item.version_order, item.version_number),
+        )
+        reference_rows = sorted(
+            [item for item in orm.references if item.has_reference],
+            key=lambda item: (item.reference_order is None, item.reference_order),
+        )
 
         versions = [
             DocumentVersion(
-                version_number=ref_orm.version_number,
-                storage_key=ref_orm.storage_key,
-                file_name=ref_orm.file_name,
-                mime_type=ref_orm.mime_type,
-                checksum=ref_orm.checksum,
-                size_bytes=ref_orm.size_bytes,
-                created_at=DocumentMapper._normalize_timestamp(ref_orm.version_created_at),
+                version_number=version_orm.version_number,
+                storage_key=version_orm.storage_key,
+                file_name=version_orm.file_name,
+                mime_type=version_orm.mime_type,
+                checksum=version_orm.checksum,
+                size_bytes=version_orm.size_bytes,
+                created_at=DocumentMapper._normalize_timestamp(version_orm.version_created_at),
             )
-            for ref_orm in ordered_refs
+            for version_orm in version_rows
         ]
 
         references = [
             DocumentReference(
-                id=ref_orm.id,
-                target_capability=ref_orm.target_capability,
-                target_aggregate_type=ref_orm.target_aggregate_type,
-                target_aggregate_id=ref_orm.target_aggregate_id,
-                exists=ref_orm.exists,
-                authorized=ref_orm.authorized,
-                is_soft_deleted=ref_orm.is_soft_deleted,
-                is_archived=ref_orm.is_archived,
-                checked_at=DocumentMapper._normalize_timestamp(ref_orm.checked_at),
-                description=ref_orm.description,
+                id=reference_orm.id,
+                target_capability=reference_orm.target_capability,
+                target_aggregate_type=reference_orm.target_aggregate_type,
+                target_aggregate_id=reference_orm.target_aggregate_id,
+                exists=reference_orm.exists,
+                authorized=reference_orm.authorized,
+                is_soft_deleted=reference_orm.is_soft_deleted,
+                is_archived=reference_orm.is_archived,
+                checked_at=DocumentMapper._normalize_timestamp(reference_orm.checked_at),
+                description=reference_orm.description,
             )
-            for ref_orm in ordered_refs
+            for reference_orm in reference_rows
         ]
 
         document = Document(

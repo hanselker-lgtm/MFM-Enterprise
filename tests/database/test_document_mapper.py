@@ -142,11 +142,14 @@ def test_document_model_creation_persists_expected_columns(tmp_path: Path) -> No
         assert loaded.document_number == "DOC-2029-001"
         assert loaded.document_type == "MAINTENANCE_REPORT"
         assert loaded.status is DocumentStatus.DRAFT
-        assert len(loaded.references) == 1
-        assert loaded.references[0].storage_key.endswith("v1.pdf")
-        assert loaded.references[0].mime_type == "application/pdf"
-        assert loaded.references[0].checksum == "sha256:01"
-        assert loaded.references[0].size_bytes == 1024
+        assert len(loaded.references) == 2
+        version_row = next(row for row in loaded.references if row.has_version)
+        reference_row = next(row for row in loaded.references if row.has_reference)
+        assert version_row.storage_key.endswith("v1.pdf")
+        assert version_row.mime_type == "application/pdf"
+        assert version_row.checksum == "sha256:01"
+        assert version_row.size_bytes == 1024
+        assert reference_row.target_capability == "PROJECTS"
     finally:
         _close_session(session)
 
@@ -167,10 +170,19 @@ def test_document_to_orm_mapping_preserves_metadata_versions_and_references(tmp_
         stored = session.get(DocumentModel, document.id.value)
         assert stored is not None
         assert stored.version == 4
-        assert len(stored.references) == 2
-        assert [row.version_number for row in stored.references] == [1, 2]
-        assert [row.reference_order for row in stored.references] == [0, 1]
-        assert stored.references[1].target_aggregate_id.endswith("B002")
+        assert len(stored.references) == 4
+        version_rows = sorted(
+            [row for row in stored.references if row.has_version],
+            key=lambda row: row.version_order,
+        )
+        reference_rows = sorted(
+            [row for row in stored.references if row.has_reference],
+            key=lambda row: row.reference_order,
+        )
+        assert [row.version_number for row in version_rows] == [1, 2]
+        assert [row.version_order for row in version_rows] == [0, 1]
+        assert [row.reference_order for row in reference_rows] == [0, 1]
+        assert reference_rows[1].target_aggregate_id.endswith("B002")
     finally:
         _close_session(session)
 
