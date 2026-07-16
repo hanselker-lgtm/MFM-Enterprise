@@ -18,6 +18,11 @@ from mfm.database.models.membership_type_model import MembershipTypeModel
 from mfm.database.models.maintenance_plan_model import MaintenancePlanModel
 from mfm.database.models.maintenance_record_model import MaintenanceRecordModel
 from mfm.database.models.maintenance_requirement_model import MaintenanceRequirementModel
+from mfm.database.models.project_model import ProjectModel
+from mfm.database.models.project_activity_model import ProjectActivityModel
+from mfm.database.models.project_milestone_model import ProjectMilestoneModel
+from mfm.database.models.project_assignment_model import ProjectAssignmentModel
+from mfm.database.models.external_reference_model import ExternalReferenceModel
 from mfm.database.models.technical_component_link_model import TechnicalComponentLinkModel
 from mfm.database.models.technical_component_model import TechnicalComponentModel
 from mfm.database.models.technical_component_replacement_model import (
@@ -53,6 +58,11 @@ __all__ = [
     "MaintenanceRequirementModel",
     "MaintenanceRecordModel",
     "WorkOrderModel",
+    "ProjectModel",
+    "ProjectActivityModel",
+    "ProjectMilestoneModel",
+    "ProjectAssignmentModel",
+    "ExternalReferenceModel",
     "TechnicalConfigurationModel",
     "TechnicalComponentModel",
     "TechnicalComponentLinkModel",
