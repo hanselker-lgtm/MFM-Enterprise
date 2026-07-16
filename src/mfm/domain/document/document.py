@@ -175,7 +175,7 @@ class Document(AggregateRoot):
         new_status = status if isinstance(status, DocumentStatus) else DocumentStatus(str(status).upper())
 
         allowed_transitions: dict[DocumentStatus, set[DocumentStatus]] = {
-            DocumentStatus.DRAFT: {DocumentStatus.ACTIVE, DocumentStatus.ARCHIVED},
+            DocumentStatus.DRAFT: {DocumentStatus.ACTIVE},
             DocumentStatus.ACTIVE: {DocumentStatus.ARCHIVED, DocumentStatus.DISPOSED},
             DocumentStatus.ARCHIVED: {DocumentStatus.ACTIVE, DocumentStatus.DISPOSED},
             DocumentStatus.DISPOSED: set(),

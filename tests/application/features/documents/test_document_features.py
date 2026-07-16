@@ -139,13 +139,18 @@ def _reference(index: int) -> DocumentReferenceInput:
     )
 
 
-def _create_document(uow: FakeDocumentsUnitOfWork, *, number: str = "DOC-FEAT-001") -> UUID:
+def _create_document(
+    uow: FakeDocumentsUnitOfWork,
+    *,
+    number: str = "DOC-FEAT-001",
+    status: str = "DRAFT",
+) -> UUID:
     response = CreateDocumentFeature(service=CreateDocumentUseCase(unit_of_work=uow)).execute(
         CreateDocumentRequest(
             document_number=number,
             document_title="Inspection package",
             document_type="MAINTENANCE_REPORT",
-            status="DRAFT",
+            status=status,
             description="Feature flow",
             created_at=_aware(2032, 2, 1, 8),
             versions=(_version(1),),
@@ -234,7 +239,7 @@ def test_get_feature_existing_and_missing_mapping() -> None:
 
 def test_update_register_archive_attach_remove_and_delete_features_end_to_end() -> None:
     uow = FakeDocumentsUnitOfWork()
-    document_id = _create_document(uow, number="DOC-FEAT-LIFE")
+    document_id = _create_document(uow, number="DOC-FEAT-LIFE", status="ACTIVE")
 
     updated = UpdateDocumentMetadataFeature(
         service=UpdateDocumentMetadataUseCase(unit_of_work=uow)
@@ -288,7 +293,7 @@ def test_update_register_archive_attach_remove_and_delete_features_end_to_end() 
 def test_list_and_search_features_delegate_and_preserve_order() -> None:
     uow = FakeDocumentsUnitOfWork()
     _create_document(uow, number="DOC-FEAT-A")
-    second_id = _create_document(uow, number="DOC-FEAT-B")
+    second_id = _create_document(uow, number="DOC-FEAT-B", status="ACTIVE")
 
     ArchiveDocumentFeature(service=ArchiveDocumentUseCase(unit_of_work=uow)).execute(
         ArchiveDocumentRequest(document_id=second_id, archived_at=_aware(2032, 2, 8, 8))
@@ -327,6 +332,7 @@ def test_package_entrypoint_helpers_delegate_to_feature_execute() -> None:
             document_number="DOC-FEAT-API-1",
             document_title="API Doc",
             document_type="REPORT",
+            status="ACTIVE",
             versions=(_version(1),),
             references=(_reference(1),),
         ),

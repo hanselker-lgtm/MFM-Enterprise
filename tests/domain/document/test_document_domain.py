@@ -192,6 +192,13 @@ def test_change_status_rejects_invalid_transition() -> None:
         document.change_status(DocumentStatus.DISPOSED)
 
 
+def test_change_status_rejects_draft_to_archived_transition() -> None:
+    document = _document(versions=[_version(1)])
+
+    with pytest.raises(InvalidDocumentStateError):
+        document.change_status(DocumentStatus.ARCHIVED, when=_dt(2027, 2, 1, 10))
+
+
 def test_document_domain_has_no_infrastructure_or_sqlalchemy_imports() -> None:
     document_dir = Path("src/mfm/domain/document")
     forbidden_markers = (

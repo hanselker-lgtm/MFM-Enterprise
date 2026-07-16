@@ -237,13 +237,18 @@ def _reference(index: int) -> DocumentReferenceInput:
     )
 
 
-def _create_document(uow: FakeDocumentsUnitOfWork, *, number: str = "DOC-APP-001") -> UUID:
+def _create_document(
+    uow: FakeDocumentsUnitOfWork,
+    *,
+    number: str = "DOC-APP-001",
+    status: str = "DRAFT",
+) -> UUID:
     response = CreateDocumentUseCase(unit_of_work=uow).execute(
         CreateDocumentRequest(
             document_number=number,
             document_title="Inspection package",
             document_type="MAINTENANCE_REPORT",
-            status="DRAFT",
+            status=status,
             description="Initial scope",
             created_at=_aware(2032, 1, 1, 8),
             versions=(_version(1),),
@@ -340,7 +345,7 @@ def test_update_register_and_attach_reference() -> None:
 
 def test_archive_remove_reference_and_delete_document() -> None:
     uow = FakeDocumentsUnitOfWork()
-    document_id = _create_document(uow, number="DOC-APP-LIFE")
+    document_id = _create_document(uow, number="DOC-APP-LIFE", status="ACTIVE")
 
     archived = ArchiveDocumentUseCase(unit_of_work=uow).execute(
         ArchiveDocumentRequest(document_id=document_id, archived_at=_aware(2032, 1, 5, 8))
@@ -366,7 +371,7 @@ def test_list_and_search_documents_delegate_and_preserve_order() -> None:
     uow = FakeDocumentsUnitOfWork()
     _create_document(uow, number="DOC-APP-A")
     _create_document(uow, number="DOC-APP-B")
-    doc_c = _create_document(uow, number="DOC-APP-C")
+    doc_c = _create_document(uow, number="DOC-APP-C", status="ACTIVE")
 
     ArchiveDocumentUseCase(unit_of_work=uow).execute(
         ArchiveDocumentRequest(document_id=doc_c, archived_at=_aware(2032, 1, 8, 8))

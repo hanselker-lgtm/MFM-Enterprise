@@ -201,7 +201,7 @@ def test_e2e_workflow_full_document_lifecycle_with_reopen_persistence(sqlite_ses
                 document_number="DOC-E2E-001",
                 document_title="Drydock compliance package",
                 document_type="COMPLIANCE_REPORT",
-                status="DRAFT",
+                status="ACTIVE",
                 description="Primary lifecycle test",
                 created_at=_aware_utc(2033, 1, 1, 8),
                 versions=(_version(1, day=1),),
@@ -212,7 +212,7 @@ def test_e2e_workflow_full_document_lifecycle_with_reopen_persistence(sqlite_ses
 
         loaded = stack.get.execute(GetDocumentRequest(document_id=document_id))
         assert loaded.document.document_number == "DOC-E2E-001"
-        assert loaded.document.status == "DRAFT"
+        assert loaded.document.status == "ACTIVE"
         assert len(loaded.document.versions) == 1
 
         updated = stack.update.execute(
