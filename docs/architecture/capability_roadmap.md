@@ -24,7 +24,7 @@ but it does not override sequence decisions recorded here.
 
 | Sequence | Identifier | Capability | Status | Evidence |
 |---|---|---|---|---|
-| 1 | ORG-000..ORG-011 | Organization | REVIEW | `organization_capability_review.md` (conclusion READY FOR LOCK), `docs/design/organization.md` |
+| 1 | ORG-000..ORG-011 | Organization | LOCKED | `organization_capability_review.md`, `docs/design/organization.md` |
 | 2 | ASSET-000..ASSET-007 | Asset Core | REVIEW | `asset_capability_review.md` (conclusion READY FOR LOCK), `docs/design/asset_core.md` |
 | 3 | CAP-07 / FLEET-000..FLEET-008 | Fleet | LOCKED | `docs/design/fleet.md`, `CHANGELOG.md` |
 | 4 | CAP-08 / TECH-000..TECH-008 | Technical Configuration | LOCKED | `docs/design/technical_configuration.md`, `CHANGELOG.md` |
@@ -42,6 +42,7 @@ Status interpretation rules in this roadmap:
 
 ## Locked Foundation
 Current locked foundation that must be preserved:
+- Organization (LOCKED)
 - CAP-07 Fleet (LOCKED)
 - CAP-08 Technical Configuration (LOCKED)
 - CAP-09 Maintenance (LOCKED)
@@ -51,7 +52,6 @@ Current locked foundation that must be preserved:
 
 Completed but not lock-marked in design status:
 - Asset Core (ASSET-007 READY FOR LOCK)
-- Organization (ORG-011 READY FOR LOCK)
 
 All future capabilities must consume these capabilities through identity/reference
 boundaries and stable public API contracts.
