@@ -216,7 +216,7 @@ These entries are provisional and subject to explicit roadmap decisions.
 	- Accepted baseline for proceeding to INV-003: 0a114fe.
 - CAP-13 Procurement (PROC) - LOCKED
 	- PROC-000 - Design
-- CAP-14 Projects (PROJ) - PROVISIONAL
+- CAP-14 Projects (PROJ) - LOCKED
 - CAP-15 Document Management (DOC) - LOCKED
 
 Note:
