@@ -79,7 +79,7 @@ def test_domain_must_not_depend_on_application_features_infrastructure_or_sqlalc
 
 
 def test_application_must_not_depend_on_gui() -> None:
-    violations = _violations("application", ("mfm.gui",))
+    violations = _violations("application", ("mfm.gui", "mfm.presentation"))
     assert not violations, "\n".join(violations)
 
 
@@ -95,26 +95,77 @@ def test_feature_layer_must_not_depend_on_sqlalchemy_models() -> None:
 
 
 def test_persistence_must_not_depend_on_gui() -> None:
-    violations = _violations("database", ("mfm.gui",))
+    violations = _violations("database", ("mfm.gui", "mfm.presentation"))
     assert not violations, "\n".join(violations)
 
 
-def test_gui_may_only_depend_on_features() -> None:
-    gui_path = SRC_ROOT / "gui"
+def test_presentation_may_only_depend_on_features_and_reporting_dtos() -> None:
+    presentation_path = SRC_ROOT / "presentation"
     violations: list[str] = []
 
-    for file_path in _python_files(gui_path):
+    for file_path in _python_files(presentation_path):
         for imported in sorted(_imports_in_file(file_path)):
-            if not _matches_prefix(imported, "mfm"):
+            normalized = imported[4:] if imported.startswith("mfm.mfm.") else imported
+
+            if not _matches_prefix(normalized, "mfm"):
                 continue
-            if _matches_prefix(imported, "mfm.gui"):
+            if _matches_prefix(normalized, "mfm.presentation"):
                 continue
-            if _matches_prefix(imported, "mfm.application.features"):
+            if _matches_prefix(normalized, "mfm.application.features"):
+                continue
+            if _matches_prefix(normalized, "mfm.application.reporting.models"):
+                continue
+            if _matches_prefix(normalized, "mfm.application.workflows"):
+                continue
+            if _matches_prefix(normalized, "mfm.common"):
                 continue
             violations.append(
-                f"{file_path.relative_to(PROJECT_ROOT)} imports non-feature dependency '{imported}'"
+                f"{file_path.relative_to(PROJECT_ROOT)} imports forbidden presentation dependency '{normalized}'"
             )
 
+    assert not violations, "\n".join(violations)
+
+
+def test_reporting_must_not_depend_on_workflows_or_repositories() -> None:
+    violations = _violations(
+        "application.reporting",
+        (
+            "mfm.application.workflows",
+            "mfm.repositories",
+            "mfm.database",
+            "mfm.infrastructure.persistence",
+            "sqlalchemy",
+        ),
+    )
+    assert not violations, "\n".join(violations)
+
+
+def test_reporting_features_must_not_depend_on_workflows_or_repositories() -> None:
+    violations = _violations(
+        "application.features.reporting",
+        (
+            "mfm.application.workflows",
+            "mfm.repositories",
+            "mfm.database",
+            "mfm.infrastructure.persistence",
+            "sqlalchemy",
+        ),
+    )
+    assert not violations, "\n".join(violations)
+
+
+def test_workflows_must_not_depend_on_gui_or_persistence() -> None:
+    violations = _violations(
+        "application.workflows",
+        (
+            "mfm.gui",
+            "mfm.presentation",
+            "mfm.repositories",
+            "mfm.database",
+            "mfm.infrastructure.persistence",
+            "sqlalchemy",
+        ),
+    )
     assert not violations, "\n".join(violations)
 
 
