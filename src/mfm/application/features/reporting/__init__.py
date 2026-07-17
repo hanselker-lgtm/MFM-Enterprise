@@ -13,13 +13,7 @@ from mfm.application.features.reporting.organization_dashboard_feature import (
     OrganizationDashboardRequest,
 )
 from mfm.application.features.reporting.organization_dashboard_feature import (
-    OrganizationDashboardResponse,
-)
-from mfm.application.features.reporting.organization_dashboard_feature import (
-    OrganizationHealthIndicatorsView,
-)
-from mfm.application.features.reporting.organization_dashboard_feature import (
-    OrganizationInfoView,
+    OrganizationDashboardService,
 )
 from mfm.application.features.reporting.organization_dashboard_feature import (
     RepositoryException,
@@ -30,15 +24,17 @@ from mfm.application.features.reporting.organization_dashboard_feature import (
 from mfm.application.features.reporting.organization_dashboard_feature import (
     organization_dashboard,
 )
+from mfm.application.reporting.models.organization_dashboard_dto import (
+    OrganizationDashboardDTO,
+)
 
 __all__ = [
     "ApplicationException",
     "BusinessRuleViolation",
+    "OrganizationDashboardDTO",
     "OrganizationDashboardFeature",
     "OrganizationDashboardRequest",
-    "OrganizationDashboardResponse",
-    "OrganizationHealthIndicatorsView",
-    "OrganizationInfoView",
+    "OrganizationDashboardService",
     "RepositoryException",
     "ValidationException",
     "organization_dashboard",

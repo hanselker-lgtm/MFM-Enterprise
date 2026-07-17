@@ -52,8 +52,8 @@ from mfm.application.features.reporting import OrganizationDashboardFeature
 from mfm.application.features.reporting import OrganizationDashboardRequest
 from mfm.application.projects.create_project import CreateProjectUseCase
 from mfm.application.projects.list_projects import ListProjectsUseCase
-from mfm.application.reports.organization_dashboard_report import (
-    OrganizationDashboardReportService,
+from mfm.application.reporting.organization_dashboard_service import (
+    OrganizationDashboardService,
 )
 from mfm.application.uow.abstract_unit_of_work import AbstractUnitOfWork
 from mfm.database.models.base_model import BaseModel
@@ -150,7 +150,7 @@ def _build_stack(session: Session) -> _FeatureStack:
     search_journals = SearchJournalsFeature(service=SearchJournalsUseCase(unit_of_work=uow))
     list_fiscal_years = ListFiscalYearsFeature(service=ListFiscalYearsUseCase(unit_of_work=uow))
 
-    report_service = OrganizationDashboardReportService(
+    report_service = OrganizationDashboardService(
         list_projects_feature=list_projects,
         list_documents_feature=list_documents,
         search_journals_feature=search_journals,
@@ -365,23 +365,24 @@ def test_organization_dashboard_e2e(sqlite_session_factory) -> None:
         response = stack.dashboard.execute(
             OrganizationDashboardRequest(
                 organization_id=organization_id,
-                organization_number="ORG-REP001-001",
                 organization_name="REP-001 Organization",
-                organization_type="MEMBER",
                 organization_status="ACTIVE",
             )
         )
 
         assert response.organization.organization_id == organization_id
-        assert response.active_projects == 1
-        assert response.closed_projects == 1
-        assert response.archived_projects == 0
-        assert response.project_documents == 2
-        assert response.accounting_journals == 2
-        assert response.open_fiscal_years == 1
-        assert response.last_accounting_activity == date(2040, 4, 2)
-        assert response.health_indicators.projects_with_budget_ready == 1
-        assert response.health_indicators.projects_with_unposted_journals == 1
-        assert response.health_indicators.overall_health_status == "CRITICAL"
+        assert response.organization.name == "REP-001 Organization"
+        assert response.projects.active_projects == 1
+        assert response.projects.closed_projects == 1
+        assert response.projects.archived_projects == 0
+        assert response.projects.total_projects == 2
+        assert response.documents.total_documents == 2
+        assert response.accounting.journal_count == 2
+        assert response.accounting.open_fiscal_years == 1
+        assert response.accounting.closed_fiscal_years == 0
+        assert response.accounting.last_posted_journal == "JRN-REP001-001"
+        assert response.operations.last_accounting_activity == date(2040, 4, 2)
+        assert response.health_indicators.budget_coverage == 1.0
+        assert response.health_indicators.accounting_status == "AT_RISK"
     finally:
         session.close()
