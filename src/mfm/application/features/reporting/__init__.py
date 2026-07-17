@@ -111,6 +111,27 @@ from mfm.application.features.reporting.events_activities_summary_feature import
 from mfm.application.features.reporting.events_activities_summary_feature import (
     ValidationException as EventsActivitiesSummaryValidationException,
 )
+from mfm.application.features.reporting.document_archive_summary_feature import (
+    ApplicationException as DocumentArchiveSummaryApplicationException,
+)
+from mfm.application.features.reporting.document_archive_summary_feature import (
+    BusinessRuleViolation as DocumentArchiveSummaryBusinessRuleViolation,
+)
+from mfm.application.features.reporting.document_archive_summary_feature import (
+    DocumentArchiveSummaryFeature,
+)
+from mfm.application.features.reporting.document_archive_summary_feature import (
+    DocumentArchiveSummaryRequest,
+)
+from mfm.application.features.reporting.document_archive_summary_feature import (
+    DocumentArchiveSummaryService,
+)
+from mfm.application.features.reporting.document_archive_summary_feature import (
+    RepositoryException as DocumentArchiveSummaryRepositoryException,
+)
+from mfm.application.features.reporting.document_archive_summary_feature import (
+    ValidationException as DocumentArchiveSummaryValidationException,
+)
 from mfm.application.reporting.models.organization_dashboard_dto import (
     OrganizationDashboardDTO,
 )
@@ -125,6 +146,9 @@ from mfm.application.reporting.models.membership_billing_summary_dto import (
 )
 from mfm.application.reporting.models.events_activities_summary_dto import (
     EventsActivitiesSummaryResponse,
+)
+from mfm.application.reporting.models.document_archive_summary_dto import (
+    DocumentArchiveSummaryResponse,
 )
 
 __all__ = [
@@ -161,6 +185,14 @@ __all__ = [
     "EventsActivitiesSummaryResponse",
     "EventsActivitiesSummaryService",
     "EventsActivitiesSummaryValidationException",
+    "DocumentArchiveSummaryApplicationException",
+    "DocumentArchiveSummaryBusinessRuleViolation",
+    "DocumentArchiveSummaryFeature",
+    "DocumentArchiveSummaryRepositoryException",
+    "DocumentArchiveSummaryRequest",
+    "DocumentArchiveSummaryResponse",
+    "DocumentArchiveSummaryService",
+    "DocumentArchiveSummaryValidationException",
     "OrganizationRolesSummaryApplicationException",
     "OrganizationRolesSummaryBusinessRuleViolation",
     "OrganizationRolesSummaryFeature",

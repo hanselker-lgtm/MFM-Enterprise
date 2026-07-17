@@ -67,6 +67,15 @@ from mfm.application.features.events_activities.manage_events_activities_feature
 from mfm.application.features.events_activities.manage_events_activities_feature import (
     ManageEventsActivitiesResponse,
 )
+from mfm.application.features.document_archive.manage_document_archive_feature import (
+    ManageDocumentArchiveFeature,
+)
+from mfm.application.features.document_archive.manage_document_archive_feature import (
+    ManageDocumentArchiveRequest,
+)
+from mfm.application.features.document_archive.manage_document_archive_feature import (
+    ManageDocumentArchiveResponse,
+)
 
 __all__ = [
     "AccountsReceivableService",
@@ -110,6 +119,9 @@ __all__ = [
     "ManageEventsActivitiesFeature",
     "ManageEventsActivitiesRequest",
     "ManageEventsActivitiesResponse",
+    "ManageDocumentArchiveFeature",
+    "ManageDocumentArchiveRequest",
+    "ManageDocumentArchiveResponse",
     "ManageOrganizationRolesFeature",
     "ManageOrganizationRolesRequest",
     "ManageOrganizationRolesResponse",

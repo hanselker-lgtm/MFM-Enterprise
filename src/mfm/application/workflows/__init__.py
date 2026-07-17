@@ -23,6 +23,9 @@ from mfm.application.workflows.membership_billing_workflow import MembershipBill
 from mfm.application.workflows.events_activities_workflow import EventsActivitiesWorkflow
 from mfm.application.workflows.events_activities_workflow import EventsActivitiesWorkflowInput
 from mfm.application.workflows.events_activities_workflow import EventsActivitiesWorkflowResult
+from mfm.application.workflows.document_archive_workflow import DocumentArchiveWorkflow
+from mfm.application.workflows.document_archive_workflow import DocumentArchiveWorkflowInput
+from mfm.application.workflows.document_archive_workflow import DocumentArchiveWorkflowResult
 
 __all__ = [
     "AnnualContingentWorkflow",
@@ -39,6 +42,9 @@ __all__ = [
     "EventsActivitiesWorkflow",
     "EventsActivitiesWorkflowInput",
     "EventsActivitiesWorkflowResult",
+    "DocumentArchiveWorkflow",
+    "DocumentArchiveWorkflowInput",
+    "DocumentArchiveWorkflowResult",
     "NoActiveContingentPlanError",
     "OrganizationRolesWorkflow",
     "OrganizationRolesWorkflowInput",

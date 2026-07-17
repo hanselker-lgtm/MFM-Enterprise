@@ -70,6 +70,15 @@ from mfm.application.reporting.models.events_activities_summary_dto import (
 from mfm.application.reporting.models.events_activities_summary_dto import (
     EventsActivitiesSummaryResponse,
 )
+from mfm.application.reporting.models.document_archive_summary_dto import (
+    DocumentArchiveIntegrationDTO,
+)
+from mfm.application.reporting.models.document_archive_summary_dto import (
+    DocumentArchiveSummaryItemDTO,
+)
+from mfm.application.reporting.models.document_archive_summary_dto import (
+    DocumentArchiveSummaryResponse,
+)
 
 __all__ = [
     "OrganizationDashboardAccountingDTO",
@@ -103,5 +112,8 @@ __all__ = [
     "MembershipBillingSummaryResponse",
     "EventsActivitiesSummaryItemDTO",
     "EventsActivitiesSummaryResponse",
+    "DocumentArchiveIntegrationDTO",
+    "DocumentArchiveSummaryItemDTO",
+    "DocumentArchiveSummaryResponse",
     "OrganizationRolesSummaryResponse",
 ]
