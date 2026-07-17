@@ -14,6 +14,7 @@ from mfm.database.models.inventory_item_model import InventoryItemModel
 from mfm.database.models.inventory_stock_movement_model import InventoryStockMovementModel
 from mfm.database.models.inventory_stock_position_model import InventoryStockPositionModel
 from mfm.database.models.member_model import MemberModel
+from mfm.database.models.membership_model import MembershipModel
 from mfm.database.models.membership_type_model import MembershipTypeModel
 from mfm.database.models.maintenance_plan_model import MaintenancePlanModel
 from mfm.database.models.maintenance_record_model import MaintenanceRecordModel
@@ -63,6 +64,7 @@ __all__ = [
     "InventoryStockPositionModel",
     "InventoryStockMovementModel",
     "MemberModel",
+    "MembershipModel",
     "MembershipTypeModel",
     "MaintenancePlanModel",
     "MaintenanceRequirementModel",

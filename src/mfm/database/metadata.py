@@ -14,6 +14,8 @@ from mfm.database.models.contact_email_model import ContactEmailModel
 from mfm.database.models.contact_phone_model import ContactPhoneModel
 from mfm.database.models.contact_address_model import ContactAddressModel
 from mfm.database.models.member_model import MemberModel
+from mfm.database.models.membership_model import MembershipModel
+from mfm.database.models.membership_type_model import MembershipTypeModel
 from mfm.database.models.organization_model import OrganizationModel
 from mfm.database.models.board_model import BoardModel
 from mfm.database.models.board_member_model import BoardMemberModel
@@ -32,6 +34,8 @@ from mfm.domain.contact.email import Email
 from mfm.domain.contact.phone import Phone
 from mfm.domain.contact.contact_relation import ContactRelation
 from mfm.domain.member.member import Member
+from mfm.domain.membership.membership import Membership
+from mfm.domain.membership.membership_type import MembershipType
 from mfm.domain.organization.organization import Organization
 from mfm.domain.organization.board import Board
 from mfm.domain.organization.committee import Committee
@@ -55,7 +59,11 @@ __all__ = [
     "ContactPhoneModel",
     "ContactAddressModel",
     "MemberModel",
+    "MembershipModel",
+    "MembershipTypeModel",
     "Member",
+    "Membership",
+    "MembershipType",
     "OrganizationModel",
     "BoardModel",
     "BoardMemberModel",

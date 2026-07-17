@@ -37,6 +37,9 @@ from mfm.application.features.member_enrollment import MemberEnrolledEvent
 from mfm.application.features.member_enrollment import MemberEnrollmentFeature
 from mfm.application.features.member_enrollment import RepositoryException
 from mfm.application.features.member_enrollment import ValidationException
+from mfm.application.features.membership.manage_membership_feature import ManageMembershipFeature
+from mfm.application.features.membership.manage_membership_feature import ManageMembershipRequest
+from mfm.application.features.membership.manage_membership_feature import ManageMembershipResponse
 
 __all__ = [
     "AccountsReceivableService",
@@ -71,6 +74,9 @@ __all__ = [
     "ListGeneralLedgerResponse",
     "MemberEnrolledEvent",
     "MemberEnrollmentFeature",
+    "ManageMembershipFeature",
+    "ManageMembershipRequest",
+    "ManageMembershipResponse",
     "RepositoryException",
     "ValidationException",
     "OpenItemsDTO",

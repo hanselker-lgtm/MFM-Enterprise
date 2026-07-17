@@ -8,6 +8,7 @@ from mfm.database.models.base_model import BaseModel
 from mfm.database.repositories.sqlite_membership_type_repository import (
     SQLiteMembershipTypeRepository,
 )
+from mfm.domain.membership.membership_category import MembershipCategory
 from mfm.domain.membership.membership_type import MembershipType
 
 
@@ -25,6 +26,7 @@ def test_membership_type_repository_persists_and_reads_membership_type():
         membership_type = MembershipType(
             code="STANDARD",
             name="Standard",
+            category=MembershipCategory.GENERAL,
             description="Default type",
         )
 
@@ -34,6 +36,7 @@ def test_membership_type_repository_persists_and_reads_membership_type():
         stored = repository.get(membership_type.id)
         assert stored is not None
         assert stored.code == "STANDARD"
+        assert stored.category is MembershipCategory.GENERAL
 
         by_code = repository.get_by_code("standard")
         assert by_code is not None
