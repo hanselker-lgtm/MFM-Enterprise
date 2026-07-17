@@ -42,6 +42,15 @@ from mfm.application.features.onboarding.project_budget_initialization_feature i
 from mfm.application.features.onboarding.project_budget_initialization_feature import (
     ProjectBudgetInitializationResponse,
 )
+from mfm.application.features.onboarding.project_accounting_feature import (
+    ProjectAccountingFeature,
+)
+from mfm.application.features.onboarding.project_accounting_feature import (
+    ProjectAccountingRequest,
+)
+from mfm.application.features.onboarding.project_accounting_feature import (
+    ProjectAccountingResponse,
+)
 
 __all__ = [
     "ApplicationException",
@@ -50,6 +59,9 @@ __all__ = [
     "CompleteOrganizationOnboardingRequest",
     "CompleteOrganizationOnboardingResponse",
     "DefaultLedgerAccountInput",
+    "ProjectAccountingFeature",
+    "ProjectAccountingRequest",
+    "ProjectAccountingResponse",
     "ProjectBudgetInitializationFeature",
     "ProjectBudgetInitializationRequest",
     "ProjectBudgetInitializationResponse",
