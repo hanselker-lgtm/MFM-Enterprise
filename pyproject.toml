@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "mfm-enterprise"
-version = "0.3.0-alpha1"
+version = "0.3.0-rc1"
 description = "Maritim ForeningsManager Enterprise"
 readme = "README.md"
 requires-python = ">=3.13"
@@ -24,16 +24,16 @@ keywords = [
 ]
 
 classifiers = [
-    "Development Status :: 3 - Alpha",
+    "Development Status :: 4 - Beta",
     "Programming Language :: Python :: 3.13",
     "Operating System :: Microsoft :: Windows",
 ]
 
 dependencies = [
-    "PySide6>=6.8",
-    "SQLAlchemy>=2.0",
-    "alembic>=1.14",
-    "pytest>=8.3",
+    "PySide6==6.11.1",
+    "SQLAlchemy==2.0.51",
+    "alembic==1.18.5",
+    "pytest==9.1.1",
 ]
 
 [tool.pytest.ini_options]

@@ -68,3 +68,19 @@ Support operations should follow the procedures in:
 - docs/releases/BACKUP_RESTORE.md
 - docs/releases/UPGRADE.md
 - docs/releases/RELEASE_CHECKLIST.md
+
+## RC-003 Build Engineering Update
+
+Build engineering activities completed:
+- Version aligned to 0.3.0-rc1.
+- Distributable wheel and sdist produced.
+- Dependency manifest frozen for candidate validation.
+- Reproducible wheel rebuild verified by matching SHA256 hash.
+- Clean install and alpha-to-rc upgrade verification executed.
+
+Related artifacts:
+- dist/rc1/mfm_enterprise-0.3.0rc1-py3-none-any.whl
+- dist/rc1/mfm_enterprise-0.3.0rc1.tar.gz
+- build/RC-003-Build-Manifest.json
+- build/RC-003-Dependency-Manifest.txt
+- RC-003-Build-Report.md

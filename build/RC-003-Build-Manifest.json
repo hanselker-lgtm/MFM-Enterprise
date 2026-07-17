@@ -1,0 +1,32 @@
+{
+  "release": "0.3.0-rc1",
+  "build_id": "RC-003",
+  "artifacts": [
+    {
+      "path": "dist/alpha/mfm_enterprise-0.3.0a1-py3-none-any.whl",
+      "purpose": "alpha baseline artifact for upgrade verification"
+    },
+    {
+      "path": "dist/rc1/mfm_enterprise-0.3.0rc1-py3-none-any.whl",
+      "sha256": "C04957B9D2C52E977B60A76DF712995B018E150F7A45C4881CF56AAFB1CB1665"
+    },
+    {
+      "path": "dist/rc1/mfm_enterprise-0.3.0rc1.tar.gz",
+      "sha256": "8B358FBBFA0B46C6FA56B4A0C6B9633DB8DCFFDA9EE32A5C74D1DD3EE132AD8C"
+    },
+    {
+      "path": "dist/rc1-rebuild/mfm_enterprise-0.3.0rc1-py3-none-any.whl",
+      "sha256": "C04957B9D2C52E977B60A76DF712995B018E150F7A45C4881CF56AAFB1CB1665"
+    }
+  ],
+  "reproducibility": {
+    "wheel_rebuild_sha256_match": true,
+    "method": "build repeated with SOURCE_DATE_EPOCH pinned"
+  },
+  "dependency_manifest": "build/RC-003-Dependency-Manifest.txt",
+  "verification_summary": {
+    "clean_install_version": "0.3.0rc1",
+    "upgrade_from_alpha_version": "0.3.0a1",
+    "upgrade_to_rc_version": "0.3.0rc1"
+  }
+}

@@ -1,6 +1,6 @@
 [application]
 name = "MFM Enterprise"
-version = "0.3.0-alpha"
+version = "0.3.0-rc1"
 language = "da"
 theme = "system"
 
