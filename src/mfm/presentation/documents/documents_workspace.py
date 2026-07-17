@@ -163,6 +163,7 @@ class DocumentsWorkspace(QWidget):
                 storage_key=storage_key.strip(),
             )
         )
+        QMessageBox.information(self, "Register Version", "Version registered")
         self._handle_refresh()
 
     def _handle_archive_document(self) -> None:
@@ -171,6 +172,7 @@ class DocumentsWorkspace(QWidget):
             return
 
         self._controller.archive_document(self._controller.last_selected_document_id)
+        QMessageBox.information(self, "Archive Document", "Document archived")
         self._handle_refresh()
 
     @staticmethod

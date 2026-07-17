@@ -48,6 +48,7 @@ class MenuBuilder:
                 on_route_selected(route_id)
 
         tree.itemActivated.connect(handle_activation)
+        tree.itemClicked.connect(handle_activation)
         return tree
 
     def build_top_toolbar(

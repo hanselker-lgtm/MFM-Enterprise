@@ -149,6 +149,7 @@ class AccountingWorkspace(QWidget):
             QMessageBox.warning(self, "Post Journal", "No journal selected")
             return
         self._controller.post_journal(self._controller.last_selected_journal_id)
+        QMessageBox.information(self, "Post Journal", "Journal posted")
         self._handle_refresh()
 
     @staticmethod

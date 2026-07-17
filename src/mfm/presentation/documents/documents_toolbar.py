@@ -36,6 +36,7 @@ class DocumentsToolbar(QWidget):
 
         self._search_input = QLineEdit()
         self._search_input.setPlaceholderText("Search documents")
+        self._search_input.returnPressed.connect(self._on_search)
 
         self._status_filter = QComboBox()
         self._status_filter.addItems(["ALL", "DRAFT", "ACTIVE", "ARCHIVED", "DISPOSED"])
@@ -54,6 +55,7 @@ class DocumentsToolbar(QWidget):
         search_button.clicked.connect(self._on_search)
 
         refresh_button = QPushButton("Refresh")
+        refresh_button.setShortcut("F5")
         refresh_button.clicked.connect(self._on_refresh)
 
         create_button = QPushButton("Create Document")
@@ -66,6 +68,8 @@ class DocumentsToolbar(QWidget):
         archive_button.clicked.connect(self._on_archive_document)
 
         layout = QHBoxLayout(self)
+        layout.setContentsMargins(0, 0, 0, 0)
+        layout.setSpacing(8)
         layout.addWidget(QLabel("Search"))
         layout.addWidget(self._search_input, 2)
         layout.addWidget(QLabel("Status"))

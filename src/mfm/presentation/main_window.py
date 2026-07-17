@@ -63,6 +63,7 @@ class MainWindow(QMainWindow):
             raise KeyError(f"Unknown route: {route_id}")
 
         payload = self._navigation_service.load(route_id)
+        self.setWindowTitle(f"MFM Enterprise - {route.label}")
         self._status_bar.set_route(route.label)
         self._status_bar.set_message(f"Loaded {route.label}")
 

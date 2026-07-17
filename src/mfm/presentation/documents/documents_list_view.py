@@ -34,6 +34,7 @@ class DocumentsListView(QWidget):
         self._table = QTableWidget(0, 5)
         self._table.setHorizontalHeaderLabels(["Document #", "Title", "Type", "Status", "Created"])
         self._table.setSelectionBehavior(QTableWidget.SelectionBehavior.SelectRows)
+        self._table.setSelectionMode(QTableWidget.SelectionMode.SingleSelection)
         self._table.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)
         self._table.itemDoubleClicked.connect(self._open_selected)
 

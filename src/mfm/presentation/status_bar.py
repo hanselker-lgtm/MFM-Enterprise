@@ -21,4 +21,4 @@ class StatusBar(QStatusBar):
 
     def set_message(self, message: str) -> None:
         self._message_label.setText(message)
-        self.showMessage(message)
+        self.showMessage(message, 5000)

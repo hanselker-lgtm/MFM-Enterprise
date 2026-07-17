@@ -32,6 +32,7 @@ class ProjectToolbar(QWidget):
 
         self._search_input = QLineEdit()
         self._search_input.setPlaceholderText("Search projects")
+        self._search_input.returnPressed.connect(self._on_search)
 
         self._status_filter = QComboBox()
         self._status_filter.addItems(["ALL", "DRAFT", "ACTIVE", "COMPLETED", "ARCHIVED"])
@@ -47,12 +48,15 @@ class ProjectToolbar(QWidget):
         search_button.clicked.connect(self._on_search)
 
         refresh_button = QPushButton("Refresh")
+        refresh_button.setShortcut("F5")
         refresh_button.clicked.connect(self._on_refresh)
 
         create_button = QPushButton("Create Project")
         create_button.clicked.connect(self._on_create)
 
         layout = QHBoxLayout(self)
+        layout.setContentsMargins(0, 0, 0, 0)
+        layout.setSpacing(8)
         layout.addWidget(QLabel("Search"))
         layout.addWidget(self._search_input, 2)
         layout.addWidget(QLabel("Status"))
