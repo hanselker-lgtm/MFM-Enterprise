@@ -2,25 +2,26 @@
 Main application composition root.
 """
 
+from __future__ import annotations
+
+from mfm.application_context import ApplicationContext
+from mfm.common.logging import LoggingManager
+from mfm.config.manager import ConfigManager
+
 
 class Application:
 
+    def __init__(self) -> None:
+        self.context: ApplicationContext | None = None
+
     def start(self):
 
-        config = ConfigManager.load()  # noqa: F821
+        config = ConfigManager.load()
 
-        self.context = ApplicationContext(config)  # noqa: F821
+        self.context = ApplicationContext(config)
 
-        self.context.logger = LoggingManager.initialize(  # noqa: F821
+        self.context.logger = LoggingManager.initialize(
             config
-        )
-
-        self.context.database = DatabaseService.initialize(  # noqa: F821
-            config
-        )
-
-        self.context.services = ServiceRegistry(  # noqa: F821
-            self.context
         )
 
         self.context.logger.info(

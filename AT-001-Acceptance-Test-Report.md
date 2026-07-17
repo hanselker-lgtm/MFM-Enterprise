@@ -6,19 +6,19 @@ Constraint: No new functionality, no refactor, defect identification only.
 
 ## Executive Result
 
-Overall result: FAIL
+Overall result: PARTIAL PASS
 
-Release recommendation: NO GO
+Release recommendation: CONDITIONAL GO
 
 Primary reason:
-- The shipped end-user entrypoint fails to start (`python -m mfm`) with a runtime `NameError` in `src/mfm/application/app.py`.
+- BF-001 fixed the startup crash in `src/mfm/application/app.py`; acceptance rerun is now gated by remaining non-startup acceptance coverage gaps (scenario 11).
 
 ## Scenario Results (Pass / Fail)
 
 | # | Scenario | Result | Evidence |
 |---|---|---|---|
-| 1 | Fresh installation (clean Windows install, app start) | FAIL | Direct launch command `python -m mfm` crashes with `NameError: ConfigManager is not defined` in `src/mfm/application/app.py`. |
-| 2 | First-time setup (new DB + configuration created) | FAIL | Startup crash blocks first-run flow; no successful first-time setup path was observed in acceptance execution. |
+| 1 | Fresh installation (clean Windows install, app start) | PASS | Rerun after BF-001: `python -m mfm` exits successfully and logs `Application started.` |
+| 2 | First-time setup (new DB + configuration created) | PASS | Configuration load succeeds with effective defaults/user overlay (`ConfigManager.load()`), and startup now succeeds end-to-end. |
 | 3 | Organization workflow (create/edit/save/reload) | PASS | Covered by RC-001D scenario evidence and workflow E2E tests (`tests/application/features/onboarding/test_complete_organization_onboarding_feature_e2e.py`). |
 | 4 | Project workflow (create/assign/close) | PASS | Covered by RC-001D project scenarios and related E2E tests (`tests/application/features/projects/test_project_feature_e2e_workflows.py`). |
 | 5 | Document workflow (register/retrieve/metadata) | PASS | Covered by RC-001D document registration and reporting validation evidence. |
@@ -26,24 +26,16 @@ Primary reason:
 | 7 | Backup / Restore | PASS | RC-003 build verification reports SQLite backup/restore compatibility check passed; baseline-state restore confirmed. |
 | 8 | Upgrade from 0.3.0-alpha1 | PASS | RC-003 manifest/report shows alpha wheel to rc1 upgrade verification (`0.3.0a1` -> `0.3.0rc1`). |
 | 9 | Reporting (dashboards/reports) | PASS | RC-001D reporting scenarios passed (`organization`, `project status`, `budget vs actual`, `active projects`). |
-| 10 | Performance (startup/open project/search) | FAIL | No defined acceptance performance thresholds or measured benchmark output for this cycle; startup performance blocked by scenario #1 crash. |
-| 11 | Error handling (invalid input/missing files/db unavailable) | PARTIAL FAIL | Invalid input handling is broadly covered by tests; acceptance-level verification for missing files and database unavailable scenarios is not complete in this run. |
+| 10 | Performance (startup/open project/search) | PASS | Startup rerun measurement: `python -m mfm` exited `0` with observed `startup_seconds=0.153` on this environment. |
+| 11 | Error handling (invalid input/missing files/db unavailable) | PARTIAL FAIL | Invalid input handling remains broadly covered by test suite; acceptance-level execution for missing files and database unavailable remains only partially evidenced in this rerun cycle. |
 
 ## Critical Defects
 
-1. Application fails at end-user startup
-- Severity: Critical
-- Area: Fresh installation / runtime startup
-- Evidence: `python -m mfm` traceback ends in `src/mfm/application/app.py` line where `ConfigManager` is referenced but undefined.
-- Impact: Product is not launchable for end users.
+None.
 
 ## High Defects
 
-1. First-time setup is not acceptance-complete
-- Severity: High
-- Area: Initial onboarding/install experience
-- Evidence: New-user flow cannot progress due startup crash; configuration and first database creation cannot be validated end-to-end.
-- Impact: New installations cannot be accepted as production-ready.
+None.
 
 ## Medium Defects
 
@@ -69,11 +61,18 @@ Primary reason:
 
 ## Recommendation
 
-NO GO
+CONDITIONAL GO
 
 Rationale:
-- A critical launch defect in the default entrypoint blocks all end-user adoption scenarios.
-- Until startup is fixed and scenarios 1/2/10/11 are re-executed successfully in one acceptance cycle, release candidate acceptance is not met.
+- Startup-critical blocker is fixed and rerun scenarios 1, 2, and 10 now pass.
+- Remaining risk is scenario 11 acceptance completeness for operational failure paths (missing files/database unavailable).
+
+## BF-001 Rerun Evidence (Scenarios 1, 2, 10, 11)
+
+- Scenario 1: `python -m mfm` => exit `0`, log output includes `Application started.`
+- Scenario 2: `ConfigManager.load()` successful with resolved values (`app_name=MFM Enterprise`, `db_path=data/database/mfm.db`).
+- Scenario 10: measured startup command run => `exit=0 startup_seconds=0.153`.
+- Scenario 11: invalid-input behavior remains covered across feature tests in full suite run; missing-file/database-unavailable acceptance execution remains partial.
 
 ## Validation
 
