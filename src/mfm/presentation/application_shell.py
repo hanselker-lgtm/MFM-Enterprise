@@ -58,6 +58,7 @@ def build_application_shell(
     report_loaders: dict[str, ReportLoader],
     widget_loaders: dict[str, WidgetLoader] | None = None,
     projects_workspace_loader: WidgetLoader | None = None,
+    accounting_workspace_loader: WidgetLoader | None = None,
     application: QApplication | None = None,
 ) -> ApplicationShell:
     navigation_service = NavigationService()
@@ -77,6 +78,7 @@ def build_application_shell(
         navigation_service,
         widget_loaders or {},
         projects_workspace_loader=projects_workspace_loader,
+        accounting_workspace_loader=accounting_workspace_loader,
     )
 
     main_window = MainWindow(
@@ -148,6 +150,7 @@ def _register_default_module_routes(
     widget_loaders: dict[str, WidgetLoader],
     *,
     projects_workspace_loader: WidgetLoader | None = None,
+    accounting_workspace_loader: WidgetLoader | None = None,
 ) -> None:
     navigation_service.register_route(
         NavigationRoute(
@@ -183,7 +186,8 @@ def _register_default_module_routes(
             label="Accounting",
             category=NavigationCategory.OPERATIONS,
             kind=NavigationKind.WIDGET,
-            loader=widget_loaders.get("operations.accounting", lambda: _placeholder_page("Accounting")),
+            loader=accounting_workspace_loader
+            or widget_loaders.get("operations.accounting", lambda: _placeholder_page("Accounting")),
         )
     )
     navigation_service.register_route(
