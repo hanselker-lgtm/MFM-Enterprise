@@ -40,6 +40,15 @@ from mfm.application.features.member_enrollment import ValidationException
 from mfm.application.features.membership.manage_membership_feature import ManageMembershipFeature
 from mfm.application.features.membership.manage_membership_feature import ManageMembershipRequest
 from mfm.application.features.membership.manage_membership_feature import ManageMembershipResponse
+from mfm.application.features.organization_roles.manage_organization_roles_feature import (
+    ManageOrganizationRolesFeature,
+)
+from mfm.application.features.organization_roles.manage_organization_roles_feature import (
+    ManageOrganizationRolesRequest,
+)
+from mfm.application.features.organization_roles.manage_organization_roles_feature import (
+    ManageOrganizationRolesResponse,
+)
 
 __all__ = [
     "AccountsReceivableService",
@@ -77,6 +86,9 @@ __all__ = [
     "ManageMembershipFeature",
     "ManageMembershipRequest",
     "ManageMembershipResponse",
+    "ManageOrganizationRolesFeature",
+    "ManageOrganizationRolesRequest",
+    "ManageOrganizationRolesResponse",
     "RepositoryException",
     "ValidationException",
     "OpenItemsDTO",

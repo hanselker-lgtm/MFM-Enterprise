@@ -13,6 +13,9 @@ from mfm.application.reporting.models.active_projects_dto import ActiveProjectsD
 from mfm.application.reporting.models.budget_vs_actual_dto import BudgetVsActualResponse
 from mfm.application.reporting.models.membership_summary_dto import MembershipSummaryResponse
 from mfm.application.reporting.models.organization_dashboard_dto import OrganizationDashboardResponse
+from mfm.application.reporting.models.organization_roles_summary_dto import (
+    OrganizationRolesSummaryResponse,
+)
 from mfm.application.reporting.models.project_status_dto import ProjectStatusResponse
 from mfm.presentation.dashboard_host import DashboardHostSnapshotLoader
 from mfm.presentation.dashboard_host import DashboardHost
@@ -31,7 +34,8 @@ ReportLoader = Callable[
     | ActiveProjectsDashboardResponse
     | ProjectStatusResponse
     | BudgetVsActualResponse
-    | MembershipSummaryResponse,
+    | MembershipSummaryResponse
+    | OrganizationRolesSummaryResponse,
 ]
 WidgetLoader = Callable[[], QWidget]
 
@@ -67,6 +71,7 @@ def build_application_shell(
     widget_loaders: dict[str, WidgetLoader] | None = None,
     projects_workspace_loader: WidgetLoader | None = None,
     memberships_workspace_loader: WidgetLoader | None = None,
+    organization_roles_workspace_loader: WidgetLoader | None = None,
     documents_workspace_loader: WidgetLoader | None = None,
     accounting_workspace_loader: WidgetLoader | None = None,
     application: QApplication | None = None,
@@ -89,6 +94,7 @@ def build_application_shell(
         widget_loaders or {},
         projects_workspace_loader=projects_workspace_loader,
         memberships_workspace_loader=memberships_workspace_loader,
+        organization_roles_workspace_loader=organization_roles_workspace_loader,
         documents_workspace_loader=documents_workspace_loader,
         accounting_workspace_loader=accounting_workspace_loader,
     )
@@ -163,6 +169,7 @@ def _register_default_module_routes(
     *,
     projects_workspace_loader: WidgetLoader | None = None,
     memberships_workspace_loader: WidgetLoader | None = None,
+    organization_roles_workspace_loader: WidgetLoader | None = None,
     documents_workspace_loader: WidgetLoader | None = None,
     accounting_workspace_loader: WidgetLoader | None = None,
 ) -> None:
@@ -195,6 +202,19 @@ def _register_default_module_routes(
             or widget_loaders.get(
                 "operations.memberships",
                 lambda: _placeholder_page("Memberships"),
+            ),
+        )
+    )
+    navigation_service.register_route(
+        NavigationRoute(
+            route_id="operations.organization-roles",
+            label="Organization Roles",
+            category=NavigationCategory.OPERATIONS,
+            kind=NavigationKind.WIDGET,
+            loader=organization_roles_workspace_loader
+            or widget_loaders.get(
+                "operations.organization-roles",
+                lambda: _placeholder_page("Organization Roles"),
             ),
         )
     )

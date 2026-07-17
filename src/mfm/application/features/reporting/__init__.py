@@ -48,12 +48,36 @@ from mfm.application.features.reporting.membership_summary_feature import Member
 from mfm.application.features.reporting.membership_summary_feature import RepositoryException as MembershipSummaryRepositoryException
 from mfm.application.features.reporting.membership_summary_feature import ValidationException as MembershipSummaryValidationException
 from mfm.application.features.reporting.membership_summary_feature import membership_summary
+from mfm.application.features.reporting.organization_roles_summary_feature import (
+    ApplicationException as OrganizationRolesSummaryApplicationException,
+)
+from mfm.application.features.reporting.organization_roles_summary_feature import (
+    BusinessRuleViolation as OrganizationRolesSummaryBusinessRuleViolation,
+)
+from mfm.application.features.reporting.organization_roles_summary_feature import (
+    OrganizationRolesSummaryFeature,
+)
+from mfm.application.features.reporting.organization_roles_summary_feature import (
+    OrganizationRolesSummaryRequest,
+)
+from mfm.application.features.reporting.organization_roles_summary_feature import (
+    OrganizationRolesSummaryService,
+)
+from mfm.application.features.reporting.organization_roles_summary_feature import (
+    RepositoryException as OrganizationRolesSummaryRepositoryException,
+)
+from mfm.application.features.reporting.organization_roles_summary_feature import (
+    ValidationException as OrganizationRolesSummaryValidationException,
+)
 from mfm.application.reporting.models.organization_dashboard_dto import (
     OrganizationDashboardDTO,
 )
 from mfm.application.reporting.models.project_status_dto import ProjectStatusDTO
 from mfm.application.reporting.models.budget_vs_actual_dto import BudgetVsActualDTO
 from mfm.application.reporting.models.membership_summary_dto import MembershipSummaryResponse
+from mfm.application.reporting.models.organization_roles_summary_dto import (
+    OrganizationRolesSummaryResponse,
+)
 
 __all__ = [
     "ApplicationException",
@@ -73,6 +97,14 @@ __all__ = [
     "MembershipSummaryResponse",
     "MembershipSummaryService",
     "MembershipSummaryValidationException",
+    "OrganizationRolesSummaryApplicationException",
+    "OrganizationRolesSummaryBusinessRuleViolation",
+    "OrganizationRolesSummaryFeature",
+    "OrganizationRolesSummaryRepositoryException",
+    "OrganizationRolesSummaryRequest",
+    "OrganizationRolesSummaryResponse",
+    "OrganizationRolesSummaryService",
+    "OrganizationRolesSummaryValidationException",
     "BusinessRuleViolation",
     "OrganizationDashboardDTO",
     "OrganizationDashboardFeature",

@@ -14,6 +14,9 @@ from mfm.application.workflows.register_payment_workflow import RegisterPaymentW
 from mfm.application.workflows.membership_management_workflow import MembershipManagementWorkflow
 from mfm.application.workflows.membership_management_workflow import MembershipManagementWorkflowInput
 from mfm.application.workflows.membership_management_workflow import MembershipManagementWorkflowResult
+from mfm.application.workflows.organization_roles_workflow import OrganizationRolesWorkflow
+from mfm.application.workflows.organization_roles_workflow import OrganizationRolesWorkflowInput
+from mfm.application.workflows.organization_roles_workflow import OrganizationRolesWorkflowResult
 
 __all__ = [
     "AnnualContingentWorkflow",
@@ -25,6 +28,9 @@ __all__ = [
     "MembershipManagementWorkflowInput",
     "MembershipManagementWorkflowResult",
     "NoActiveContingentPlanError",
+    "OrganizationRolesWorkflow",
+    "OrganizationRolesWorkflowInput",
+    "OrganizationRolesWorkflowResult",
     "PaymentRegisteredEvent",
     "RegisterPaymentWorkflow",
     "RegisterPaymentWorkflowInput",
