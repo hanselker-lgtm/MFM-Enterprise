@@ -51,6 +51,15 @@ from mfm.application.features.onboarding.project_accounting_feature import (
 from mfm.application.features.onboarding.project_accounting_feature import (
     ProjectAccountingResponse,
 )
+from mfm.application.features.onboarding.project_closure_archive_feature import (
+    ProjectClosureArchiveFeature,
+)
+from mfm.application.features.onboarding.project_closure_archive_feature import (
+    ProjectClosureArchiveRequest,
+)
+from mfm.application.features.onboarding.project_closure_archive_feature import (
+    ProjectClosureArchiveResponse,
+)
 
 __all__ = [
     "ApplicationException",
@@ -62,6 +71,9 @@ __all__ = [
     "ProjectAccountingFeature",
     "ProjectAccountingRequest",
     "ProjectAccountingResponse",
+    "ProjectClosureArchiveFeature",
+    "ProjectClosureArchiveRequest",
+    "ProjectClosureArchiveResponse",
     "ProjectBudgetInitializationFeature",
     "ProjectBudgetInitializationRequest",
     "ProjectBudgetInitializationResponse",
