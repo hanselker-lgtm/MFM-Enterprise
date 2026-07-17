@@ -15,11 +15,15 @@ from mfm.application.reporting.organization_dashboard_service import (
 from mfm.application.reporting.organization_dashboard_service import (
     ValidationException,
 )
+from mfm.application.reporting.project_status_service import ProjectStatusRequest
+from mfm.application.reporting.project_status_service import ProjectStatusService
 
 __all__ = [
     "ApplicationException",
     "OrganizationDashboardRequest",
     "OrganizationDashboardService",
+    "ProjectStatusRequest",
+    "ProjectStatusService",
     "RepositoryException",
     "ValidationException",
 ]
