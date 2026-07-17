@@ -24,6 +24,15 @@ from mfm.application.features.onboarding.complete_organization_onboarding_featur
 from mfm.application.features.onboarding.complete_organization_onboarding_feature import (
     ValidationException,
 )
+from mfm.application.features.onboarding.project_document_registration_feature import (
+    ProjectDocumentRegistrationFeature,
+)
+from mfm.application.features.onboarding.project_document_registration_feature import (
+    ProjectDocumentRegistrationRequest,
+)
+from mfm.application.features.onboarding.project_document_registration_feature import (
+    ProjectDocumentRegistrationResponse,
+)
 
 __all__ = [
     "ApplicationException",
@@ -32,6 +41,9 @@ __all__ = [
     "CompleteOrganizationOnboardingRequest",
     "CompleteOrganizationOnboardingResponse",
     "DefaultLedgerAccountInput",
+    "ProjectDocumentRegistrationFeature",
+    "ProjectDocumentRegistrationRequest",
+    "ProjectDocumentRegistrationResponse",
     "RepositoryException",
     "ValidationException",
 ]
