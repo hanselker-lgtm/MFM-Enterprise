@@ -1,81 +1,69 @@
-"""Dashboard host that renders reporting DTOs only."""
+"""Dashboard host that embeds the operational dashboard workspace."""
 
 from __future__ import annotations
 
-from dataclasses import fields
-from decimal import Decimal
+from collections.abc import Callable
+from dataclasses import dataclass
 
-from PySide6.QtWidgets import QScrollArea
-from PySide6.QtWidgets import QFrame
 from PySide6.QtWidgets import QVBoxLayout
 from PySide6.QtWidgets import QWidget
-from PySide6.QtWidgets import QTextBrowser
 
 from mfm.application.reporting.models.active_projects_dto import ActiveProjectsDashboardResponse
 from mfm.application.reporting.models.budget_vs_actual_dto import BudgetVsActualResponse
 from mfm.application.reporting.models.organization_dashboard_dto import OrganizationDashboardResponse
 from mfm.application.reporting.models.project_status_dto import ProjectStatusResponse
+from mfm.presentation.dashboard.dashboard_controller import DashboardController
+from mfm.presentation.dashboard.dashboard_controller import DashboardSnapshot
+from mfm.presentation.dashboard.dashboard_workspace import DashboardWorkspace
+
+
+@dataclass(frozen=True, slots=True)
+class DashboardHostSnapshotLoader:
+    organization_dashboard: Callable[[], OrganizationDashboardResponse]
+    active_projects_dashboard: Callable[[], ActiveProjectsDashboardResponse]
+    project_status_dashboard: Callable[[], ProjectStatusResponse]
+    budget_vs_actual_dashboard: Callable[[], BudgetVsActualResponse]
+
+    def load(self) -> DashboardSnapshot:
+        return DashboardSnapshot(
+            organization_dashboard=self.organization_dashboard(),
+            active_projects_dashboard=self.active_projects_dashboard(),
+            project_status_dashboard=self.project_status_dashboard(),
+            budget_vs_actual_dashboard=self.budget_vs_actual_dashboard(),
+        )
 
 
 class DashboardHost(QWidget):
-    """Render the reporting dashboards inside the application shell."""
+    """Host widget that owns the reporting dashboard workspace."""
 
-    def __init__(self) -> None:
+    def __init__(self, *, snapshot_loader: DashboardHostSnapshotLoader | None = None) -> None:
         super().__init__()
-        self._viewer = QTextBrowser()
-        self._viewer.setOpenExternalLinks(False)
-        self._viewer.setReadOnly(True)
-
-        scroll_area = QScrollArea()
-        scroll_area.setWidgetResizable(True)
-        scroll_area.setFrameShape(QFrame.Shape.NoFrame)
-        scroll_area.setWidget(self._viewer)
+        self._snapshot_loader = snapshot_loader
+        self._controller = DashboardController(refresh_callback=self.refresh)
+        self._workspace = DashboardWorkspace(controller=self._controller)
 
         layout = QVBoxLayout(self)
-        layout.addWidget(scroll_area)
-        self._current_title = "Dashboard"
-        self._current_payload: object | None = None
-        self._render_empty_state()
+        layout.addWidget(self._workspace)
 
     @property
-    def current_payload(self) -> object | None:
-        return self._current_payload
+    def workspace(self) -> DashboardWorkspace:
+        return self._workspace
 
-    def set_organization_dashboard(self, report: OrganizationDashboardResponse) -> None:
-        self._current_title = "Organization Dashboard"
-        self._current_payload = report
-        self._viewer.setPlainText(self._format_report(report))
-
-    def set_active_projects_dashboard(self, report: ActiveProjectsDashboardResponse) -> None:
-        self._current_title = "Active Projects"
-        self._current_payload = report
-        self._viewer.setPlainText(self._format_report(report))
-
-    def set_project_status(self, report: ProjectStatusResponse) -> None:
-        self._current_title = "Project Status"
-        self._current_payload = report
-        self._viewer.setPlainText(self._format_report(report))
-
-    def set_budget_vs_actual(self, report: BudgetVsActualResponse) -> None:
-        self._current_title = "Budget vs Actual"
-        self._current_payload = report
-        self._viewer.setPlainText(self._format_report(report))
-
-    def _render_empty_state(self) -> None:
-        self._viewer.setPlainText(
-            "Select a dashboard on the left to view reporting output."
+    def refresh(self) -> None:
+        snapshot = self._load_snapshot()
+        self._workspace.set_reports(
+            organization_dashboard=snapshot.organization_dashboard,
+            active_projects_dashboard=snapshot.active_projects_dashboard,
+            project_status_dashboard=snapshot.project_status_dashboard,
+            budget_vs_actual_dashboard=snapshot.budget_vs_actual_dashboard,
         )
 
-    def _format_report(self, report: object) -> str:
-        lines = [self._current_title, ""]
-        for field in fields(report):
-            value = getattr(report, field.name)
-            lines.append(f"{field.name}: {self._format_value(value)}")
-        return "\n".join(lines)
+    def show_dashboard(self, route_id: str) -> None:
+        if self._workspace.current_route_id is None:
+            self.refresh()
+        self._workspace.show_dashboard(route_id)
 
-    def _format_value(self, value: object) -> str:
-        if isinstance(value, tuple):
-            return ", ".join(self._format_value(item) for item in value) if value else "(none)"
-        if isinstance(value, Decimal):
-            return format(value, "f")
-        return str(value)
+    def _load_snapshot(self) -> DashboardSnapshot:
+        if self._snapshot_loader is None:
+            raise RuntimeError("Dashboard snapshot loader is not configured")
+        return self._snapshot_loader.load()

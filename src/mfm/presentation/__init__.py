@@ -9,17 +9,21 @@ from mfm.presentation.navigation_service import NavigationCategory
 from mfm.presentation.navigation_service import NavigationKind
 from mfm.presentation.navigation_service import NavigationRoute
 from mfm.presentation.navigation_service import NavigationService
+from mfm.presentation.dashboard import DashboardController
+from mfm.presentation.dashboard import DashboardWorkspace
 from mfm.presentation.status_bar import StatusBar
 
 __all__ = [
     "ApplicationShell",
     "DashboardHost",
+    "DashboardController",
     "MainWindow",
     "MenuBuilder",
     "NavigationCategory",
     "NavigationKind",
     "NavigationRoute",
     "NavigationService",
+    "DashboardWorkspace",
     "StatusBar",
     "build_application_shell",
 ]

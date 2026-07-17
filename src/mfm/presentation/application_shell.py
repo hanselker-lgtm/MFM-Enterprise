@@ -13,6 +13,7 @@ from mfm.application.reporting.models.active_projects_dto import ActiveProjectsD
 from mfm.application.reporting.models.budget_vs_actual_dto import BudgetVsActualResponse
 from mfm.application.reporting.models.organization_dashboard_dto import OrganizationDashboardResponse
 from mfm.application.reporting.models.project_status_dto import ProjectStatusResponse
+from mfm.presentation.dashboard_host import DashboardHostSnapshotLoader
 from mfm.presentation.dashboard_host import DashboardHost
 from mfm.presentation.main_window import MainWindow
 from mfm.presentation.menu_builder import MenuBuilder
@@ -59,7 +60,14 @@ def build_application_shell(
     application: QApplication | None = None,
 ) -> ApplicationShell:
     navigation_service = NavigationService()
-    dashboard_host = DashboardHost()
+    dashboard_host = DashboardHost(
+        snapshot_loader=DashboardHostSnapshotLoader(
+            organization_dashboard=report_loaders["dashboard.organization"],
+            active_projects_dashboard=report_loaders["dashboard.active-projects"],
+            project_status_dashboard=report_loaders["dashboard.project-status"],
+            budget_vs_actual_dashboard=report_loaders["dashboard.budget-vs-actual"],
+        )
+    )
     menu_builder = MenuBuilder()
     status_bar = StatusBar()
 

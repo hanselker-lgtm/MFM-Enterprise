@@ -8,10 +8,6 @@ from PySide6.QtWidgets import QMainWindow
 from PySide6.QtWidgets import QStackedWidget
 from PySide6.QtWidgets import QWidget
 
-from mfm.application.reporting.models.active_projects_dto import ActiveProjectsDashboardResponse
-from mfm.application.reporting.models.budget_vs_actual_dto import BudgetVsActualResponse
-from mfm.application.reporting.models.organization_dashboard_dto import OrganizationDashboardResponse
-from mfm.application.reporting.models.project_status_dto import ProjectStatusResponse
 from mfm.presentation.dashboard_host import DashboardHost
 from mfm.presentation.menu_builder import MenuBuilder
 from mfm.presentation.navigation_service import NavigationKind
@@ -71,23 +67,13 @@ class MainWindow(QMainWindow):
         self._status_bar.set_message(f"Loaded {route.label}")
 
         if route.kind == NavigationKind.REPORT:
-            self._display_report(route_id, payload)
+            self._display_report(route_id)
             return
 
         self._display_widget(route_id, payload)
 
-    def _display_report(self, route_id: str, payload: object) -> None:
-        if isinstance(payload, OrganizationDashboardResponse):
-            self._dashboard_host.set_organization_dashboard(payload)
-        elif isinstance(payload, ActiveProjectsDashboardResponse):
-            self._dashboard_host.set_active_projects_dashboard(payload)
-        elif isinstance(payload, ProjectStatusResponse):
-            self._dashboard_host.set_project_status(payload)
-        elif isinstance(payload, BudgetVsActualResponse):
-            self._dashboard_host.set_budget_vs_actual(payload)
-        else:
-            raise TypeError(f"Route {route_id} did not return a reporting DTO")
-
+    def _display_report(self, route_id: str) -> None:
+        self._dashboard_host.show_dashboard(route_id)
         self._page_stack.setCurrentWidget(self._dashboard_host)
 
     def _display_widget(self, route_id: str, payload: object) -> None:

@@ -1,49 +1,25 @@
 from __future__ import annotations
 
-from datetime import date
-from decimal import Decimal
-from uuid import UUID
-
-from mfm.application.reporting.models.budget_vs_actual_dto import BudgetVsActualAccountingResponse
-from mfm.application.reporting.models.budget_vs_actual_dto import BudgetVsActualBudgetResponse
-from mfm.application.reporting.models.budget_vs_actual_dto import BudgetVsActualProjectResponse
-from mfm.application.reporting.models.budget_vs_actual_dto import BudgetVsActualResponse
-from mfm.application.reporting.models.budget_vs_actual_dto import BudgetVsActualStatusResponse
-from mfm.application.reporting.models.budget_vs_actual_dto import BudgetVsActualVarianceResponse
 from mfm.presentation.dashboard_host import DashboardHost
+from mfm.presentation.dashboard_host import DashboardHostSnapshotLoader
+
+from tests.presentation._dashboard_fixtures import active_projects_dashboard_report
+from tests.presentation._dashboard_fixtures import budget_vs_actual_report
+from tests.presentation._dashboard_fixtures import organization_dashboard_report
+from tests.presentation._dashboard_fixtures import project_status_report
 
 
-def test_dashboard_host_accepts_reporting_dto_only(qapp) -> None:
-    host = DashboardHost()
-    report = BudgetVsActualResponse(
-        project=BudgetVsActualProjectResponse(
-            project_id=UUID("11111111-1111-1111-1111-111111111111"),
-            project_name="Harbor Project",
-        ),
-        budget=BudgetVsActualBudgetResponse(
-            budget_status="READY",
-            budget_categories=("CAPEX",),
-            planned_budget_total=None,
-            budget_ready=True,
-        ),
-        accounting=BudgetVsActualAccountingResponse(
-            actual_total=Decimal("125.50"),
-            journal_count=1,
-            last_journal_date=date(2024, 2, 1),
-            fiscal_year=2024,
-        ),
-        variance=BudgetVsActualVarianceResponse(
-            budget_variance=None,
-            variance_percentage=None,
-        ),
-        status=BudgetVsActualStatusResponse(
-            within_budget=None,
-            reporting_confidence="LIMITED_BUDGET_METADATA",
-        ),
+def test_dashboard_host_loads_snapshot_and_selects_route(qapp) -> None:
+    host = DashboardHost(
+        snapshot_loader=DashboardHostSnapshotLoader(
+            organization_dashboard=organization_dashboard_report,
+            active_projects_dashboard=active_projects_dashboard_report,
+            project_status_dashboard=project_status_report,
+            budget_vs_actual_dashboard=budget_vs_actual_report,
+        )
     )
 
-    host.set_budget_vs_actual(report)
+    host.show_dashboard("dashboard.budget-vs-actual")
 
-    assert host.current_payload == report
-    assert "Harbor Project" in host.findChild(type(host._viewer)).toPlainText()
-    assert "LIMITED_BUDGET_METADATA" in host.findChild(type(host._viewer)).toPlainText()
+    assert host.workspace.current_route_id == "dashboard.budget-vs-actual"
+    assert "LIMITED_BUDGET_METADATA" in host.workspace.detail_widget("dashboard.budget-vs-actual").rendered_text
