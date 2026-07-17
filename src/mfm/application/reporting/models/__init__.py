@@ -64,6 +64,12 @@ from mfm.application.reporting.models.membership_billing_summary_dto import (
 from mfm.application.reporting.models.membership_billing_summary_dto import (
     MembershipBillingSummaryResponse,
 )
+from mfm.application.reporting.models.events_activities_summary_dto import (
+    EventsActivitiesSummaryItemDTO,
+)
+from mfm.application.reporting.models.events_activities_summary_dto import (
+    EventsActivitiesSummaryResponse,
+)
 
 __all__ = [
     "OrganizationDashboardAccountingDTO",
@@ -95,5 +101,7 @@ __all__ = [
     "MembershipSummaryStatusTotalsDTO",
     "MembershipBillingSummaryItemDTO",
     "MembershipBillingSummaryResponse",
+    "EventsActivitiesSummaryItemDTO",
+    "EventsActivitiesSummaryResponse",
     "OrganizationRolesSummaryResponse",
 ]

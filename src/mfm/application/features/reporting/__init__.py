@@ -90,6 +90,27 @@ from mfm.application.features.reporting.membership_billing_summary_feature impor
 from mfm.application.features.reporting.membership_billing_summary_feature import (
     ValidationException as MembershipBillingSummaryValidationException,
 )
+from mfm.application.features.reporting.events_activities_summary_feature import (
+    ApplicationException as EventsActivitiesSummaryApplicationException,
+)
+from mfm.application.features.reporting.events_activities_summary_feature import (
+    BusinessRuleViolation as EventsActivitiesSummaryBusinessRuleViolation,
+)
+from mfm.application.features.reporting.events_activities_summary_feature import (
+    EventsActivitiesSummaryFeature,
+)
+from mfm.application.features.reporting.events_activities_summary_feature import (
+    EventsActivitiesSummaryRequest,
+)
+from mfm.application.features.reporting.events_activities_summary_feature import (
+    EventsActivitiesSummaryService,
+)
+from mfm.application.features.reporting.events_activities_summary_feature import (
+    RepositoryException as EventsActivitiesSummaryRepositoryException,
+)
+from mfm.application.features.reporting.events_activities_summary_feature import (
+    ValidationException as EventsActivitiesSummaryValidationException,
+)
 from mfm.application.reporting.models.organization_dashboard_dto import (
     OrganizationDashboardDTO,
 )
@@ -101,6 +122,9 @@ from mfm.application.reporting.models.organization_roles_summary_dto import (
 )
 from mfm.application.reporting.models.membership_billing_summary_dto import (
     MembershipBillingSummaryResponse,
+)
+from mfm.application.reporting.models.events_activities_summary_dto import (
+    EventsActivitiesSummaryResponse,
 )
 
 __all__ = [
@@ -129,6 +153,14 @@ __all__ = [
     "MembershipBillingSummaryResponse",
     "MembershipBillingSummaryService",
     "MembershipBillingSummaryValidationException",
+    "EventsActivitiesSummaryApplicationException",
+    "EventsActivitiesSummaryBusinessRuleViolation",
+    "EventsActivitiesSummaryFeature",
+    "EventsActivitiesSummaryRepositoryException",
+    "EventsActivitiesSummaryRequest",
+    "EventsActivitiesSummaryResponse",
+    "EventsActivitiesSummaryService",
+    "EventsActivitiesSummaryValidationException",
     "OrganizationRolesSummaryApplicationException",
     "OrganizationRolesSummaryBusinessRuleViolation",
     "OrganizationRolesSummaryFeature",

@@ -58,6 +58,15 @@ from mfm.application.features.membership_billing.manage_membership_billing_featu
 from mfm.application.features.membership_billing.manage_membership_billing_feature import (
     ManageMembershipBillingResponse,
 )
+from mfm.application.features.events_activities.manage_events_activities_feature import (
+    ManageEventsActivitiesFeature,
+)
+from mfm.application.features.events_activities.manage_events_activities_feature import (
+    ManageEventsActivitiesRequest,
+)
+from mfm.application.features.events_activities.manage_events_activities_feature import (
+    ManageEventsActivitiesResponse,
+)
 
 __all__ = [
     "AccountsReceivableService",
@@ -98,6 +107,9 @@ __all__ = [
     "ManageMembershipBillingFeature",
     "ManageMembershipBillingRequest",
     "ManageMembershipBillingResponse",
+    "ManageEventsActivitiesFeature",
+    "ManageEventsActivitiesRequest",
+    "ManageEventsActivitiesResponse",
     "ManageOrganizationRolesFeature",
     "ManageOrganizationRolesRequest",
     "ManageOrganizationRolesResponse",

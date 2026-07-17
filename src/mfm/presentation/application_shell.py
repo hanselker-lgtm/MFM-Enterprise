@@ -17,6 +17,9 @@ from mfm.application.reporting.models.contact_communication_summary_dto import (
 from mfm.application.reporting.models.membership_billing_summary_dto import (
     MembershipBillingSummaryResponse,
 )
+from mfm.application.reporting.models.events_activities_summary_dto import (
+    EventsActivitiesSummaryResponse,
+)
 from mfm.application.reporting.models.membership_summary_dto import MembershipSummaryResponse
 from mfm.application.reporting.models.organization_dashboard_dto import OrganizationDashboardResponse
 from mfm.application.reporting.models.organization_roles_summary_dto import (
@@ -43,7 +46,8 @@ ReportLoader = Callable[
     | MembershipSummaryResponse
     | OrganizationRolesSummaryResponse
     | ContactCommunicationSummaryResponse
-    | MembershipBillingSummaryResponse,
+    | MembershipBillingSummaryResponse
+    | EventsActivitiesSummaryResponse,
 ]
 WidgetLoader = Callable[[], QWidget]
 
@@ -82,6 +86,7 @@ def build_application_shell(
     organization_roles_workspace_loader: WidgetLoader | None = None,
     contact_communication_workspace_loader: WidgetLoader | None = None,
     membership_billing_workspace_loader: WidgetLoader | None = None,
+    events_activities_workspace_loader: WidgetLoader | None = None,
     documents_workspace_loader: WidgetLoader | None = None,
     accounting_workspace_loader: WidgetLoader | None = None,
     application: QApplication | None = None,
@@ -107,6 +112,7 @@ def build_application_shell(
         organization_roles_workspace_loader=organization_roles_workspace_loader,
         contact_communication_workspace_loader=contact_communication_workspace_loader,
         membership_billing_workspace_loader=membership_billing_workspace_loader,
+        events_activities_workspace_loader=events_activities_workspace_loader,
         documents_workspace_loader=documents_workspace_loader,
         accounting_workspace_loader=accounting_workspace_loader,
     )
@@ -184,6 +190,7 @@ def _register_default_module_routes(
     organization_roles_workspace_loader: WidgetLoader | None = None,
     contact_communication_workspace_loader: WidgetLoader | None = None,
     membership_billing_workspace_loader: WidgetLoader | None = None,
+    events_activities_workspace_loader: WidgetLoader | None = None,
     documents_workspace_loader: WidgetLoader | None = None,
     accounting_workspace_loader: WidgetLoader | None = None,
 ) -> None:
@@ -255,6 +262,19 @@ def _register_default_module_routes(
             or widget_loaders.get(
                 "operations.membership-billing",
                 lambda: _placeholder_page("Membership Billing"),
+            ),
+        )
+    )
+    navigation_service.register_route(
+        NavigationRoute(
+            route_id="operations.events-activities",
+            label="Events Activities",
+            category=NavigationCategory.OPERATIONS,
+            kind=NavigationKind.WIDGET,
+            loader=events_activities_workspace_loader
+            or widget_loaders.get(
+                "operations.events-activities",
+                lambda: _placeholder_page("Events Activities"),
             ),
         )
     )
