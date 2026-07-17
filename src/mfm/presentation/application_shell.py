@@ -57,6 +57,7 @@ def build_application_shell(
     *,
     report_loaders: dict[str, ReportLoader],
     widget_loaders: dict[str, WidgetLoader] | None = None,
+    projects_workspace_loader: WidgetLoader | None = None,
     application: QApplication | None = None,
 ) -> ApplicationShell:
     navigation_service = NavigationService()
@@ -72,7 +73,11 @@ def build_application_shell(
     status_bar = StatusBar()
 
     _register_default_dashboard_routes(navigation_service, dashboard_host, report_loaders)
-    _register_default_module_routes(navigation_service, widget_loaders or {})
+    _register_default_module_routes(
+        navigation_service,
+        widget_loaders or {},
+        projects_workspace_loader=projects_workspace_loader,
+    )
 
     main_window = MainWindow(
         navigation_service=navigation_service,
@@ -141,6 +146,8 @@ def _register_default_dashboard_routes(
 def _register_default_module_routes(
     navigation_service: NavigationService,
     widget_loaders: dict[str, WidgetLoader],
+    *,
+    projects_workspace_loader: WidgetLoader | None = None,
 ) -> None:
     navigation_service.register_route(
         NavigationRoute(
@@ -157,7 +164,8 @@ def _register_default_module_routes(
             label="Projects",
             category=NavigationCategory.OPERATIONS,
             kind=NavigationKind.WIDGET,
-            loader=widget_loaders.get("operations.projects", lambda: _placeholder_page("Projects")),
+            loader=projects_workspace_loader
+            or widget_loaders.get("operations.projects", lambda: _placeholder_page("Projects")),
         )
     )
     navigation_service.register_route(
