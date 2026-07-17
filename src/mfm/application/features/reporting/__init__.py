@@ -32,13 +32,30 @@ from mfm.application.features.reporting.project_status_feature import ProjectSta
 from mfm.application.features.reporting.project_status_feature import RepositoryException as ProjectStatusRepositoryException
 from mfm.application.features.reporting.project_status_feature import ValidationException as ProjectStatusValidationException
 from mfm.application.features.reporting.project_status_feature import project_status_dashboard
+from mfm.application.features.reporting.budget_vs_actual_feature import ApplicationException as BudgetVsActualApplicationException
+from mfm.application.features.reporting.budget_vs_actual_feature import BudgetVsActualFeature
+from mfm.application.features.reporting.budget_vs_actual_feature import BudgetVsActualRequest
+from mfm.application.features.reporting.budget_vs_actual_feature import BudgetVsActualService
+from mfm.application.features.reporting.budget_vs_actual_feature import BusinessRuleViolation as BudgetVsActualBusinessRuleViolation
+from mfm.application.features.reporting.budget_vs_actual_feature import RepositoryException as BudgetVsActualRepositoryException
+from mfm.application.features.reporting.budget_vs_actual_feature import ValidationException as BudgetVsActualValidationException
+from mfm.application.features.reporting.budget_vs_actual_feature import budget_vs_actual
 from mfm.application.reporting.models.organization_dashboard_dto import (
     OrganizationDashboardDTO,
 )
 from mfm.application.reporting.models.project_status_dto import ProjectStatusDTO
+from mfm.application.reporting.models.budget_vs_actual_dto import BudgetVsActualDTO
 
 __all__ = [
     "ApplicationException",
+    "BudgetVsActualApplicationException",
+    "BudgetVsActualBusinessRuleViolation",
+    "BudgetVsActualDTO",
+    "BudgetVsActualFeature",
+    "BudgetVsActualRequest",
+    "BudgetVsActualRepositoryException",
+    "BudgetVsActualService",
+    "BudgetVsActualValidationException",
     "BusinessRuleViolation",
     "OrganizationDashboardDTO",
     "OrganizationDashboardFeature",
@@ -55,5 +72,6 @@ __all__ = [
     "RepositoryException",
     "ValidationException",
     "organization_dashboard",
+    "budget_vs_actual",
     "project_status_dashboard",
 ]
