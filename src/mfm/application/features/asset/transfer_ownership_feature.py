@@ -11,7 +11,6 @@ from mfm.application.asset.create_asset import RepositoryException as ServiceRep
 from mfm.application.asset.create_asset import ValidationException as ServiceValidationException
 from mfm.application.asset.transfer_asset import TransferAssetRequest as ServiceRequest
 from mfm.application.asset.transfer_asset import TransferAssetResponse as ServiceResponse
-from mfm.application.asset.transfer_asset import TransferAssetUseCase
 
 
 class ApplicationException(Exception):

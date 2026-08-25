@@ -43,9 +43,6 @@ from mfm.application.procurement.record_purchase_receipt import (
 from mfm.application.procurement.record_purchase_receipt import (
     RecordPurchaseReceiptResponse as ServiceResponse,
 )
-from mfm.application.procurement.record_purchase_receipt import (
-    RecordPurchaseReceiptUseCase,
-)
 
 
 @dataclass(frozen=True, slots=True)

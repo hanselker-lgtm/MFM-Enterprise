@@ -5,7 +5,6 @@ from datetime import UTC
 from datetime import datetime
 from decimal import Decimal
 from uuid import UUID
-from uuid import uuid4
 
 import pytest
 
@@ -18,7 +17,6 @@ from mfm.domain.procurement.events import PurchaseOrderCreated
 from mfm.domain.procurement.events import PurchaseOrderOrdered
 from mfm.domain.procurement.events import PurchaseOrderSubmitted
 from mfm.domain.procurement.events import PurchaseReceiptRecorded
-from mfm.domain.procurement.exceptions import InvalidPurchaseOrderError
 from mfm.domain.procurement.exceptions import InvalidPurchaseOrderLifecycleError
 from mfm.domain.procurement.exceptions import InvalidPurchaseOrderLineError
 from mfm.domain.procurement.exceptions import InvalidPurchaseOrderReferenceError

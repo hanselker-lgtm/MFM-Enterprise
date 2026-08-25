@@ -36,7 +36,6 @@ from mfm.application.features.asset.retire_asset_feature import RetireAssetReque
 from mfm.application.features.asset.transfer_ownership_feature import TransferOwnershipFeature
 from mfm.application.features.asset.transfer_ownership_feature import TransferOwnershipRequest
 from mfm.application.features.asset.update_asset_feature import UpdateAssetFeature
-from mfm.application.features.asset.update_asset_feature import UpdateAssetRequest
 from mfm.application.uow.abstract_unit_of_work import AbstractUnitOfWork
 from mfm.common.domain_event import DomainEvent
 from mfm.database.models.asset_location_model import AssetLocationModel

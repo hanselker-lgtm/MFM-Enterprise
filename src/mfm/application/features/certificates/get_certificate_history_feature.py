@@ -21,9 +21,6 @@ from mfm.application.certificates.get_certificate_history import (
 from mfm.application.certificates.get_certificate_history import (
     GetCertificateHistoryResponse as ServiceResponse,
 )
-from mfm.application.certificates.get_certificate_history import (
-    GetCertificateHistoryUseCase,
-)
 from mfm.application.features.certificates.create_certificate_feature import (
     BusinessRuleViolation,
 )

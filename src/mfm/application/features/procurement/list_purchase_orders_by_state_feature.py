@@ -29,9 +29,6 @@ from mfm.application.procurement.list_purchase_orders_by_state import (
 from mfm.application.procurement.list_purchase_orders_by_state import (
     ListPurchaseOrdersByStateResponse as ServiceResponse,
 )
-from mfm.application.procurement.list_purchase_orders_by_state import (
-    ListPurchaseOrdersByStateUseCase,
-)
 
 
 @dataclass(frozen=True, slots=True)

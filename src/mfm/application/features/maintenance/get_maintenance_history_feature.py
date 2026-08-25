@@ -42,9 +42,6 @@ from mfm.application.maintenance.get_maintenance_history import (
 from mfm.application.maintenance.get_maintenance_history import (
     GetMaintenanceHistoryResponse as ServiceResponse,
 )
-from mfm.application.maintenance.get_maintenance_history import (
-    GetMaintenanceHistoryUseCase,
-)
 
 
 @dataclass(frozen=True, slots=True)

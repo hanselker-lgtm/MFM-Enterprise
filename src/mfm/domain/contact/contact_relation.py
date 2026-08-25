@@ -15,10 +15,9 @@ from sqlalchemy import String
 
 from sqlalchemy.orm import Mapped
 from sqlalchemy.orm import mapped_column
-from sqlalchemy.orm import relationship
 
-from mfm.domain.common.entity import Entity
-from mfm.domain.common.enums import RelationType
+from mfm.common.entity import Entity
+from mfm.common.enums import RelationType
 
 
 class ContactRelation(Entity):
@@ -34,13 +33,13 @@ class ContactRelation(Entity):
 
     from_contact_id: Mapped[str] = mapped_column(
         "FromContactID",
-        ForeignKey("CONTACT.ContactID"),
+        ForeignKey("contact.id"),
         nullable=False,
     )
 
     to_contact_id: Mapped[str] = mapped_column(
         "ToContactID",
-        ForeignKey("CONTACT.ContactID"),
+        ForeignKey("contact.id"),
         nullable=False,
     )
 
@@ -69,14 +68,9 @@ class ContactRelation(Entity):
         nullable=False,
     )
 
-    from_contact = relationship(
-        "Contact",
-        foreign_keys=[from_contact_id],
-        back_populates="outgoing_relations",
-    )
-
-    to_contact = relationship(
-        "Contact",
-        foreign_keys=[to_contact_id],
-        back_populates="incoming_relations",
-    )
+    # Note: bidirectional ORM relationships to ContactModel were removed here.
+    # They referenced a mapped class name ("Contact") that does not exist
+    # (the real ORM class is ContactModel) and back_populates fields that
+    # were never defined on ContactModel. Nothing in the codebase reads
+    # ContactRelation.from_contact / .to_contact; the plain FK columns
+    # above are sufficient for current usage.

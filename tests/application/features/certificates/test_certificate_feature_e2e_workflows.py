@@ -9,7 +9,6 @@ from uuid import uuid4
 import mfm.database.models  # noqa: F401
 import pytest
 from sqlalchemy import create_engine
-from sqlalchemy import select
 from sqlalchemy import text
 from sqlalchemy.orm import Session
 from sqlalchemy.orm import sessionmaker

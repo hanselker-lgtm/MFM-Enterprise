@@ -11,7 +11,6 @@ from mfm.application.organization.create_organization import RepositoryException
 from mfm.application.organization.create_organization import ValidationException as ServiceValidationException
 from mfm.application.organization.update_organization import UpdateOrganizationRequest as ServiceRequest
 from mfm.application.organization.update_organization import UpdateOrganizationResponse as ServiceResponse
-from mfm.application.organization.update_organization import UpdateOrganizationUseCase
 from mfm.domain.organization.organization_status import OrganizationStatus
 from mfm.domain.organization.organization_type import OrganizationType
 

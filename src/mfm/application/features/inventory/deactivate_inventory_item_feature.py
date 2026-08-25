@@ -36,7 +36,6 @@ from mfm.application.inventory.deactivate_inventory_item import (
 from mfm.application.inventory.deactivate_inventory_item import (
     DeactivateInventoryItemResponse as ServiceResponse,
 )
-from mfm.application.inventory.deactivate_inventory_item import DeactivateInventoryItemUseCase
 
 
 @dataclass(frozen=True, slots=True)

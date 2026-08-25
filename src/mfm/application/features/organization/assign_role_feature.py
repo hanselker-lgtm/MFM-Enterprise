@@ -9,7 +9,6 @@ from uuid import UUID
 
 from mfm.application.organization.assign_role import AssignRoleRequest as ServiceRequest
 from mfm.application.organization.assign_role import AssignRoleResponse as ServiceResponse
-from mfm.application.organization.assign_role import AssignRoleUseCase
 from mfm.application.organization.create_organization import BusinessRuleViolation as ServiceBusinessRuleViolation
 from mfm.application.organization.create_organization import RepositoryException as ServiceRepositoryException
 from mfm.application.organization.create_organization import ValidationException as ServiceValidationException

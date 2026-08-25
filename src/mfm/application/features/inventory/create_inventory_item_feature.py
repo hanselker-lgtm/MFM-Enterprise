@@ -17,7 +17,6 @@ from mfm.application.inventory.create_inventory_item import (
 from mfm.application.inventory.create_inventory_item import (
     CreateInventoryItemResponse as ServiceResponse,
 )
-from mfm.application.inventory.create_inventory_item import CreateInventoryItemUseCase
 from mfm.application.inventory.create_inventory_item import (
     InventoryItemResponse as ServiceInventoryItemResponse,
 )

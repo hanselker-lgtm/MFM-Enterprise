@@ -18,9 +18,6 @@ from mfm.application.certificates.get_expiring_certificates import (
 from mfm.application.certificates.get_expiring_certificates import (
     GetExpiringCertificatesResponse as ServiceResponse,
 )
-from mfm.application.certificates.get_expiring_certificates import (
-    GetExpiringCertificatesUseCase,
-)
 from mfm.application.features.certificates.create_certificate_feature import (
     CertificateResponse,
 )

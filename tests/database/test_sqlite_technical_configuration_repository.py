@@ -1,11 +1,12 @@
 from __future__ import annotations
 
 from datetime import date
-import weakref
 from uuid import UUID
 from uuid import uuid4
 
+import pytest
 from sqlalchemy import create_engine
+from sqlalchemy.engine import Engine
 from sqlalchemy.orm import Session
 
 from mfm.database.models.asset_location_model import AssetLocationModel  # noqa: F401
@@ -43,11 +44,25 @@ from mfm.infrastructure.persistence.sqlite.sqlite_technical_configuration_reposi
 from mfm.repositories.unit_of_work import UnitOfWork
 
 
+_SQLITE_SESSION_ENGINE_PAIRS: list[tuple[Session, Engine]] = []
+
+
+@pytest.fixture(autouse=True)
+def _deterministic_sqlite_teardown() -> None:
+    try:
+        yield
+    finally:
+        while _SQLITE_SESSION_ENGINE_PAIRS:
+            session, engine = _SQLITE_SESSION_ENGINE_PAIRS.pop()
+            session.close()
+            engine.dispose()
+
+
 def _create_session() -> tuple[object, Session]:
     engine = create_engine("sqlite:///:memory:")
     BaseModel.metadata.create_all(engine)
     session = Session(engine)
-    weakref.finalize(session, engine.dispose)
+    _SQLITE_SESSION_ENGINE_PAIRS.append((session, engine))
     return engine, session
 
 

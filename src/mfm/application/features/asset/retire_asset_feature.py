@@ -12,7 +12,6 @@ from mfm.application.asset.create_asset import RepositoryException as ServiceRep
 from mfm.application.asset.create_asset import ValidationException as ServiceValidationException
 from mfm.application.asset.retire_asset import RetireAssetRequest as ServiceRequest
 from mfm.application.asset.retire_asset import RetireAssetResponse as ServiceResponse
-from mfm.application.asset.retire_asset import RetireAssetUseCase
 
 
 class ApplicationException(Exception):

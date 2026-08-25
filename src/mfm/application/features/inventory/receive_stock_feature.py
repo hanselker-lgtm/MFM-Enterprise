@@ -40,7 +40,6 @@ from mfm.application.inventory.create_inventory_item import (
 )
 from mfm.application.inventory.receive_stock import ReceiveStockRequest as ServiceRequest
 from mfm.application.inventory.receive_stock import ReceiveStockResponse as ServiceResponse
-from mfm.application.inventory.receive_stock import ReceiveStockUseCase
 
 
 @dataclass(frozen=True, slots=True)

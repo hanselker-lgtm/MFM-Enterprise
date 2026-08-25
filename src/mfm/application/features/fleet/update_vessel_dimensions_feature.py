@@ -21,9 +21,6 @@ from mfm.application.fleet.update_vessel_dimensions import (
 from mfm.application.fleet.update_vessel_dimensions import (
     UpdateVesselDimensionsResponse as ServiceResponse,
 )
-from mfm.application.fleet.update_vessel_dimensions import (
-    UpdateVesselDimensionsUseCase,
-)
 
 
 class ApplicationException(Exception):

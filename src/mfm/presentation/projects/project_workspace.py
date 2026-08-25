@@ -26,10 +26,26 @@ from mfm.presentation.projects.project_toolbar import ProjectToolbar
 class ProjectWorkspace(QWidget):
     """Operational workspace for project management."""
 
-    def __init__(self, *, controller: ProjectController) -> None:
+    def __init__(
+        self,
+        *,
+        controller: ProjectController,
+        default_organization_id: UUID | None = None,
+        default_owner_contact_id: UUID | None = None,
+    ) -> None:
         super().__init__()
         self._controller = controller
         self._current_filters = ProjectListFilterViewModel()
+        # Fall back to the historical placeholder IDs only when the
+        # caller doesn't supply real ones (e.g. older tests). Against a
+        # real composition root these are always the seeded
+        # organization/owner-contact so "Create Project" actually works.
+        self._default_organization_id = default_organization_id or UUID(
+            "00000000-0000-0000-0000-000000000001"
+        )
+        self._default_owner_contact_id = default_owner_contact_id or UUID(
+            "00000000-0000-0000-0000-000000000002"
+        )
 
         self._toolbar = ProjectToolbar(
             on_search=self._handle_search,
@@ -107,8 +123,8 @@ class ProjectWorkspace(QWidget):
         if not ok_name or not project_name.strip():
             return
 
-        organization_id = UUID("00000000-0000-0000-0000-000000000001")
-        owner_contact_id = UUID("00000000-0000-0000-0000-000000000002")
+        organization_id = self._default_organization_id
+        owner_contact_id = self._default_owner_contact_id
 
         created_id = self._controller.create_project(
             CreateProjectCommandViewModel(

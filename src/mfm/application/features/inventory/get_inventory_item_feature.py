@@ -32,7 +32,6 @@ from mfm.application.inventory.create_inventory_item import (
 )
 from mfm.application.inventory.get_inventory_item import GetInventoryItemRequest as ServiceRequest
 from mfm.application.inventory.get_inventory_item import GetInventoryItemResponse as ServiceResponse
-from mfm.application.inventory.get_inventory_item import GetInventoryItemUseCase
 
 
 @dataclass(frozen=True, slots=True)

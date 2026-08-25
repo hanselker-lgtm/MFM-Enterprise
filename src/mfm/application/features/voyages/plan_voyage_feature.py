@@ -22,7 +22,6 @@ from mfm.application.voyages.create_voyage import (
 )
 from mfm.application.voyages.plan_voyage import PlanVoyageRequest as ServiceRequest
 from mfm.application.voyages.plan_voyage import PlanVoyageResponse as ServiceResponse
-from mfm.application.voyages.plan_voyage import PlanVoyageUseCase
 
 
 @dataclass(frozen=True, slots=True)

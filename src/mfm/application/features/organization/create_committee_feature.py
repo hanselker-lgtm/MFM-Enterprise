@@ -11,7 +11,6 @@ from mfm.application.organization.create_committee import BusinessRuleViolation 
 from mfm.application.organization.create_committee import CommitteeMemberInput as ServiceCommitteeMemberInput
 from mfm.application.organization.create_committee import CreateCommitteeRequest as ServiceRequest
 from mfm.application.organization.create_committee import CreateCommitteeResponse as ServiceResponse
-from mfm.application.organization.create_committee import CreateCommitteeUseCase
 from mfm.application.organization.create_organization import RepositoryException as ServiceRepositoryException
 from mfm.application.organization.create_organization import ValidationException as ServiceValidationException
 

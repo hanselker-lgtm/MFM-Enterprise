@@ -23,7 +23,6 @@ from mfm.application.features.maintenance.create_maintenance_plan_feature import
 )
 from mfm.application.maintenance.cancel_work_order import CancelWorkOrderRequest as ServiceRequest
 from mfm.application.maintenance.cancel_work_order import CancelWorkOrderResponse as ServiceResponse
-from mfm.application.maintenance.cancel_work_order import CancelWorkOrderUseCase
 from mfm.application.maintenance.create_maintenance_plan import (
     BusinessRuleViolation as ServiceBusinessRuleViolation,
 )

@@ -7,7 +7,6 @@ from datetime import datetime
 from decimal import Decimal
 from importlib import import_module
 from uuid import UUID
-from uuid import uuid4
 
 import pytest
 

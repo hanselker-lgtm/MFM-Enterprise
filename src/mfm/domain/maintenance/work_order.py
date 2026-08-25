@@ -6,7 +6,6 @@ from dataclasses import dataclass
 from dataclasses import field
 from datetime import date
 from datetime import datetime
-from uuid import UUID
 
 from mfm.common.aggregate_root import AggregateRoot
 from mfm.domain.maintenance.events import MaintenanceRecordCreated

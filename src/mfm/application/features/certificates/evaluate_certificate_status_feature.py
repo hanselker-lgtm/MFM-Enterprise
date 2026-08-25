@@ -22,9 +22,6 @@ from mfm.application.certificates.create_certificate import (
 from mfm.application.certificates.evaluate_certificate_status import (
     EvaluateCertificateStatusRequest as ServiceRequest,
 )
-from mfm.application.certificates.evaluate_certificate_status import (
-    EvaluateCertificateStatusUseCase,
-)
 from mfm.application.features.certificates.create_certificate_feature import (
     BusinessRuleViolation,
 )

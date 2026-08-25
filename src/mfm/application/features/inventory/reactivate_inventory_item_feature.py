@@ -36,7 +36,6 @@ from mfm.application.inventory.reactivate_inventory_item import (
 from mfm.application.inventory.reactivate_inventory_item import (
     ReactivateInventoryItemResponse as ServiceResponse,
 )
-from mfm.application.inventory.reactivate_inventory_item import ReactivateInventoryItemUseCase
 
 
 @dataclass(frozen=True, slots=True)

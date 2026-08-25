@@ -6,7 +6,6 @@ from datetime import UTC
 from datetime import datetime
 from decimal import Decimal
 from uuid import UUID
-from uuid import uuid4
 
 import pytest
 
@@ -31,7 +30,6 @@ from mfm.application.uow.abstract_unit_of_work import AbstractUnitOfWork
 from mfm.domain.inventory.inventory_item import InventoryItem
 from mfm.domain.inventory.stock_location import StockLocation
 from mfm.domain.inventory.stock_movement_type import StockMovementType
-from mfm.domain.inventory.unit_of_measure import UnitOfMeasure
 from mfm.repositories.inventory_repository import InventoryRepository
 
 

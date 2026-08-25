@@ -18,7 +18,6 @@ from mfm.application.voyages.create_voyage import (
 )
 from mfm.application.voyages.list_vessel_voyages import ListVesselVoyagesRequest as ServiceRequest
 from mfm.application.voyages.list_vessel_voyages import ListVesselVoyagesResponse as ServiceResponse
-from mfm.application.voyages.list_vessel_voyages import ListVesselVoyagesUseCase
 
 
 @dataclass(frozen=True, slots=True)

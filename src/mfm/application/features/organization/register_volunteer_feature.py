@@ -12,7 +12,6 @@ from mfm.application.organization.create_organization import RepositoryException
 from mfm.application.organization.create_organization import ValidationException as ServiceValidationException
 from mfm.application.organization.register_volunteer import RegisterVolunteerRequest as ServiceRequest
 from mfm.application.organization.register_volunteer import RegisterVolunteerResponse as ServiceResponse
-from mfm.application.organization.register_volunteer import RegisterVolunteerUseCase
 from mfm.application.organization.register_volunteer import VolunteerCertificateInput as ServiceVolunteerCertificateInput
 
 

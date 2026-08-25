@@ -32,7 +32,6 @@ from mfm.application.procurement.create_purchase_order import (
 )
 from mfm.application.procurement.get_purchase_order import GetPurchaseOrderRequest as ServiceRequest
 from mfm.application.procurement.get_purchase_order import GetPurchaseOrderResponse as ServiceResponse
-from mfm.application.procurement.get_purchase_order import GetPurchaseOrderUseCase
 
 
 @dataclass(frozen=True, slots=True)

@@ -339,6 +339,23 @@ class SQLiteFiscalYearRepository(FiscalYearRepository):
             return None
         return AccountingMapper.to_domain_fiscal_year(orm)
 
+    def ensure_posting_allowed(self, posting_date: date) -> None:
+        """Raise if no fiscal year covers ``posting_date`` for posting.
+
+        Delegates to :meth:`FiscalYear.ensure_posting_allowed`, which
+        already implements the open/closed/archived and period checks
+        -- this just resolves the right fiscal year first. Not part
+        of the original ``FiscalYearRepository`` ABC, but required by
+        :class:`mfm.application.features.annual_contingent_generation.
+        AnnualContingentGenerationFeature`'s narrower protocol of the
+        same name; both are satisfied by this same object.
+        """
+
+        fiscal_year = self.get_by_year(posting_date.year)
+        if fiscal_year is None:
+            raise ValueError(f"Fiscal year {posting_date.year} does not exist")
+        fiscal_year.ensure_posting_allowed(posting_date)
+
     def update(self, fiscal_year: FiscalYear) -> None:
         existing = self._session.scalar(
             self._base_query().where(FiscalYearModel.id == fiscal_year.id)

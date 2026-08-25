@@ -37,7 +37,6 @@ from mfm.application.maintenance.create_work_order import (
 from mfm.application.maintenance.create_work_order import (
     CreateWorkOrderResponse as ServiceResponse,
 )
-from mfm.application.maintenance.create_work_order import CreateWorkOrderUseCase
 
 
 @dataclass(frozen=True, slots=True)

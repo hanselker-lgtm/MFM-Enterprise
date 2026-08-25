@@ -37,9 +37,6 @@ from mfm.application.technical_configuration.install_technical_component import 
 from mfm.application.technical_configuration.install_technical_component import (
     InstallTechnicalComponentResponse as ServiceResponse,
 )
-from mfm.application.technical_configuration.install_technical_component import (
-    InstallTechnicalComponentUseCase,
-)
 
 
 @dataclass(frozen=True, slots=True)

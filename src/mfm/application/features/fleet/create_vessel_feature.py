@@ -11,7 +11,6 @@ from mfm.application.fleet.create_vessel import (
 )
 from mfm.application.fleet.create_vessel import CreateVesselRequest as ServiceRequest
 from mfm.application.fleet.create_vessel import CreateVesselResponse as ServiceResponse
-from mfm.application.fleet.create_vessel import CreateVesselUseCase
 from mfm.application.fleet.create_vessel import (
     RepositoryException as ServiceRepositoryException,
 )

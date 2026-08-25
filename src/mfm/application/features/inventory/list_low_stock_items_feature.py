@@ -19,7 +19,6 @@ from mfm.application.inventory.create_inventory_item import (
 )
 from mfm.application.inventory.list_low_stock_items import ListLowStockItemsRequest as ServiceRequest
 from mfm.application.inventory.list_low_stock_items import ListLowStockItemsResponse as ServiceResponse
-from mfm.application.inventory.list_low_stock_items import ListLowStockItemsUseCase
 
 
 @dataclass(frozen=True, slots=True)

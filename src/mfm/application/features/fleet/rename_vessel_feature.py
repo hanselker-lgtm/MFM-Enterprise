@@ -17,7 +17,6 @@ from mfm.application.fleet.create_vessel import (
 )
 from mfm.application.fleet.rename_vessel import RenameVesselRequest as ServiceRequest
 from mfm.application.fleet.rename_vessel import RenameVesselResponse as ServiceResponse
-from mfm.application.fleet.rename_vessel import RenameVesselUseCase
 
 
 class ApplicationException(Exception):

@@ -28,7 +28,6 @@ from mfm.application.procurement.cancel_purchase_order import (
 from mfm.application.procurement.cancel_purchase_order import (
     CancelPurchaseOrderResponse as ServiceResponse,
 )
-from mfm.application.procurement.cancel_purchase_order import CancelPurchaseOrderUseCase
 from mfm.application.procurement.create_purchase_order import (
     BusinessRuleViolation as ServiceBusinessRuleViolation,
 )

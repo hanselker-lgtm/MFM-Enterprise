@@ -20,3 +20,15 @@ class DuplicatePrimaryEmailError(ContactError):
 
 class DuplicatePrimaryPhoneError(ContactError):
     """Raised when more than one primary phone exists."""
+
+
+class DuplicateContactNumberError(ContactError):
+    """Raised when a contact_number already exists."""
+
+
+class ContactNotFoundException(ContactError):
+    """Raised when a contact could not be found."""
+
+
+class ContactNotFoundError(ContactNotFoundException):
+    """Raised when a contact could not be found."""

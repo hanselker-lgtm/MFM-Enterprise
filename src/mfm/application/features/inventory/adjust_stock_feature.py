@@ -31,7 +31,6 @@ from mfm.application.features.inventory.create_inventory_item_feature import (
 )
 from mfm.application.inventory.adjust_stock import AdjustStockRequest as ServiceRequest
 from mfm.application.inventory.adjust_stock import AdjustStockResponse as ServiceResponse
-from mfm.application.inventory.adjust_stock import AdjustStockUseCase
 from mfm.application.inventory.create_inventory_item import (
     BusinessRuleViolation as ServiceBusinessRuleViolation,
 )

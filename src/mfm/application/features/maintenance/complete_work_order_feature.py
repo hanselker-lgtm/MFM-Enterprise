@@ -28,7 +28,6 @@ from mfm.application.maintenance.complete_work_order import (
 from mfm.application.maintenance.complete_work_order import (
     CompleteWorkOrderResponse as ServiceResponse,
 )
-from mfm.application.maintenance.complete_work_order import CompleteWorkOrderUseCase
 from mfm.application.maintenance.create_maintenance_plan import (
     BusinessRuleViolation as ServiceBusinessRuleViolation,
 )

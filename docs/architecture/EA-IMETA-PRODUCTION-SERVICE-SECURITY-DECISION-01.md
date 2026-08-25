@@ -1,0 +1,2058 @@
+# EA-IMETA-PRODUCTION-SERVICE-SECURITY-DECISION-01
+# PRODUCTION SECURITY DECISION FRAMEWORK, RISK PRIORITIZATION, DECISION RIGHTS & HUMAN-AI GOVERNANCE BASELINE
+
+### Version 1.0
+### Status: PRODUCTION SECURITY DECISION BASELINE
+### Governing Architecture: EA-IMETA-MASTER-01
+### Governing System Baseline: EA-IMETA-SYSTEM-RELEASE-BASELINE-01
+### Governing Roadmap: EA-IMETA-IMPLEMENTATION-ROADMAP-01
+### Governing Backlog: EA-IMETA-IMPLEMENTATION-BACKLOG-01
+### Governing MVP: EA-IMETA-MVP-IMPLEMENTATION-01
+### Governing Build: EA-IMETA-MVP-BUILD-01
+### Governing MVP Test: EA-IMETA-MVP-TEST-01
+### Governing MVP Release: EA-IMETA-MVP-RELEASE-01
+### Governing Pilot-01: EA-IMETA-PILOT-01
+### Governing Pilot-02: EA-IMETA-PILOT-02
+### Governing Readiness: EA-IMETA-PRODUCTION-READINESS-01
+### Governing Production: EA-IMETA-PRODUCTION-01
+### Governing Production Test: EA-IMETA-PRODUCTION-TEST-01
+### Governing Production Release: EA-IMETA-PRODUCTION-RELEASE-01
+### Governing Production Operations: EA-IMETA-PRODUCTION-OPERATIONS-01
+### Governing Service Management: EA-IMETA-PRODUCTION-SERVICE-MANAGEMENT-01
+### Governing Service Governance: EA-IMETA-PRODUCTION-SERVICE-GOVERNANCE-01
+### Governing Service Control: EA-IMETA-PRODUCTION-SERVICE-CONTROL-01
+### Governing Service Assurance: EA-IMETA-PRODUCTION-SERVICE-ASSURANCE-01
+### Governing Service Audit: EA-IMETA-PRODUCTION-SERVICE-AUDIT-01
+### Governing Service Continuity: EA-IMETA-PRODUCTION-SERVICE-CONTINUITY-01
+### Governing Service Resilience: EA-IMETA-PRODUCTION-SERVICE-RESILIENCE-01
+### Governing Service Capacity: EA-IMETA-PRODUCTION-SERVICE-CAPACITY-01
+### Governing Service Performance: EA-IMETA-PRODUCTION-SERVICE-PERFORMANCE-01
+### Governing Service Observability: EA-IMETA-PRODUCTION-SERVICE-OBSERVABILITY-01
+### Governing Service Security: EA-IMETA-PRODUCTION-SERVICE-SECURITY-01
+### Governing Security Operations: EA-IMETA-PRODUCTION-SERVICE-SECURITY-OPERATIONS-01
+### Governing Security Intelligence: EA-IMETA-PRODUCTION-SERVICE-SECURITY-INTELLIGENCE-01
+### Target: EA-IMETA-PRODUCTION-SERVICE-SECURITY-DECISION-01
+### Purpose: Establish the formal production security decision framework for evidence-based risk decisions, prioritization, authority, escalation, human-AI boundaries and auditable security action
+
+---
+
+# 1. PURPOSE
+
+EA-IMETA-PRODUCTION-SERVICE-SECURITY-DECISION-01 establishes the decision layer above Security Intelligence.
+
+It defines how EA-IMETA converts:
+
+```text
+SECURITY INTELLIGENCE
++
+RISK
++
+EVIDENCE
++
+BUSINESS IMPACT
++
+CONTROL EFFECTIVENESS
++
+ARCHITECTURE CONTEXT
+```
+
+into:
+
+```text
+DECISION
+ ↓
+AUTHORITY
+ ↓
+ACTION
+ ↓
+VERIFICATION
+ ↓
+AUDIT
+ ↓
+LEARNING
+```
+
+---
+
+# 2. SECURITY DECISION PRINCIPLE
+
+> EA-IMETA SHALL MAKE SECURITY DECISIONS THROUGH EXPLICIT AUTHORITY, SUFFICIENT EVIDENCE, RISK-BASED PRIORITIZATION, DEFINED HUMAN-AI BOUNDARIES AND FULL DECISION TRACEABILITY.
+
+---
+
+# 3. OBJECTIVES
+
+The decision framework shall ensure:
+
+```text
+CLEAR DECISION RIGHTS
+EVIDENCE-BASED DECISIONS
+RISK-BASED PRIORITIZATION
+TIMELY ESCALATION
+CONSISTENT DECISIONS
+CONTROLLED EXCEPTIONS
+HUMAN OVERSIGHT
+AI GOVERNANCE
+AUDITABILITY
+DECISION LEARNING
+```
+
+---
+
+# 4. DECISION MODEL
+
+```text
+IDENTIFY
+   ↓
+UNDERSTAND
+   ↓
+ASSESS
+   ↓
+PRIORITIZE
+   ↓
+DECIDE
+   ↓
+AUTHORIZE
+   ↓
+ACT
+   ↓
+VERIFY
+   ↓
+CLOSE
+   ↓
+LEARN
+```
+
+---
+
+# 5. DECISION DOMAINS
+
+Security decisions include:
+
+```text
+INCIDENT RESPONSE
+VULNERABILITY REMEDIATION
+ACCESS
+PRIVILEGE
+SECURITY EXCEPTIONS
+RISK ACCEPTANCE
+CONTROL IMPLEMENTATION
+CONTROL COMPENSATION
+ARCHITECTURE
+CHANGE
+AI
+AGENT
+DATA PROTECTION
+THIRD-PARTY RISK
+BUSINESS CONTINUITY
+RECOVERY
+```
+
+---
+
+# 6. DECISION RIGHTS
+
+Every material security decision shall have:
+
+```text
+DECISION OWNER
+DECISION AUTHORITY
+DECISION INPUTS
+DECISION DEADLINE
+DECISION OUTCOME
+```
+
+---
+
+# 7. DECISION OWNER
+
+The decision owner is accountable for the outcome.
+
+---
+
+# 8. DECISION AUTHORITY
+
+The authority is the person or governance body authorized to approve the decision.
+
+---
+
+# 9. DECISION INPUTS
+
+Inputs should include, as applicable:
+
+```text
+FACTS
+EVIDENCE
+RISK
+IMPACT
+CONFIDENCE
+OPTIONS
+CONSTRAINTS
+DEPENDENCIES
+```
+
+---
+
+# 10. DECISION DEADLINE
+
+Material decisions shall have a target decision time based on risk and urgency.
+
+---
+
+# 11. DECISION OUTCOME
+
+Allowed baseline outcomes:
+
+```text
+APPROVE
+REJECT
+DEFER
+MITIGATE
+ESCALATE
+ACCEPT RISK
+REQUIRE MORE EVIDENCE
+```
+
+---
+
+# 12. DECISION EVIDENCE
+
+Material decisions shall be supported by sufficient evidence.
+
+---
+
+# 13. EVIDENCE SUFFICIENCY
+
+Evidence shall be assessed for:
+
+```text
+RELEVANCE
+RELIABILITY
+TIMELINESS
+COMPLETENESS
+PROVENANCE
+```
+
+---
+
+# 14. FACT VS INFERENCE
+
+Decision records shall distinguish:
+
+```text
+FACT
+INFERENCE
+HYPOTHESIS
+RECOMMENDATION
+DECISION
+```
+
+---
+
+# 15. DECISION CONFIDENCE
+
+Where uncertainty is material, record:
+
+```text
+HIGH
+MEDIUM
+LOW
+UNKNOWN
+```
+
+confidence.
+
+---
+
+# 16. UNCERTAINTY
+
+Unknown information shall not be silently converted into certainty.
+
+---
+
+# 17. RISK-BASED PRIORITIZATION
+
+Prioritize according to:
+
+```text
+THREAT
+VULNERABILITY
+EXPOSURE
+IMPACT
+CONTROL EFFECTIVENESS
+URGENCY
+```
+
+---
+
+# 18. BUSINESS IMPACT
+
+Security decisions shall consider:
+
+```text
+SERVICE AVAILABILITY
+DATA
+CUSTOMERS
+OPERATIONS
+LEGAL / REGULATORY
+REPUTATION
+FINANCIAL
+SAFETY
+```
+
+where relevant.
+
+---
+
+# 19. TECHNICAL IMPACT
+
+Consider:
+
+```text
+SYSTEM
+SERVICE
+DATABASE
+API
+INTEGRATION
+IDENTITY
+NETWORK
+AI
+AGENT
+```
+
+impact.
+
+---
+
+# 20. DECISION SEVERITY
+
+Recommended:
+
+```text
+D1 CRITICAL
+D2 HIGH
+D3 MEDIUM
+D4 LOW
+```
+
+---
+
+# 21. D1 CRITICAL
+
+Decisions involving:
+
+```text
+ACTIVE CRITICAL COMPROMISE
+CRITICAL DATA EXPOSURE
+CRITICAL SERVICE TAKEOVER
+MATERIAL ENTERPRISE IMPACT
+```
+
+require highest authority and fastest response.
+
+---
+
+# 22. D2 HIGH
+
+Material security risk requiring urgent management action.
+
+---
+
+# 23. D3 MEDIUM
+
+Security decisions managed through normal controlled processes.
+
+---
+
+# 24. D4 LOW
+
+Low-impact security decisions that can be handled operationally.
+
+---
+
+# 25. DECISION ESCALATION
+
+Escalate when:
+
+```text
+AUTHORITY INSUFFICIENT
+RISK EXCEEDS THRESHOLD
+IMPACT UNCERTAIN
+EVIDENCE CONFLICTS
+TIME OBJECTIVE AT RISK
+CROSS-DOMAIN IMPACT
+```
+
+---
+
+# 26. DECISION ESCALATION PATH
+
+```text
+OPERATOR
+ ↓
+SECOPS LEAD
+ ↓
+SERVICE OWNER
+ ↓
+SECURITY OWNER
+ ↓
+RISK / GOVERNANCE
+ ↓
+EXECUTIVE
+```
+
+as applicable.
+
+---
+
+# 27. SECURITY DECISION RECORD
+
+Every material decision should create a traceable record.
+
+Minimum:
+
+```text
+DECISION ID
+DATE
+OWNER
+AUTHORITY
+ISSUE
+EVIDENCE
+RISK
+OPTIONS
+DECISION
+RATIONALE
+ACTION
+DEADLINE
+VERIFICATION
+```
+
+---
+
+# 28. DECISION RATIONALE
+
+The rationale shall explain why the selected option was chosen.
+
+---
+
+# 29. OPTIONS ANALYSIS
+
+Material decisions should consider reasonable alternatives.
+
+---
+
+# 30. OPTION EVALUATION
+
+Evaluate options against:
+
+```text
+SECURITY
+RISK
+IMPACT
+COST
+TIME
+COMPLEXITY
+REVERSIBILITY
+DEPENDENCIES
+```
+
+---
+
+# 31. REVERSIBILITY
+
+Prefer reversible actions when uncertainty is high and risk permits.
+
+---
+
+# 32. IRREVERSIBLE ACTIONS
+
+Irreversible or high-impact actions require enhanced authority and evidence.
+
+---
+
+# 33. SECURITY ACTION
+
+Actions may include:
+
+```text
+PATCH
+BLOCK
+ISOLATE
+REVOKE
+ROTATE
+DISABLE
+RECONFIGURE
+REBUILD
+MONITOR
+ACCEPT
+TRANSFER
+```
+
+---
+
+# 34. ACTION AUTHORIZATION
+
+Security actions shall be executed only by authorized actors.
+
+---
+
+# 35. ACTION VERIFICATION
+
+After material action, verify:
+
+```text
+SECURITY OUTCOME
+SERVICE OUTCOME
+CONTROL STATE
+SIDE EFFECTS
+```
+
+---
+
+# 36. DECISION CLOSURE
+
+A decision is closed only when:
+
+```text
+ACTION COMPLETE
+OUTCOME VERIFIED
+EVIDENCE RECORDED
+FOLLOW-UP ASSIGNED
+```
+
+as applicable.
+
+---
+
+# 37. RISK ACCEPTANCE
+
+Risk acceptance shall be explicit.
+
+---
+
+# 38. RISK ACCEPTANCE REQUIREMENTS
+
+Requires:
+
+```text
+RISK DESCRIPTION
+IMPACT
+LIKELIHOOD / EXPOSURE
+MITIGATIONS
+RESIDUAL RISK
+OWNER
+AUTHORITY
+REVIEW DATE
+```
+
+---
+
+# 39. RISK ACCEPTANCE BOUNDARY
+
+Operational staff shall not accept risks beyond their delegated authority.
+
+---
+
+# 40. RISK EXPIRATION
+
+Risk acceptance shall have a review or expiration point where appropriate.
+
+---
+
+# 41. SECURITY EXCEPTION
+
+Exceptions permit controlled deviation from an approved security requirement.
+
+---
+
+# 42. SECURITY EXCEPTION REQUIREMENTS
+
+```text
+REQUIREMENT
+DEVIATION
+RATIONALE
+RISK
+COMPENSATING CONTROL
+OWNER
+APPROVER
+EXPIRY
+```
+
+---
+
+# 43. COMPENSATING CONTROL
+
+Where a required control cannot be implemented, an alternative control may reduce risk.
+
+---
+
+# 44. EXCEPTION REVIEW
+
+Expired or obsolete exceptions shall be closed.
+
+---
+
+# 45. ACCESS DECISIONS
+
+Access decisions shall consider:
+
+```text
+IDENTITY
+ROLE
+PURPOSE
+DATA
+PRIVILEGE
+RISK
+DURATION
+```
+
+---
+
+# 46. PRIVILEGED ACCESS DECISION
+
+High-risk privileged access requires enhanced authorization.
+
+---
+
+# 47. EMERGENCY ACCESS DECISION
+
+Emergency access may be granted under controlled break-glass procedures and reviewed afterward.
+
+---
+
+# 48. VULNERABILITY DECISION
+
+Vulnerability decisions shall distinguish:
+
+```text
+REMEDIATE
+MITIGATE
+ACCEPT
+TRANSFER
+RETIRE
+MONITOR
+```
+
+---
+
+# 49. VULNERABILITY PRIORITY
+
+Use:
+
+```text
+SEVERITY
+EXPLOITABILITY
+EXPOSURE
+ASSET CRITICALITY
+ACTIVE THREAT
+BUSINESS IMPACT
+```
+
+---
+
+# 50. INCIDENT DECISION
+
+Incident decisions include:
+
+```text
+DECLARE
+CONTAIN
+ESCALATE
+COMMUNICATE
+RECOVER
+CLOSE
+```
+
+---
+
+# 51. CONTAINMENT DECISION
+
+Containment shall balance:
+
+```text
+SECURITY RISK
+SERVICE IMPACT
+DATA IMPACT
+RECOVERY
+```
+
+---
+
+# 52. RECOVERY DECISION
+
+Recovery requires sufficient evidence that the environment can safely return to service.
+
+---
+
+# 53. ARCHITECTURE SECURITY DECISION
+
+Architecture decisions shall consider:
+
+```text
+SECURITY
+RESILIENCE
+PERFORMANCE
+COST
+COMPLEXITY
+OPERABILITY
+```
+
+---
+
+# 54. SECURITY CHANGE DECISION
+
+Security-sensitive changes require appropriate review before production implementation.
+
+---
+
+# 55. AI DECISION FRAMEWORK
+
+AI may:
+
+```text
+ANALYZE
+CORRELATE
+SUMMARIZE
+CLASSIFY
+PRIORITIZE
+RECOMMEND
+```
+
+within approved boundaries.
+
+---
+
+# 56. AI DECISION LIMITS
+
+AI shall not independently:
+
+```text
+ACCEPT MATERIAL SECURITY RISK
+CHANGE AUTHORITATIVE SECURITY POLICY
+GRANT HIGH-RISK PRIVILEGE
+OVERRIDE GOVERNANCE
+DELETE AUTHORITATIVE EVIDENCE
+MAKE UNCONTROLLED IRREVERSIBLE SECURITY ACTIONS
+```
+
+---
+
+# 57. HUMAN-AI DECISION MODEL
+
+```text
+AI
+ ↓
+ANALYZE
+ ↓
+EVIDENCE
+ ↓
+RECOMMEND
+ ↓
+HUMAN / AUTHORIZED AUTHORITY
+ ↓
+DECIDE
+ ↓
+ACTION
+ ↓
+VERIFY
+```
+
+---
+
+# 58. AI AUTONOMY LEVELS
+
+```text
+A0 NO AUTONOMY
+A1 ASSISTED
+A2 RECOMMENDATION
+A3 APPROVAL-BASED ACTION
+A4 BOUNDED AUTOMATION
+A5 PROHIBITED / GOVERNANCE-RESTRICTED
+```
+
+---
+
+# 59. A0
+
+AI provides no autonomous action.
+
+---
+
+# 60. A1
+
+AI assists an authorized operator.
+
+---
+
+# 61. A2
+
+AI provides recommendations requiring human decision.
+
+---
+
+# 62. A3
+
+AI prepares an action that requires explicit authorization.
+
+---
+
+# 63. A4
+
+AI may execute predefined low-risk actions within strict boundaries.
+
+---
+
+# 64. A5
+
+Actions are prohibited from AI autonomy because of risk or governance requirements.
+
+---
+
+# 65. AGENT DECISION FRAMEWORK
+
+Agents shall have:
+
+```text
+IDENTITY
+AUTHORITY
+SCOPE
+TOOLS
+LIMITS
+ESCALATION
+AUDIT
+STOP CONDITION
+```
+
+---
+
+# 66. AGENT DECISION RIGHTS
+
+Agents may execute only decisions delegated to them.
+
+---
+
+# 67. AGENT HIGH-RISK DECISION
+
+Requires human or explicitly authorized governance approval where risk warrants.
+
+---
+
+# 68. AGENT ESCALATION
+
+Agents shall escalate when:
+
+```text
+RISK HIGH
+CONFIDENCE LOW
+POLICY CONFLICT
+AUTHORITY EXCEEDED
+UNEXPECTED STATE
+IRREVERSIBLE ACTION
+```
+
+---
+
+# 69. AGENT SAFE STOP
+
+Agents shall stop or enter a safe state when required conditions are violated.
+
+---
+
+# 70. AI / AGENT EVIDENCE
+
+AI and agent recommendations shall preserve relevant:
+
+```text
+INPUT
+SOURCE
+MODEL / AGENT
+TOOLS
+EVIDENCE
+OUTPUT
+DECISION
+ACTION
+```
+
+---
+
+# 71. AI HALLUCINATION CONTROL
+
+Unverified AI statements shall not be treated as authoritative security facts.
+
+---
+
+# 72. AI CONFIDENCE
+
+AI recommendations should expose confidence and uncertainty where technically possible.
+
+---
+
+# 73. HUMAN OVERSIGHT
+
+Human oversight shall be proportional to:
+
+```text
+RISK
+IMPACT
+REVERSIBILITY
+UNCERTAINTY
+AUTONOMY
+```
+
+---
+
+# 74. FOUR-EYES PRINCIPLE
+
+High-risk security decisions may require independent review or dual authorization.
+
+---
+
+# 75. SEGREGATION OF DUTIES
+
+Where appropriate:
+
+```text
+REQUEST
+APPROVAL
+EXECUTION
+VERIFICATION
+```
+
+shall be separated.
+
+---
+
+# 76. CONFLICT OF INTEREST
+
+Decision processes shall identify material conflicts of interest.
+
+---
+
+# 77. DECISION QUALITY
+
+Evaluate:
+
+```text
+EVIDENCE QUALITY
+RISK QUALITY
+TIMELINESS
+CONSISTENCY
+OUTCOME
+```
+
+---
+
+# 78. DECISION ERROR
+
+Decision errors shall be treated as learning opportunities unless they involve misconduct or policy violations requiring formal action.
+
+---
+
+# 79. DECISION REVIEW
+
+Material decisions should be periodically reviewed for:
+
+```text
+QUALITY
+CONSISTENCY
+OUTCOME
+UNINTENDED EFFECTS
+```
+
+---
+
+# 80. DECISION FEEDBACK
+
+```text
+DECISION
+ ↓
+ACTION
+ ↓
+OUTCOME
+ ↓
+VALIDATION
+ ↓
+LESSON
+ ↓
+POLICY / CONTROL / MODEL IMPROVEMENT
+```
+
+---
+
+# 81. DECISION KNOWLEDGE GRAPH
+
+Security decisions may be represented as:
+
+```text
+RISK → REQUIRES → DECISION
+DECISION → AUTHORIZED_BY → ACTOR
+DECISION → BASED_ON → EVIDENCE
+DECISION → CREATES → ACTION
+ACTION → VERIFIED_BY → CONTROL
+DECISION → PRODUCES → OUTCOME
+```
+
+---
+
+# 82. DECISION LINEAGE
+
+Material decisions shall be traceable:
+
+```text
+SOURCE
+ ↓
+INTELLIGENCE
+ ↓
+RISK
+ ↓
+OPTIONS
+ ↓
+DECISION
+ ↓
+ACTION
+ ↓
+OUTCOME
+```
+
+---
+
+# 83. DECISION AUDITABILITY
+
+An independent reviewer should be able to understand:
+
+```text
+WHAT
+WHY
+WHO
+WHEN
+EVIDENCE
+AUTHORITY
+OUTCOME
+```
+
+---
+
+# 84. SECURITY DECISION DASHBOARD
+
+Minimum:
+
+```text
+OPEN DECISIONS
+CRITICAL DECISIONS
+OVERDUE DECISIONS
+RISK ACCEPTANCES
+EXCEPTIONS
+AI RECOMMENDATIONS
+AGENT ESCALATIONS
+HIGH-RISK ACTIONS
+DECISION OUTCOMES
+```
+
+---
+
+# 85. DECISION KPIs
+
+Track:
+
+```text
+DECISION LEAD TIME
+OVERDUE DECISIONS
+DECISION ESCALATION RATE
+RISK ACCEPTANCE AGE
+EXCEPTION AGE
+DECISION REWORK
+DECISION ERROR RATE
+AI RECOMMENDATION ACCEPTANCE
+AI RECOMMENDATION OVERRIDE
+AGENT ESCALATION RATE
+HIGH-RISK DECISION REVIEW COVERAGE
+```
+
+---
+
+# 86. DECISION SLO
+
+Where appropriate define objectives for:
+
+```text
+CRITICAL SECURITY DECISION TIME
+HIGH-RISK APPROVAL TIME
+EMERGENCY ACCESS DECISION TIME
+VULNERABILITY DECISION TIME
+INCIDENT DECISION TIME
+```
+
+---
+
+# 87. DECISION QUEUE
+
+Maintain:
+
+```text
+DECISION ID
+PRIORITY
+OWNER
+AUTHORITY
+DUE TIME
+STATUS
+DEPENDENCIES
+```
+
+---
+
+# 88. DECISION STATUS
+
+```text
+OPEN
+ASSESSING
+AWAITING EVIDENCE
+AWAITING APPROVAL
+APPROVED
+REJECTED
+EXECUTING
+VERIFYING
+CLOSED
+```
+
+---
+
+# 89. SECURITY DECISION AUTOMATION
+
+Automation may support:
+
+```text
+ROUTING
+ENRICHMENT
+PRIORITIZATION
+NOTIFICATION
+CASE CREATION
+APPROVAL WORKFLOW
+```
+
+---
+
+# 90. AUTOMATED DECISION GUARDRAILS
+
+Automated decisions shall have:
+
+```text
+DEFINED RULE
+DEFINED SCOPE
+DEFINED AUTHORITY
+DEFINED DATA
+DEFINED ACTION
+DEFINED ROLLBACK
+DEFINED AUDIT
+```
+
+---
+
+# 91. IRREVERSIBLE DECISION GUARDRAIL
+
+Irreversible actions shall not be automated without explicit governance authorization appropriate to risk.
+
+---
+
+# 92. SECURITY DECISION RUNBOOKS
+
+Required runbooks should cover:
+
+```text
+CRITICAL INCIDENT DECISION
+EMERGENCY ACCESS
+CRITICAL VULNERABILITY
+DATA EXPOSURE
+AI SECURITY INCIDENT
+AGENT SECURITY INCIDENT
+RISK ACCEPTANCE
+SECURITY EXCEPTION
+RECOVERY AUTHORIZATION
+```
+
+---
+
+# 93. DECISION EXERCISES
+
+Exercise:
+
+```text
+TABLETOP
+SCENARIO
+AI RECOMMENDATION
+AGENT ESCALATION
+EMERGENCY DECISION
+```
+
+capabilities.
+
+---
+
+# 94. DECISION TESTING
+
+Test:
+
+```text
+AUTHORITY
+ESCALATION
+APPROVAL
+REJECTION
+OVERRIDE
+ROLLBACK
+AUDIT
+```
+
+---
+
+# 95. DECISION ASSURANCE
+
+Assurance shall verify:
+
+```text
+RIGHT AUTHORITY
+SUFFICIENT EVIDENCE
+PROPER RISK
+APPROPRIATE ACTION
+TRACEABILITY
+VERIFICATION
+```
+
+---
+
+# 96. DECISION AUDIT
+
+Audit may examine:
+
+```text
+DECISION RECORDS
+RISK ACCEPTANCE
+EXCEPTIONS
+AI RECOMMENDATIONS
+AGENT ACTIONS
+APPROVALS
+OVERRIDES
+OUTCOMES
+```
+
+---
+
+# 97. SECURITY DECISION CONTROL LIBRARY
+
+Recommended controls:
+
+```text
+CTRL-SECDEC-001 Decision Rights
+CTRL-SECDEC-002 Decision Authority
+CTRL-SECDEC-003 Evidence Sufficiency
+CTRL-SECDEC-004 Fact / Inference Separation
+CTRL-SECDEC-005 Decision Confidence
+CTRL-SECDEC-006 Risk Prioritization
+CTRL-SECDEC-007 Business Impact
+CTRL-SECDEC-008 Decision Severity
+CTRL-SECDEC-009 Decision Escalation
+CTRL-SECDEC-010 Decision Record
+CTRL-SECDEC-011 Options Analysis
+CTRL-SECDEC-012 Reversibility
+CTRL-SECDEC-013 Action Authorization
+CTRL-SECDEC-014 Action Verification
+CTRL-SECDEC-015 Risk Acceptance
+CTRL-SECDEC-016 Security Exceptions
+CTRL-SECDEC-017 Compensating Controls
+CTRL-SECDEC-018 Access Decisions
+CTRL-SECDEC-019 Vulnerability Decisions
+CTRL-SECDEC-020 Incident Decisions
+CTRL-SECDEC-021 Architecture Security Decisions
+CTRL-SECDEC-022 AI Decision Governance
+CTRL-SECDEC-023 AI Autonomy
+CTRL-SECDEC-024 Agent Decision Governance
+CTRL-SECDEC-025 Human Oversight
+CTRL-SECDEC-026 Four-Eyes
+CTRL-SECDEC-027 Segregation of Duties
+CTRL-SECDEC-028 Decision Lineage
+CTRL-SECDEC-029 Decision Feedback
+CTRL-SECDEC-030 Decision Assurance
+```
+
+---
+
+# 98. CTRL-SECDEC-001 — DECISION RIGHTS
+
+Objective:
+
+```text
+MATERIAL SECURITY DECISIONS HAVE DEFINED DECISION RIGHTS.
+```
+
+---
+
+# 99. CTRL-SECDEC-002 — DECISION AUTHORITY
+
+Objective:
+
+```text
+DECISIONS ARE APPROVED BY AUTHORIZED ACTORS.
+```
+
+---
+
+# 100. CTRL-SECDEC-003 — EVIDENCE SUFFICIENCY
+
+Objective:
+
+```text
+MATERIAL DECISIONS ARE BASED ON SUFFICIENT AND RELEVANT EVIDENCE.
+```
+
+---
+
+# 101. CTRL-SECDEC-004 — FACT / INFERENCE SEPARATION
+
+Objective:
+
+```text
+DECISION RECORDS DISTINGUISH FACTS FROM INFERENCES AND RECOMMENDATIONS.
+```
+
+---
+
+# 102. CTRL-SECDEC-005 — DECISION CONFIDENCE
+
+Objective:
+
+```text
+MATERIAL UNCERTAINTY IS EXPLICITLY RECORDED.
+```
+
+---
+
+# 103. CTRL-SECDEC-006 — RISK PRIORITIZATION
+
+Objective:
+
+```text
+SECURITY DECISIONS ARE PRIORITIZED ACCORDING TO RISK AND IMPACT.
+```
+
+---
+
+# 104. CTRL-SECDEC-007 — BUSINESS IMPACT
+
+Objective:
+
+```text
+DECISIONS CONSIDER MATERIAL BUSINESS AND SERVICE IMPACT.
+```
+
+---
+
+# 105. CTRL-SECDEC-008 — DECISION SEVERITY
+
+Objective:
+
+```text
+DECISION URGENCY AND AUTHORITY ARE PROPORTIONAL TO IMPACT.
+```
+
+---
+
+# 106. CTRL-SECDEC-009 — DECISION ESCALATION
+
+Objective:
+
+```text
+DECISIONS ESCALATE WHEN AUTHORITY, RISK OR UNCERTAINTY REQUIRES IT.
+```
+
+---
+
+# 107. CTRL-SECDEC-010 — DECISION RECORD
+
+Objective:
+
+```text
+MATERIAL SECURITY DECISIONS ARE TRACEABLE AND AUDITABLE.
+```
+
+---
+
+# 108. CTRL-SECDEC-011 — OPTIONS ANALYSIS
+
+Objective:
+
+```text
+MATERIAL DECISIONS CONSIDER REASONABLE ALTERNATIVES.
+```
+
+---
+
+# 109. CTRL-SECDEC-012 — REVERSIBILITY
+
+Objective:
+
+```text
+DECISION MAKERS CONSIDER REVERSIBILITY BEFORE HIGH-IMPACT ACTIONS.
+```
+
+---
+
+# 110. CTRL-SECDEC-013 — ACTION AUTHORIZATION
+
+Objective:
+
+```text
+SECURITY ACTIONS ARE EXECUTED ONLY WITHIN AUTHORIZED BOUNDARIES.
+```
+
+---
+
+# 111. CTRL-SECDEC-014 — ACTION VERIFICATION
+
+Objective:
+
+```text
+MATERIAL SECURITY ACTIONS ARE VERIFIED AFTER EXECUTION.
+```
+
+---
+
+# 112. CTRL-SECDEC-015 — RISK ACCEPTANCE
+
+Objective:
+
+```text
+RESIDUAL SECURITY RISK IS ACCEPTED ONLY BY APPROPRIATE AUTHORITY.
+```
+
+---
+
+# 113. CTRL-SECDEC-016 — SECURITY EXCEPTIONS
+
+Objective:
+
+```text
+SECURITY EXCEPTIONS ARE DOCUMENTED, APPROVED, TIME-BOUND AND REVIEWED.
+```
+
+---
+
+# 114. CTRL-SECDEC-017 — COMPENSATING CONTROLS
+
+Objective:
+
+```text
+ALTERNATIVE CONTROLS ARE FORMALLY ASSESSED WHEN PRIMARY CONTROLS CANNOT BE IMPLEMENTED.
+```
+
+---
+
+# 115. CTRL-SECDEC-018 — ACCESS DECISIONS
+
+Objective:
+
+```text
+ACCESS AND PRIVILEGE DECISIONS FOLLOW RISK-BASED AUTHORIZATION.
+```
+
+---
+
+# 116. CTRL-SECDEC-019 — VULNERABILITY DECISIONS
+
+Objective:
+
+```text
+VULNERABILITY DISPOSITION IS BASED ON THREAT, EXPOSURE, IMPACT AND CONTROLS.
+```
+
+---
+
+# 117. CTRL-SECDEC-020 — INCIDENT DECISIONS
+
+Objective:
+
+```text
+INCIDENT DECLARATION, CONTAINMENT AND RECOVERY DECISIONS ARE GOVERNED.
+```
+
+---
+
+# 118. CTRL-SECDEC-021 — ARCHITECTURE SECURITY DECISIONS
+
+Objective:
+
+```text
+MATERIAL ARCHITECTURAL SECURITY DECISIONS ARE EXPLICITLY ASSESSED AND OWNED.
+```
+
+---
+
+# 119. CTRL-SECDEC-022 — AI DECISION GOVERNANCE
+
+Objective:
+
+```text
+AI SECURITY RECOMMENDATIONS OPERATE WITHIN DEFINED GOVERNANCE BOUNDARIES.
+```
+
+---
+
+# 120. CTRL-SECDEC-023 — AI AUTONOMY
+
+Objective:
+
+```text
+AI AUTONOMY IS EXPLICITLY DEFINED AND PROPORTIONAL TO RISK.
+```
+
+---
+
+# 121. CTRL-SECDEC-024 — AGENT DECISION GOVERNANCE
+
+Objective:
+
+```text
+AGENTS EXECUTE ONLY DELEGATED DECISIONS WITHIN DEFINED AUTHORITY.
+```
+
+---
+
+# 122. CTRL-SECDEC-025 — HUMAN OVERSIGHT
+
+Objective:
+
+```text
+HIGH-RISK AI AND AGENT DECISIONS HAVE APPROPRIATE HUMAN OR GOVERNANCE OVERSIGHT.
+```
+
+---
+
+# 123. CTRL-SECDEC-026 — FOUR-EYES
+
+Objective:
+
+```text
+HIGH-RISK DECISIONS MAY REQUIRE INDEPENDENT DUAL AUTHORIZATION.
+```
+
+---
+
+# 124. CTRL-SECDEC-027 — SEGREGATION OF DUTIES
+
+Objective:
+
+```text
+CRITICAL REQUEST, APPROVAL, EXECUTION AND VERIFICATION RESPONSIBILITIES ARE SEPARATED WHERE REQUIRED.
+```
+
+---
+
+# 125. CTRL-SECDEC-028 — DECISION LINEAGE
+
+Objective:
+
+```text
+MATERIAL SECURITY DECISIONS ARE TRACEABLE FROM SOURCE THROUGH OUTCOME.
+```
+
+---
+
+# 126. CTRL-SECDEC-029 — DECISION FEEDBACK
+
+Objective:
+
+```text
+DECISION OUTCOMES FEED SECURITY GOVERNANCE AND CONTROL IMPROVEMENT.
+```
+
+---
+
+# 127. CTRL-SECDEC-030 — DECISION ASSURANCE
+
+Objective:
+
+```text
+SECURITY DECISION CONTROLS ARE PERIODICALLY ASSURED.
+```
+
+---
+
+# 128. DECISION MATURITY
+
+```text
+AD HOC
+ ↓
+DEFINED
+ ↓
+CONTROLLED
+ ↓
+EVIDENCE-BASED
+ ↓
+RISK-INTELLIGENT
+ ↓
+ADAPTIVE
+```
+
+---
+
+# 129. AD HOC
+
+Security decisions depend heavily on individual judgment.
+
+---
+
+# 130. DEFINED
+
+Decision roles and procedures are documented.
+
+---
+
+# 131. CONTROLLED
+
+Authority, evidence and approval are consistently managed.
+
+---
+
+# 132. EVIDENCE-BASED
+
+Decisions use structured evidence and explicit uncertainty.
+
+---
+
+# 133. RISK-INTELLIGENT
+
+Decisions incorporate threat, business impact, architecture and historical outcomes.
+
+---
+
+# 134. ADAPTIVE
+
+Decision rules, controls and governance evolve based on measured outcomes.
+
+---
+
+# 135. SECURITY DECISION INVARIANTS
+
+```text
+NO AUTHORITY
+→
+NO VALID MATERIAL DECISION
+```
+
+```text
+NO EVIDENCE
+→
+NO DEFENSIBLE SECURITY DECISION
+```
+
+```text
+NO RISK CONTEXT
+→
+NO RELIABLE PRIORITIZATION
+```
+
+```text
+NO HUMAN / GOVERNANCE BOUNDARY
+→
+AI MAY BECOME AN UNCONTROLLED DECISION MAKER
+```
+
+```text
+NO VERIFICATION
+→
+ACTION OUTCOME IS UNKNOWN
+```
+
+```text
+NO TRACEABILITY
+→
+DECISION CANNOT BE AUDITED
+```
+
+---
+
+# 136. DECISION QUALITY MODEL
+
+```text
+AUTHORITY
++
+EVIDENCE
++
+RISK
++
+OPTIONS
++
+ACCOUNTABILITY
++
+VERIFICATION
+=
+DEFENSIBLE SECURITY DECISION
+```
+
+---
+
+# 137. SECURITY DECISION ACCEPTANCE
+
+The decision framework is accepted when:
+
+```text
+DECISION RIGHTS ACTIVE
+DECISION AUTHORITY ACTIVE
+EVIDENCE MODEL ACTIVE
+FACT / INFERENCE SEPARATION ACTIVE
+CONFIDENCE ACTIVE
+RISK PRIORITIZATION ACTIVE
+BUSINESS IMPACT ACTIVE
+DECISION SEVERITY ACTIVE
+ESCALATION ACTIVE
+DECISION RECORD ACTIVE
+OPTIONS ANALYSIS ACTIVE
+REVERSIBILITY ACTIVE
+ACTION AUTHORIZATION ACTIVE
+ACTION VERIFICATION ACTIVE
+RISK ACCEPTANCE ACTIVE
+SECURITY EXCEPTION ACTIVE
+COMPENSATING CONTROL ACTIVE
+ACCESS DECISIONS ACTIVE
+VULNERABILITY DECISIONS ACTIVE
+INCIDENT DECISIONS ACTIVE
+ARCHITECTURE SECURITY DECISIONS ACTIVE
+AI DECISION GOVERNANCE ACTIVE
+AI AUTONOMY DEFINED
+AGENT DECISION GOVERNANCE ACTIVE
+HUMAN OVERSIGHT ACTIVE
+FOUR-EYES ACTIVE WHERE REQUIRED
+SEGREGATION OF DUTIES ACTIVE
+DECISION LINEAGE ACTIVE
+DECISION FEEDBACK ACTIVE
+DECISION ASSURANCE ACTIVE
+```
+
+---
+
+# 138. SECURITY DECISION ACCEPTANCE CHECKLIST
+
+```text
+[ ] Decision rights established
+[ ] Decision authorities established
+[ ] Decision inputs established
+[ ] Evidence sufficiency established
+[ ] Fact / inference separation established
+[ ] Confidence and uncertainty established
+[ ] Risk prioritization established
+[ ] Business impact assessment established
+[ ] Decision severity established
+[ ] Escalation established
+[ ] Decision record established
+[ ] Options analysis established
+[ ] Reversibility assessment established
+[ ] Action authorization established
+[ ] Action verification established
+[ ] Risk acceptance established
+[ ] Risk acceptance expiry/review established
+[ ] Security exception process established
+[ ] Compensating control process established
+[ ] Access decision process established
+[ ] Vulnerability decision process established
+[ ] Incident decision process established
+[ ] Architecture security decision process established
+[ ] AI decision governance established
+[ ] AI autonomy levels established
+[ ] Agent decision governance established
+[ ] Human oversight established
+[ ] Four-eyes established where required
+[ ] Segregation of duties established
+[ ] Decision lineage established
+[ ] Decision feedback established
+[ ] Decision dashboard established
+[ ] Decision KPIs established
+[ ] Decision SLOs established
+[ ] Decision runbooks established
+[ ] Decision exercises established
+[ ] Decision testing established
+[ ] Decision assurance established
+[ ] Decision auditability established
+```
+
+---
+
+# 139. SECURITY DECISION STATE
+
+Allowed states:
+
+```text
+ACCEPTED
+ACCEPTED WITH CONDITIONS
+NOT ACCEPTED
+```
+
+---
+
+# 140. CONDITIONAL ACCEPTANCE
+
+Requires:
+
+```text
+GAP
+RISK
+OWNER
+MITIGATION
+DEADLINE
+AUTHORITY
+```
+
+---
+
+# 141. DECISION HANDOVER
+
+The decision capability becomes operational when:
+
+```text
+INTELLIGENCE
++
+RISK
++
+AUTHORITY
++
+EVIDENCE
++
+DECISION
++
+ACTION
++
+VERIFICATION
+```
+
+are connected and traceable.
+
+---
+
+# 142. NORMAL SECURITY DECISION STATE
+
+```text
+INTELLIGENCE
+ ↓
+RISK
+ ↓
+OPTIONS
+ ↓
+DECISION
+ ↓
+AUTHORIZATION
+ ↓
+ACTION
+ ↓
+VERIFICATION
+ ↓
+OUTCOME
+ ↓
+LEARNING
+```
+
+---
+
+# 143. FINAL SECURITY DECISION BASELINE
+
+The baseline consists of:
+
+```text
+DECISION RIGHTS
+DECISION AUTHORITY
+EVIDENCE
+CONFIDENCE
+RISK PRIORITIZATION
+BUSINESS IMPACT
+DECISION SEVERITY
+ESCALATION
+DECISION RECORD
+OPTIONS
+REVERSIBILITY
+ACTION AUTHORIZATION
+ACTION VERIFICATION
+RISK ACCEPTANCE
+SECURITY EXCEPTIONS
+COMPENSATING CONTROLS
+ACCESS DECISIONS
+VULNERABILITY DECISIONS
+INCIDENT DECISIONS
+ARCHITECTURE SECURITY DECISIONS
+AI DECISION GOVERNANCE
+AI AUTONOMY
+AGENT DECISION GOVERNANCE
+HUMAN OVERSIGHT
+FOUR-EYES
+SEGREGATION OF DUTIES
+DECISION LINEAGE
+DECISION FEEDBACK
+DECISION ASSURANCE
+AUDIT
+```
+
+---
+
+# 144. FINAL TRACEABILITY
+
+```text
+EA-IMETA-MASTER-01
+        ↓
+SYSTEM RELEASE BASELINE
+        ↓
+IMPLEMENTATION
+        ↓
+BUILD
+        ↓
+TEST
+        ↓
+RELEASE
+        ↓
+PILOT
+        ↓
+PRODUCTION READINESS
+        ↓
+PRODUCTION
+        ↓
+PRODUCTION TEST
+        ↓
+PRODUCTION RELEASE
+        ↓
+PRODUCTION OPERATIONS
+        ↓
+SERVICE MANAGEMENT
+        ↓
+SERVICE GOVERNANCE
+        ↓
+SERVICE CONTROL
+        ↓
+SERVICE ASSURANCE
+        ↓
+SERVICE AUDIT
+        ↓
+SERVICE CONTINUITY
+        ↓
+SERVICE RESILIENCE
+        ↓
+SERVICE CAPACITY
+        ↓
+SERVICE PERFORMANCE
+        ↓
+SERVICE OBSERVABILITY
+        ↓
+SERVICE SECURITY
+        ↓
+SECURITY OPERATIONS
+        ↓
+SECURITY INTELLIGENCE
+        ↓
+SECURITY DECISION
+```
+
+---
+
+# 145. COMPLETION STATEMENT
+
+EA-IMETA-PRODUCTION-SERVICE-SECURITY-DECISION-01 establishes the formal decision layer that converts security intelligence and risk context into authorized, traceable and verifiable security action.
+
+It provides the ability to answer:
+
+```text
+WHO MAY DECIDE?
+WHAT EVIDENCE IS REQUIRED?
+WHAT IS THE RISK?
+WHAT ARE THE OPTIONS?
+WHAT IS THE BUSINESS IMPACT?
+WHAT MUST BE ESCALATED?
+WHEN MAY AI RECOMMEND?
+WHEN MAY AI ACT?
+WHEN MUST A HUMAN DECIDE?
+WHEN IS DUAL APPROVAL REQUIRED?
+HOW IS THE ACTION VERIFIED?
+CAN THE DECISION BE AUDITED?
+WHAT DID WE LEARN FROM THE OUTCOME?
+```
+
+This completes the core decision chain:
+
+```text
+SECURITY
+ ↓
+SECURITY OPERATIONS
+ ↓
+SECURITY INTELLIGENCE
+ ↓
+SECURITY DECISION
+ ↓
+AUTHORIZED ACTION
+ ↓
+VERIFICATION
+ ↓
+LEARNING
+```
+
+---
+
+# 146. NEXT DOCUMENT
+
+The next recommended document is:
+
+```text
+EA-IMETA-PRODUCTION-SERVICE-SECURITY-ADAPTATION-01
+```
+
+This should establish the adaptive security layer above the decision framework:
+
+```text
+SECURITY FEEDBACK
+CONTROL ADAPTATION
+DETECTION ADAPTATION
+RISK ADAPTATION
+POLICY ADAPTATION
+ARCHITECTURE ADAPTATION
+AI / AGENT ADAPTATION
+THREAT-DRIVEN CHANGE
+SECURITY LEARNING
+CONTINUOUS SECURITY IMPROVEMENT
+ADAPTIVE SECURITY GOVERNANCE
+```
+
+The next chain becomes:
+
+```text
+EA-IMETA-PRODUCTION-SERVICE-SECURITY-01
+        ↓
+EA-IMETA-PRODUCTION-SERVICE-SECURITY-OPERATIONS-01
+        ↓
+EA-IMETA-PRODUCTION-SERVICE-SECURITY-INTELLIGENCE-01
+        ↓
+EA-IMETA-PRODUCTION-SERVICE-SECURITY-DECISION-01
+        ↓
+EA-IMETA-PRODUCTION-SERVICE-SECURITY-ADAPTATION-01
+```
+
+---
+
+# 147. FINAL PRINCIPLE
+
+> EA-IMETA SHALL ENSURE THAT SECURITY DECISIONS ARE MADE BY THE RIGHT AUTHORITY, ON THE BASIS OF sufficient evidence and risk context, WITH EXPLICIT HUMAN-AI BOUNDARIES, TRACEABLE ACTIONS, VERIFIED OUTCOMES AND CONTINUOUS LEARNING.
+
+```text
+INTELLIGENCE
+ ↓
+RISK
+ ↓
+EVIDENCE
+ ↓
+DECISION
+ ↓
+AUTHORITY
+ ↓
+ACTION
+ ↓
+VERIFICATION
+ ↓
+LEARNING
+ ↓
+ADAPTATION
+```
+
+---
+
+# END OF EA-IMETA-PRODUCTION-SERVICE-SECURITY-DECISION-01
+## PRODUCTION SECURITY DECISION FRAMEWORK, RISK PRIORITIZATION, DECISION RIGHTS & HUMAN-AI GOVERNANCE BASELINE
+## COMPLETE

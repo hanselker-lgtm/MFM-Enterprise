@@ -14,12 +14,12 @@ from sqlalchemy.orm import mapped_column
 from sqlalchemy.orm import relationship
 
 from mfm.database.models.base_model import BaseModel
+from mfm.database.models.vessel_model import VesselModel
 from mfm.domain.asset.asset_category import AssetCategory
 from mfm.domain.asset.asset_status import AssetStatus
 
 if TYPE_CHECKING:
     from mfm.database.models.asset_location_model import AssetLocationModel
-    from mfm.database.models.vessel_model import VesselModel
 
 
 class AssetModel(BaseModel):

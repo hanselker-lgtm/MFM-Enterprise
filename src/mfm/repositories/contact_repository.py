@@ -33,6 +33,13 @@ class ContactRepository(ABC):
         raise NotImplementedError
 
     @abstractmethod
+    def update(self, contact: Contact) -> None:
+        """
+        Persist changes to an existing Contact.
+        """
+        raise NotImplementedError
+
+    @abstractmethod
     def get(self, contact_id: UUID) -> Contact | None:
         """
         Return a Contact by UUID.

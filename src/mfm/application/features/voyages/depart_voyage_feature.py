@@ -24,7 +24,6 @@ from mfm.application.voyages.create_voyage import (
 )
 from mfm.application.voyages.depart_voyage import DepartVoyageRequest as ServiceRequest
 from mfm.application.voyages.depart_voyage import DepartVoyageResponse as ServiceResponse
-from mfm.application.voyages.depart_voyage import DepartVoyageUseCase
 from mfm.application.voyages.create_voyage import VoyageLocationInput as ServiceLocationInput
 
 

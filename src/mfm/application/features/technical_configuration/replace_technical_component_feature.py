@@ -43,9 +43,6 @@ from mfm.application.technical_configuration.replace_technical_component import 
 from mfm.application.technical_configuration.replace_technical_component import (
     ReplaceTechnicalComponentResponse as ServiceResponse,
 )
-from mfm.application.technical_configuration.replace_technical_component import (
-    ReplaceTechnicalComponentUseCase,
-)
 from mfm.domain.technical_configuration.technical_component_status import (
     TechnicalComponentStatus,
 )

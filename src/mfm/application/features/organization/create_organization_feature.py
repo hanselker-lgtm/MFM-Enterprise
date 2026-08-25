@@ -9,7 +9,6 @@ from uuid import UUID
 from mfm.application.organization.create_organization import BusinessRuleViolation as ServiceBusinessRuleViolation
 from mfm.application.organization.create_organization import CreateOrganizationRequest as ServiceRequest
 from mfm.application.organization.create_organization import CreateOrganizationResponse as ServiceResponse
-from mfm.application.organization.create_organization import CreateOrganizationUseCase
 from mfm.application.organization.create_organization import RepositoryException as ServiceRepositoryException
 from mfm.application.organization.create_organization import ValidationException as ServiceValidationException
 from mfm.domain.organization.organization_type import OrganizationType

@@ -31,7 +31,6 @@ from mfm.application.certificates.create_certificate import (
 from mfm.application.certificates.create_certificate import (
     CreateCertificateResponse as ServiceResponse,
 )
-from mfm.application.certificates.create_certificate import CreateCertificateUseCase
 from mfm.application.certificates.create_certificate import (
     IssuerReferenceResponse as ServiceIssuerReferenceResponse,
 )

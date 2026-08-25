@@ -36,9 +36,6 @@ from mfm.application.maintenance.update_maintenance_requirement import (
 from mfm.application.maintenance.update_maintenance_requirement import (
     UpdateMaintenanceRequirementResponse as ServiceResponse,
 )
-from mfm.application.maintenance.update_maintenance_requirement import (
-    UpdateMaintenanceRequirementUseCase,
-)
 
 
 @dataclass(frozen=True, slots=True)

@@ -42,9 +42,6 @@ from mfm.application.technical_configuration.update_technical_component_details 
 from mfm.application.technical_configuration.update_technical_component_details import (
     UpdateTechnicalComponentDetailsResponse as ServiceResponse,
 )
-from mfm.application.technical_configuration.update_technical_component_details import (
-    UpdateTechnicalComponentDetailsUseCase,
-)
 
 
 @dataclass(frozen=True, slots=True)

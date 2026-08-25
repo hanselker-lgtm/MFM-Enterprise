@@ -20,9 +20,6 @@ from mfm.application.technical_configuration.create_technical_configuration impo
     CreateTechnicalConfigurationResponse as ServiceResponse,
 )
 from mfm.application.technical_configuration.create_technical_configuration import (
-    CreateTechnicalConfigurationUseCase,
-)
-from mfm.application.technical_configuration.create_technical_configuration import (
     RepositoryException as ServiceRepositoryException,
 )
 from mfm.application.technical_configuration.create_technical_configuration import (

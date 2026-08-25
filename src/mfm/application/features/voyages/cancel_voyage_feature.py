@@ -23,7 +23,6 @@ from mfm.application.voyages.create_voyage import (
 )
 from mfm.application.voyages.cancel_voyage import CancelVoyageRequest as ServiceRequest
 from mfm.application.voyages.cancel_voyage import CancelVoyageResponse as ServiceResponse
-from mfm.application.voyages.cancel_voyage import CancelVoyageUseCase
 
 
 @dataclass(frozen=True, slots=True)

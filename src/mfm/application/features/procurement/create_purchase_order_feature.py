@@ -18,9 +18,6 @@ from mfm.application.procurement.create_purchase_order import (
     CreatePurchaseOrderResponse as ServiceResponse,
 )
 from mfm.application.procurement.create_purchase_order import (
-    CreatePurchaseOrderUseCase,
-)
-from mfm.application.procurement.create_purchase_order import (
     PurchaseOrderLineInput as ServicePurchaseOrderLineInput,
 )
 from mfm.application.procurement.create_purchase_order import (

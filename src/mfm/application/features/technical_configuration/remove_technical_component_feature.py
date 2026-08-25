@@ -37,9 +37,6 @@ from mfm.application.technical_configuration.remove_technical_component import (
 from mfm.application.technical_configuration.remove_technical_component import (
     RemoveTechnicalComponentResponse as ServiceResponse,
 )
-from mfm.application.technical_configuration.remove_technical_component import (
-    RemoveTechnicalComponentUseCase,
-)
 
 
 @dataclass(frozen=True, slots=True)

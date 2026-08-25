@@ -40,7 +40,6 @@ from mfm.common.domain_event import DomainEvent
 from mfm.domain.organization.board import Board
 from mfm.domain.organization.committee import Committee
 from mfm.domain.organization.organization import Organization
-from mfm.domain.organization.organization_id import OrganizationId
 from mfm.domain.organization.organization_id import OrganizationNumber
 from mfm.domain.organization.organization_status import OrganizationStatus
 from mfm.domain.organization.organization_type import OrganizationType

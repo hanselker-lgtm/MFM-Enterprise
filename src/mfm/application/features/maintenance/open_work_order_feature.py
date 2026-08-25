@@ -32,7 +32,6 @@ from mfm.application.maintenance.create_maintenance_plan import (
 )
 from mfm.application.maintenance.open_work_order import OpenWorkOrderRequest as ServiceRequest
 from mfm.application.maintenance.open_work_order import OpenWorkOrderResponse as ServiceResponse
-from mfm.application.maintenance.open_work_order import OpenWorkOrderUseCase
 
 
 @dataclass(frozen=True, slots=True)

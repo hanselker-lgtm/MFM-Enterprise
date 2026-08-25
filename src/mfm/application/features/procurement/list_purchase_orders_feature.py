@@ -19,7 +19,6 @@ from mfm.application.procurement.create_purchase_order import (
 )
 from mfm.application.procurement.list_purchase_orders import ListPurchaseOrdersRequest as ServiceRequest
 from mfm.application.procurement.list_purchase_orders import ListPurchaseOrdersResponse as ServiceResponse
-from mfm.application.procurement.list_purchase_orders import ListPurchaseOrdersUseCase
 
 
 @dataclass(frozen=True, slots=True)

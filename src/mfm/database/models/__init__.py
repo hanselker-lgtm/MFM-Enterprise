@@ -1,4 +1,6 @@
 from mfm.database.models.base_model import BaseModel
+from mfm.database.models.asset_model import AssetModel
+from mfm.database.models.asset_location_model import AssetLocationModel
 from mfm.database.models.contact_model import ContactModel
 from mfm.database.models.contact_person_model import ContactPersonModel
 from mfm.database.models.contact_organisation_model import ContactOrganisationModel
@@ -6,6 +8,11 @@ from mfm.database.models.contact_email_model import ContactEmailModel
 from mfm.database.models.contact_phone_model import ContactPhoneModel
 from mfm.database.models.contact_address_model import ContactAddressModel
 from mfm.database.models.contingent_plan_model import ContingentPlanModel
+from mfm.database.models.invoice_model import InvoiceLineModel
+from mfm.database.models.invoice_model import InvoiceModel
+from mfm.database.models.membership_billing_model import MembershipFeeScheduleModel
+from mfm.database.models.membership_billing_model import MembershipBillingReminderModel
+from mfm.database.models.membership_billing_model import MembershipBillingRunModel
 from mfm.database.models.certificate_model import CertificateModel
 from mfm.database.models.certificate_compliance_observation_model import (
     CertificateComplianceObservationModel,
@@ -94,4 +101,9 @@ __all__ = [
     "LedgerAccountModel",
     "FiscalYearModel",
     "FiscalPeriodModel",
+    "MembershipFeeScheduleModel",
+    "MembershipBillingReminderModel",
+    "MembershipBillingRunModel",
+    "InvoiceModel",
+    "InvoiceLineModel",
 ]

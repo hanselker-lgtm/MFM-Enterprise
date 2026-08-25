@@ -21,7 +21,6 @@ from mfm.application.certificates.suspend_certificate import (
 from mfm.application.certificates.suspend_certificate import (
     SuspendCertificateResponse as ServiceResponse,
 )
-from mfm.application.certificates.suspend_certificate import SuspendCertificateUseCase
 from mfm.application.features.certificates.create_certificate_feature import (
     BusinessRuleViolation,
 )

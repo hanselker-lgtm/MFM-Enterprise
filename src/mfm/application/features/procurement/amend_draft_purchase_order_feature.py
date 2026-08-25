@@ -36,9 +36,6 @@ from mfm.application.procurement.amend_draft_purchase_order import (
     AmendDraftPurchaseOrderResponse as ServiceResponse,
 )
 from mfm.application.procurement.amend_draft_purchase_order import (
-    AmendDraftPurchaseOrderUseCase,
-)
-from mfm.application.procurement.amend_draft_purchase_order import (
     PurchaseOrderLineUpdateInput as ServicePurchaseOrderLineUpdateInput,
 )
 from mfm.application.procurement.create_purchase_order import (

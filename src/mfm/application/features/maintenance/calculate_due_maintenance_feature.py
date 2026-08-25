@@ -28,9 +28,6 @@ from mfm.application.maintenance.calculate_due_maintenance import (
 from mfm.application.maintenance.calculate_due_maintenance import (
     CalculateDueMaintenanceResponse as ServiceResponse,
 )
-from mfm.application.maintenance.calculate_due_maintenance import (
-    CalculateDueMaintenanceUseCase,
-)
 from mfm.application.maintenance.create_maintenance_plan import (
     BusinessRuleViolation as ServiceBusinessRuleViolation,
 )

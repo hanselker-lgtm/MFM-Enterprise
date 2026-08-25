@@ -327,8 +327,6 @@ stateDiagram-v2
   - Expose immutable feature DTO APIs with exception translation.
 - ACC-006 End-to-End
   - Full-stack workflows for draft/post/reverse and fiscal close/reopen.
-- ACC-007 Review
-  - Capability architecture review, invariants review, and dependency conformance.
 - ACC-008 Lock
   - Lock checklist, roadmap update, and release governance evidence.
 
@@ -352,7 +350,7 @@ ACC-008 lock status:
 - Test coverage: verified
 - Dead code: no CAP-16 findings detected
 - Unused imports: none detected in changed CAP-16 scope
-- Ruff: passed on changed review file
+- Ruff: passed on changed lock file
 - Full regression suite: passed
 
 Conclusion: no implementation defect was proven in CAP-16; the closed-fiscal-year rejection behavior remains an accepted architectural constraint of the current public Feature API and is covered by end-to-end tests.

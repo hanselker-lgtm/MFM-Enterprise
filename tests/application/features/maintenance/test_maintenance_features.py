@@ -3,7 +3,6 @@ from __future__ import annotations
 from dataclasses import FrozenInstanceError
 from datetime import date
 from datetime import datetime
-from datetime import timezone
 from uuid import UUID
 from uuid import uuid4
 

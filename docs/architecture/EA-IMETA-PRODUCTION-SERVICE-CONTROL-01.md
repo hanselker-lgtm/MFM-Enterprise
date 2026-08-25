@@ -1,0 +1,2421 @@
+# EA-IMETA-PRODUCTION-SERVICE-CONTROL-01
+# PRODUCTION SERVICE CONTROL, ASSURANCE & CONTROL EVIDENCE BASELINE
+
+### Version 1.0
+### Status: PRODUCTION SERVICE CONTROL BASELINE
+### Governing Architecture: EA-IMETA-MASTER-01
+### Governing System Baseline: EA-IMETA-SYSTEM-RELEASE-BASELINE-01
+### Governing Roadmap: EA-IMETA-IMPLEMENTATION-ROADMAP-01
+### Governing Backlog: EA-IMETA-IMPLEMENTATION-BACKLOG-01
+### Governing MVP: EA-IMETA-MVP-IMPLEMENTATION-01
+### Governing Build: EA-IMETA-MVP-BUILD-01
+### Governing MVP Test: EA-IMETA-MVP-TEST-01
+### Governing MVP Release: EA-IMETA-MVP-RELEASE-01
+### Governing Pilot-01: EA-IMETA-PILOT-01
+### Governing Pilot-02: EA-IMETA-PILOT-02
+### Governing Readiness: EA-IMETA-PRODUCTION-READINESS-01
+### Governing Production: EA-IMETA-PRODUCTION-01
+### Governing Production Test: EA-IMETA-PRODUCTION-TEST-01
+### Governing Production Release: EA-IMETA-PRODUCTION-RELEASE-01
+### Governing Production Operations: EA-IMETA-PRODUCTION-OPERATIONS-01
+### Governing Service Management: EA-IMETA-PRODUCTION-SERVICE-MANAGEMENT-01
+### Governing Service Governance: EA-IMETA-PRODUCTION-SERVICE-GOVERNANCE-01
+### Target: EA-IMETA-PRODUCTION-SERVICE-CONTROL-01
+### Purpose: Translate production governance requirements into measurable, owned, testable and evidenced controls
+
+---
+
+# 1. PURPOSE
+
+EA-IMETA-PRODUCTION-SERVICE-CONTROL-01 establishes the operational control framework for the live EA-IMETA service.
+
+It translates:
+
+```text
+GOVERNANCE
+      ↓
+POLICY
+      ↓
+STANDARD
+      ↓
+CONTROL
+      ↓
+EVIDENCE
+      ↓
+ASSURANCE
+```
+
+into a repeatable production control system.
+
+---
+
+# 2. CONTROL PRINCIPLE
+
+> EVERY MATERIAL PRODUCTION CONTROL SHALL HAVE A DEFINED OBJECTIVE, OWNER, FREQUENCY, TEST METHOD, EVIDENCE SOURCE, RESULT AND REMEDIATION PATH.
+
+---
+
+# 3. CONTROL OBJECTIVES
+
+Controls shall protect:
+
+```text
+AVAILABILITY
+CONFIDENTIALITY
+INTEGRITY
+AUTHORIZATION
+TRACEABILITY
+DATA QUALITY
+GOVERNANCE
+RECOVERABILITY
+CHANGE SAFETY
+SERVICE QUALITY
+```
+
+---
+
+# 4. CONTROL MODEL
+
+```text
+CONTROL OBJECTIVE
+       ↓
+CONTROL
+       ↓
+CONTROL OWNER
+       ↓
+CONTROL EXECUTION
+       ↓
+EVIDENCE
+       ↓
+TEST
+       ↓
+RESULT
+       ↓
+REMEDIATION
+       ↓
+RETEST
+```
+
+---
+
+# 5. CONTROL TYPES
+
+```text
+PREVENTIVE
+DETECTIVE
+CORRECTIVE
+DIRECTIVE
+COMPENSATING
+```
+
+---
+
+# 6. PREVENTIVE CONTROL
+
+Prevents an undesired condition before it occurs.
+
+Examples:
+
+```text
+ROLE RESTRICTION
+APPROVAL GATE
+INPUT VALIDATION
+CHANGE APPROVAL
+```
+
+---
+
+# 7. DETECTIVE CONTROL
+
+Detects an undesired condition after or during occurrence.
+
+Examples:
+
+```text
+AUDIT REVIEW
+MONITORING
+ACCESS REVIEW
+DATA QUALITY CHECK
+```
+
+---
+
+# 8. CORRECTIVE CONTROL
+
+Restores an acceptable condition.
+
+Examples:
+
+```text
+REMEDIATION
+ROLLBACK
+DATA CORRECTION
+ACCESS REVOCATION
+```
+
+---
+
+# 9. DIRECTIVE CONTROL
+
+Establishes required behavior.
+
+Examples:
+
+```text
+POLICY
+STANDARD
+PROCEDURE
+RUNBOOK
+```
+
+---
+
+# 10. COMPENSATING CONTROL
+
+Provides alternate protection when the primary control cannot operate.
+
+---
+
+# 11. CONTROL OWNERSHIP
+
+Every control has:
+
+```text
+CONTROL ID
+CONTROL OWNER
+CONTROL OBJECTIVE
+FREQUENCY
+EVIDENCE
+TEST METHOD
+RESULT
+REMEDIATION OWNER
+```
+
+---
+
+# 12. CONTROL ID
+
+Recommended format:
+
+```text
+CTRL-<DOMAIN>-<NUMBER>
+```
+
+Examples:
+
+```text
+CTRL-SEC-001
+CTRL-DATA-001
+CTRL-GOV-001
+CTRL-OPS-001
+```
+
+---
+
+# 13. CONTROL DOMAINS
+
+Minimum domains:
+
+```text
+SECURITY
+IDENTITY
+DATA
+GOVERNANCE
+ARCHITECTURE
+CHANGE
+RELEASE
+OPERATIONS
+BACKUP
+RECOVERY
+SERVICE
+AUDIT
+AI
+AGENT
+INTEGRATION
+```
+
+---
+
+# 14. CONTROL STATUS
+
+Allowed states:
+
+```text
+ACTIVE
+INACTIVE
+FAILED
+EXCEPTION
+RETIRED
+```
+
+---
+
+# 15. CONTROL FREQUENCY
+
+Possible frequencies:
+
+```text
+CONTINUOUS
+REAL-TIME
+DAILY
+WEEKLY
+MONTHLY
+QUARTERLY
+EVENT-DRIVEN
+ANNUAL
+```
+
+---
+
+# 16. CONTROL EVIDENCE
+
+Evidence may include:
+
+```text
+LOG
+REPORT
+SCREENSHOT
+TICKET
+APPROVAL
+AUDIT RECORD
+TEST RESULT
+CONFIGURATION
+DATABASE RECORD
+```
+
+---
+
+# 17. EVIDENCE REQUIREMENT
+
+Material controls require evidence sufficient to demonstrate execution.
+
+---
+
+# 18. EVIDENCE RETENTION
+
+Evidence shall follow approved retention requirements.
+
+---
+
+# 19. CONTROL TEST
+
+A control test determines whether the control:
+
+```text
+DESIGNED CORRECTLY
+EXECUTED
+OPERATED EFFECTIVELY
+```
+
+---
+
+# 20. CONTROL DESIGN TEST
+
+Determine whether the control is appropriately designed for its objective.
+
+---
+
+# 21. CONTROL OPERATING TEST
+
+Determine whether the control actually operated as intended.
+
+---
+
+# 22. CONTROL EFFECTIVENESS
+
+Possible outcomes:
+
+```text
+EFFECTIVE
+PARTIALLY EFFECTIVE
+INEFFECTIVE
+NOT TESTED
+```
+
+---
+
+# 23. CONTROL FAILURE
+
+A control failure requires:
+
+```text
+RECORD
+RISK ASSESSMENT
+OWNER
+CONTAINMENT
+REMEDIATION
+RETEST
+```
+
+---
+
+# 24. CONTROL EXCEPTION
+
+An approved exception may temporarily alter control execution.
+
+---
+
+# 25. CONTROL EXCEPTION REQUIREMENTS
+
+```text
+REASON
+RISK
+MITIGATION
+OWNER
+AUTHORITY
+START
+EXPIRY
+```
+
+---
+
+# 26. CONTROL REMEDIATION
+
+Remediation follows:
+
+```text
+IDENTIFY
+ ↓
+ASSESS
+ ↓
+CONTAIN
+ ↓
+FIX
+ ↓
+VERIFY
+ ↓
+CLOSE
+```
+
+---
+
+# 27. CONTROL ASSURANCE
+
+Assurance confirms that controls operate as intended.
+
+---
+
+# 28. ASSURANCE LEVELS
+
+```text
+SELF-ASSESSMENT
+SECOND-LINE REVIEW
+INDEPENDENT REVIEW
+AUDIT
+```
+
+---
+
+# 29. SELF-ASSESSMENT
+
+Control owner verifies own controls according to defined frequency.
+
+---
+
+# 30. SECOND-LINE REVIEW
+
+Governance, security, risk or service management may independently review evidence.
+
+---
+
+# 31. INDEPENDENT REVIEW
+
+Independent assurance may test selected material controls.
+
+---
+
+# 32. AUDIT
+
+Formal audit may evaluate control design and effectiveness.
+
+---
+
+# 33. CONTROL LIBRARY
+
+The control library is the authoritative catalogue of production controls.
+
+---
+
+# 34. CONTROL RECORD
+
+Each control record contains:
+
+```text
+ID
+NAME
+OBJECTIVE
+TYPE
+OWNER
+FREQUENCY
+PROCEDURE
+EVIDENCE
+TEST
+THRESHOLD
+ESCALATION
+STATUS
+```
+
+---
+
+# 35. SECURITY CONTROL DOMAIN
+
+Security controls protect:
+
+```text
+IDENTITY
+ACCESS
+SECRETS
+VULNERABILITIES
+SECURITY EVENTS
+```
+
+---
+
+# 36. CTRL-SEC-001 — AUTHENTICATION
+
+Objective:
+
+```text
+ONLY AUTHENTICATED IDENTITIES MAY ACCESS PROTECTED SERVICES.
+```
+
+Control:
+
+```text
+ENFORCE APPROVED AUTHENTICATION.
+```
+
+Evidence:
+
+```text
+AUTHENTICATION CONFIGURATION
+AUTHENTICATION LOGS
+```
+
+Frequency:
+
+```text
+CONTINUOUS
+```
+
+---
+
+# 37. CTRL-SEC-002 — AUTHORIZATION
+
+Objective:
+
+```text
+USERS MAY ONLY PERFORM AUTHORIZED ACTIONS.
+```
+
+Control:
+
+```text
+ENFORCE ROLE / PERMISSION MODEL.
+```
+
+Evidence:
+
+```text
+ROLE CONFIGURATION
+ACCESS LOGS
+```
+
+---
+
+# 38. CTRL-SEC-003 — PRIVILEGED ACCESS
+
+Objective:
+
+```text
+PRIVILEGED ACCESS IS RESTRICTED AND REVIEWED.
+```
+
+Evidence:
+
+```text
+PRIVILEGED ACCESS LIST
+REVIEW RECORD
+```
+
+Frequency:
+
+```text
+MONTHLY
+```
+
+---
+
+# 39. CTRL-SEC-004 — ACCESS REVOCATION
+
+Objective:
+
+```text
+NO LONGER REQUIRED ACCESS IS REMOVED.
+```
+
+Evidence:
+
+```text
+OFFBOARDING RECORD
+ACCESS REVOCATION
+```
+
+Frequency:
+
+```text
+EVENT-DRIVEN
+```
+
+---
+
+# 40. CTRL-SEC-005 — SECURITY LOGGING
+
+Objective:
+
+```text
+MATERIAL SECURITY EVENTS ARE TRACEABLE.
+```
+
+Evidence:
+
+```text
+SECURITY LOG
+MONITORING RECORD
+```
+
+---
+
+# 41. CTRL-SEC-006 — VULNERABILITY MANAGEMENT
+
+Objective:
+
+```text
+KNOWN MATERIAL VULNERABILITIES ARE IDENTIFIED AND REMEDIATED.
+```
+
+Evidence:
+
+```text
+SCAN
+RISK ASSESSMENT
+REMEDIATION
+```
+
+---
+
+# 42. CTRL-SEC-007 — SECRET MANAGEMENT
+
+Objective:
+
+```text
+PRODUCTION SECRETS ARE PROTECTED AND CONTROLLED.
+```
+
+Evidence:
+
+```text
+SECRET INVENTORY
+ROTATION RECORD
+ACCESS RECORD
+```
+
+---
+
+# 43. IDENTITY CONTROL DOMAIN
+
+Controls cover:
+
+```text
+IDENTITY
+ROLE
+LIFECYCLE
+PRIVILEGE
+SERVICE ACCOUNTS
+```
+
+---
+
+# 44. CTRL-ID-001 — USER PROVISIONING
+
+Objective:
+
+```text
+USER ACCESS IS PROVISIONED ONLY AFTER APPROVAL.
+```
+
+---
+
+# 45. CTRL-ID-002 — ROLE ASSIGNMENT
+
+Objective:
+
+```text
+ROLES ARE ASSIGNED ACCORDING TO APPROVED RESPONSIBILITIES.
+```
+
+---
+
+# 46. CTRL-ID-003 — USER REVIEW
+
+Objective:
+
+```text
+ACTIVE USER ACCESS REMAINS APPROPRIATE.
+```
+
+Frequency:
+
+```text
+QUARTERLY
+```
+
+---
+
+# 47. CTRL-ID-004 — SERVICE ACCOUNT OWNERSHIP
+
+Objective:
+
+```text
+EVERY SERVICE ACCOUNT HAS AN OWNER AND PURPOSE.
+```
+
+---
+
+# 48. CTRL-ID-005 — PRIVILEGE SEGREGATION
+
+Objective:
+
+```text
+CRITICAL DUTIES ARE SEPARATED WHERE REQUIRED.
+```
+
+---
+
+# 49. DATA CONTROL DOMAIN
+
+Data controls protect:
+
+```text
+QUALITY
+INTEGRITY
+OWNERSHIP
+LINEAGE
+RETENTION
+```
+
+---
+
+# 50. CTRL-DATA-001 — DATA OWNERSHIP
+
+Objective:
+
+```text
+AUTHORITATIVE DATA HAS AN ACCOUNTABLE OWNER.
+```
+
+---
+
+# 51. CTRL-DATA-002 — DATA QUALITY
+
+Objective:
+
+```text
+CRITICAL DATA MEETS DEFINED QUALITY THRESHOLDS.
+```
+
+Evidence:
+
+```text
+DATA QUALITY REPORT
+```
+
+Frequency:
+
+```text
+DAILY / WEEKLY
+```
+
+---
+
+# 52. CTRL-DATA-003 — DATA INTEGRITY
+
+Objective:
+
+```text
+RELATIONSHIPS AND CONSTRAINTS REMAIN VALID.
+```
+
+---
+
+# 53. CTRL-DATA-004 — DATA LINEAGE
+
+Objective:
+
+```text
+MATERIAL AUTHORITATIVE DATA IS TRACEABLE TO SOURCE.
+```
+
+---
+
+# 54. CTRL-DATA-005 — DATA RETENTION
+
+Objective:
+
+```text
+DATA IS RETAINED ACCORDING TO APPROVED POLICY.
+```
+
+---
+
+# 55. CTRL-DATA-006 — DATA DISPOSAL
+
+Objective:
+
+```text
+DATA DISPOSAL IS AUTHORIZED AND TRACEABLE.
+```
+
+---
+
+# 56. CTRL-DATA-007 — IMPORT VALIDATION
+
+Objective:
+
+```text
+IMPORTED DATA IS VALIDATED BEFORE AUTHORITATIVE USE.
+```
+
+---
+
+# 57. CTRL-DATA-008 — EXPORT AUTHORIZATION
+
+Objective:
+
+```text
+MATERIAL DATA EXPORTS REQUIRE AUTHORIZATION.
+```
+
+---
+
+# 58. GOVERNANCE CONTROL DOMAIN
+
+Governance controls protect:
+
+```text
+APPROVAL
+PUBLISH
+EXCEPTION
+AUDIT
+DECISION
+```
+
+---
+
+# 59. CTRL-GOV-001 — GOVERNANCE WORKFLOW
+
+Objective:
+
+```text
+AUTHORITATIVE CONTENT FOLLOWS THE APPROVED WORKFLOW.
+```
+
+Required sequence:
+
+```text
+DRAFT
+ ↓
+VALIDATE
+ ↓
+SUBMIT
+ ↓
+REVIEW
+ ↓
+APPROVE
+ ↓
+PUBLISH
+```
+
+---
+
+# 60. CTRL-GOV-002 — APPROVAL AUTHORITY
+
+Objective:
+
+```text
+ONLY AUTHORIZED PERSONS MAY APPROVE.
+```
+
+---
+
+# 61. CTRL-GOV-003 — NO SELF-APPROVAL
+
+Objective:
+
+```text
+SELF-APPROVAL IS PREVENTED WHERE SEGREGATION OF DUTIES APPLIES.
+```
+
+---
+
+# 62. CTRL-GOV-004 — PUBLISH CONTROL
+
+Objective:
+
+```text
+ONLY APPROVED CONTENT MAY BECOME AUTHORITATIVE.
+```
+
+---
+
+# 63. CTRL-GOV-005 — PUBLISHED IMMUTABILITY
+
+Objective:
+
+```text
+PUBLISHED STATE CANNOT BE SILENTLY ALTERED.
+```
+
+---
+
+# 64. CTRL-GOV-006 — GOVERNANCE EXCEPTION
+
+Objective:
+
+```text
+EXCEPTIONS ARE EXPLICITLY APPROVED, TIME-BOUND AND TRACEABLE.
+```
+
+---
+
+# 65. CTRL-GOV-007 — GOVERNANCE AUDIT
+
+Objective:
+
+```text
+MATERIAL GOVERNANCE ACTIONS ARE AUDITABLE.
+```
+
+---
+
+# 66. CTRL-GOV-008 — DECISION RECORD
+
+Objective:
+
+```text
+MATERIAL GOVERNANCE DECISIONS HAVE A TRACEABLE RECORD.
+```
+
+---
+
+# 67. ARCHITECTURE CONTROL DOMAIN
+
+Controls protect:
+
+```text
+ARCHITECTURAL INTEGRITY
+TRACEABILITY
+DESIGN AUTHORITY
+TECHNICAL DEBT
+```
+
+---
+
+# 68. CTRL-ARCH-001 — ARCHITECTURE DECISION
+
+Objective:
+
+```text
+MATERIAL ARCHITECTURE DECISIONS ARE DOCUMENTED.
+```
+
+---
+
+# 69. CTRL-ARCH-002 — ARCHITECTURE REVIEW
+
+Objective:
+
+```text
+MATERIAL ARCHITECTURE CHANGES RECEIVE ARCHITECTURE REVIEW.
+```
+
+---
+
+# 70. CTRL-ARCH-003 — ARCHITECTURE TRACEABILITY
+
+Objective:
+
+```text
+PRODUCTION COMPONENTS TRACE TO APPROVED ARCHITECTURE.
+```
+
+---
+
+# 71. CTRL-ARCH-004 — TECHNICAL DEBT
+
+Objective:
+
+```text
+MATERIAL TECHNICAL DEBT IS IDENTIFIED AND GOVERNED.
+```
+
+---
+
+# 72. CHANGE CONTROL DOMAIN
+
+Controls protect:
+
+```text
+PRODUCTION STABILITY
+TRACEABILITY
+APPROVAL
+ROLLBACK
+```
+
+---
+
+# 73. CTRL-CHG-001 — CHANGE REQUEST
+
+Objective:
+
+```text
+MATERIAL PRODUCTION CHANGES HAVE A CHANGE RECORD.
+```
+
+---
+
+# 74. CTRL-CHG-002 — CHANGE APPROVAL
+
+Objective:
+
+```text
+MATERIAL CHANGES ARE APPROVED BEFORE IMPLEMENTATION.
+```
+
+---
+
+# 75. CTRL-CHG-003 — CHANGE TEST
+
+Objective:
+
+```text
+MATERIAL CHANGES ARE TESTED BEFORE PRODUCTION.
+```
+
+---
+
+# 76. CTRL-CHG-004 — CHANGE ROLLBACK
+
+Objective:
+
+```text
+MATERIAL CHANGES HAVE A RECOVERY OR ROLLBACK STRATEGY.
+```
+
+---
+
+# 77. CTRL-CHG-005 — EMERGENCY CHANGE
+
+Objective:
+
+```text
+EMERGENCY CHANGES ARE CONTROLLED AND RETROSPECTIVELY REVIEWED.
+```
+
+---
+
+# 78. CTRL-CHG-006 — CHANGE TRACEABILITY
+
+Objective:
+
+```text
+CHANGE TRACES TO IMPLEMENTATION, TEST AND DEPLOYMENT.
+```
+
+---
+
+# 79. RELEASE CONTROL DOMAIN
+
+Controls protect:
+
+```text
+RELEASE INTEGRITY
+ARTIFACT INTEGRITY
+DEPLOYMENT
+VALIDATION
+```
+
+---
+
+# 80. CTRL-REL-001 — RELEASE APPROVAL
+
+Objective:
+
+```text
+PRODUCTION RELEASES ARE APPROVED.
+```
+
+---
+
+# 81. CTRL-REL-002 — ARTIFACT INTEGRITY
+
+Objective:
+
+```text
+DEPLOYED ARTIFACT MATCHES APPROVED ARTIFACT.
+```
+
+---
+
+# 82. CTRL-REL-003 — RELEASE TEST
+
+Objective:
+
+```text
+RELEASE PASSES REQUIRED TESTS BEFORE PRODUCTION.
+```
+
+---
+
+# 83. CTRL-REL-004 — DEPLOYMENT VALIDATION
+
+Objective:
+
+```text
+DEPLOYMENT IS VALIDATED AFTER RELEASE.
+```
+
+---
+
+# 84. CTRL-REL-005 — RELEASE BASELINE
+
+Objective:
+
+```text
+PRODUCTION VERSION IS RECORDED AS AN IMMUTABLE BASELINE.
+```
+
+---
+
+# 85. OPERATIONS CONTROL DOMAIN
+
+Controls protect:
+
+```text
+AVAILABILITY
+HEALTH
+MONITORING
+CAPACITY
+PERFORMANCE
+```
+
+---
+
+# 86. CTRL-OPS-001 — SERVICE HEALTH
+
+Objective:
+
+```text
+PRODUCTION HEALTH IS MONITORED.
+```
+
+---
+
+# 87. CTRL-OPS-002 — ALERTING
+
+Objective:
+
+```text
+CRITICAL SERVICE CONDITIONS GENERATE ACTIONABLE ALERTS.
+```
+
+---
+
+# 88. CTRL-OPS-003 — LOGGING
+
+Objective:
+
+```text
+MATERIAL OPERATIONAL EVENTS ARE LOGGED.
+```
+
+---
+
+# 89. CTRL-OPS-004 — CAPACITY
+
+Objective:
+
+```text
+CAPACITY RISK IS DETECTED BEFORE SERVICE FAILURE WHERE PRACTICAL.
+```
+
+---
+
+# 90. CTRL-OPS-005 — PERFORMANCE
+
+Objective:
+
+```text
+PERFORMANCE IS MEASURED AGAINST APPROVED TARGETS.
+```
+
+---
+
+# 91. CTRL-OPS-006 — CONFIGURATION DRIFT
+
+Objective:
+
+```text
+UNAUTHORIZED PRODUCTION CONFIGURATION CHANGES ARE DETECTED.
+```
+
+---
+
+# 92. BACKUP CONTROL DOMAIN
+
+Controls protect:
+
+```text
+RECOVERABILITY
+DATA PROTECTION
+RESTORE CAPABILITY
+```
+
+---
+
+# 93. CTRL-BKP-001 — BACKUP EXECUTION
+
+Objective:
+
+```text
+REQUIRED BACKUPS EXECUTE ACCORDING TO SCHEDULE.
+```
+
+---
+
+# 94. CTRL-BKP-002 — BACKUP SUCCESS
+
+Objective:
+
+```text
+FAILED BACKUPS ARE DETECTED AND REMEDIATED.
+```
+
+---
+
+# 95. CTRL-BKP-003 — BACKUP PROTECTION
+
+Objective:
+
+```text
+BACKUPS ARE PROTECTED FROM UNAUTHORIZED ACCESS OR ALTERATION.
+```
+
+---
+
+# 96. CTRL-BKP-004 — RESTORE TEST
+
+Objective:
+
+```text
+BACKUPS ARE PERIODICALLY TESTED FOR RESTORABILITY.
+```
+
+---
+
+# 97. CTRL-BKP-005 — BACKUP RETENTION
+
+Objective:
+
+```text
+BACKUPS MEET APPROVED RETENTION REQUIREMENTS.
+```
+
+---
+
+# 98. RECOVERY CONTROL DOMAIN
+
+Controls protect:
+
+```text
+RPO
+RTO
+DR
+FAILOVER
+FAILBACK
+```
+
+---
+
+# 99. CTRL-REC-001 — RPO
+
+Objective:
+
+```text
+RECOVERY POINT OBJECTIVE IS DEFINED AND MEASURABLE.
+```
+
+---
+
+# 100. CTRL-REC-002 — RTO
+
+Objective:
+
+```text
+RECOVERY TIME OBJECTIVE IS DEFINED AND MEASURABLE.
+```
+
+---
+
+# 101. CTRL-REC-003 — RECOVERY TEST
+
+Objective:
+
+```text
+RECOVERY PROCEDURES ARE PERIODICALLY TESTED.
+```
+
+---
+
+# 102. CTRL-REC-004 — DR TEST
+
+Objective:
+
+```text
+DISASTER RECOVERY CAPABILITY IS PERIODICALLY VALIDATED.
+```
+
+---
+
+# 103. CTRL-REC-005 — FAILBACK
+
+Objective:
+
+```text
+RETURN TO NORMAL OPERATIONS IS CONTROLLED WHERE FAILOVER EXISTS.
+```
+
+---
+
+# 104. SERVICE CONTROL DOMAIN
+
+Controls protect:
+
+```text
+SERVICE QUALITY
+SLA
+SLO
+SUPPORT
+INCIDENT
+```
+
+---
+
+# 105. CTRL-SVC-001 — SERVICE AVAILABILITY
+
+Objective:
+
+```text
+SERVICE AVAILABILITY IS MEASURED.
+```
+
+---
+
+# 106. CTRL-SVC-002 — SLA/SLO
+
+Objective:
+
+```text
+SERVICE PERFORMANCE IS COMPARED WITH APPROVED TARGETS.
+```
+
+---
+
+# 107. CTRL-SVC-003 — INCIDENT MANAGEMENT
+
+Objective:
+
+```text
+MATERIAL INCIDENTS ARE LOGGED AND MANAGED.
+```
+
+---
+
+# 108. CTRL-SVC-004 — INCIDENT ESCALATION
+
+Objective:
+
+```text
+P1/P2 INCIDENTS ESCALATE ACCORDING TO DEFINED RULES.
+```
+
+---
+
+# 109. CTRL-SVC-005 — SERVICE REPORTING
+
+Objective:
+
+```text
+SERVICE PERFORMANCE IS REPORTED PERIODICALLY.
+```
+
+---
+
+# 110. CTRL-SVC-006 — USER SUPPORT
+
+Objective:
+
+```text
+USER REQUESTS ARE TRACEABLE AND MANAGED.
+```
+
+---
+
+# 111. AUDIT CONTROL DOMAIN
+
+Controls protect:
+
+```text
+TRACEABILITY
+EVIDENCE
+RETENTION
+AUDITABILITY
+```
+
+---
+
+# 112. CTRL-AUD-001 — AUDIT TRAIL
+
+Objective:
+
+```text
+MATERIAL ACTIONS HAVE AN AUDIT TRAIL.
+```
+
+---
+
+# 113. CTRL-AUD-002 — AUDIT PROTECTION
+
+Objective:
+
+```text
+AUDIT RECORDS ARE PROTECTED FROM UNAUTHORIZED ALTERATION.
+```
+
+---
+
+# 114. CTRL-AUD-003 — AUDIT REVIEW
+
+Objective:
+
+```text
+MATERIAL AUDIT EVENTS ARE PERIODICALLY REVIEWED.
+```
+
+---
+
+# 115. CTRL-AUD-004 — EVIDENCE RETENTION
+
+Objective:
+
+```text
+REQUIRED CONTROL EVIDENCE IS RETAINED.
+```
+
+---
+
+# 116. INTEGRATION CONTROL DOMAIN
+
+Controls protect:
+
+```text
+INTERFACE
+DATA FLOW
+AUTHENTICATION
+FAILURE HANDLING
+```
+
+---
+
+# 117. CTRL-INT-001 — INTEGRATION AUTHORIZATION
+
+Objective:
+
+```text
+ONLY APPROVED INTEGRATIONS MAY CONNECT.
+```
+
+---
+
+# 118. CTRL-INT-002 — INTEGRATION HEALTH
+
+Objective:
+
+```text
+CRITICAL INTEGRATIONS ARE MONITORED.
+```
+
+---
+
+# 119. CTRL-INT-003 — DATA FLOW VALIDATION
+
+Objective:
+
+```text
+MATERIAL DATA EXCHANGES ARE VALIDATED.
+```
+
+---
+
+# 120. CTRL-INT-004 — INTEGRATION FAILURE
+
+Objective:
+
+```text
+FAILED INTEGRATIONS ARE DETECTED AND HANDLED.
+```
+
+---
+
+# 121. AI CONTROL DOMAIN
+
+AI controls protect:
+
+```text
+PURPOSE
+DATA
+OUTPUT
+TRACEABILITY
+HUMAN OVERSIGHT
+```
+
+---
+
+# 122. CTRL-AI-001 — AI USE CASE REGISTRATION
+
+Objective:
+
+```text
+MATERIAL AI USE CASES ARE REGISTERED.
+```
+
+---
+
+# 123. CTRL-AI-002 — AI DATA AUTHORIZATION
+
+Objective:
+
+```text
+AI SYSTEMS ACCESS ONLY AUTHORIZED DATA.
+```
+
+---
+
+# 124. CTRL-AI-003 — AI OUTPUT CLASSIFICATION
+
+Objective:
+
+```text
+AI OUTPUT IS CLASSIFIED BEFORE AUTHORITATIVE USE.
+```
+
+---
+
+# 125. CTRL-AI-004 — AI HUMAN OVERSIGHT
+
+Objective:
+
+```text
+MATERIAL AI DECISIONS HAVE APPROPRIATE HUMAN OVERSIGHT.
+```
+
+---
+
+# 126. CTRL-AI-005 — AI AUDIT
+
+Objective:
+
+```text
+MATERIAL AI ACTIONS ARE TRACEABLE.
+```
+
+---
+
+# 127. CTRL-AI-006 — AI MODEL / VERSION
+
+Objective:
+
+```text
+PRODUCTION AI BEHAVIOR CAN BE TRACED TO A CONTROLLED MODEL OR VERSION.
+```
+
+---
+
+# 128. AGENT CONTROL DOMAIN
+
+Agent controls protect:
+
+```text
+IDENTITY
+TOOLS
+PERMISSIONS
+BOUNDARIES
+ACTIONS
+AUDIT
+```
+
+---
+
+# 129. CTRL-AGT-001 — AGENT IDENTITY
+
+Objective:
+
+```text
+EVERY PRODUCTION AGENT HAS A DISTINCT IDENTITY.
+```
+
+---
+
+# 130. CTRL-AGT-002 — AGENT PERMISSIONS
+
+Objective:
+
+```text
+AGENTS OPERATE ONLY WITH APPROVED PERMISSIONS.
+```
+
+---
+
+# 131. CTRL-AGT-003 — AGENT TOOL ACCESS
+
+Objective:
+
+```text
+AGENTS ACCESS ONLY APPROVED TOOLS.
+```
+
+---
+
+# 132. CTRL-AGT-004 — AGENT ACTION BOUNDARY
+
+Objective:
+
+```text
+AGENTS CANNOT EXCEED DELEGATED ACTION BOUNDARIES.
+```
+
+---
+
+# 133. CTRL-AGT-005 — AGENT AUDIT
+
+Objective:
+
+```text
+MATERIAL AGENT ACTIONS ARE TRACEABLE.
+```
+
+---
+
+# 134. CTRL-AGT-006 — AGENT HUMAN OVERSIGHT
+
+Objective:
+
+```text
+HIGH-IMPACT AGENT ACTIONS REQUIRE APPROPRIATE HUMAN CONTROL.
+```
+
+---
+
+# 135. CONTROL TESTING PROGRAM
+
+Control testing follows:
+
+```text
+PLAN
+ ↓
+SELECT
+ ↓
+TEST
+ ↓
+EVIDENCE
+ ↓
+ASSESS
+ ↓
+REPORT
+ ↓
+REMEDIATE
+ ↓
+RETEST
+```
+
+---
+
+# 136. CONTROL TEST PLAN
+
+Each test defines:
+
+```text
+CONTROL
+TEST OBJECTIVE
+SAMPLE
+METHOD
+EVIDENCE
+EXPECTED RESULT
+ACTUAL RESULT
+CONCLUSION
+```
+
+---
+
+# 137. TEST SAMPLE
+
+Sampling may be:
+
+```text
+FULL POPULATION
+RANDOM
+RISK-BASED
+JUDGMENTAL
+EVENT-BASED
+```
+
+---
+
+# 138. CONTROL THRESHOLDS
+
+Controls may define thresholds such as:
+
+```text
+0 UNAUTHORIZED APPROVALS
+0 CRITICAL ACCESS FINDINGS
+100% REQUIRED BACKUP EXECUTION
+100% MATERIAL RELEASE APPROVAL
+```
+
+as appropriate.
+
+---
+
+# 139. CONTROL RESULT
+
+Possible result:
+
+```text
+PASS
+PASS WITH OBSERVATION
+FAIL
+NOT APPLICABLE
+NOT TESTED
+```
+
+---
+
+# 140. CONTROL FAILURE SEVERITY
+
+```text
+LOW
+MEDIUM
+HIGH
+CRITICAL
+```
+
+---
+
+# 141. CRITICAL CONTROL FAILURE
+
+Requires immediate governance assessment.
+
+---
+
+# 142. CONTROL REMEDIATION PLAN
+
+Record:
+
+```text
+FAILURE
+ROOT CAUSE
+RISK
+ACTION
+OWNER
+DUE DATE
+STATUS
+```
+
+---
+
+# 143. ROOT CAUSE ANALYSIS
+
+For material control failures determine:
+
+```text
+DESIGN FAILURE
+EXECUTION FAILURE
+EVIDENCE FAILURE
+OWNERSHIP FAILURE
+SYSTEM FAILURE
+PROCESS FAILURE
+```
+
+---
+
+# 144. COMPENSATING CONTROL
+
+Where immediate remediation is not possible, an approved compensating control may be established.
+
+---
+
+# 145. COMPENSATING CONTROL REQUIREMENTS
+
+```text
+RISK
+OWNER
+SCOPE
+DURATION
+EFFECTIVENESS
+EXPIRY
+```
+
+---
+
+# 146. CONTROL DASHBOARD
+
+Minimum dashboard:
+
+```text
+ACTIVE CONTROLS
+PASSED
+FAILED
+EXCEPTIONS
+OVERDUE TESTS
+OPEN REMEDIATIONS
+CRITICAL FAILURES
+```
+
+---
+
+# 147. CONTROL KPI
+
+Track:
+
+```text
+CONTROL PASS RATE
+CONTROL FAILURE RATE
+OVERDUE TEST RATE
+REMEDIATION AGE
+EXCEPTION COUNT
+```
+
+---
+
+# 148. CONTROL HEALTH
+
+```text
+GREEN
+AMBER
+RED
+```
+
+---
+
+# 149. GREEN
+
+Controls operating within approved thresholds.
+
+---
+
+# 150. AMBER
+
+Control weakness or overdue remediation exists.
+
+---
+
+# 151. RED
+
+Material control failure or unresolved critical exposure exists.
+
+---
+
+# 152. CONTROL REPORTING
+
+Monthly control reporting should include:
+
+```text
+CONTROL STATUS
+FAILURES
+EXCEPTIONS
+REMEDIATIONS
+RISKS
+TESTING
+```
+
+---
+
+# 153. GOVERNANCE ESCALATION
+
+Escalate:
+
+```text
+CRITICAL FAILURE
+REPEATED FAILURE
+OVERDUE HIGH-RISK REMEDIATION
+CONTROL BYPASS
+```
+
+---
+
+# 154. CONTROL BYPASS
+
+Unauthorized control bypass is itself a control incident.
+
+---
+
+# 155. CONTROL OWNERSHIP REVIEW
+
+Review control ownership periodically.
+
+---
+
+# 156. CONTROL LIBRARY REVIEW
+
+Review the control library when:
+
+```text
+ARCHITECTURE CHANGES
+SECURITY CHANGES
+REGULATORY CHANGES
+SERVICE CHANGES
+MATERIAL INCIDENTS
+```
+
+---
+
+# 157. CONTROL CHANGE
+
+Control changes require:
+
+```text
+IMPACT
+OWNER
+APPROVAL
+VERSION
+EVIDENCE
+```
+
+---
+
+# 158. CONTROL VERSIONING
+
+Controls are versioned where material changes occur.
+
+---
+
+# 159. CONTROL RETIREMENT
+
+Retire a control only when:
+
+```text
+OBJECTIVE NO LONGER REQUIRED
+REPLACEMENT EXISTS
+RISK ACCEPTED
+APPROVAL OBTAINED
+```
+
+---
+
+# 160. ASSURANCE CALENDAR
+
+Maintain a calendar for:
+
+```text
+ACCESS REVIEWS
+BACKUP TESTS
+DR TESTS
+CONTROL TESTS
+SECURITY REVIEWS
+DATA REVIEWS
+GOVERNANCE REVIEWS
+```
+
+---
+
+# 161. CONTROL EVIDENCE REPOSITORY
+
+Maintain a controlled evidence repository.
+
+---
+
+# 162. EVIDENCE INDEX
+
+Minimum:
+
+```text
+CONTROL ID
+PERIOD
+EVIDENCE
+OWNER
+RESULT
+LOCATION
+```
+
+---
+
+# 163. EVIDENCE QUALITY
+
+Evidence should be:
+
+```text
+COMPLETE
+ACCURATE
+TIMELY
+TRACEABLE
+PROTECTED
+```
+
+---
+
+# 164. ASSURANCE REPORT
+
+Assurance reporting should summarize:
+
+```text
+SCOPE
+METHOD
+RESULT
+FINDINGS
+RISK
+REMEDIATION
+CONCLUSION
+```
+
+---
+
+# 165. CONTROL MATURITY
+
+```text
+DEFINED
+ ↓
+REPEATABLE
+ ↓
+MEASURED
+ ↓
+AUTOMATED
+ ↓
+OPTIMIZED
+```
+
+---
+
+# 166. CONTROL MATURITY — DEFINED
+
+Control exists and is documented.
+
+---
+
+# 167. CONTROL MATURITY — REPEATABLE
+
+Control is consistently executed.
+
+---
+
+# 168. CONTROL MATURITY — MEASURED
+
+Control effectiveness is measured.
+
+---
+
+# 169. CONTROL MATURITY — AUTOMATED
+
+Evidence or execution is automated where appropriate.
+
+---
+
+# 170. CONTROL MATURITY — OPTIMIZED
+
+Control is continuously improved based on risk and evidence.
+
+---
+
+# 171. AI-ASSISTED CONTROL
+
+AI may assist with:
+
+```text
+EVIDENCE CLASSIFICATION
+ANOMALY DETECTION
+CONTROL TEST PREPARATION
+RISK CORRELATION
+REPORTING
+```
+
+---
+
+# 172. AI CONTROL BOUNDARY
+
+AI-generated control conclusions require appropriate review before becoming authoritative.
+
+---
+
+# 173. AGENT CONTROL AUTOMATION
+
+Agents may execute approved control procedures only within delegated scope.
+
+---
+
+# 174. AGENT ASSURANCE
+
+Material automated control actions remain auditable.
+
+---
+
+# 175. KNOWLEDGE GRAPH CONTROL
+
+Knowledge graph updates require:
+
+```text
+SOURCE
+VALIDATION
+LINEAGE
+OWNER
+VERSION
+```
+
+---
+
+# 176. ADAPTIVE CONTROL
+
+Adaptive architecture may recommend control changes, but recommendations require governance approval.
+
+---
+
+# 177. CONTROL INVARIANTS
+
+```text
+NO OWNER
+→
+NO CONTROL
+```
+
+```text
+NO EVIDENCE
+→
+CONTROL NOT PROVEN
+```
+
+```text
+NO TEST
+→
+CONTROL EFFECTIVENESS UNKNOWN
+```
+
+```text
+NO APPROVAL
+→
+NO MATERIAL CONTROL CHANGE
+```
+
+---
+
+# 178. CONTROL ASSURANCE INVARIANT
+
+```text
+CONTROL
++
+EVIDENCE
++
+TEST
+=
+ASSURANCE
+```
+
+---
+
+# 179. CONTROL FAILURE INVARIANT
+
+```text
+FAILURE
+→
+RISK
+→
+REMEDIATION
+→
+RETEST
+```
+
+---
+
+# 180. CONTROL ACCEPTANCE
+
+The control framework is accepted when:
+
+```text
+CONTROL LIBRARY EXISTS
+OWNERS ASSIGNED
+EVIDENCE DEFINED
+TESTING DEFINED
+FAILURE PROCESS ACTIVE
+REMEDIATION ACTIVE
+ASSURANCE ACTIVE
+REPORTING ACTIVE
+```
+
+---
+
+# 181. CONTROL ACCEPTANCE CHECKLIST
+
+```text
+[ ] Control domains defined
+[ ] Control IDs defined
+[ ] Control owners assigned
+[ ] Control objectives defined
+[ ] Control frequencies defined
+[ ] Evidence requirements defined
+[ ] Control tests defined
+[ ] Thresholds defined
+[ ] Failure process defined
+[ ] Remediation process defined
+[ ] Exception process linked
+[ ] Assurance model defined
+[ ] Control dashboard defined
+[ ] KPI baseline defined
+[ ] Evidence repository defined
+[ ] Assurance calendar defined
+[ ] AI controls defined
+[ ] Agent controls defined
+[ ] Knowledge graph controls defined
+[ ] Adaptive control governance defined
+```
+
+---
+
+# 182. CONTROL DECISION
+
+Allowed states:
+
+```text
+ACCEPTED
+ACCEPTED WITH CONDITIONS
+NOT ACCEPTED
+```
+
+---
+
+# 183. CONDITIONAL CONTROL ACCEPTANCE
+
+Requires:
+
+```text
+GAP
+RISK
+OWNER
+MITIGATION
+DEADLINE
+APPROVAL
+```
+
+---
+
+# 184. CONTROL HANDOVER
+
+The control framework becomes operational when:
+
+```text
+OWNERS
++
+PROCEDURES
++
+EVIDENCE
++
+TESTING
++
+ASSURANCE
+```
+
+are active.
+
+---
+
+# 185. NORMAL CONTROL STATE
+
+```text
+EXECUTE
+ ↓
+EVIDENCE
+ ↓
+TEST
+ ↓
+REPORT
+ ↓
+REMEDIATE
+ ↓
+IMPROVE
+```
+
+---
+
+# 186. FINAL CONTROL BASELINE
+
+The production control baseline consists of:
+
+```text
+CONTROL LIBRARY
+CONTROL OBJECTIVES
+CONTROL OWNERS
+CONTROL FREQUENCY
+CONTROL EVIDENCE
+CONTROL TESTING
+CONTROL THRESHOLDS
+CONTROL FAILURES
+REMEDIATION
+EXCEPTIONS
+ASSURANCE
+DASHBOARD
+KPIs
+AI CONTROLS
+AGENT CONTROLS
+```
+
+---
+
+# 187. FINAL TRACEABILITY
+
+```text
+EA-IMETA-MASTER-01
+        ↓
+SYSTEM RELEASE BASELINE
+        ↓
+IMPLEMENTATION
+        ↓
+BUILD
+        ↓
+TEST
+        ↓
+RELEASE
+        ↓
+PILOT
+        ↓
+PRODUCTION READINESS
+        ↓
+PRODUCTION
+        ↓
+PRODUCTION TEST
+        ↓
+PRODUCTION RELEASE
+        ↓
+PRODUCTION OPERATIONS
+        ↓
+SERVICE MANAGEMENT
+        ↓
+SERVICE GOVERNANCE
+        ↓
+SERVICE CONTROL
+```
+
+---
+
+# 188. COMPLETION STATEMENT
+
+EA-IMETA-PRODUCTION-SERVICE-CONTROL-01 converts the governance framework into a measurable operational control system.
+
+It establishes the ability to answer:
+
+```text
+WHAT MUST BE CONTROLLED?
+WHO OWNS IT?
+HOW OFTEN?
+WHAT EVIDENCE EXISTS?
+WAS IT TESTED?
+DID IT PASS?
+WHAT HAPPENS IF IT FAILS?
+WHO ASSURES IT?
+```
+
+This creates the bridge from:
+
+```text
+GOVERNANCE
+```
+
+to:
+
+```text
+MEASURABLE CONTROL
+```
+
+and from:
+
+```text
+CONTROL
+```
+
+to:
+
+```text
+ASSURANCE
+```
+
+---
+
+# 189. NEXT DOCUMENT
+
+The next recommended document is:
+
+```text
+EA-IMETA-PRODUCTION-SERVICE-ASSURANCE-01
+```
+
+This document should establish the independent and management assurance layer above the controls:
+
+```text
+ASSURANCE MODEL
+CONTROL ASSURANCE
+RISK ASSURANCE
+SECURITY ASSURANCE
+DATA ASSURANCE
+ARCHITECTURE ASSURANCE
+SERVICE ASSURANCE
+AUDIT PREPARATION
+ASSURANCE REPORTING
+FINDINGS
+REMEDIATION VERIFICATION
+EXECUTIVE ASSURANCE
+```
+
+The sequence becomes:
+
+```text
+EA-IMETA-PRODUCTION-OPERATIONS-01
+        ↓
+EA-IMETA-PRODUCTION-SERVICE-MANAGEMENT-01
+        ↓
+EA-IMETA-PRODUCTION-SERVICE-GOVERNANCE-01
+        ↓
+EA-IMETA-PRODUCTION-SERVICE-CONTROL-01
+        ↓
+EA-IMETA-PRODUCTION-SERVICE-ASSURANCE-01
+```
+
+---
+
+# 190. FINAL PRINCIPLE
+
+> EA-IMETA SHALL NOT RELY ON GOVERNANCE CLAIMS ALONE. MATERIAL GOVERNANCE REQUIREMENTS SHALL BE TRANSLATED INTO OWNED, TESTABLE, EVIDENCED AND ASSURED CONTROLS.
+
+```text
+GOVERN
+ ↓
+CONTROL
+ ↓
+EVIDENCE
+ ↓
+TEST
+ ↓
+ASSURE
+ ↓
+IMPROVE
+```
+
+---
+
+# END OF EA-IMETA-PRODUCTION-SERVICE-CONTROL-01
+## PRODUCTION SERVICE CONTROL, ASSURANCE & CONTROL EVIDENCE BASELINE
+## COMPLETE

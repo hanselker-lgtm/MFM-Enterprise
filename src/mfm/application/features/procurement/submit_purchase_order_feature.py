@@ -37,7 +37,6 @@ from mfm.application.procurement.submit_purchase_order import (
 from mfm.application.procurement.submit_purchase_order import (
     SubmitPurchaseOrderResponse as ServiceResponse,
 )
-from mfm.application.procurement.submit_purchase_order import SubmitPurchaseOrderUseCase
 
 
 @dataclass(frozen=True, slots=True)

@@ -33,7 +33,6 @@ from mfm.application.maintenance.create_maintenance_plan import (
 )
 from mfm.application.maintenance.start_work_order import StartWorkOrderRequest as ServiceRequest
 from mfm.application.maintenance.start_work_order import StartWorkOrderResponse as ServiceResponse
-from mfm.application.maintenance.start_work_order import StartWorkOrderUseCase
 
 
 @dataclass(frozen=True, slots=True)

@@ -1,0 +1,2269 @@
+# EA-IMETA-PRODUCTION-SERVICE-SECURITY-RESILIENCE-COMPLIANCE-CAPABILITY-ARCHITECTURE-01
+# PRODUCTION SECURITY-RESILIENCE COMPLIANCE CAPABILITY ARCHITECTURE, CAPABILITY MAP, VALUE STREAMS, DEPENDENCIES, COMPOSITION, SERVICE/PROCESS/SYSTEM/DATA/CONTROL MAPPING, TARGET ARCHITECTURE & TRANSFORMATION BASELINE
+
+### Version 1.0
+### Status: PRODUCTION SECURITY-RESILIENCE COMPLIANCE CAPABILITY ARCHITECTURE BASELINE
+### Governing Architecture: EA-IMETA-MASTER-01
+### Governing System Baseline: EA-IMETA-SYSTEM-RELEASE-BASELINE-01
+### Governing Capability: EA-IMETA-PRODUCTION-SERVICE-SECURITY-RESILIENCE-COMPLIANCE-CAPABILITY-01
+### Governing Compliance Maturity: EA-IMETA-PRODUCTION-SERVICE-SECURITY-RESILIENCE-COMPLIANCE-MATURITY-01
+### Governing Compliance Improvement: EA-IMETA-PRODUCTION-SERVICE-SECURITY-RESILIENCE-COMPLIANCE-IMPROVEMENT-01
+### Governing Compliance Remediation: EA-IMETA-PRODUCTION-SERVICE-SECURITY-RESILIENCE-COMPLIANCE-REMEDIATION-01
+### Governing Compliance Assurance: EA-IMETA-PRODUCTION-SERVICE-SECURITY-RESILIENCE-COMPLIANCE-ASSURANCE-01
+### Governing Compliance Monitoring: EA-IMETA-PRODUCTION-SERVICE-SECURITY-RESILIENCE-COMPLIANCE-MONITORING-01
+### Governing Compliance Governance: EA-IMETA-PRODUCTION-SERVICE-SECURITY-RESILIENCE-COMPLIANCE-GOVERNANCE-01
+### Target: EA-IMETA-PRODUCTION-SERVICE-SECURITY-RESILIENCE-COMPLIANCE-CAPABILITY-ARCHITECTURE-01
+### Purpose: Establish the authoritative architecture of production security-resilience compliance capabilities and their relationships to value streams, services, processes, systems, data, controls, risks, governance and transformation
+
+---
+
+# 1. PURPOSE
+
+EA-IMETA-PRODUCTION-SERVICE-SECURITY-RESILIENCE-COMPLIANCE-CAPABILITY-ARCHITECTURE-01 defines how compliance capabilities are structurally organized and connected to the operational and architectural environment.
+
+The capability architecture chain is:
+
+```text
+STRATEGY
+ ↓
+OUTCOMES
+ ↓
+VALUE STREAMS
+ ↓
+CAPABILITIES
+ ↓
+SERVICES
+ ↓
+PROCESSES
+ ↓
+SYSTEMS
+ ↓
+DATA
+ ↓
+CONTROLS
+ ↓
+EVIDENCE
+ ↓
+ASSURANCE
+```
+
+---
+
+# 2. ARCHITECTURE PRINCIPLE
+
+> EA-IMETA SHALL MAINTAIN AN EXPLICIT, TRACEABLE AND GOVERNED RELATIONSHIP BETWEEN COMPLIANCE CAPABILITIES AND THE SERVICES, PROCESSES, SYSTEMS, DATA, CONTROLS AND PEOPLE THAT ENABLE THEM.
+
+---
+
+# 3. ARCHITECTURE OBJECTIVES
+
+The capability architecture shall:
+
+```text
+MAKE CAPABILITIES VISIBLE
+ESTABLISH STRUCTURE
+SHOW DEPENDENCIES
+CONNECT CAPABILITIES TO SERVICES
+CONNECT CAPABILITIES TO PROCESSES
+CONNECT CAPABILITIES TO SYSTEMS
+CONNECT CAPABILITIES TO DATA
+CONNECT CAPABILITIES TO CONTROLS
+SUPPORT INVESTMENT
+SUPPORT TRANSFORMATION
+SUPPORT RISK
+SUPPORT RESILIENCE
+SUPPORT GOVERNANCE
+```
+
+---
+
+# 4. ARCHITECTURE SCOPE
+
+The architecture covers:
+
+```text
+STRATEGY
+OUTCOMES
+VALUE STREAMS
+CAPABILITIES
+SUB-CAPABILITIES
+SERVICES
+PROCESSES
+SYSTEMS
+DATA
+CONTROLS
+ROLES
+RISKS
+REQUIREMENTS
+EVIDENCE
+GOVERNANCE
+```
+
+---
+
+# 5. CAPABILITY ARCHITECTURE
+
+Capability architecture is the structural representation of the organization's enduring abilities and their enabling relationships.
+
+---
+
+# 6. CAPABILITY ARCHITECTURE VS CAPABILITY MODEL
+
+The capability model defines capabilities.
+
+The capability architecture defines how those capabilities relate to the wider enterprise.
+
+```text
+CAPABILITY MODEL
+→ WHAT CAPABILITIES EXIST
+
+CAPABILITY ARCHITECTURE
+→ HOW CAPABILITIES FIT TOGETHER
+```
+
+---
+
+# 7. ARCHITECTURE LAYERS
+
+```text
+L1 STRATEGY
+L2 OUTCOME
+L3 VALUE STREAM
+L4 CAPABILITY
+L5 SERVICE
+L6 PROCESS
+L7 SYSTEM
+L8 DATA
+L9 CONTROL
+L10 EVIDENCE
+```
+
+---
+
+# 8. STRATEGY LAYER
+
+The strategy layer defines:
+
+```text
+STRATEGIC OBJECTIVES
+PRIORITIES
+RISK APPETITE
+TARGET OUTCOMES
+INVESTMENT DIRECTION
+```
+
+---
+
+# 9. OUTCOME LAYER
+
+Outcomes define what the architecture must enable.
+
+Examples:
+
+```text
+COMPLIANCE
+SECURITY
+RESILIENCE
+ASSURANCE
+TRUST
+CONTINUITY
+```
+
+---
+
+# 10. VALUE STREAM LAYER
+
+Value streams describe how outcomes are produced end-to-end.
+
+Core compliance value streams may include:
+
+```text
+OBLIGATION-TO-CONTROL
+CONTROL-TO-EVIDENCE
+EVIDENCE-TO-ASSURANCE
+EVENT-TO-RESPONSE
+FINDING-TO-REMEDIATION
+LESSON-TO-IMPROVEMENT
+MATURITY-TO-CAPABILITY
+```
+
+---
+
+# 11. CAPABILITY LAYER
+
+Capabilities represent enduring abilities required to execute value streams.
+
+---
+
+# 12. CAPABILITY HIERARCHY
+
+```text
+DOMAIN
+ ↓
+CAPABILITY
+ ↓
+SUB-CAPABILITY
+ ↓
+COMPONENT CAPABILITY
+```
+
+---
+
+# 13. CAPABILITY COMPOSITION
+
+A capability may be composed of:
+
+```text
+PEOPLE
+PROCESS
+TECHNOLOGY
+DATA
+GOVERNANCE
+CONTROL
+SUPPLIER
+```
+
+---
+
+# 14. CAPABILITY DEPENDENCY
+
+Capabilities shall explicitly identify dependencies.
+
+```text
+CAPABILITY A
+   ↓
+CAPABILITY B
+   ↓
+CAPABILITY C
+```
+
+---
+
+# 15. DEPENDENCY TYPES
+
+```text
+REQUIRED
+SUPPORTING
+OPTIONAL
+SHARED
+CRITICAL
+TEMPORAL
+```
+
+---
+
+# 16. CAPABILITY-TO-VALUE-STREAM MAPPING
+
+Each material capability shall map to one or more value streams.
+
+---
+
+# 17. CAPABILITY-TO-SERVICE MAPPING
+
+Capabilities shall map to services that consume or expose the capability.
+
+```text
+CAPABILITY
+ ↓
+SERVICE
+```
+
+---
+
+# 18. CAPABILITY-TO-PROCESS MAPPING
+
+Capabilities shall map to processes that operationalize them.
+
+```text
+CAPABILITY
+ ↓
+PROCESS
+```
+
+---
+
+# 19. CAPABILITY-TO-SYSTEM MAPPING
+
+Capabilities shall map to enabling systems.
+
+```text
+CAPABILITY
+ ↓
+SYSTEM
+```
+
+---
+
+# 20. CAPABILITY-TO-DATA MAPPING
+
+Capabilities shall map to required data domains and datasets.
+
+```text
+CAPABILITY
+ ↓
+DATA
+```
+
+---
+
+# 21. CAPABILITY-TO-CONTROL MAPPING
+
+Capabilities shall map to controls.
+
+```text
+CAPABILITY
+ ↓
+CONTROL
+ ↓
+EVIDENCE
+```
+
+---
+
+# 22. CAPABILITY-TO-ROLE MAPPING
+
+Capabilities shall map to accountable and responsible roles.
+
+---
+
+# 23. CAPABILITY-TO-RISK MAPPING
+
+Capabilities shall map to risks that they mitigate, create or depend upon.
+
+---
+
+# 24. CAPABILITY-TO-REQUIREMENT MAPPING
+
+Capabilities shall trace to obligations and requirements.
+
+```text
+OBLIGATION
+ ↓
+REQUIREMENT
+ ↓
+CAPABILITY
+```
+
+---
+
+# 25. CAPABILITY TRACEABILITY MODEL
+
+The minimum traceability chain is:
+
+```text
+STRATEGY
+ ↓
+OUTCOME
+ ↓
+VALUE STREAM
+ ↓
+CAPABILITY
+ ↓
+SERVICE
+ ↓
+PROCESS
+ ↓
+SYSTEM
+ ↓
+DATA
+ ↓
+CONTROL
+ ↓
+EVIDENCE
+ ↓
+ASSURANCE
+```
+
+---
+
+# 26. TRACEABILITY PRINCIPLE
+
+> EVERY MATERIAL COMPLIANCE OUTCOME SHALL BE TRACEABLE TO THE CAPABILITIES AND ENABLERS THAT PRODUCE IT.
+
+---
+
+# 27. VALUE STREAM ARCHITECTURE
+
+Value streams shall define:
+
+```text
+TRIGGER
+STAGES
+CAPABILITIES
+SERVICES
+OUTCOMES
+MEASURES
+```
+
+---
+
+# 28. VALUE STREAM: OBLIGATION-TO-CONTROL
+
+```text
+OBLIGATION
+ ↓
+INTERPRET
+ ↓
+REQUIREMENT
+ ↓
+CONTROL
+ ↓
+OWNER
+ ↓
+IMPLEMENT
+ ↓
+ASSURE
+```
+
+---
+
+# 29. VALUE STREAM: CONTROL-TO-EVIDENCE
+
+```text
+CONTROL
+ ↓
+OPERATE
+ ↓
+CAPTURE
+ ↓
+STORE
+ ↓
+VALIDATE
+ ↓
+EVIDENCE
+```
+
+---
+
+# 30. VALUE STREAM: EVIDENCE-TO-ASSURANCE
+
+```text
+EVIDENCE
+ ↓
+COLLECT
+ ↓
+ASSESS
+ ↓
+TEST
+ ↓
+CHALLENGE
+ ↓
+ASSURE
+```
+
+---
+
+# 31. VALUE STREAM: EVENT-TO-RESPONSE
+
+```text
+EVENT
+ ↓
+DETECT
+ ↓
+ASSESS
+ ↓
+DECIDE
+ ↓
+RESPOND
+ ↓
+RECOVER
+```
+
+---
+
+# 32. VALUE STREAM: FINDING-TO-REMEDIATION
+
+```text
+FINDING
+ ↓
+CLASSIFY
+ ↓
+ROOT CAUSE
+ ↓
+PLAN
+ ↓
+REMEDIATE
+ ↓
+VALIDATE
+ ↓
+CLOSE
+```
+
+---
+
+# 33. VALUE STREAM: LESSON-TO-IMPROVEMENT
+
+```text
+LESSON
+ ↓
+INSIGHT
+ ↓
+OPPORTUNITY
+ ↓
+PRIORITIZE
+ ↓
+CHANGE
+ ↓
+MEASURE
+ ↓
+VALIDATE
+ ↓
+STANDARDIZE
+```
+
+---
+
+# 34. VALUE STREAM: MATURITY-TO-CAPABILITY
+
+```text
+MATURITY ASSESSMENT
+ ↓
+GAP
+ ↓
+TARGET
+ ↓
+CAPABILITY DESIGN
+ ↓
+INVEST
+ ↓
+IMPLEMENT
+ ↓
+VALIDATE
+```
+
+---
+
+# 35. SERVICE ARCHITECTURE
+
+Services consume and expose capabilities to users, systems and governance functions.
+
+---
+
+# 36. SERVICE-CAPABILITY RELATIONSHIP
+
+```text
+CAPABILITY
+   ↓
+SERVICE
+   ↓
+SERVICE CONSUMER
+```
+
+---
+
+# 37. PROCESS ARCHITECTURE
+
+Processes operationalize capability behavior.
+
+---
+
+# 38. PROCESS-CAPABILITY RELATIONSHIP
+
+```text
+CAPABILITY
+   ↓
+PROCESS
+   ↓
+ACTIVITY
+```
+
+---
+
+# 39. SYSTEM ARCHITECTURE
+
+Systems provide technology enablement for capabilities and services.
+
+---
+
+# 40. SYSTEM-CAPABILITY RELATIONSHIP
+
+```text
+CAPABILITY
+   ↓
+SYSTEM
+   ↓
+COMPONENT
+```
+
+---
+
+# 41. DATA ARCHITECTURE
+
+Data architecture identifies information required by capabilities.
+
+---
+
+# 42. DATA-CAPABILITY RELATIONSHIP
+
+```text
+CAPABILITY
+   ↓
+DATA DOMAIN
+   ↓
+DATASET
+   ↓
+RECORD
+```
+
+---
+
+# 43. CONTROL ARCHITECTURE
+
+Controls constrain and assure capability operation.
+
+---
+
+# 44. CONTROL-CAPABILITY RELATIONSHIP
+
+```text
+CAPABILITY
+   ↓
+CONTROL
+   ↓
+CONTROL TEST
+   ↓
+EVIDENCE
+```
+
+---
+
+# 45. ROLE ARCHITECTURE
+
+Roles define accountability and responsibility around capabilities.
+
+---
+
+# 46. ROLE-CAPABILITY RELATIONSHIP
+
+```text
+CAPABILITY
+ ↓
+ACCOUNTABLE
+ ↓
+RESPONSIBLE
+ ↓
+CONSULTED
+ ↓
+INFORMED
+```
+
+---
+
+# 47. RISK ARCHITECTURE
+
+Risks shall be mapped to capabilities and their dependencies.
+
+---
+
+# 48. RISK-CAPABILITY RELATIONSHIP
+
+```text
+RISK
+ ↓
+CAPABILITY
+ ↓
+CONTROL
+ ↓
+MITIGATION
+```
+
+---
+
+# 49. REQUIREMENT ARCHITECTURE
+
+Requirements shall be mapped through capabilities to implementation.
+
+---
+
+# 50. REQUIREMENT TRACEABILITY
+
+```text
+OBLIGATION
+ ↓
+REQUIREMENT
+ ↓
+CAPABILITY
+ ↓
+CONTROL
+ ↓
+EVIDENCE
+```
+
+---
+
+# 51. EVIDENCE ARCHITECTURE
+
+Evidence shall be linked to:
+
+```text
+CONTROL
+CAPABILITY
+REQUIREMENT
+ASSURANCE
+AUDIT
+```
+
+---
+
+# 52. ARCHITECTURE DEPENDENCY MODEL
+
+Dependencies shall be categorized by:
+
+```text
+TECHNICAL
+ORGANIZATIONAL
+DATA
+PROCESS
+SUPPLIER
+REGULATORY
+FINANCIAL
+TEMPORAL
+```
+
+---
+
+# 53. CRITICAL DEPENDENCIES
+
+Critical dependencies shall be identified and monitored.
+
+---
+
+# 54. SINGLE POINT OF FAILURE
+
+The architecture shall identify material single points of failure.
+
+---
+
+# 55. REDUNDANCY
+
+Critical capability dependencies shall have appropriate redundancy or recovery mechanisms.
+
+---
+
+# 56. RESILIENCE ARCHITECTURE
+
+Resilience shall be represented across:
+
+```text
+CAPABILITY
+SERVICE
+PROCESS
+SYSTEM
+DATA
+SUPPLIER
+PEOPLE
+```
+
+---
+
+# 57. RESILIENCE PATTERNS
+
+Patterns may include:
+
+```text
+REDUNDANCY
+FAILOVER
+DEGRADED MODE
+RECOVERY
+REPLICATION
+ALTERNATIVE SUPPLIER
+MANUAL FALLBACK
+```
+
+---
+
+# 58. SECURITY ARCHITECTURE
+
+Security shall be represented across capability dependencies.
+
+---
+
+# 59. SECURITY CAPABILITY RELATIONSHIPS
+
+```text
+CAPABILITY
+ ↓
+IDENTITY
+ ↓
+ACCESS
+ ↓
+PROTECTION
+ ↓
+DETECTION
+ ↓
+RESPONSE
+ ↓
+RECOVERY
+```
+
+---
+
+# 60. AI ARCHITECTURE
+
+AI capabilities shall map to:
+
+```text
+MODEL
+DATA
+AGENT
+TOOL
+AUTHORITY
+OVERSIGHT
+EVIDENCE
+```
+
+---
+
+# 61. AGENT ARCHITECTURE
+
+Agents shall have explicit mappings for:
+
+```text
+IDENTITY
+AUTHORITY
+TOOLS
+DATA SCOPE
+ACTION SCOPE
+STOP CONDITIONS
+ESCALATION
+AUDIT
+```
+
+---
+
+# 62. AGENT ARCHITECTURE INVARIANT
+
+```text
+CAPABILITY ARCHITECTURE
++
+AGENT AUTONOMY
+→
+EXPLICIT GOVERNANCE REQUIRED
+```
+
+---
+
+# 63. NO IMPLICIT AUTHORITY
+
+Capability architecture shall not imply authority that has not been explicitly granted.
+
+---
+
+# 64. CAPABILITY COMPOSITION PATTERN
+
+```text
+CAPABILITY
+ ├── PEOPLE
+ ├── PROCESS
+ ├── SYSTEM
+ ├── DATA
+ ├── CONTROL
+ ├── SERVICE
+ └── SUPPLIER
+```
+
+---
+
+# 65. ARCHITECTURE VIEWPOINTS
+
+Recommended viewpoints:
+
+```text
+STRATEGIC
+CAPABILITY
+VALUE STREAM
+SERVICE
+PROCESS
+SYSTEM
+DATA
+CONTROL
+RISK
+SECURITY
+RESILIENCE
+AI / AGENT
+```
+
+---
+
+# 66. STRATEGIC VIEW
+
+Shows:
+
+```text
+STRATEGY
+OUTCOMES
+VALUE
+CAPABILITIES
+INVESTMENT
+```
+
+---
+
+# 67. CAPABILITY VIEW
+
+Shows:
+
+```text
+CAPABILITIES
+SUB-CAPABILITIES
+OWNERS
+DEPENDENCIES
+MATURITY
+HEALTH
+```
+
+---
+
+# 68. VALUE STREAM VIEW
+
+Shows:
+
+```text
+STAGES
+CAPABILITIES
+SERVICES
+OUTCOMES
+MEASURES
+```
+
+---
+
+# 69. SERVICE VIEW
+
+Shows:
+
+```text
+SERVICES
+CAPABILITIES
+CONSUMERS
+DEPENDENCIES
+SLOs
+```
+
+---
+
+# 70. PROCESS VIEW
+
+Shows:
+
+```text
+PROCESSES
+ACTIVITIES
+CAPABILITIES
+CONTROLS
+ROLES
+```
+
+---
+
+# 71. SYSTEM VIEW
+
+Shows:
+
+```text
+SYSTEMS
+COMPONENTS
+CAPABILITIES
+INTEGRATIONS
+DEPENDENCIES
+```
+
+---
+
+# 72. DATA VIEW
+
+Shows:
+
+```text
+DATA DOMAINS
+DATASETS
+OWNERS
+LINEAGE
+SECURITY
+RETENTION
+```
+
+---
+
+# 73. CONTROL VIEW
+
+Shows:
+
+```text
+REQUIREMENTS
+CAPABILITIES
+CONTROLS
+TESTS
+EVIDENCE
+ASSURANCE
+```
+
+---
+
+# 74. RISK VIEW
+
+Shows:
+
+```text
+RISKS
+CAPABILITIES
+DEPENDENCIES
+CONTROLS
+MITIGATION
+```
+
+---
+
+# 75. SECURITY VIEW
+
+Shows:
+
+```text
+THREATS
+CAPABILITIES
+CONTROLS
+IDENTITIES
+SYSTEMS
+DATA
+RESPONSE
+```
+
+---
+
+# 76. RESILIENCE VIEW
+
+Shows:
+
+```text
+CRITICAL CAPABILITIES
+DEPENDENCIES
+FAILURE MODES
+RECOVERY
+CONTINUITY
+```
+
+---
+
+# 77. AI / AGENT VIEW
+
+Shows:
+
+```text
+MODELS
+AGENTS
+TOOLS
+DATA
+AUTHORITY
+GUARDRAILS
+OVERSIGHT
+AUDIT
+```
+
+---
+
+# 78. ARCHITECTURE BASELINE
+
+Every approved architecture state shall have:
+
+```text
+VERSION
+DATE
+OWNER
+SCOPE
+ASSUMPTIONS
+DECISIONS
+DEPENDENCIES
+RISKS
+APPROVAL
+```
+
+---
+
+# 79. CURRENT ARCHITECTURE
+
+The current architecture represents the validated as-is state.
+
+---
+
+# 80. TARGET ARCHITECTURE
+
+The target architecture represents the approved future-state capability structure.
+
+---
+
+# 81. TRANSITION ARCHITECTURE
+
+Where current and target states cannot be reached directly, transition architectures shall be defined.
+
+---
+
+# 82. ARCHITECTURE GAP
+
+```text
+CURRENT ARCHITECTURE
+        ↓
+TARGET ARCHITECTURE
+        ↓
+GAP
+```
+
+---
+
+# 83. GAP CATEGORIES
+
+```text
+CAPABILITY
+SERVICE
+PROCESS
+SYSTEM
+DATA
+CONTROL
+PEOPLE
+SUPPLIER
+RESILIENCE
+SECURITY
+```
+
+---
+
+# 84. TRANSFORMATION
+
+Capability transformation shall define how the architecture moves from current to target state.
+
+---
+
+# 85. TRANSFORMATION PRINCIPLES
+
+Transformation shall be:
+
+```text
+CONTROLLED
+TRACEABLE
+RISK-BASED
+MEASURABLE
+REVERSIBLE WHERE PRACTICAL
+```
+
+---
+
+# 86. TRANSFORMATION ROADMAP
+
+Minimum:
+
+```text
+WORKSTREAM
+MILESTONE
+OWNER
+DEPENDENCY
+RISK
+TARGET
+VALIDATION
+```
+
+---
+
+# 87. ARCHITECTURE DECISIONS
+
+Material architecture decisions shall be recorded as authoritative decisions.
+
+---
+
+# 88. ARCHITECTURE DECISION RECORD
+
+Minimum:
+
+```text
+DECISION ID
+CONTEXT
+OPTIONS
+DECISION
+RATIONALE
+IMPACT
+RISKS
+OWNER
+DATE
+```
+
+---
+
+# 89. ARCHITECTURE PRINCIPLES
+
+Architecture decisions shall comply with governing EA-IMETA principles.
+
+---
+
+# 90. ARCHITECTURE EXCEPTIONS
+
+Exceptions shall be:
+
+```text
+IDENTIFIED
+JUSTIFIED
+RISK-ASSESSED
+APPROVED
+TIME-BOUND
+REVIEWED
+```
+
+---
+
+# 91. ARCHITECTURE GOVERNANCE
+
+Architecture governance shall control:
+
+```text
+BASELINE
+TARGET
+TRANSITION
+DECISIONS
+EXCEPTIONS
+STANDARDS
+PATTERNS
+REVIEW
+```
+
+---
+
+# 92. ARCHITECTURE REVIEW
+
+Material capability architecture changes shall receive architecture review.
+
+---
+
+# 93. SECURITY ARCHITECTURE REVIEW
+
+Changes affecting security shall receive appropriate security review.
+
+---
+
+# 94. RESILIENCE ARCHITECTURE REVIEW
+
+Changes affecting critical resilience shall receive resilience review.
+
+---
+
+# 95. AI / AGENT ARCHITECTURE REVIEW
+
+Changes affecting AI or agent authority shall receive dedicated review.
+
+---
+
+# 96. DATA ARCHITECTURE REVIEW
+
+Changes affecting critical data shall receive data architecture review.
+
+---
+
+# 97. CAPABILITY ARCHITECTURE METRICS
+
+Recommended:
+
+```text
+CAPABILITY COVERAGE
+TRACEABILITY COVERAGE
+DEPENDENCY VISIBILITY
+CRITICAL SPOF COUNT
+ARCHITECTURE GAP
+TARGET ALIGNMENT
+EXCEPTION COUNT
+TECHNICAL DEBT
+RESILIENCE COVERAGE
+SECURITY COVERAGE
+```
+
+---
+
+# 98. TRACEABILITY KPI
+
+Measure percentage of material capabilities with complete mappings:
+
+```text
+STRATEGY
+→ OUTCOME
+→ VALUE STREAM
+→ CAPABILITY
+→ SERVICE
+→ PROCESS
+→ SYSTEM
+→ DATA
+→ CONTROL
+→ EVIDENCE
+```
+
+---
+
+# 99. ARCHITECTURE HEALTH
+
+Architecture health shall consider:
+
+```text
+ALIGNMENT
+COHERENCE
+DEPENDENCY
+RISK
+RESILIENCE
+SECURITY
+TECHNICAL DEBT
+CHANGEABILITY
+```
+
+---
+
+# 100. ARCHITECTURE MATURITY
+
+Architecture maturity shall be aligned with the governing capability maturity model.
+
+---
+
+# 101. ARCHITECTURE TECHNICAL DEBT
+
+Technical debt affecting compliance capability shall be recorded and prioritized.
+
+---
+
+# 102. ARCHITECTURE CHANGE IMPACT
+
+Material changes shall assess:
+
+```text
+CAPABILITY
+SERVICE
+PROCESS
+SYSTEM
+DATA
+CONTROL
+RISK
+RESILIENCE
+SECURITY
+```
+
+---
+
+# 103. CHANGE PROPAGATION
+
+Changes shall identify downstream dependencies before implementation where practical.
+
+---
+
+# 104. ARCHITECTURE SIMULATION
+
+Where supported, architecture scenarios may be evaluated before implementation.
+
+---
+
+# 105. WHAT-IF ANALYSIS
+
+Decision services may evaluate:
+
+```text
+REMOVE CAPABILITY
+ADD CAPABILITY
+CHANGE SYSTEM
+CHANGE SUPPLIER
+CHANGE CONTROL
+CHANGE DATA
+CHANGE AUTHORITY
+```
+
+---
+
+# 106. KNOWLEDGE GRAPH INTEGRATION
+
+The capability architecture shall be represented in the knowledge graph.
+
+Core relationships:
+
+```text
+STRATEGY
+→ ENABLES
+→ OUTCOME
+
+OUTCOME
+→ REALIZED_BY
+→ VALUE_STREAM
+
+VALUE_STREAM
+→ USES
+→ CAPABILITY
+
+CAPABILITY
+→ EXPOSED_BY
+→ SERVICE
+
+CAPABILITY
+→ IMPLEMENTED_BY
+→ PROCESS
+
+CAPABILITY
+→ ENABLED_BY
+→ SYSTEM
+
+CAPABILITY
+→ REQUIRES
+→ DATA
+
+CAPABILITY
+→ GOVERNED_BY
+→ CONTROL
+
+CAPABILITY
+→ MITIGATES
+→ RISK
+```
+
+---
+
+# 107. ARCHITECTURE DATA MODEL
+
+Minimum entities:
+
+```text
+STRATEGY
+OUTCOME
+VALUE_STREAM
+CAPABILITY
+SUB_CAPABILITY
+SERVICE
+PROCESS
+SYSTEM
+COMPONENT
+DATA_DOMAIN
+DATASET
+CONTROL
+ROLE
+RISK
+REQUIREMENT
+EVIDENCE
+DECISION
+EXCEPTION
+```
+
+---
+
+# 108. ARCHITECTURE IDENTITY
+
+Each architectural object shall have a stable identifier.
+
+---
+
+# 109. ARCHITECTURE VERSIONING
+
+Material architectural objects shall be versioned.
+
+---
+
+# 110. ARCHITECTURE LINEAGE
+
+Architectural changes shall preserve lineage between versions.
+
+---
+
+# 111. ARCHITECTURE EVIDENCE
+
+Architecture claims shall be supported by authoritative evidence where required.
+
+---
+
+# 112. ARCHITECTURE ASSURANCE
+
+Architecture assurance shall verify:
+
+```text
+TRACEABILITY
+CONSISTENCY
+CONTROL
+RISK
+SECURITY
+RESILIENCE
+```
+
+---
+
+# 113. ARCHITECTURE VALIDATION
+
+Target architectures shall be validated before becoming authoritative baselines.
+
+---
+
+# 114. ARCHITECTURE BASELINE APPROVAL
+
+Approval shall require:
+
+```text
+OWNER
+REVIEW
+RISK ASSESSMENT
+DEPENDENCY REVIEW
+SECURITY REVIEW WHERE REQUIRED
+RESILIENCE REVIEW WHERE REQUIRED
+```
+
+---
+
+# 115. CAPABILITY ARCHITECTURE CONTROL LIBRARY
+
+Recommended controls:
+
+```text
+CTRL-SECRCA-001 Capability Architecture Charter
+CTRL-SECRCA-002 Architecture Authority
+CTRL-SECRCA-003 Architecture Scope
+CTRL-SECRCA-004 Architecture Layers
+CTRL-SECRCA-005 Strategy Layer
+CTRL-SECRCA-006 Outcome Layer
+CTRL-SECRCA-007 Value Stream Layer
+CTRL-SECRCA-008 Capability Layer
+CTRL-SECRCA-009 Service Layer
+CTRL-SECRCA-010 Process Layer
+CTRL-SECRCA-011 System Layer
+CTRL-SECRCA-012 Data Layer
+CTRL-SECRCA-013 Control Layer
+CTRL-SECRCA-014 Evidence Layer
+CTRL-SECRCA-015 Capability Hierarchy
+CTRL-SECRCA-016 Capability Composition
+CTRL-SECRCA-017 Capability Dependencies
+CTRL-SECRCA-018 Dependency Types
+CTRL-SECRCA-019 Value Stream Mapping
+CTRL-SECRCA-020 Capability-Service Mapping
+CTRL-SECRCA-021 Capability-Process Mapping
+CTRL-SECRCA-022 Capability-System Mapping
+CTRL-SECRCA-023 Capability-Data Mapping
+CTRL-SECRCA-024 Capability-Control Mapping
+CTRL-SECRCA-025 Capability-Role Mapping
+CTRL-SECRCA-026 Capability-Risk Mapping
+CTRL-SECRCA-027 Requirement Mapping
+CTRL-SECRCA-028 Traceability
+CTRL-SECRCA-029 Value Stream Architecture
+CTRL-SECRCA-030 Obligation-to-Control
+CTRL-SECRCA-031 Control-to-Evidence
+CTRL-SECRCA-032 Evidence-to-Assurance
+CTRL-SECRCA-033 Event-to-Response
+CTRL-SECRCA-034 Finding-to-Remediation
+CTRL-SECRCA-035 Lesson-to-Improvement
+CTRL-SECRCA-036 Maturity-to-Capability
+CTRL-SECRCA-037 Service Architecture
+CTRL-SECRCA-038 Process Architecture
+CTRL-SECRCA-039 System Architecture
+CTRL-SECRCA-040 Data Architecture
+CTRL-SECRCA-041 Control Architecture
+CTRL-SECRCA-042 Role Architecture
+CTRL-SECRCA-043 Risk Architecture
+CTRL-SECRCA-044 Requirement Architecture
+CTRL-SECRCA-045 Evidence Architecture
+CTRL-SECRCA-046 Dependency Architecture
+CTRL-SECRCA-047 Critical Dependency
+CTRL-SECRCA-048 Single Point of Failure
+CTRL-SECRCA-049 Redundancy
+CTRL-SECRCA-050 Resilience Architecture
+CTRL-SECRCA-051 Resilience Patterns
+CTRL-SECRCA-052 Security Architecture
+CTRL-SECRCA-053 AI Architecture
+CTRL-SECRCA-054 Agent Architecture
+CTRL-SECRCA-055 Agent Authority
+CTRL-SECRCA-056 Capability Composition Pattern
+CTRL-SECRCA-057 Architecture Viewpoints
+CTRL-SECRCA-058 Strategic View
+CTRL-SECRCA-059 Capability View
+CTRL-SECRCA-060 Value Stream View
+CTRL-SECRCA-061 Service View
+CTRL-SECRCA-062 Process View
+CTRL-SECRCA-063 System View
+CTRL-SECRCA-064 Data View
+CTRL-SECRCA-065 Control View
+CTRL-SECRCA-066 Risk View
+CTRL-SECRCA-067 Security View
+CTRL-SECRCA-068 Resilience View
+CTRL-SECRCA-069 AI-Agent View
+CTRL-SECRCA-070 Architecture Baseline
+CTRL-SECRCA-071 Current Architecture
+CTRL-SECRCA-072 Target Architecture
+CTRL-SECRCA-073 Transition Architecture
+CTRL-SECRCA-074 Architecture Gap
+CTRL-SECRCA-075 Transformation
+CTRL-SECRCA-076 Transformation Principles
+CTRL-SECRCA-077 Transformation Roadmap
+CTRL-SECRCA-078 Architecture Decisions
+CTRL-SECRCA-079 Decision Records
+CTRL-SECRCA-080 Architecture Principles
+CTRL-SECRCA-081 Architecture Exceptions
+CTRL-SECRCA-082 Architecture Governance
+CTRL-SECRCA-083 Architecture Review
+CTRL-SECRCA-084 Security Architecture Review
+CTRL-SECRCA-085 Resilience Architecture Review
+CTRL-SECRCA-086 AI-Agent Architecture Review
+CTRL-SECRCA-087 Data Architecture Review
+CTRL-SECRCA-088 Architecture Metrics
+CTRL-SECRCA-089 Traceability KPI
+CTRL-SECRCA-090 Architecture Health
+CTRL-SECRCA-091 Architecture Maturity
+CTRL-SECRCA-092 Technical Debt
+CTRL-SECRCA-093 Change Impact
+CTRL-SECRCA-094 Change Propagation
+CTRL-SECRCA-095 Architecture Simulation
+CTRL-SECRCA-096 What-If Analysis
+CTRL-SECRCA-097 Knowledge Graph
+CTRL-SECRCA-098 Architecture Data Model
+CTRL-SECRCA-099 Architecture Identity
+CTRL-SECRCA-100 Architecture Versioning
+CTRL-SECRCA-101 Architecture Lineage
+CTRL-SECRCA-102 Architecture Evidence
+CTRL-SECRCA-103 Architecture Assurance
+CTRL-SECRCA-104 Architecture Validation
+CTRL-SECRCA-105 Baseline Approval
+```
+
+---
+
+# 116. ARCHITECTURE CONTROL OBJECTIVES
+
+Each architecture control shall establish:
+
+```text
+OBJECT
+RELATIONSHIP
+OWNER
+STANDARD
+EVIDENCE
+RISK
+VALIDATION
+APPROVAL
+```
+
+---
+
+# 117. ARCHITECTURE RECORD
+
+Minimum:
+
+```text
+OBJECT_ID
+OBJECT_TYPE
+NAME
+VERSION
+OWNER
+PARENT
+DEPENDENCIES
+RELATIONSHIPS
+CURRENT_STATE
+TARGET_STATE
+RISKS
+EVIDENCE
+APPROVAL
+```
+
+---
+
+# 118. CAPABILITY ARCHITECTURE ACCEPTANCE
+
+The capability architecture is accepted when:
+
+```text
+ARCHITECTURE CHARTER ACTIVE
+ARCHITECTURE AUTHORITY ACTIVE
+ARCHITECTURE SCOPE ACTIVE
+ARCHITECTURE LAYERS ACTIVE
+STRATEGY MAPPING ACTIVE
+OUTCOME MAPPING ACTIVE
+VALUE STREAM ARCHITECTURE ACTIVE
+CAPABILITY ARCHITECTURE ACTIVE
+SERVICE MAPPING ACTIVE
+PROCESS MAPPING ACTIVE
+SYSTEM MAPPING ACTIVE
+DATA MAPPING ACTIVE
+CONTROL MAPPING ACTIVE
+ROLE MAPPING ACTIVE
+RISK MAPPING ACTIVE
+REQUIREMENT MAPPING ACTIVE
+TRACEABILITY ACTIVE
+VALUE STREAMS ACTIVE
+OBLIGATION-TO-CONTROL ACTIVE
+CONTROL-TO-EVIDENCE ACTIVE
+EVIDENCE-TO-ASSURANCE ACTIVE
+EVENT-TO-RESPONSE ACTIVE
+FINDING-TO-REMEDIATION ACTIVE
+LESSON-TO-IMPROVEMENT ACTIVE
+MATURITY-TO-CAPABILITY ACTIVE
+SERVICE ARCHITECTURE ACTIVE
+PROCESS ARCHITECTURE ACTIVE
+SYSTEM ARCHITECTURE ACTIVE
+DATA ARCHITECTURE ACTIVE
+CONTROL ARCHITECTURE ACTIVE
+ROLE ARCHITECTURE ACTIVE
+RISK ARCHITECTURE ACTIVE
+REQUIREMENT ARCHITECTURE ACTIVE
+EVIDENCE ARCHITECTURE ACTIVE
+DEPENDENCY MODEL ACTIVE
+CRITICAL DEPENDENCY MANAGEMENT ACTIVE
+SPOF MANAGEMENT ACTIVE
+REDUNDANCY ACTIVE
+RESILIENCE ARCHITECTURE ACTIVE
+SECURITY ARCHITECTURE ACTIVE
+AI ARCHITECTURE ACTIVE
+AGENT ARCHITECTURE ACTIVE
+AGENT AUTHORITY GOVERNANCE ACTIVE
+ARCHITECTURE VIEWPOINTS ACTIVE
+BASELINE ACTIVE
+CURRENT ARCHITECTURE ACTIVE
+TARGET ARCHITECTURE ACTIVE
+TRANSITION ARCHITECTURE ACTIVE
+ARCHITECTURE GAP ACTIVE
+TRANSFORMATION ACTIVE
+TRANSFORMATION ROADMAP ACTIVE
+ARCHITECTURE DECISIONS ACTIVE
+DECISION RECORDS ACTIVE
+ARCHITECTURE PRINCIPLES ACTIVE
+EXCEPTION MANAGEMENT ACTIVE
+ARCHITECTURE GOVERNANCE ACTIVE
+ARCHITECTURE REVIEW ACTIVE
+SECURITY REVIEW ACTIVE
+RESILIENCE REVIEW ACTIVE
+AI-AGENT REVIEW ACTIVE
+DATA REVIEW ACTIVE
+ARCHITECTURE METRICS ACTIVE
+TRACEABILITY KPI ACTIVE
+ARCHITECTURE HEALTH ACTIVE
+ARCHITECTURE MATURITY ACTIVE
+TECHNICAL DEBT ACTIVE
+CHANGE IMPACT ACTIVE
+CHANGE PROPAGATION ACTIVE
+SIMULATION ACTIVE
+WHAT-IF ANALYSIS ACTIVE
+KNOWLEDGE GRAPH ACTIVE
+ARCHITECTURE DATA MODEL ACTIVE
+ARCHITECTURE IDENTITY ACTIVE
+VERSIONING ACTIVE
+LINEAGE ACTIVE
+ARCHITECTURE EVIDENCE ACTIVE
+ARCHITECTURE ASSURANCE ACTIVE
+ARCHITECTURE VALIDATION ACTIVE
+BASELINE APPROVAL ACTIVE
+```
+
+---
+
+# 119. ACCEPTANCE CHECKLIST
+
+```text
+[ ] Architecture charter established
+[ ] Architecture authority established
+[ ] Architecture scope established
+[ ] Architecture layers established
+[ ] Strategy mapping established
+[ ] Outcome mapping established
+[ ] Value streams established
+[ ] Capability hierarchy established
+[ ] Capability composition established
+[ ] Dependency model established
+[ ] Service mapping established
+[ ] Process mapping established
+[ ] System mapping established
+[ ] Data mapping established
+[ ] Control mapping established
+[ ] Role mapping established
+[ ] Risk mapping established
+[ ] Requirement mapping established
+[ ] End-to-end traceability established
+[ ] Value-stream architecture established
+[ ] Obligation-to-control established
+[ ] Control-to-evidence established
+[ ] Evidence-to-assurance established
+[ ] Event-to-response established
+[ ] Finding-to-remediation established
+[ ] Lesson-to-improvement established
+[ ] Maturity-to-capability established
+[ ] Security architecture established
+[ ] Resilience architecture established
+[ ] AI architecture established
+[ ] Agent architecture established
+[ ] Agent authority governance established
+[ ] Architecture viewpoints established
+[ ] Current baseline established
+[ ] Target architecture established
+[ ] Transition architecture established
+[ ] Architecture gap established
+[ ] Transformation established
+[ ] Transformation roadmap established
+[ ] Architecture decision records established
+[ ] Exception management established
+[ ] Architecture governance established
+[ ] Architecture reviews established
+[ ] Architecture metrics established
+[ ] Technical debt management established
+[ ] Change impact established
+[ ] Knowledge graph established
+[ ] Architecture data model established
+[ ] Versioning established
+[ ] Lineage established
+[ ] Architecture assurance established
+[ ] Architecture validation established
+[ ] Baseline approval established
+```
+
+---
+
+# 120. NORMAL ARCHITECTURE LIFECYCLE
+
+```text
+STRATEGY
+ ↓
+OUTCOME
+ ↓
+VALUE STREAM
+ ↓
+CAPABILITY
+ ↓
+SERVICE
+ ↓
+PROCESS
+ ↓
+SYSTEM
+ ↓
+DATA
+ ↓
+CONTROL
+ ↓
+EVIDENCE
+ ↓
+ASSURANCE
+```
+
+---
+
+# 121. TRANSFORMATION LIFECYCLE
+
+```text
+CURRENT
+ ↓
+ASSESS
+ ↓
+GAP
+ ↓
+TARGET
+ ↓
+TRANSITION
+ ↓
+IMPLEMENT
+ ↓
+VALIDATE
+ ↓
+BASELINE
+```
+
+---
+
+# 122. ARCHITECTURE DECISION FLOW
+
+```text
+NEED
+ ↓
+CONTEXT
+ ↓
+OPTIONS
+ ↓
+IMPACT
+ ↓
+RISK
+ ↓
+DECISION
+ ↓
+APPROVAL
+ ↓
+IMPLEMENTATION
+ ↓
+VALIDATION
+```
+
+---
+
+# 123. ARCHITECTURE CHANGE FLOW
+
+```text
+CHANGE REQUEST
+ ↓
+IMPACT
+ ↓
+DEPENDENCIES
+ ↓
+RISK
+ ↓
+SECURITY
+ ↓
+RESILIENCE
+ ↓
+GOVERNANCE
+ ↓
+IMPLEMENT
+ ↓
+VALIDATE
+ ↓
+BASELINE
+```
+
+---
+
+# 124. CAPABILITY ARCHITECTURE INVARIANTS
+
+```text
+NO TRACEABILITY
+→
+NO AUTHORITATIVE ARCHITECTURE CLAIM
+```
+
+```text
+NO OWNER
+→
+NO ACCOUNTABLE ARCHITECTURAL OBJECT
+```
+
+```text
+NO DEPENDENCY VISIBILITY
+→
+NO RELIABLE RESILIENCE CLAIM
+```
+
+```text
+NO TARGET STATE
+→
+NO CONTROLLED TRANSFORMATION
+```
+
+```text
+NO VALIDATION
+→
+NO APPROVED TARGET BASELINE
+```
+
+```text
+NO EXCEPTION GOVERNANCE
+→
+NO CONTROLLED DEVIATION
+```
+
+```text
+IMPLICIT AGENT AUTHORITY
+→
+ARCHITECTURE CONTROL FAILURE
+```
+
+---
+
+# 125. ARCHITECTURE QUALITY MODEL
+
+```text
+STRATEGY
++
+OUTCOME
++
+VALUE STREAM
++
+CAPABILITY
++
+SERVICE
++
+PROCESS
++
+SYSTEM
++
+DATA
++
+CONTROL
++
+EVIDENCE
++
+ASSURANCE
++
+GOVERNANCE
+=
+TRACEABLE CAPABILITY ARCHITECTURE
+```
+
+---
+
+# 126. FINAL CAPABILITY ARCHITECTURE BASELINE
+
+The baseline consists of:
+
+```text
+STRATEGY
+OUTCOMES
+VALUE STREAMS
+CAPABILITIES
+SUB-CAPABILITIES
+SERVICES
+PROCESSES
+SYSTEMS
+COMPONENTS
+DATA
+CONTROLS
+ROLES
+RISKS
+REQUIREMENTS
+EVIDENCE
+DEPENDENCIES
+RESILIENCE
+SECURITY
+AI
+AGENTS
+VIEWPOINTS
+CURRENT ARCHITECTURE
+TARGET ARCHITECTURE
+TRANSITION ARCHITECTURE
+GAPS
+TRANSFORMATION
+DECISIONS
+EXCEPTIONS
+GOVERNANCE
+METRICS
+HEALTH
+MATURITY
+TECHNICAL DEBT
+CHANGE IMPACT
+SIMULATION
+KNOWLEDGE GRAPH
+DATA MODEL
+IDENTITY
+VERSIONING
+LINEAGE
+ASSURANCE
+VALIDATION
+APPROVAL
+```
+
+---
+
+# 127. FINAL TRACEABILITY
+
+```text
+EA-IMETA-MASTER-01
+        ↓
+SYSTEM RELEASE BASELINE
+        ↓
+IMPLEMENTATION
+        ↓
+BUILD
+        ↓
+TEST
+        ↓
+RELEASE
+        ↓
+PILOT
+        ↓
+PRODUCTION READINESS
+        ↓
+PRODUCTION
+        ↓
+PRODUCTION TEST
+        ↓
+PRODUCTION RELEASE
+        ↓
+PRODUCTION OPERATIONS
+        ↓
+SERVICE MANAGEMENT
+        ↓
+SERVICE GOVERNANCE
+        ↓
+SERVICE CONTROL
+        ↓
+SERVICE ASSURANCE
+        ↓
+SERVICE AUDIT
+        ↓
+SERVICE CONTINUITY
+        ↓
+SERVICE RESILIENCE
+        ↓
+SERVICE CAPACITY
+        ↓
+SERVICE PERFORMANCE
+        ↓
+SERVICE OBSERVABILITY
+        ↓
+SERVICE SECURITY
+        ↓
+SECURITY OPERATIONS
+        ↓
+SECURITY INTELLIGENCE
+        ↓
+SECURITY DECISION
+        ↓
+SECURITY ADAPTATION
+        ↓
+SECURITY RESILIENCE ADAPTIVE
+        ↓
+SECURITY RESILIENCE GOVERNANCE
+        ↓
+SECURITY RESILIENCE ASSURANCE
+        ↓
+SECURITY RESILIENCE AUDIT
+        ↓
+SECURITY RESILIENCE CERTIFICATION
+        ↓
+SECURITY RESILIENCE ATTESTATION
+        ↓
+SECURITY RESILIENCE COMPLIANCE
+        ↓
+SECURITY RESILIENCE COMPLIANCE GOVERNANCE
+        ↓
+SECURITY RESILIENCE COMPLIANCE ASSURANCE
+        ↓
+SECURITY RESILIENCE COMPLIANCE MONITORING
+        ↓
+SECURITY RESILIENCE COMPLIANCE RESPONSE
+        ↓
+SECURITY RESILIENCE COMPLIANCE REMEDIATION
+        ↓
+SECURITY RESILIENCE COMPLIANCE IMPROVEMENT
+        ↓
+SECURITY RESILIENCE COMPLIANCE MATURITY
+        ↓
+SECURITY RESILIENCE COMPLIANCE CAPABILITY
+        ↓
+SECURITY RESILIENCE COMPLIANCE CAPABILITY ARCHITECTURE
+```
+
+---
+
+# 128. COMPLETION STATEMENT
+
+EA-IMETA-PRODUCTION-SERVICE-SECURITY-RESILIENCE-COMPLIANCE-CAPABILITY-ARCHITECTURE-01 establishes the authoritative architecture for connecting compliance capabilities to the enterprise structures that enable them.
+
+It provides the ability to answer:
+
+```text
+WHICH STRATEGY DRIVES THIS CAPABILITY?
+WHICH OUTCOME DOES IT PRODUCE?
+WHICH VALUE STREAM USES IT?
+WHICH SERVICE EXPOSES IT?
+WHICH PROCESS OPERATES IT?
+WHICH SYSTEM ENABLES IT?
+WHICH DATA DOES IT REQUIRE?
+WHICH CONTROLS GOVERN IT?
+WHICH ROLES OWN IT?
+WHICH RISKS AFFECT IT?
+WHICH EVIDENCE PROVES IT?
+HOW IS IT ASSURED?
+WHAT IS THE CURRENT ARCHITECTURE?
+WHAT IS THE TARGET ARCHITECTURE?
+WHAT MUST CHANGE?
+```
+
+The resulting architecture chain is:
+
+```text
+STRATEGY
+ ↓
+OUTCOME
+ ↓
+VALUE STREAM
+ ↓
+CAPABILITY
+ ↓
+SERVICE
+ ↓
+PROCESS
+ ↓
+SYSTEM
+ ↓
+DATA
+ ↓
+CONTROL
+ ↓
+EVIDENCE
+ ↓
+ASSURANCE
+```
+
+---
+
+# 129. NEXT DOCUMENT
+
+The next recommended document is:
+
+```text
+EA-IMETA-PRODUCTION-SERVICE-SECURITY-RESILIENCE-COMPLIANCE-CAPABILITY-TRANSFORMATION-01
+```
+
+This should establish the dedicated capability transformation layer:
+
+```text
+TRANSFORMATION STRATEGY
+CURRENT STATE
+TARGET STATE
+TRANSITION STATES
+TRANSFORMATION PRINCIPLES
+TRANSFORMATION WORKSTREAMS
+DEPENDENCIES
+ARCHITECTURE CHANGE
+CAPABILITY CHANGE
+SERVICE CHANGE
+PROCESS CHANGE
+SYSTEM CHANGE
+DATA CHANGE
+CONTROL CHANGE
+SECURITY CHANGE
+RESILIENCE CHANGE
+AI / AGENT CHANGE
+MIGRATION
+CUTOVER
+VALIDATION
+BENEFIT REALIZATION
+TRANSFORMATION GOVERNANCE
+```
+
+The next chain becomes:
+
+```text
+COMPLIANCE
+   ↓
+GOVERNANCE
+   ↓
+ASSURANCE
+   ↓
+MONITORING
+   ↓
+RESPONSE
+   ↓
+REMEDIATION
+   ↓
+IMPROVEMENT
+   ↓
+MATURITY
+   ↓
+CAPABILITY
+   ↓
+CAPABILITY ARCHITECTURE
+   ↓
+CAPABILITY TRANSFORMATION
+```
+
+---
+
+# 130. FINAL PRINCIPLE
+
+> EA-IMETA SHALL MAINTAIN A TRACEABLE CAPABILITY ARCHITECTURE IN WHICH STRATEGY, OUTCOMES, VALUE STREAMS, CAPABILITIES, SERVICES, PROCESSES, SYSTEMS, DATA, CONTROLS AND EVIDENCE FORM A GOVERNED ARCHITECTURAL CHAIN, ENABLING CONTROLLED TRANSFORMATION, SECURITY, RESILIENCE, ASSURANCE AND CONTINUOUS EVOLUTION.
+
+```text
+STRATEGY
+ ↓
+OUTCOME
+ ↓
+VALUE
+ ↓
+CAPABILITY
+ ↓
+ENABLEMENT
+ ↓
+CONTROL
+ ↓
+EVIDENCE
+ ↓
+ASSURANCE
+ ↓
+TRANSFORMATION
+```
+
+---
+
+# END OF EA-IMETA-PRODUCTION-SERVICE-SECURITY-RESILIENCE-COMPLIANCE-CAPABILITY-ARCHITECTURE-01
+## PRODUCTION SECURITY-RESILIENCE COMPLIANCE CAPABILITY ARCHITECTURE, CAPABILITY MAP, VALUE STREAMS, DEPENDENCIES, COMPOSITION, SERVICE/PROCESS/SYSTEM/DATA/CONTROL MAPPING, TARGET ARCHITECTURE & TRANSFORMATION BASELINE
+## COMPLETE

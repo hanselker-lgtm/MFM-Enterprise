@@ -44,11 +44,6 @@ from mfm.application.uow.abstract_unit_of_work import AbstractUnitOfWork
 from mfm.domain.certificates.certificate import Certificate
 from mfm.domain.certificates.certificate_status import CertificateStatus
 from mfm.domain.certificates.certificate_target import CertificateTarget
-from mfm.domain.certificates.certificate_target_type import CertificateTargetType
-from mfm.domain.certificates.certificate_type_reference import CertificateTypeReference
-from mfm.domain.certificates.identifiers import CertificateTypeId
-from mfm.domain.certificates.issuer_reference import IssuerReference
-from mfm.domain.certificates.issuer_reference_type import IssuerReferenceType
 from mfm.repositories.certificate_repository import CertificateRepository
 
 

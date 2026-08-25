@@ -46,3 +46,13 @@ Desktop.ini
 # Environment
 
 .env
+
+# Local runtime data (created on first run, machine-specific)
+
+data/database/
+logs/
+config/user.toml
+
+# Ruff
+
+.ruff_cache/

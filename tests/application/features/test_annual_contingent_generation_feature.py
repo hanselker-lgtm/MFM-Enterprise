@@ -11,7 +11,6 @@ import pytest
 
 from mfm.application.events.domain_event_dispatcher import DomainEventDispatcher
 from mfm.application.events.event_handler import EventHandler
-from mfm.application.features.annual_contingent_generation import AnnualContingentGenerationFeature
 from mfm.application.features.annual_contingent_generation import CreateAnnualContingentFeature
 from mfm.application.features.annual_contingent_generation import CreateAnnualContingentRequest
 from mfm.application.features.annual_contingent_generation import CreateAnnualContingentResponse

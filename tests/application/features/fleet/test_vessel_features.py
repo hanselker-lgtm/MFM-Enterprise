@@ -6,9 +6,6 @@ from uuid import uuid4
 import pytest
 
 from mfm.application.features.fleet.change_vessel_registration_feature import (
-    BusinessRuleViolation as ChangeRegistrationBusinessRuleViolation,
-)
-from mfm.application.features.fleet.change_vessel_registration_feature import (
     ChangeVesselRegistrationFeature,
 )
 from mfm.application.features.fleet.change_vessel_registration_feature import (
@@ -76,9 +73,6 @@ from mfm.application.fleet.create_vessel import (
 )
 from mfm.application.fleet.create_vessel import (
     CreateVesselResponse as ServiceCreateVesselResponse,
-)
-from mfm.application.fleet.create_vessel import (
-    RepositoryException as ServiceRepositoryException,
 )
 from mfm.application.fleet.create_vessel import (
     ValidationException as ServiceValidationException,

@@ -16,11 +16,6 @@ from mfm.database.models.asset_location_model import AssetLocationModel  # noqa:
 from mfm.database.models.asset_model import AssetModel  # noqa: F401
 from mfm.database.models.base_model import BaseModel
 from mfm.database.models.voyage_model import VoyageModel
-from mfm.domain.voyages.events import VoyageArrived
-from mfm.domain.voyages.events import VoyageCancelled
-from mfm.domain.voyages.events import VoyageCreated
-from mfm.domain.voyages.events import VoyageDeparted
-from mfm.domain.voyages.events import VoyagePlanned
 from mfm.domain.voyages.exceptions import InvalidVoyageChronologyError
 from mfm.domain.voyages.exceptions import InvalidVoyageLifecycleError
 from mfm.domain.voyages.exceptions import InvalidVoyagePurposeError

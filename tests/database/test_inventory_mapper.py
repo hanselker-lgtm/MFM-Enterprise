@@ -13,6 +13,8 @@ import mfm.database.models  # noqa: F401
 import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
+from sqlalchemy.engine import Connection
+from sqlalchemy.engine import Engine
 
 from mfm.database.mappers.inventory_mapper import InventoryMapper
 from mfm.database.models.asset_location_model import AssetLocationModel  # noqa: F401
@@ -32,14 +34,22 @@ from mfm.domain.inventory.unit_of_measure import UnitOfMeasure
 def _sqlite_session(tmp_path: Path, name: str) -> Session:
     db_path = tmp_path / f"{name}.sqlite"
     engine = create_engine(f"sqlite:///{db_path}")
-    BaseModel.metadata.create_all(engine)
-    return Session(engine)
+    connection = engine.connect()
+    BaseModel.metadata.create_all(connection)
+    session = Session(bind=connection)
+    session.info["test_connection"] = connection
+    session.info["test_engine"] = engine
+    return session
 
 
 def _close_session(session: Session) -> None:
-    bind = session.get_bind()
+    connection = session.info.pop("test_connection", None)
+    engine = session.info.pop("test_engine", None)
     session.close()
-    bind.dispose()
+    if isinstance(connection, Connection):
+        connection.close()
+    if isinstance(engine, Engine):
+        engine.dispose()
 
 
 def _aware(

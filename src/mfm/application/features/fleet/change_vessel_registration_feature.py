@@ -12,9 +12,6 @@ from mfm.application.fleet.change_vessel_registration import (
 from mfm.application.fleet.change_vessel_registration import (
     ChangeVesselRegistrationResponse as ServiceResponse,
 )
-from mfm.application.fleet.change_vessel_registration import (
-    ChangeVesselRegistrationUseCase,
-)
 from mfm.application.fleet.create_vessel import (
     BusinessRuleViolation as ServiceBusinessRuleViolation,
 )

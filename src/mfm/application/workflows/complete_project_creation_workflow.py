@@ -376,6 +376,12 @@ class CompleteProjectCreationWorkflow:
                             description="Project budget container",
                             created_at=datetime.now(UTC),
                         ),
+                        ExternalReferenceInput(
+                            reference_type="DOCUMENT",
+                            external_id=project_budget_container_id,
+                            description="BUDGET_STATUS:READY",
+                            created_at=datetime.now(UTC),
+                        ),
                     ),
                     updated_at=datetime.now(UTC),
                 )

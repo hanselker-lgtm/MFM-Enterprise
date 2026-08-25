@@ -12,7 +12,6 @@ from mfm.application.fleet.change_vessel_status import (
 from mfm.application.fleet.change_vessel_status import (
     ChangeVesselStatusResponse as ServiceResponse,
 )
-from mfm.application.fleet.change_vessel_status import ChangeVesselStatusUseCase
 from mfm.application.fleet.create_vessel import (
     BusinessRuleViolation as ServiceBusinessRuleViolation,
 )

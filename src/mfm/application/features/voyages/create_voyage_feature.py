@@ -12,7 +12,6 @@ from mfm.application.voyages.create_voyage import (
 )
 from mfm.application.voyages.create_voyage import CreateVoyageRequest as ServiceRequest
 from mfm.application.voyages.create_voyage import CreateVoyageResponse as ServiceResponse
-from mfm.application.voyages.create_voyage import CreateVoyageUseCase
 from mfm.application.voyages.create_voyage import (
     RepositoryException as ServiceRepositoryException,
 )

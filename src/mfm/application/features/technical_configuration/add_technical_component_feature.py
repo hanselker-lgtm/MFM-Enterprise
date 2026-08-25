@@ -28,9 +28,6 @@ from mfm.application.technical_configuration.add_technical_component import (
 from mfm.application.technical_configuration.add_technical_component import (
     AddTechnicalComponentResponse as ServiceResponse,
 )
-from mfm.application.technical_configuration.add_technical_component import (
-    AddTechnicalComponentUseCase,
-)
 from mfm.application.technical_configuration.create_technical_configuration import (
     BusinessRuleViolation as ServiceBusinessRuleViolation,
 )

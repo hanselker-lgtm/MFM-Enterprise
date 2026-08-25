@@ -1,12 +1,14 @@
 from __future__ import annotations
 
-import weakref
 from uuid import UUID
 from uuid import uuid4
 
 import pytest
 from sqlalchemy import create_engine
+from sqlalchemy.engine import Connection
+from sqlalchemy.engine import Engine
 from sqlalchemy.orm import Session
+from sqlalchemy.pool import NullPool
 
 from mfm.common.enums import ContactStatus
 from mfm.database.models.asset_location_model import AssetLocationModel
@@ -26,16 +28,45 @@ from mfm.infrastructure.persistence.sqlite.sqlite_vessel_repository import (
 from mfm.repositories.unit_of_work import UnitOfWork
 
 
+_SQLITE_RESOURCES: list[tuple[Session, Connection, Engine]] = []
+
+
 @pytest.fixture(autouse=True)
 def clear_registry() -> None:
     Vessel._clear_registry_for_tests()
 
 
+@pytest.fixture(autouse=True)
+def _deterministic_sqlite_teardown() -> None:
+    try:
+        yield
+    finally:
+        close_errors: list[BaseException] = []
+        while _SQLITE_RESOURCES:
+            session, connection, engine = _SQLITE_RESOURCES.pop()
+            try:
+                session.close()
+            except BaseException as exc:  # pragma: no cover - defensive cleanup
+                close_errors.append(exc)
+            try:
+                connection.close()
+            except BaseException as exc:  # pragma: no cover - defensive cleanup
+                close_errors.append(exc)
+            try:
+                engine.dispose()
+            except BaseException as exc:  # pragma: no cover - defensive cleanup
+                close_errors.append(exc)
+
+        if close_errors:
+            raise close_errors[0]
+
+
 def _create_session() -> tuple[object, Session]:
-    engine = create_engine("sqlite:///:memory:")
-    BaseModel.metadata.create_all(engine)
-    session = Session(engine)
-    weakref.finalize(session, engine.dispose)
+    engine = create_engine("sqlite:///:memory:", poolclass=NullPool)
+    connection = engine.connect()
+    BaseModel.metadata.create_all(connection)
+    session = Session(bind=connection)
+    _SQLITE_RESOURCES.append((session, connection, engine))
     return engine, session
 
 

@@ -27,9 +27,6 @@ from mfm.application.maintenance.add_maintenance_requirement import (
 from mfm.application.maintenance.add_maintenance_requirement import (
     AddMaintenanceRequirementResponse as ServiceResponse,
 )
-from mfm.application.maintenance.add_maintenance_requirement import (
-    AddMaintenanceRequirementUseCase,
-)
 from mfm.application.maintenance.create_maintenance_plan import (
     BusinessRuleViolation as ServiceBusinessRuleViolation,
 )

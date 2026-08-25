@@ -5,7 +5,10 @@ from pathlib import Path
 from uuid import UUID
 
 import mfm.database.models  # noqa: F401
+import pytest
 from sqlalchemy import create_engine
+from sqlalchemy.engine import Connection
+from sqlalchemy.engine import Engine
 from sqlalchemy.orm import Session
 
 from mfm.database.models.asset_location_model import AssetLocationModel  # noqa: F401
@@ -27,17 +30,54 @@ from mfm.infrastructure.persistence.sqlite.sqlite_certificate_repository import 
 from mfm.repositories.unit_of_work import UnitOfWork
 
 
+_TRACKED_SQLITE_RESOURCES: list[tuple[Session, Connection, Engine]] = []
+
+
+def _detach_tracked_resources(session: Session) -> tuple[Connection, Engine] | None:
+    for index in range(len(_TRACKED_SQLITE_RESOURCES) - 1, -1, -1):
+        tracked_session, tracked_connection, tracked_engine = _TRACKED_SQLITE_RESOURCES[index]
+        if tracked_session is session:
+            _TRACKED_SQLITE_RESOURCES.pop(index)
+            return tracked_connection, tracked_engine
+    return None
+
+
+@pytest.fixture(scope="module", autouse=True)
+def _module_sqlite_resource_finalizer() -> None:
+    yield
+    while _TRACKED_SQLITE_RESOURCES:
+        session, connection, engine = _TRACKED_SQLITE_RESOURCES.pop()
+        session.close()
+        connection.close()
+        engine.dispose()
+
+
 def _sqlite_session(tmp_path: Path, name: str) -> Session:
     db_path = tmp_path / f"{name}.sqlite"
     engine = create_engine(f"sqlite:///{db_path}")
-    BaseModel.metadata.create_all(engine)
-    return Session(engine)
+    connection = engine.connect()
+    BaseModel.metadata.create_all(connection)
+    session = Session(bind=connection)
+    session.info["test_connection"] = connection
+    session.info["test_engine"] = engine
+    _TRACKED_SQLITE_RESOURCES.append((session, connection, engine))
+    return session
 
 
 def _close_session(session: Session) -> None:
-    bind = session.get_bind()
+    tracked = _detach_tracked_resources(session)
+    if tracked is None:
+        connection = session.info.pop("test_connection", None)
+        engine = session.info.pop("test_engine", None)
+    else:
+        connection, engine = tracked
+        session.info.pop("test_connection", None)
+        session.info.pop("test_engine", None)
     session.close()
-    bind.dispose()
+    if isinstance(connection, Connection):
+        connection.close()
+    if isinstance(engine, Engine):
+        engine.dispose()
 
 
 def _certificate_type() -> CertificateTypeReference:
@@ -502,8 +542,10 @@ def test_certificate_repository_uses_uow_transaction_without_implicit_commit(
     engine = create_engine(f"sqlite:///{db_path}")
     BaseModel.metadata.create_all(engine)
 
-    session_one = Session(engine)
-    session_two = Session(engine)
+    connection_one: Connection = engine.connect()
+    connection_two: Connection = engine.connect()
+    session_one = Session(bind=connection_one)
+    session_two = Session(bind=connection_two)
     try:
         repository = SQLiteCertificateRepository(UnitOfWork(session_one))
         certificate = _certificate(
@@ -557,4 +599,6 @@ def test_certificate_repository_uses_uow_transaction_without_implicit_commit(
     finally:
         session_one.close()
         session_two.close()
+        connection_one.close()
+        connection_two.close()
         engine.dispose()

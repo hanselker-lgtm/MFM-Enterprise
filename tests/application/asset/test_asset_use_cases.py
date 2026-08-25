@@ -14,7 +14,6 @@ from mfm.application.asset.create_asset import BusinessRuleViolation
 from mfm.application.asset.create_asset import CreateAssetRequest
 from mfm.application.asset.create_asset import CreateAssetUseCase
 from mfm.application.asset.create_asset import RepositoryException
-from mfm.application.asset.create_asset import ValidationException
 from mfm.application.asset.dispose_asset import AssetDisposedEvent
 from mfm.application.asset.dispose_asset import DisposeAssetRequest
 from mfm.application.asset.dispose_asset import DisposeAssetUseCase

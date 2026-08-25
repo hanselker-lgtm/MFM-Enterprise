@@ -10,7 +10,6 @@ from uuid import UUID
 from mfm.application.asset.create_asset import BusinessRuleViolation as ServiceBusinessRuleViolation
 from mfm.application.asset.create_asset import CreateAssetRequest as ServiceRequest
 from mfm.application.asset.create_asset import CreateAssetResponse as ServiceResponse
-from mfm.application.asset.create_asset import CreateAssetUseCase
 from mfm.application.asset.create_asset import RepositoryException as ServiceRepositoryException
 from mfm.application.asset.create_asset import ValidationException as ServiceValidationException
 from mfm.domain.asset.asset_category import AssetCategory

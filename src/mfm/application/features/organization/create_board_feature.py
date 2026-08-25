@@ -11,7 +11,6 @@ from mfm.application.organization.create_board import BoardMemberInput as Servic
 from mfm.application.organization.create_board import BusinessRuleViolation as ServiceBusinessRuleViolation
 from mfm.application.organization.create_board import CreateBoardRequest as ServiceRequest
 from mfm.application.organization.create_board import CreateBoardResponse as ServiceResponse
-from mfm.application.organization.create_board import CreateBoardUseCase
 from mfm.application.organization.create_organization import RepositoryException as ServiceRepositoryException
 from mfm.application.organization.create_organization import ValidationException as ServiceValidationException
 

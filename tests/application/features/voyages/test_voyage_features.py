@@ -59,7 +59,6 @@ from mfm.domain.voyages.location_snapshot import LocationSnapshot
 from mfm.domain.voyages.voyage import Voyage
 from mfm.domain.voyages.voyage_purpose import VoyagePurpose
 from mfm.domain.voyages.voyage_purpose_code import VoyagePurposeCode
-from mfm.repositories.voyage_repository import VoyageRepository
 from tests.application.voyages.test_voyage_use_cases import FakeVoyageUnitOfWork
 
 

@@ -22,7 +22,6 @@ from mfm.domain.maintenance.maintenance_type import MaintenanceType
 from mfm.domain.maintenance.performer_reference import PerformerReference
 from mfm.domain.maintenance.performer_reference_type import PerformerReferenceType
 from mfm.domain.maintenance.work_order import WorkOrder
-from mfm.domain.maintenance.work_order_status import WorkOrderStatus
 
 
 def _utc(year: int, month: int, day: int, hour: int) -> datetime:

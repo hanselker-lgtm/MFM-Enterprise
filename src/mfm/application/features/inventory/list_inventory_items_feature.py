@@ -19,7 +19,6 @@ from mfm.application.inventory.create_inventory_item import (
 )
 from mfm.application.inventory.list_inventory_items import ListInventoryItemsRequest as ServiceRequest
 from mfm.application.inventory.list_inventory_items import ListInventoryItemsResponse as ServiceResponse
-from mfm.application.inventory.list_inventory_items import ListInventoryItemsUseCase
 
 
 @dataclass(frozen=True, slots=True)

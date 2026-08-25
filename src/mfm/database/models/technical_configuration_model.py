@@ -6,7 +6,6 @@ from typing import TYPE_CHECKING
 from uuid import UUID
 
 from sqlalchemy import Enum
-from sqlalchemy import String
 from sqlalchemy.orm import Mapped
 from sqlalchemy.orm import mapped_column
 from sqlalchemy.orm import relationship

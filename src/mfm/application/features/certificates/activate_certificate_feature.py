@@ -12,7 +12,6 @@ from mfm.application.certificates.activate_certificate import (
 from mfm.application.certificates.activate_certificate import (
     ActivateCertificateResponse as ServiceResponse,
 )
-from mfm.application.certificates.activate_certificate import ActivateCertificateUseCase
 from mfm.application.certificates.create_certificate import (
     BusinessRuleViolation as ServiceBusinessRuleViolation,
 )

@@ -7,7 +7,6 @@ from datetime import timedelta
 from datetime import timezone
 from pathlib import Path
 from uuid import UUID
-from uuid import uuid4
 
 import mfm.database.models  # noqa: F401
 import pytest

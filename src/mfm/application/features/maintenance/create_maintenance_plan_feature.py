@@ -18,9 +18,6 @@ from mfm.application.maintenance.create_maintenance_plan import (
     CreateMaintenancePlanResponse as ServiceResponse,
 )
 from mfm.application.maintenance.create_maintenance_plan import (
-    CreateMaintenancePlanUseCase,
-)
-from mfm.application.maintenance.create_maintenance_plan import (
     MaintenanceIntervalResponse as ServiceIntervalResponse,
 )
 from mfm.application.maintenance.create_maintenance_plan import (

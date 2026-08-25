@@ -21,7 +21,6 @@ from mfm.application.certificates.revoke_certificate import (
 from mfm.application.certificates.revoke_certificate import (
     RevokeCertificateResponse as ServiceResponse,
 )
-from mfm.application.certificates.revoke_certificate import RevokeCertificateUseCase
 from mfm.application.features.certificates.create_certificate_feature import (
     BusinessRuleViolation,
 )

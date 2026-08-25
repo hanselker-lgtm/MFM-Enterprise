@@ -77,6 +77,39 @@ def _contains_domain_type(tp: Any) -> bool:
     return False
 
 
+def _contains_forbidden_boundary_type(tp: Any) -> str | None:
+    """Return a short reason string if ``tp`` leaks a domain or SQLAlchemy type.
+
+    Implements the Public API Standard's "Domain Boundary Rules" and
+    "SQLAlchemy Boundary Rules": DTOs must not expose domain objects,
+    ORM models, or SQLAlchemy sessions/query types.
+    """
+
+    origin = get_origin(tp)
+    if origin is not None:
+        for arg in get_args(tp):
+            reason = _contains_forbidden_boundary_type(arg)
+            if reason:
+                return reason
+        return None
+
+    if inspect.isclass(tp):
+        import enum
+
+        if issubclass(tp, enum.Enum):
+            # Enums are explicitly allowed by the Public API Standard,
+            # regardless of which module they're declared in.
+            return None
+
+        module = tp.__module__
+        if module.startswith("mfm.domain"):
+            return f"domain type '{tp.__qualname__}' ({module})"
+        if module.startswith("sqlalchemy") or module.startswith("mfm.database.models"):
+            return f"SQLAlchemy/ORM type '{tp.__qualname__}' ({module})"
+
+    return None
+
+
 def _request_response_pairs() -> list[tuple[type, type, Any]]:
     pairs: list[tuple[type, type, Any]] = []
     for feature_cls in _iter_feature_classes():
@@ -185,3 +218,77 @@ def test_feature_responses_do_not_expose_domain_types() -> None:
                     f"{feature_cls.__module__}.{feature_cls.__name__} response field "
                     f"{response_type.__name__}.{field.name} exposes domain type"
                 )
+
+
+def test_feature_requests_do_not_expose_domain_or_sqlalchemy_types() -> None:
+    """Public API Standard, backlog item 5: requests were previously unchecked.
+
+    Only response DTOs were guarded against leaking domain/ORM types;
+    request DTOs had no equivalent check at all.
+    """
+
+    checked: set[type] = set()
+
+    for feature_cls, request_type, _ in _request_response_pairs():
+        if request_type in checked:
+            continue
+        checked.add(request_type)
+
+        if not is_dataclass(request_type):
+            continue
+
+        module_globals = vars(sys.modules[request_type.__module__])
+        hints = get_type_hints(request_type, globalns=module_globals, localns=module_globals)
+
+        for field in fields(request_type):
+            field_type = hints.get(field.name, field.type)
+            reason = _contains_forbidden_boundary_type(field_type)
+            assert reason is None, (
+                f"{feature_cls.__module__}.{feature_cls.__name__} request field "
+                f"{request_type.__name__}.{field.name} exposes {reason}"
+            )
+
+
+def test_feature_responses_do_not_expose_sqlalchemy_types() -> None:
+    """Public API Standard "SQLAlchemy Boundary Rules": no ORM/Session leakage."""
+
+    checked: set[type] = set()
+
+    for feature_cls, _, response_annotation in _request_response_pairs():
+        for response_type in _unwrap_response_types(response_annotation):
+            if response_type in checked:
+                continue
+            checked.add(response_type)
+
+            module_globals = vars(sys.modules[response_type.__module__])
+            hints = get_type_hints(response_type, globalns=module_globals, localns=module_globals)
+
+            for field in fields(response_type):
+                field_type = hints.get(field.name, field.type)
+                reason = _contains_forbidden_boundary_type(field_type)
+                assert reason is None or "domain type" in reason, (
+                    f"{feature_cls.__module__}.{feature_cls.__name__} response field "
+                    f"{response_type.__name__}.{field.name} exposes {reason}"
+                )
+
+
+def test_request_and_response_dataclasses_use_slots() -> None:
+    """Public API Standard requires ``@dataclass(frozen=True, slots=True)``."""
+
+    checked: set[type] = set()
+    for feature_cls, request_type, response_annotation in _request_response_pairs():
+        candidates = [request_type, *_unwrap_response_types(response_annotation)]
+        for dto_type in candidates:
+            if dto_type in checked or not is_dataclass(dto_type):
+                continue
+            checked.add(dto_type)
+
+            assert getattr(dto_type, "__dataclass_params__", None) is not None
+            has_slots = "__slots__" in dto_type.__dict__
+            assert has_slots, (
+                f"{feature_cls.__module__}.{feature_cls.__name__} DTO "
+                f"{dto_type.__name__} must use @dataclass(slots=True)"
+            )
+
+
+

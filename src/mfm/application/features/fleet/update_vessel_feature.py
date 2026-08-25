@@ -17,7 +17,6 @@ from mfm.application.fleet.create_vessel import (
 )
 from mfm.application.fleet.update_vessel import UpdateVesselRequest as ServiceRequest
 from mfm.application.fleet.update_vessel import UpdateVesselResponse as ServiceResponse
-from mfm.application.fleet.update_vessel import UpdateVesselUseCase
 from mfm.domain.fleet.vessel_material import VesselMaterial
 
 

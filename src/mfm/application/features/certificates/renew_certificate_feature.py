@@ -22,7 +22,6 @@ from mfm.application.certificates.renew_certificate import (
 from mfm.application.certificates.renew_certificate import (
     RenewCertificateResponse as ServiceResponse,
 )
-from mfm.application.certificates.renew_certificate import RenewCertificateUseCase
 from mfm.application.features.certificates.create_certificate_feature import (
     BusinessRuleViolation,
 )
