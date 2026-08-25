@@ -48,6 +48,10 @@ python -m alembic revision --autogenerate -m "beskrivelse af ændringen"
 python -m alembic upgrade head
 ```
 
+## Installerbar desktop-app
+
+Se [packaging/README.md](packaging/README.md) for at bygge en færdig .exe (Windows) eller app (macOS/Linux) med PyInstaller — ingen Python-installation krævet for slutbrugeren.
+
 ## Licens
 
 MIT – se [LICENSE](LICENSE).

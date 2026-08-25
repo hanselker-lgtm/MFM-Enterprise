@@ -171,6 +171,8 @@ from mfm.infrastructure.persistence.finance.sqlalchemy_invoice_repository import
     SqlAlchemyInvoiceRepository,
 )
 from mfm.repositories.unit_of_work import UnitOfWork as SessionUnitOfWork
+from mfm.runtime_paths import is_frozen
+from mfm.runtime_paths import user_data_dir
 from mfm.config.models import Config
 from mfm.database.base import Base
 from mfm.database.engine import EngineFactory
@@ -262,6 +264,15 @@ class CompositionRoot:
     def __init__(self, *, config: Config, project_root: Path) -> None:
         self._config = config
         self._project_root = project_root
+        # Bundled resources (migrations/, alembic.ini) live under
+        # project_root and are read-only in a packaged build. Writable
+        # state (database, logs, config overrides) must go somewhere
+        # the app is actually allowed to write. In development, that's
+        # still project_root itself (as before -- callers, including
+        # tests using tmp_path, control it explicitly); only a real
+        # packaged build diverges to the OS-appropriate user data
+        # directory.
+        self._data_root = user_data_dir() if is_frozen() else self._project_root
 
     def build_shell(self) -> ApplicationShell:
         # A QApplication must exist before any QWidget (DashboardHost,
@@ -318,12 +329,12 @@ class CompositionRoot:
     # -- database bootstrap -------------------------------------------------
 
     def _config_directory(self) -> Path:
-        return self._project_root / "config"
+        return self._data_root / "config"
 
     def _database_path(self) -> Path:
         path = Path(self._config.database.path)
         if not path.is_absolute():
-            path = self._project_root / path
+            path = self._data_root / path
         return path
 
     def _build_session_factory(self) -> sessionmaker[Session]:

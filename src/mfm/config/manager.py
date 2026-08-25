@@ -13,6 +13,8 @@ from mfm.config.models import (
     GuiConfig,
     LoggingConfig,
 )
+from mfm.runtime_paths import bundled_resource_dir
+from mfm.runtime_paths import user_data_dir
 
 
 class ConfigManager:
@@ -21,20 +23,23 @@ class ConfigManager:
 
     Configuration is loaded in two steps:
 
-    1. config/default.toml (required)
-    2. config/user.toml (optional)
+    1. config/default.toml (required) -- read from the bundled
+       resources directory, which is read-only in a packaged build.
+    2. config/user.toml (optional) -- read from (and, on first run,
+       created in) the writable per-user data directory, so a
+       packaged build can persist overrides without needing write
+       access to its own install location.
 
     Values from user.toml override the defaults.
     """
 
-    CONFIG_DIR = (
-        Path(__file__).resolve().parents[3]
-        / "config"
-    )
+    CONFIG_DIR = bundled_resource_dir() / "config"
 
     DEFAULT_FILE = CONFIG_DIR / "default.toml"
 
-    USER_FILE = CONFIG_DIR / "user.toml"
+    USER_CONFIG_DIR = user_data_dir() / "config"
+
+    USER_FILE = USER_CONFIG_DIR / "user.toml"
 
     @classmethod
     def _load_toml(cls, path: Path) -> dict[str, Any]:

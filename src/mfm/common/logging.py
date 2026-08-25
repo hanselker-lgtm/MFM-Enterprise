@@ -9,6 +9,7 @@ from logging.handlers import RotatingFileHandler
 from pathlib import Path
 
 from mfm.config.models import Config
+from mfm.runtime_paths import user_data_dir
 
 
 class LoggingManager:
@@ -23,6 +24,13 @@ class LoggingManager:
             return logging.getLogger("mfm")
 
         log_directory = Path(config.logging.directory)
+        if not log_directory.is_absolute():
+            # A bare relative path (the default, "logs") would
+            # otherwise resolve against the process's current working
+            # directory, which is unpredictable for a packaged desktop
+            # app -- it depends on how the user launched it, and may
+            # not even be writable.
+            log_directory = user_data_dir() / log_directory
         log_directory.mkdir(parents=True, exist_ok=True)
 
         logger = logging.getLogger("mfm")

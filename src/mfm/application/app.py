@@ -37,7 +37,9 @@ class Application:
             "Application started."
         )
 
-        project_root = Path(__file__).resolve().parents[3]
+        from mfm.runtime_paths import bundled_resource_dir
+
+        project_root = bundled_resource_dir()
         composition_root = CompositionRoot(config=config, project_root=project_root)
         shell = composition_root.build_shell()
 
