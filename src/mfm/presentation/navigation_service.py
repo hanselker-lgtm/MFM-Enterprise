@@ -8,8 +8,8 @@ from typing import Any, Callable
 
 
 class NavigationCategory(StrEnum):
-    DASHBOARD = "Dashboard"
-    OPERATIONS = "Operations"
+    DASHBOARD = "Oversigt"
+    OPERATIONS = "Drift"
     ADMINISTRATION = "Administration"
 
 

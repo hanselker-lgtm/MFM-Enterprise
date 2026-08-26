@@ -32,15 +32,15 @@ class JournalListView(QWidget):
         self._item_map: dict[int, UUID] = {}
 
         self._table = QTableWidget(0, 5)
-        self._table.setHorizontalHeaderLabels(["Journal #", "Posting Date", "Status", "Reference", "Fiscal Year ID"])
+        self._table.setHorizontalHeaderLabels(["Posteringsnr.", "Bogføringsdato", "Status", "Reference", "Regnskabsårs-ID"])
         self._table.setSelectionBehavior(QTableWidget.SelectionBehavior.SelectRows)
         self._table.setSelectionMode(QTableWidget.SelectionMode.SingleSelection)
         self._table.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)
         self._table.itemDoubleClicked.connect(self._open_selected)
 
         self._page_label = QLabel("Page 1 / 1")
-        self._prev_page = QPushButton("Prev")
-        self._next_page = QPushButton("Next")
+        self._prev_page = QPushButton("Forrige")
+        self._next_page = QPushButton("Næste")
         self._prev_page.clicked.connect(lambda: self._on_page_change(-1))
         self._next_page.clicked.connect(lambda: self._on_page_change(1))
 

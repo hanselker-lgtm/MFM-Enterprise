@@ -25,4 +25,4 @@ def test_application_shell_can_use_membership_billing_workspace_loader(qapp) -> 
     window.navigate_to("operations.membership-billing")
 
     assert window.centralWidget().currentWidget().text() == "Membership Billing Workspace"
-    assert window.statusBar().currentMessage() == "Loaded Membership Billing"
+    assert window.statusBar().currentMessage() == "Loaded Kontingentopkrævning"

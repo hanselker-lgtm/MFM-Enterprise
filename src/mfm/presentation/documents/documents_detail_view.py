@@ -24,12 +24,12 @@ class DocumentsDetailView(QWidget):
         self._on_open_project = on_open_project
         self._current_project_id: UUID | None = None
 
-        self._overview = self._build_group("Overview")
-        self._lifecycle = self._build_group("Lifecycle")
-        self._versions = self._build_group("Versions")
-        self._references = self._build_group("References")
+        self._overview = self._build_group("Oversigt")
+        self._lifecycle = self._build_group("Livscyklus")
+        self._versions = self._build_group("Versioner")
+        self._references = self._build_group("Referencer")
 
-        self._open_project_button = QPushButton("Open Project")
+        self._open_project_button = QPushButton("Åbn projekt")
         self._open_project_button.clicked.connect(self._go_project)
 
         button_layout = QHBoxLayout()
@@ -50,20 +50,20 @@ class DocumentsDetailView(QWidget):
         self._set_group(
             self._overview,
             {
-                "Document #": vm.document_number,
-                "Title": vm.document_title,
+                "Dokumentnr.": vm.document_number,
+                "Titel": vm.document_title,
                 "Type": vm.document_type,
                 "Status": vm.status,
-                "Description": vm.description or "",
+                "Beskrivelse": vm.description or "",
             },
         )
         self._set_group(
             self._lifecycle,
             {
-                "Created": vm.created_at.isoformat(),
-                "Updated": vm.updated_at.isoformat() if vm.updated_at is not None else "",
-                "Archived": vm.archived_at.isoformat() if vm.archived_at is not None else "",
-                "Disposed": vm.disposed_at.isoformat() if vm.disposed_at is not None else "",
+                "Oprettet": vm.created_at.isoformat(),
+                "Opdateret": vm.updated_at.isoformat() if vm.updated_at is not None else "",
+                "Arkiveret": vm.archived_at.isoformat() if vm.archived_at is not None else "",
+                "Kasseret": vm.disposed_at.isoformat() if vm.disposed_at is not None else "",
                 "Version": str(vm.version),
             },
         )
@@ -72,9 +72,9 @@ class DocumentsDetailView(QWidget):
         self._set_group(
             self._versions,
             {
-                "Count": str(len(vm.versions)),
-                "Latest version": str(latest_version.version_number) if latest_version is not None else "",
-                "Latest storage key": latest_version.storage_key if latest_version is not None else "",
+                "Antal": str(len(vm.versions)),
+                "Nyeste version": str(latest_version.version_number) if latest_version is not None else "",
+                "Nyeste lagernøgle": latest_version.storage_key if latest_version is not None else "",
             },
         )
 
@@ -82,9 +82,9 @@ class DocumentsDetailView(QWidget):
         self._set_group(
             self._references,
             {
-                "Count": str(len(vm.references)),
-                "Target": first_reference.target_capability if first_reference is not None else "",
-                "Aggregate ID": first_reference.target_aggregate_id if first_reference is not None else "",
+                "Antal": str(len(vm.references)),
+                "Mål": first_reference.target_capability if first_reference is not None else "",
+                "Aggregat-ID": first_reference.target_aggregate_id if first_reference is not None else "",
             },
         )
 

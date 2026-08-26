@@ -25,4 +25,4 @@ def test_application_shell_can_use_dedicated_accounting_workspace_loader(qapp) -
     window.navigate_to("operations.accounting")
 
     assert window.centralWidget().currentWidget().text() == "Accounting Workspace"
-    assert window.statusBar().currentMessage() == "Loaded Accounting"
+    assert window.statusBar().currentMessage() == "Loaded Bogføring"

@@ -35,48 +35,71 @@ class DocumentsToolbar(QWidget):
         self._on_archive_document = on_archive_document
 
         self._search_input = QLineEdit()
-        self._search_input.setPlaceholderText("Search documents")
+        self._search_input.setPlaceholderText("Søg dokumenter")
         self._search_input.returnPressed.connect(self._on_search)
 
         self._status_filter = QComboBox()
-        self._status_filter.addItems(["ALL", "DRAFT", "ACTIVE", "ARCHIVED", "DISPOSED"])
+        _status_labels = {
+            "ALL": "Alle",
+            "DRAFT": "Kladde",
+            "ACTIVE": "Aktiv",
+            "ARCHIVED": "Arkiveret",
+            "DISPOSED": "Kasseret",
+        }
+        for value, label in _status_labels.items():
+            self._status_filter.addItem(label, value)
 
         self._target_filter = QComboBox()
-        self._target_filter.addItems(["ALL", "PROJECTS", "ORGANIZATIONS", "ACCOUNTING", "MAINTENANCE"])
+        _target_labels = {
+            "ALL": "Alle",
+            "PROJECTS": "Projekter",
+            "ORGANIZATIONS": "Organisationer",
+            "ACCOUNTING": "Bogføring",
+            "MAINTENANCE": "Vedligehold",
+        }
+        for value, label in _target_labels.items():
+            self._target_filter.addItem(label, value)
 
         self._sort_filter = QComboBox()
+        _sort_labels = {
+            DocumentSortField.DOCUMENT_NUMBER: "Dokumentnummer",
+            DocumentSortField.CREATED_AT: "Oprettet",
+            DocumentSortField.STATUS: "Status",
+            DocumentSortField.DOCUMENT_TYPE: "Dokumenttype",
+        }
         for field in DocumentSortField:
-            self._sort_filter.addItem(field.value, field)
+            self._sort_filter.addItem(_sort_labels.get(field, field.value), field)
 
         self._order_filter = QComboBox()
-        self._order_filter.addItems(["DESC", "ASC"])
+        self._order_filter.addItem("Faldende", "DESC")
+        self._order_filter.addItem("Stigende", "ASC")
 
-        search_button = QPushButton("Search")
+        search_button = QPushButton("Søg")
         search_button.clicked.connect(self._on_search)
 
-        refresh_button = QPushButton("Refresh")
+        refresh_button = QPushButton("Opdatér")
         refresh_button.setShortcut("F5")
         refresh_button.clicked.connect(self._on_refresh)
 
-        create_button = QPushButton("Create Document")
+        create_button = QPushButton("Opret dokument")
         create_button.clicked.connect(self._on_create_document)
 
-        register_version_button = QPushButton("Register Version")
+        register_version_button = QPushButton("Registrér version")
         register_version_button.clicked.connect(self._on_register_version)
 
-        archive_button = QPushButton("Archive")
+        archive_button = QPushButton("Arkivér")
         archive_button.clicked.connect(self._on_archive_document)
 
         layout = QHBoxLayout(self)
         layout.setContentsMargins(0, 0, 0, 0)
         layout.setSpacing(8)
-        layout.addWidget(QLabel("Search"))
+        layout.addWidget(QLabel("Søg"))
         layout.addWidget(self._search_input, 2)
         layout.addWidget(QLabel("Status"))
         layout.addWidget(self._status_filter)
-        layout.addWidget(QLabel("Target"))
+        layout.addWidget(QLabel("Mål"))
         layout.addWidget(self._target_filter)
-        layout.addWidget(QLabel("Sort"))
+        layout.addWidget(QLabel("Sortér"))
         layout.addWidget(self._sort_filter)
         layout.addWidget(self._order_filter)
         layout.addWidget(search_button)
@@ -92,10 +115,10 @@ class DocumentsToolbar(QWidget):
 
         return DocumentListFilterViewModel(
             text=self._search_input.text().strip(),
-            status=self._status_filter.currentText(),
-            target_capability=self._target_filter.currentText(),
+            status=self._status_filter.currentData(),
+            target_capability=self._target_filter.currentData(),
             sort_by=sort_field,
-            descending=self._order_filter.currentText() == "DESC",
+            descending=self._order_filter.currentData() == "DESC",
             page=page,
             page_size=page_size,
         )

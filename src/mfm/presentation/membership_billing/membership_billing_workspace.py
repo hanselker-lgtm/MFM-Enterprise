@@ -36,7 +36,7 @@ class _SetupFeeScheduleDialog(QDialog):
 
     def __init__(self, *, membership_types, parent: QWidget | None = None) -> None:
         super().__init__(parent)
-        self.setWindowTitle("Set Up Fee Schedule")
+        self.setWindowTitle("Opsæt gebyrplan")
         self._membership_types = membership_types
 
         self._type_combo = QComboBox()
@@ -54,10 +54,10 @@ class _SetupFeeScheduleDialog(QDialog):
         self._due_days_input.setValue(30)
 
         form = QFormLayout()
-        form.addRow("Membership type", self._type_combo)
-        form.addRow("Fee amount", self._amount_input)
-        form.addRow("Currency", self._currency_input)
-        form.addRow("Due days", self._due_days_input)
+        form.addRow("Medlemskabstype", self._type_combo)
+        form.addRow("Gebyrbeløb", self._amount_input)
+        form.addRow("Valuta", self._currency_input)
+        form.addRow("Betalingsfrist (dage)", self._due_days_input)
 
         buttons = QDialogButtonBox(
             QDialogButtonBox.StandardButton.Ok | QDialogButtonBox.StandardButton.Cancel
@@ -92,18 +92,18 @@ class _RunBillingDialog(QDialog):
 
     def __init__(self, *, membership_type_id, parent: QWidget | None = None) -> None:
         super().__init__(parent)
-        self.setWindowTitle("Run Billing")
+        self.setWindowTitle("Kør fakturering")
         self._membership_type_id = membership_type_id
 
         self._fiscal_year_input = QSpinBox()
         self._fiscal_year_input.setRange(2000, 2100)
         self._fiscal_year_input.setValue(date.today().year)
 
-        self._dry_run_checkbox = QCheckBox("Dry run (preview only, no invoices created)")
+        self._dry_run_checkbox = QCheckBox("Prøvekørsel (kun forhåndsvisning, ingen fakturaer oprettes)")
         self._dry_run_checkbox.setChecked(True)
 
         form = QFormLayout()
-        form.addRow("Fiscal year", self._fiscal_year_input)
+        form.addRow("Regnskabsår", self._fiscal_year_input)
         form.addRow("", self._dry_run_checkbox)
 
         buttons = QDialogButtonBox(
@@ -134,12 +134,12 @@ class MembershipBillingWorkspace(QWidget):
         self._items: tuple[FeeScheduleListItemViewModel, ...] = ()
 
         toolbar = QHBoxLayout()
-        refresh_button = QPushButton("Refresh")
+        refresh_button = QPushButton("Opdatér")
         refresh_button.setShortcut("F5")
         refresh_button.clicked.connect(self._handle_refresh)
-        setup_button = QPushButton("Set Up Fee Schedule")
+        setup_button = QPushButton("Opsæt gebyrplan")
         setup_button.clicked.connect(self._handle_setup_fee_schedule)
-        run_button = QPushButton("Run Billing")
+        run_button = QPushButton("Kør fakturering")
         run_button.clicked.connect(self._handle_run_billing)
         toolbar.addWidget(refresh_button)
         toolbar.addWidget(setup_button)
@@ -150,7 +150,7 @@ class MembershipBillingWorkspace(QWidget):
 
         layout = QVBoxLayout(self)
         layout.addLayout(toolbar)
-        layout.addWidget(QLabel("Fee Schedules"))
+        layout.addWidget(QLabel("Gebyrplaner"))
         layout.addWidget(self._list)
 
         self._handle_refresh()
@@ -173,8 +173,8 @@ class MembershipBillingWorkspace(QWidget):
         if not membership_types:
             QMessageBox.information(
                 self,
-                "Set Up Fee Schedule",
-                "No membership types are configured yet. Create one in Memberships first.",
+                "Opsæt gebyrplan",
+                "Der er endnu ikke oprettet nogen medlemskabstyper. Opret én under Medlemskaber først.",
             )
             return
 
@@ -183,12 +183,12 @@ class MembershipBillingWorkspace(QWidget):
             return
         command = dialog.command()
         if command is None:
-            QMessageBox.warning(self, "Set Up Fee Schedule", "Amount and currency are required.")
+            QMessageBox.warning(self, "Opsæt gebyrplan", "Beløb og valuta skal udfyldes.")
             return
         try:
             self._controller.setup_fee_schedule(command)
         except Exception as exc:  # noqa: BLE001 - surfaced to the user, not swallowed
-            QMessageBox.critical(self, "Set Up Fee Schedule", str(exc))
+            QMessageBox.critical(self, "Opsæt gebyrplan", str(exc))
             return
         self._handle_refresh()
 
@@ -196,7 +196,7 @@ class MembershipBillingWorkspace(QWidget):
         current_row = self._list.currentRow()
         if current_row < 0 or current_row >= len(self._items):
             QMessageBox.information(
-                self, "Run Billing", "Select a fee schedule to run billing for."
+                self, "Kør fakturering", "Vælg en gebyrplan at fakturere for."
             )
             return
 
@@ -208,12 +208,12 @@ class MembershipBillingWorkspace(QWidget):
         try:
             result = self._controller.run_billing(dialog.command())
         except Exception as exc:  # noqa: BLE001 - surfaced to the user, not swallowed
-            QMessageBox.critical(self, "Run Billing", str(exc))
+            QMessageBox.critical(self, "Kør fakturering", str(exc))
             return
 
         QMessageBox.information(
             self,
-            "Run Billing",
-            f"Processed {result.processed} member(s), created {result.invoices_created} invoice(s).",
+            "Kør fakturering",
+            f"Behandlede {result.processed} medlem(mer), oprettede {result.invoices_created} faktura(er).",
         )
         self._handle_refresh()

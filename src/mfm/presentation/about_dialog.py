@@ -24,7 +24,7 @@ class AboutDialog(QDialog):
 
     def __init__(self, *, about_info: AboutInfo, parent: QWidget | None = None) -> None:
         super().__init__(parent)
-        self.setWindowTitle(f"About {about_info.application_name}")
+        self.setWindowTitle(f"Om {about_info.application_name}")
         self.setMinimumWidth(420)
 
         layout = QVBoxLayout(self)
@@ -33,8 +33,8 @@ class AboutDialog(QDialog):
         layout.addWidget(heading)
 
         tabs = QTabWidget()
-        tabs.addTab(self._build_general_tab(about_info), "General")
-        tabs.addTab(self._build_diagnostics_tab(about_info), "Diagnostics")
+        tabs.addTab(self._build_general_tab(about_info), "Generelt")
+        tabs.addTab(self._build_diagnostics_tab(about_info), "Diagnostik")
         layout.addWidget(tabs)
 
         buttons = QDialogButtonBox(QDialogButtonBox.StandardButton.Close)
@@ -48,13 +48,13 @@ class AboutDialog(QDialog):
         form = QFormLayout(page)
         form.addRow("Version:", QLabel(about_info.version))
         form.addRow("Build:", QLabel(about_info.build_id))
-        form.addRow("Channel:", QLabel(about_info.build_channel.upper()))
+        form.addRow("Kanal:", QLabel(about_info.build_channel.upper()))
 
         license_label = QLabel(
             f'<a href="{about_info.license_url}">{about_info.license_name} License</a>'
         )
         license_label.setOpenExternalLinks(True)
-        form.addRow("License:", license_label)
+        form.addRow("Licens:", license_label)
 
         support_label = QLabel(
             f'<a href="mailto:{about_info.support_contact}">{about_info.support_contact}</a>'
@@ -67,19 +67,19 @@ class AboutDialog(QDialog):
     def _build_diagnostics_tab(self, about_info: AboutInfo) -> QWidget:
         page = QWidget()
         form = QFormLayout(page)
-        form.addRow("Database provider:", QLabel(about_info.database_provider))
+        form.addRow("Databasetype:", QLabel(about_info.database_provider))
         db_path_label = QLabel(about_info.database_path)
         db_path_label.setTextInteractionFlags(Qt.TextInteractionFlag.TextSelectableByMouse)
-        form.addRow("Database path:", db_path_label)
+        form.addRow("Databasesti:", db_path_label)
 
         log_label = QLabel(f"{about_info.log_directory}/{about_info.log_filename}")
         log_label.setTextInteractionFlags(Qt.TextInteractionFlag.TextSelectableByMouse)
-        form.addRow("Log file:", log_label)
+        form.addRow("Logfil:", log_label)
 
         config_label = QLabel(about_info.config_directory)
         config_label.setTextInteractionFlags(Qt.TextInteractionFlag.TextSelectableByMouse)
         config_label.setWordWrap(True)
-        form.addRow("Config directory:", config_label)
+        form.addRow("Konfigurationsmappe:", config_label)
         return page
 
 
@@ -98,12 +98,12 @@ def build_about_page(*, about_info: AboutInfo) -> QWidget:
     general = QFormLayout()
     general.addRow("Version:", QLabel(about_info.version))
     general.addRow("Build:", QLabel(about_info.build_id))
-    general.addRow("Channel:", QLabel(about_info.build_channel.upper()))
+    general.addRow("Kanal:", QLabel(about_info.build_channel.upper()))
     license_label = QLabel(
         f'<a href="{about_info.license_url}">{about_info.license_name} License</a>'
     )
     license_label.setOpenExternalLinks(True)
-    general.addRow("License:", license_label)
+    general.addRow("Licens:", license_label)
     support_label = QLabel(
         f'<a href="mailto:{about_info.support_contact}">{about_info.support_contact}</a>'
     )
@@ -111,14 +111,14 @@ def build_about_page(*, about_info: AboutInfo) -> QWidget:
     general.addRow("Support:", support_label)
     layout.addLayout(general)
 
-    layout.addWidget(QLabel("<h3>Diagnostics</h3>"))
+    layout.addWidget(QLabel("<h3>Diagnostik</h3>"))
     diagnostics = QFormLayout()
-    diagnostics.addRow("Database provider:", QLabel(about_info.database_provider))
-    diagnostics.addRow("Database path:", QLabel(about_info.database_path))
+    diagnostics.addRow("Databasetype:", QLabel(about_info.database_provider))
+    diagnostics.addRow("Databasesti:", QLabel(about_info.database_path))
     diagnostics.addRow(
-        "Log file:", QLabel(f"{about_info.log_directory}/{about_info.log_filename}")
+        "Logfil:", QLabel(f"{about_info.log_directory}/{about_info.log_filename}")
     )
-    diagnostics.addRow("Config directory:", QLabel(about_info.config_directory))
+    diagnostics.addRow("Konfigurationsmappe:", QLabel(about_info.config_directory))
     layout.addLayout(diagnostics)
     layout.addStretch(1)
     return page

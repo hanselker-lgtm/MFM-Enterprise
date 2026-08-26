@@ -33,40 +33,53 @@ class AccountingToolbar(QWidget):
         self._on_post_journal = on_post_journal
 
         self._search_input = QLineEdit()
-        self._search_input.setPlaceholderText("Search journals")
+        self._search_input.setPlaceholderText("Søg posteringer")
         self._search_input.returnPressed.connect(self._on_search)
 
         self._status_filter = QComboBox()
-        self._status_filter.addItems(["ALL", "DRAFT", "POSTED", "REVERSED"])
+        _status_labels = {
+            "ALL": "Alle",
+            "DRAFT": "Kladde",
+            "POSTED": "Bogført",
+            "REVERSED": "Tilbageført",
+        }
+        for value, label in _status_labels.items():
+            self._status_filter.addItem(label, value)
 
         self._sort_filter = QComboBox()
+        _sort_labels = {
+            JournalSortField.JOURNAL_NUMBER: "Posteringsnummer",
+            JournalSortField.POSTING_DATE: "Bogføringsdato",
+            JournalSortField.STATUS: "Status",
+        }
         for field in JournalSortField:
-            self._sort_filter.addItem(field.value, field)
+            self._sort_filter.addItem(_sort_labels.get(field, field.value), field)
 
         self._order_filter = QComboBox()
-        self._order_filter.addItems(["DESC", "ASC"])
+        self._order_filter.addItem("Faldende", "DESC")
+        self._order_filter.addItem("Stigende", "ASC")
 
-        search_button = QPushButton("Search")
+        search_button = QPushButton("Søg")
         search_button.clicked.connect(self._on_search)
 
-        refresh_button = QPushButton("Refresh")
+        refresh_button = QPushButton("Opdatér")
         refresh_button.setShortcut("F5")
         refresh_button.clicked.connect(self._on_refresh)
 
-        create_button = QPushButton("Create Journal")
+        create_button = QPushButton("Opret postering")
         create_button.clicked.connect(self._on_create_journal)
 
-        post_button = QPushButton("Post Journal")
+        post_button = QPushButton("Bogfør postering")
         post_button.clicked.connect(self._on_post_journal)
 
         layout = QHBoxLayout(self)
         layout.setContentsMargins(0, 0, 0, 0)
         layout.setSpacing(8)
-        layout.addWidget(QLabel("Search"))
+        layout.addWidget(QLabel("Søg"))
         layout.addWidget(self._search_input, 2)
         layout.addWidget(QLabel("Status"))
         layout.addWidget(self._status_filter)
-        layout.addWidget(QLabel("Sort"))
+        layout.addWidget(QLabel("Sortér"))
         layout.addWidget(self._sort_filter)
         layout.addWidget(self._order_filter)
         layout.addWidget(search_button)
@@ -81,9 +94,9 @@ class AccountingToolbar(QWidget):
 
         return JournalListFilterViewModel(
             text=self._search_input.text().strip(),
-            status=self._status_filter.currentText(),
+            status=self._status_filter.currentData(),
             sort_by=sort_field,
-            descending=self._order_filter.currentText() == "DESC",
+            descending=self._order_filter.currentData() == "DESC",
             page=page,
             page_size=page_size,
         )

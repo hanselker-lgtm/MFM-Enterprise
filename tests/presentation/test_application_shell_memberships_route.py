@@ -25,4 +25,4 @@ def test_application_shell_can_use_dedicated_memberships_workspace_loader(qapp) 
     window.navigate_to("operations.memberships")
 
     assert window.centralWidget().currentWidget().text() == "Membership Workspace"
-    assert window.statusBar().currentMessage() == "Loaded Memberships"
+    assert window.statusBar().currentMessage() == "Loaded Medlemskaber"

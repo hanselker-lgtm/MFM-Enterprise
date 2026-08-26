@@ -25,4 +25,4 @@ def test_application_shell_can_use_organization_roles_workspace_loader(qapp) -> 
     window.navigate_to("operations.organization-roles")
 
     assert window.centralWidget().currentWidget().text() == "Organization Roles Workspace"
-    assert window.statusBar().currentMessage() == "Loaded Organization Roles"
+    assert window.statusBar().currentMessage() == "Loaded Organisationsroller"

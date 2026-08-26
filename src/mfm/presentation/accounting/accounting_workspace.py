@@ -55,9 +55,9 @@ class AccountingWorkspace(QWidget):
         journals_split.setStretchFactor(1, 3)
 
         tabs = QTabWidget()
-        tabs.addTab(journals_split, "Journals")
-        tabs.addTab(self._placeholder("Ledger pane reserved for future capability"), "Ledger")
-        tabs.addTab(self._placeholder("Reporting pane reserved for future capability"), "Reporting")
+        tabs.addTab(journals_split, "Posteringer")
+        tabs.addTab(self._placeholder("Kontoplan-visning forbeholdt fremtidig funktionalitet"), "Kontoplan")
+        tabs.addTab(self._placeholder("Rapportvisning forbeholdt fremtidig funktionalitet"), "Rapportering")
 
         layout = QVBoxLayout(self)
         layout.addWidget(self._toolbar)
@@ -67,7 +67,7 @@ class AccountingWorkspace(QWidget):
 
     def create_detail_dock_widget(self, parent: QMainWindow | None = None) -> QDockWidget:
         """Provide a future-ready detachable detail pane."""
-        dock = QDockWidget("Journal Detail", parent)
+        dock = QDockWidget("Posteringsdetaljer", parent)
         dock.setWidget(self._detail)
         dock.setAllowedAreas(
             Qt.DockWidgetArea.LeftDockWidgetArea
@@ -108,15 +108,15 @@ class AccountingWorkspace(QWidget):
         self._list.set_view_model(list_vm)
 
     def _handle_create_journal(self) -> None:
-        project_id_text, ok_project = QInputDialog.getText(self, "Create Journal", "Project ID")
+        project_id_text, ok_project = QInputDialog.getText(self, "Opret postering", "Projekt-ID")
         if not ok_project:
             return
 
-        journal_number, ok_journal = QInputDialog.getText(self, "Create Journal", "Journal number")
+        journal_number, ok_journal = QInputDialog.getText(self, "Opret postering", "Posteringsnummer")
         if not ok_journal or not journal_number.strip():
             return
 
-        amount_text, ok_amount = QInputDialog.getText(self, "Create Journal", "Amount")
+        amount_text, ok_amount = QInputDialog.getText(self, "Opret postering", "Beløb")
         if not ok_amount or not amount_text.strip():
             return
 
@@ -124,7 +124,7 @@ class AccountingWorkspace(QWidget):
             project_id = UUID(project_id_text.strip())
             amount = Decimal(amount_text.strip())
         except (ValueError, ArithmeticError):
-            QMessageBox.warning(self, "Create Journal", "Invalid project id or amount")
+            QMessageBox.warning(self, "Opret postering", "Ugyldigt projekt-ID eller beløb")
             return
 
         debit_account_id = UUID("00000000-0000-0000-0000-000000000101")
@@ -141,15 +141,15 @@ class AccountingWorkspace(QWidget):
                 amount=amount,
             )
         )
-        QMessageBox.information(self, "Journal Created", f"Journal created: {journal_id}")
+        QMessageBox.information(self, "Postering oprettet", f"Postering oprettet: {journal_id}")
         self._handle_refresh()
 
     def _handle_post_journal(self) -> None:
         if self._controller.last_selected_journal_id is None:
-            QMessageBox.warning(self, "Post Journal", "No journal selected")
+            QMessageBox.warning(self, "Bogfør postering", "Ingen postering valgt")
             return
         self._controller.post_journal(self._controller.last_selected_journal_id)
-        QMessageBox.information(self, "Post Journal", "Journal posted")
+        QMessageBox.information(self, "Bogfør postering", "Postering bogført")
         self._handle_refresh()
 
     @staticmethod

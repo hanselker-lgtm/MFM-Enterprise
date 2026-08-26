@@ -34,7 +34,7 @@ class _CreateMemberDialog(QDialog):
 
     def __init__(self, parent: QWidget | None = None) -> None:
         super().__init__(parent)
-        self.setWindowTitle("New Member")
+        self.setWindowTitle("Nyt medlem")
 
         self._contact_number = QLineEdit()
         self._member_number = QLineEdit()
@@ -42,10 +42,10 @@ class _CreateMemberDialog(QDialog):
         self._last_name = QLineEdit()
 
         form = QFormLayout()
-        form.addRow("Contact number", self._contact_number)
-        form.addRow("Member number", self._member_number)
-        form.addRow("First name", self._first_name)
-        form.addRow("Last name", self._last_name)
+        form.addRow("Kontaktnummer", self._contact_number)
+        form.addRow("Medlemsnummer", self._member_number)
+        form.addRow("Fornavn", self._first_name)
+        form.addRow("Efternavn", self._last_name)
 
         buttons = QDialogButtonBox(
             QDialogButtonBox.StandardButton.Ok | QDialogButtonBox.StandardButton.Cancel
@@ -81,19 +81,19 @@ class MembershipToolbar(QWidget):
         self._on_search = on_search
 
         self._search_input = QLineEdit()
-        self._search_input.setPlaceholderText("Filter by name or member number")
+        self._search_input.setPlaceholderText("Filtrér efter navn eller medlemsnummer")
         self._search_input.textChanged.connect(lambda _: self._on_search())
 
-        refresh_button = QPushButton("Refresh")
+        refresh_button = QPushButton("Opdatér")
         refresh_button.setShortcut("F5")
         refresh_button.clicked.connect(on_refresh)
 
-        create_button = QPushButton("New Member")
+        create_button = QPushButton("Nyt medlem")
         create_button.clicked.connect(on_create_member)
 
         layout = QHBoxLayout(self)
         layout.setContentsMargins(0, 0, 0, 0)
-        layout.addWidget(QLabel("Search"))
+        layout.addWidget(QLabel("Søg"))
         layout.addWidget(self._search_input)
         layout.addStretch(1)
         layout.addWidget(refresh_button)
@@ -136,7 +136,7 @@ class MemberDetailView(QWidget):
         self._on_register_membership = on_register_membership
         self._current_member_id: UUID | None = None
 
-        self._title = QLabel("Select a member")
+        self._title = QLabel("Vælg et medlem")
         self._title.setStyleSheet("font-weight: bold; font-size: 14px;")
         self._number_label = QLabel("")
         self._status_label = QLabel("")
@@ -144,7 +144,7 @@ class MemberDetailView(QWidget):
 
         self._memberships_list = QListWidget()
 
-        register_button = QPushButton("Register Membership")
+        register_button = QPushButton("Registrér medlemskab")
         register_button.clicked.connect(self._handle_register_membership)
 
         layout = QVBoxLayout(self)
@@ -152,7 +152,7 @@ class MemberDetailView(QWidget):
         layout.addWidget(self._number_label)
         layout.addWidget(self._status_label)
         layout.addWidget(self._join_date_label)
-        layout.addWidget(QLabel("Memberships"))
+        layout.addWidget(QLabel("Medlemskaber"))
         layout.addWidget(self._memberships_list)
         layout.addWidget(register_button)
         layout.addStretch(1)
@@ -234,12 +234,12 @@ class MembershipWorkspace(QWidget):
             return
         command = dialog.command()
         if command is None:
-            QMessageBox.warning(self, "New Member", "All fields are required.")
+            QMessageBox.warning(self, "Nyt medlem", "Alle felter skal udfyldes.")
             return
         try:
             self._controller.create_member(command)
         except Exception as exc:  # noqa: BLE001 - surfaced to the user, not swallowed
-            QMessageBox.critical(self, "New Member", str(exc))
+            QMessageBox.critical(self, "Nyt medlem", str(exc))
             return
         self._handle_refresh()
 
@@ -248,13 +248,13 @@ class MembershipWorkspace(QWidget):
         if not options:
             QMessageBox.information(
                 self,
-                "Register Membership",
-                "No membership types are configured yet.",
+                "Registrér medlemskab",
+                "Der er endnu ikke oprettet nogen medlemskabstyper.",
             )
             return
 
         dialog = QDialog(self)
-        dialog.setWindowTitle("Register Membership")
+        dialog.setWindowTitle("Registrér medlemskab")
         combo = QComboBox()
         for option in options:
             combo.addItem(f"{option.code} \u2014 {option.name}", option.membership_type_id)
@@ -266,7 +266,7 @@ class MembershipWorkspace(QWidget):
         buttons.rejected.connect(dialog.reject)
 
         layout = QVBoxLayout(dialog)
-        layout.addWidget(QLabel("Membership type"))
+        layout.addWidget(QLabel("Medlemskabstype"))
         layout.addWidget(combo)
         layout.addWidget(buttons)
 
@@ -281,7 +281,7 @@ class MembershipWorkspace(QWidget):
                 )
             )
         except Exception as exc:  # noqa: BLE001 - surfaced to the user, not swallowed
-            QMessageBox.critical(self, "Register Membership", str(exc))
+            QMessageBox.critical(self, "Registrér medlemskab", str(exc))
             return
 
         self._handle_select_member(member_id)

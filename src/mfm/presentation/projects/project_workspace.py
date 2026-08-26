@@ -75,7 +75,7 @@ class ProjectWorkspace(QWidget):
 
     def create_detail_dock_widget(self, parent: QMainWindow | None = None) -> QDockWidget:
         """Provide a future-ready detachable detail pane."""
-        dock = QDockWidget("Project Detail", parent)
+        dock = QDockWidget("Projektdetaljer", parent)
         dock.setWidget(self._detail)
         dock.setAllowedAreas(
             Qt.DockWidgetArea.LeftDockWidgetArea
@@ -115,11 +115,11 @@ class ProjectWorkspace(QWidget):
         self._list.set_view_model(list_vm)
 
     def _handle_create_project(self) -> None:
-        project_number, ok_number = QInputDialog.getText(self, "Create Project", "Project number")
+        project_number, ok_number = QInputDialog.getText(self, "Opret projekt", "Projektnummer")
         if not ok_number or not project_number.strip():
             return
 
-        project_name, ok_name = QInputDialog.getText(self, "Create Project", "Project name")
+        project_name, ok_name = QInputDialog.getText(self, "Opret projekt", "Projektnavn")
         if not ok_name or not project_name.strip():
             return
 
@@ -135,5 +135,5 @@ class ProjectWorkspace(QWidget):
                 project_start_date=datetime.now(UTC),
             )
         )
-        QMessageBox.information(self, "Project Created", f"Project created: {created_id}")
+        QMessageBox.information(self, "Projekt oprettet", f"Projekt oprettet: {created_id}")
         self._handle_refresh()

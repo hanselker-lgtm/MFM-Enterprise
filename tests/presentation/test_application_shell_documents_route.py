@@ -25,4 +25,4 @@ def test_application_shell_can_use_dedicated_documents_workspace_loader(qapp) ->
     window.navigate_to("operations.documents")
 
     assert window.centralWidget().currentWidget().text() == "Documents Workspace"
-    assert window.statusBar().currentMessage() == "Loaded Documents"
+    assert window.statusBar().currentMessage() == "Loaded Dokumenter"

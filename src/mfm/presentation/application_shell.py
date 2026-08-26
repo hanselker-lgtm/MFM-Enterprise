@@ -150,7 +150,7 @@ def _register_default_dashboard_routes(
     navigation_service.register_route(
         NavigationRoute(
             route_id="dashboard.organization",
-            label="Organization Dashboard",
+            label="Foreningsoversigt",
             category=NavigationCategory.DASHBOARD,
             kind=NavigationKind.REPORT,
             loader=report_loaders["dashboard.organization"],
@@ -159,7 +159,7 @@ def _register_default_dashboard_routes(
     navigation_service.register_route(
         NavigationRoute(
             route_id="dashboard.active-projects",
-            label="Active Projects",
+            label="Aktive Projekter",
             category=NavigationCategory.DASHBOARD,
             kind=NavigationKind.REPORT,
             loader=report_loaders["dashboard.active-projects"],
@@ -168,7 +168,7 @@ def _register_default_dashboard_routes(
     navigation_service.register_route(
         NavigationRoute(
             route_id="dashboard.project-status",
-            label="Project Status",
+            label="Projektstatus",
             category=NavigationCategory.DASHBOARD,
             kind=NavigationKind.REPORT,
             loader=report_loaders["dashboard.project-status"],
@@ -177,7 +177,7 @@ def _register_default_dashboard_routes(
     navigation_service.register_route(
         NavigationRoute(
             route_id="dashboard.budget-vs-actual",
-            label="Budget vs Actual",
+            label="Budget vs. Faktisk",
             category=NavigationCategory.DASHBOARD,
             kind=NavigationKind.REPORT,
             loader=report_loaders["dashboard.budget-vs-actual"],
@@ -204,127 +204,127 @@ def _register_default_module_routes(
     navigation_service.register_route(
         NavigationRoute(
             route_id="operations.organizations",
-            label="Organizations",
+            label="Organisationer",
             category=NavigationCategory.OPERATIONS,
             kind=NavigationKind.WIDGET,
-            loader=widget_loaders.get("operations.organizations", lambda: _placeholder_page("Organizations")),
+            loader=widget_loaders.get("operations.organizations", lambda: _placeholder_page("Organisationer")),
         )
     )
     navigation_service.register_route(
         NavigationRoute(
             route_id="operations.projects",
-            label="Projects",
+            label="Projekter",
             category=NavigationCategory.OPERATIONS,
             kind=NavigationKind.WIDGET,
             loader=projects_workspace_loader
-            or widget_loaders.get("operations.projects", lambda: _placeholder_page("Projects")),
+            or widget_loaders.get("operations.projects", lambda: _placeholder_page("Projekter")),
         )
     )
     navigation_service.register_route(
         NavigationRoute(
             route_id="operations.memberships",
-            label="Memberships",
+            label="Medlemskaber",
             category=NavigationCategory.OPERATIONS,
             kind=NavigationKind.WIDGET,
             loader=memberships_workspace_loader
             or widget_loaders.get(
                 "operations.memberships",
-                lambda: _placeholder_page("Memberships"),
+                lambda: _placeholder_page("Medlemskaber"),
             ),
         )
     )
     navigation_service.register_route(
         NavigationRoute(
             route_id="operations.organization-roles",
-            label="Organization Roles",
+            label="Organisationsroller",
             category=NavigationCategory.OPERATIONS,
             kind=NavigationKind.WIDGET,
             loader=organization_roles_workspace_loader
             or widget_loaders.get(
                 "operations.organization-roles",
-                lambda: _placeholder_page("Organization Roles"),
+                lambda: _placeholder_page("Organisationsroller"),
             ),
         )
     )
     navigation_service.register_route(
         NavigationRoute(
             route_id="operations.contact-communication",
-            label="Contact Communication",
+            label="Kontaktkommunikation",
             category=NavigationCategory.OPERATIONS,
             kind=NavigationKind.WIDGET,
             loader=contact_communication_workspace_loader
             or widget_loaders.get(
                 "operations.contact-communication",
-                lambda: _placeholder_page("Contact Communication"),
+                lambda: _placeholder_page("Kontaktkommunikation"),
             ),
         )
     )
     navigation_service.register_route(
         NavigationRoute(
             route_id="operations.membership-billing",
-            label="Membership Billing",
+            label="Kontingentopkrævning",
             category=NavigationCategory.OPERATIONS,
             kind=NavigationKind.WIDGET,
             loader=membership_billing_workspace_loader
             or widget_loaders.get(
                 "operations.membership-billing",
-                lambda: _placeholder_page("Membership Billing"),
+                lambda: _placeholder_page("Kontingentopkrævning"),
             ),
         )
     )
     navigation_service.register_route(
         NavigationRoute(
             route_id="operations.events-activities",
-            label="Events Activities",
+            label="Events/Aktiviteter",
             category=NavigationCategory.OPERATIONS,
             kind=NavigationKind.WIDGET,
             loader=events_activities_workspace_loader
             or widget_loaders.get(
                 "operations.events-activities",
-                lambda: _placeholder_page("Events Activities"),
+                lambda: _placeholder_page("Events/Aktiviteter"),
             ),
         )
     )
     navigation_service.register_route(
         NavigationRoute(
             route_id="operations.document-archive",
-            label="Document Archive",
+            label="Dokumentarkiv",
             category=NavigationCategory.OPERATIONS,
             kind=NavigationKind.WIDGET,
             loader=document_archive_workspace_loader
             or widget_loaders.get(
                 "operations.document-archive",
-                lambda: _placeholder_page("Document Archive"),
+                lambda: _placeholder_page("Dokumentarkiv"),
             ),
         )
     )
     navigation_service.register_route(
         NavigationRoute(
             route_id="operations.documents",
-            label="Documents",
+            label="Dokumenter",
             category=NavigationCategory.OPERATIONS,
             kind=NavigationKind.WIDGET,
             loader=documents_workspace_loader
-            or widget_loaders.get("operations.documents", lambda: _placeholder_page("Documents")),
+            or widget_loaders.get("operations.documents", lambda: _placeholder_page("Dokumenter")),
         )
     )
     navigation_service.register_route(
         NavigationRoute(
             route_id="operations.accounting",
-            label="Accounting",
+            label="Bogføring",
             category=NavigationCategory.OPERATIONS,
             kind=NavigationKind.WIDGET,
             loader=accounting_workspace_loader
-            or widget_loaders.get("operations.accounting", lambda: _placeholder_page("Accounting")),
+            or widget_loaders.get("operations.accounting", lambda: _placeholder_page("Bogføring")),
         )
     )
     navigation_service.register_route(
         NavigationRoute(
             route_id="administration.settings",
-            label="Settings",
+            label="Indstillinger",
             category=NavigationCategory.ADMINISTRATION,
             kind=NavigationKind.WIDGET,
-            loader=widget_loaders.get("administration.settings", lambda: _placeholder_page("Settings")),
+            loader=widget_loaders.get("administration.settings", lambda: _placeholder_page("Indstillinger")),
         )
     )
     navigation_service.register_route(
@@ -339,7 +339,7 @@ def _register_default_module_routes(
     navigation_service.register_route(
         NavigationRoute(
             route_id="administration.about",
-            label="About",
+            label="Om",
             category=NavigationCategory.ADMINISTRATION,
             kind=NavigationKind.WIDGET,
             loader=widget_loaders.get("administration.about", lambda: _placeholder_page("About")),
@@ -349,6 +349,6 @@ def _register_default_module_routes(
 
 def _placeholder_page(title: str) -> QWidget:
     page = QWidget()
-    label = QLabel(f"{title} module will be connected to feature APIs here.", page)
+    label = QLabel(f"Modulet {title} er endnu ikke koblet til rigtige data.", page)
     label.setWordWrap(True)
     return page

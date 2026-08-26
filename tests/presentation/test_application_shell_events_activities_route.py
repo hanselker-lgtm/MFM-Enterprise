@@ -25,4 +25,4 @@ def test_application_shell_can_use_events_activities_workspace_loader(qapp) -> N
     window.navigate_to("operations.events-activities")
 
     assert window.centralWidget().currentWidget().text() == "Events Activities Workspace"
-    assert window.statusBar().currentMessage() == "Loaded Events Activities"
+    assert window.statusBar().currentMessage() == "Loaded Events/Aktiviteter"

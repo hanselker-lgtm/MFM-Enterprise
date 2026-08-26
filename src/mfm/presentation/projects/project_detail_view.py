@@ -30,16 +30,16 @@ class ProjectDetailView(QWidget):
         self._on_navigate_accounting = on_navigate_accounting
         self._current_project_id: UUID | None = None
 
-        self._overview = self._build_group("Overview")
+        self._overview = self._build_group("Oversigt")
         self._status = self._build_group("Status")
-        self._budget = self._build_group("Budget Summary")
-        self._accounting = self._build_group("Accounting Summary")
-        self._documents = self._build_group("Document Summary")
-        self._archive = self._build_group("Archive Status")
+        self._budget = self._build_group("Budgetoversigt")
+        self._accounting = self._build_group("Bogføringsoversigt")
+        self._documents = self._build_group("Dokumentoversigt")
+        self._archive = self._build_group("Arkivstatus")
 
-        self._navigate_documents = QPushButton("Go to Documents")
+        self._navigate_documents = QPushButton("Gå til Dokumenter")
         self._navigate_documents.clicked.connect(self._go_documents)
-        self._navigate_accounting = QPushButton("Go to Accounting")
+        self._navigate_accounting = QPushButton("Gå til Bogføring")
         self._navigate_accounting.clicked.connect(self._go_accounting)
 
         nav_layout = QHBoxLayout()
@@ -60,35 +60,35 @@ class ProjectDetailView(QWidget):
         self._current_project_id = vm.overview.project_id
 
         self._set_group(self._overview, {
-            "Project #": vm.overview.project_number,
-            "Name": vm.overview.name,
-            "Description": vm.overview.description,
+            "Projektnr.": vm.overview.project_number,
+            "Navn": vm.overview.name,
+            "Beskrivelse": vm.overview.description,
         })
         self._set_group(self._status, {
             "Status": vm.status.status,
-            "Health": vm.status.health_indicator,
-            "Ready for closure": str(vm.status.ready_for_closure),
+            "Helbred": vm.status.health_indicator,
+            "Klar til afslutning": str(vm.status.ready_for_closure),
         })
         self._set_group(self._budget, {
-            "Budget status": vm.budget_summary.budget_status,
-            "Categories": ", ".join(vm.budget_summary.categories),
-            "Planned total": str(vm.budget_summary.planned_budget_total),
-            "Variance": str(vm.budget_summary.budget_variance),
+            "Budgetstatus": vm.budget_summary.budget_status,
+            "Kategorier": ", ".join(vm.budget_summary.categories),
+            "Planlagt total": str(vm.budget_summary.planned_budget_total),
+            "Afvigelse": str(vm.budget_summary.budget_variance),
         })
         self._set_group(self._accounting, {
-            "Accounting status": vm.accounting_summary.accounting_status,
-            "Journal count": str(vm.accounting_summary.journal_count),
-            "Actual total": str(vm.accounting_summary.actual_total),
-            "Fiscal year": str(vm.accounting_summary.fiscal_year),
+            "Bogføringsstatus": vm.accounting_summary.accounting_status,
+            "Antal posteringer": str(vm.accounting_summary.journal_count),
+            "Faktisk total": str(vm.accounting_summary.actual_total),
+            "Regnskabsår": str(vm.accounting_summary.fiscal_year),
         })
         self._set_group(self._documents, {
             "Total": str(vm.document_summary.total_documents),
-            "Finalized": str(vm.document_summary.finalized_documents),
-            "Outstanding": str(vm.document_summary.outstanding_documents),
+            "Færdiggjort": str(vm.document_summary.finalized_documents),
+            "Udestående": str(vm.document_summary.outstanding_documents),
         })
         self._set_group(self._archive, {
-            "Archive": vm.archive_status.archive_status,
-            "Closure": vm.archive_status.closure_status,
+            "Arkiv": vm.archive_status.archive_status,
+            "Afslutning": vm.archive_status.closure_status,
         })
 
     @staticmethod

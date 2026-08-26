@@ -25,4 +25,4 @@ def test_application_shell_can_use_document_archive_workspace_loader(qapp) -> No
     window.navigate_to("operations.document-archive")
 
     assert window.centralWidget().currentWidget().text() == "Document Archive Workspace"
-    assert window.statusBar().currentMessage() == "Loaded Document Archive"
+    assert window.statusBar().currentMessage() == "Loaded Dokumentarkiv"

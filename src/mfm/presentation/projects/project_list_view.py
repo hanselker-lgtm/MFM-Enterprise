@@ -32,15 +32,15 @@ class ProjectListView(QWidget):
         self._item_map: dict[int, UUID] = {}
 
         self._table = QTableWidget(0, 5)
-        self._table.setHorizontalHeaderLabels(["Project #", "Name", "Status", "Priority", "Created"])
+        self._table.setHorizontalHeaderLabels(["Projektnr.", "Navn", "Status", "Prioritet", "Oprettet"])
         self._table.setSelectionBehavior(QTableWidget.SelectionBehavior.SelectRows)
         self._table.setSelectionMode(QTableWidget.SelectionMode.SingleSelection)
         self._table.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)
         self._table.itemDoubleClicked.connect(self._open_selected)
 
         self._page_label = QLabel("Page 1 / 1")
-        self._prev_page = QPushButton("Prev")
-        self._next_page = QPushButton("Next")
+        self._prev_page = QPushButton("Forrige")
+        self._next_page = QPushButton("Næste")
         self._prev_page.clicked.connect(lambda: self._on_page_change(-1))
         self._next_page.clicked.connect(lambda: self._on_page_change(1))
 

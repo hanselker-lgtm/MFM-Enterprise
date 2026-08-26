@@ -25,4 +25,4 @@ def test_application_shell_can_use_dedicated_projects_workspace_loader(qapp) -> 
     window.navigate_to("operations.projects")
 
     assert window.centralWidget().currentWidget().text() == "Project Workspace"
-    assert window.statusBar().currentMessage() == "Loaded Projects"
+    assert window.statusBar().currentMessage() == "Loaded Projekter"

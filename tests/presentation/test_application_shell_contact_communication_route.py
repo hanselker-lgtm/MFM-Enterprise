@@ -25,4 +25,4 @@ def test_application_shell_can_use_contact_communication_workspace_loader(qapp) 
     window.navigate_to("operations.contact-communication")
 
     assert window.centralWidget().currentWidget().text() == "Contact Communication Workspace"
-    assert window.statusBar().currentMessage() == "Loaded Contact Communication"
+    assert window.statusBar().currentMessage() == "Loaded Kontaktkommunikation"

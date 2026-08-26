@@ -52,9 +52,9 @@ class DocumentsWorkspace(QWidget):
         documents_split.setStretchFactor(1, 3)
 
         tabs = QTabWidget()
-        tabs.addTab(documents_split, "Documents")
-        tabs.addTab(self._placeholder("Version timeline pane reserved for future capability"), "Versions")
-        tabs.addTab(self._placeholder("Reference analysis pane reserved for future capability"), "References")
+        tabs.addTab(documents_split, "Dokumenter")
+        tabs.addTab(self._placeholder("Versionstidslinje forbeholdt fremtidig funktionalitet"), "Versioner")
+        tabs.addTab(self._placeholder("Referenceanalyse forbeholdt fremtidig funktionalitet"), "Referencer")
 
         layout = QVBoxLayout(self)
         layout.addWidget(self._toolbar)
@@ -64,7 +64,7 @@ class DocumentsWorkspace(QWidget):
 
     def create_detail_dock_widget(self, parent: QMainWindow | None = None) -> QDockWidget:
         """Provide a future-ready detachable detail pane."""
-        dock = QDockWidget("Document Detail", parent)
+        dock = QDockWidget("Dokumentdetaljer", parent)
         dock.setWidget(self._detail)
         dock.setAllowedAreas(
             Qt.DockWidgetArea.LeftDockWidgetArea
@@ -105,25 +105,25 @@ class DocumentsWorkspace(QWidget):
         self._list.set_view_model(list_vm)
 
     def _handle_create_document(self) -> None:
-        document_number, ok_number = QInputDialog.getText(self, "Create Document", "Document number")
+        document_number, ok_number = QInputDialog.getText(self, "Opret dokument", "Dokumentnummer")
         if not ok_number or not document_number.strip():
             return
 
-        document_title, ok_title = QInputDialog.getText(self, "Create Document", "Document title")
+        document_title, ok_title = QInputDialog.getText(self, "Opret dokument", "Dokumenttitel")
         if not ok_title or not document_title.strip():
             return
 
-        document_type, ok_type = QInputDialog.getText(self, "Create Document", "Document type")
+        document_type, ok_type = QInputDialog.getText(self, "Opret dokument", "Dokumenttype")
         if not ok_type or not document_type.strip():
             return
 
-        project_id_text, _ = QInputDialog.getText(self, "Create Document", "Project ID (optional)")
+        project_id_text, _ = QInputDialog.getText(self, "Opret dokument", "Projekt-ID (valgfrit)")
         project_id = None
         if project_id_text.strip():
             try:
                 project_id = UUID(project_id_text.strip())
             except ValueError:
-                QMessageBox.warning(self, "Create Document", "Invalid project id")
+                QMessageBox.warning(self, "Opret dokument", "Ugyldigt projekt-ID")
                 return
 
         created_id = self._controller.create_document(
@@ -134,26 +134,26 @@ class DocumentsWorkspace(QWidget):
                 project_id=project_id,
             )
         )
-        QMessageBox.information(self, "Document Created", f"Document created: {created_id}")
+        QMessageBox.information(self, "Dokument oprettet", f"Dokument oprettet: {created_id}")
         self._handle_refresh()
 
     def _handle_register_version(self) -> None:
         if self._controller.last_selected_document_id is None:
-            QMessageBox.warning(self, "Register Version", "No document selected")
+            QMessageBox.warning(self, "Registrér version", "Intet dokument valgt")
             return
 
-        version_text, ok_version = QInputDialog.getText(self, "Register Version", "Version number")
+        version_text, ok_version = QInputDialog.getText(self, "Registrér version", "Versionsnummer")
         if not ok_version or not version_text.strip():
             return
 
-        storage_key, ok_storage = QInputDialog.getText(self, "Register Version", "Storage key")
+        storage_key, ok_storage = QInputDialog.getText(self, "Registrér version", "Lagernøgle")
         if not ok_storage or not storage_key.strip():
             return
 
         try:
             version_number = int(version_text.strip())
         except ValueError:
-            QMessageBox.warning(self, "Register Version", "Version number must be integer")
+            QMessageBox.warning(self, "Registrér version", "Versionsnummer skal være et heltal")
             return
 
         self._controller.register_document_version(
@@ -163,16 +163,16 @@ class DocumentsWorkspace(QWidget):
                 storage_key=storage_key.strip(),
             )
         )
-        QMessageBox.information(self, "Register Version", "Version registered")
+        QMessageBox.information(self, "Registrér version", "Version registreret")
         self._handle_refresh()
 
     def _handle_archive_document(self) -> None:
         if self._controller.last_selected_document_id is None:
-            QMessageBox.warning(self, "Archive Document", "No document selected")
+            QMessageBox.warning(self, "Arkivér dokument", "Intet dokument valgt")
             return
 
         self._controller.archive_document(self._controller.last_selected_document_id)
-        QMessageBox.information(self, "Archive Document", "Document archived")
+        QMessageBox.information(self, "Arkivér dokument", "Dokument arkiveret")
         self._handle_refresh()
 
     @staticmethod

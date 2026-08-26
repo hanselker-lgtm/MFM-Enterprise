@@ -32,9 +32,9 @@ def test_application_shell_navigates_report_and_widget_routes(qapp) -> None:
 
     window = shell.main_window
     window.navigate_to("dashboard.budget-vs-actual")
-    assert window.statusBar().currentMessage() == "Loaded Budget vs Actual"
+    assert window.statusBar().currentMessage() == "Loaded Budget vs. Faktisk"
     assert window.centralWidget().currentWidget().workspace.current_route_id == "dashboard.budget-vs-actual"
 
     window.navigate_to("operations.projects")
     assert isinstance(window.centralWidget().currentWidget(), QWidget)
-    assert window.statusBar().currentMessage() == "Loaded Projects"
+    assert window.statusBar().currentMessage() == "Loaded Projekter"

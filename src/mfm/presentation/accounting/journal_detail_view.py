@@ -33,19 +33,19 @@ class JournalDetailView(QWidget):
         self._current_project_id: UUID | None = None
         self._current_fiscal_year_id: UUID | None = None
 
-        self._journal_info = self._build_group("Journal Information")
-        self._project_link = self._build_group("Project Linkage")
-        self._fiscal_year = self._build_group("Fiscal Year")
-        self._posting = self._build_group("Posting Status")
-        self._audit = self._build_group("Audit References")
-        self._summary = self._build_group("Reporting Summary")
+        self._journal_info = self._build_group("Posteringsinformation")
+        self._project_link = self._build_group("Projektkobling")
+        self._fiscal_year = self._build_group("Regnskabsår")
+        self._posting = self._build_group("Bogføringsstatus")
+        self._audit = self._build_group("Revisionsreferencer")
+        self._summary = self._build_group("Rapporteringsoversigt")
 
         self._lines = QTableWidget(0, 5)
-        self._lines.setHorizontalHeaderLabels(["Account", "Side", "Amount", "Currency", "Description"])
+        self._lines.setHorizontalHeaderLabels(["Konto", "Debet/Kredit", "Beløb", "Valuta", "Beskrivelse"])
 
-        self._open_project_button = QPushButton("Open Project")
+        self._open_project_button = QPushButton("Åbn projekt")
         self._open_project_button.clicked.connect(self._open_project)
-        self._open_fiscal_year_button = QPushButton("Open Fiscal Year")
+        self._open_fiscal_year_button = QPushButton("Åbn regnskabsår")
         self._open_fiscal_year_button.clicked.connect(self._open_fiscal_year)
 
         nav = QHBoxLayout()
@@ -70,34 +70,34 @@ class JournalDetailView(QWidget):
         self._set_group(
             self._journal_info,
             {
-                "Journal #": vm.journal.journal_number,
-                "Posting Date": vm.journal.posting_date.isoformat(),
-                "Description": vm.journal.description,
+                "Posteringsnr.": vm.journal.journal_number,
+                "Bogføringsdato": vm.journal.posting_date.isoformat(),
+                "Beskrivelse": vm.journal.description,
             },
         )
         self._set_group(
             self._project_link,
             {
-                "Linked": str(vm.project_link.linked),
-                "Project ID": str(vm.project_link.project_id) if vm.project_link.project_id else "",
+                "Koblet": str(vm.project_link.linked),
+                "Projekt-ID": str(vm.project_link.project_id) if vm.project_link.project_id else "",
             },
         )
         self._set_group(
             self._fiscal_year,
             {
-                "Fiscal Year": vm.fiscal_year.fiscal_year_label,
-                "Fiscal Year ID": str(vm.fiscal_year.fiscal_year_id) if vm.fiscal_year.fiscal_year_id else "",
+                "Regnskabsår": vm.fiscal_year.fiscal_year_label,
+                "Regnskabsårs-ID": str(vm.fiscal_year.fiscal_year_id) if vm.fiscal_year.fiscal_year_id else "",
             },
         )
         self._set_group(self._posting, {"Status": vm.journal.posting_status})
-        self._set_group(self._audit, {"References": " | ".join(vm.audit.references)})
+        self._set_group(self._audit, {"Referencer": " | ".join(vm.audit.references)})
         self._set_group(
             self._summary,
             {
-                "Health": vm.project_summary.health_indicator or "",
+                "Helbred": vm.project_summary.health_indicator or "",
                 "Budget": vm.project_summary.budget_status or "",
-                "Actual Total": str(vm.project_summary.actual_total) if vm.project_summary.actual_total is not None else "",
-                "Variance": str(vm.project_summary.budget_variance) if vm.project_summary.budget_variance is not None else "",
+                "Faktisk total": str(vm.project_summary.actual_total) if vm.project_summary.actual_total is not None else "",
+                "Afvigelse": str(vm.project_summary.budget_variance) if vm.project_summary.budget_variance is not None else "",
             },
         )
 
